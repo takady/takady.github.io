@@ -49,7 +49,7 @@
 
 	<h2 class="title">Railsでmysqlのbooleanを扱う</h2>
 	<div class="entry-content"><p>rails+mysqlな環境では、booleanで定義したカラムはtinyint(1)で作られ、中身はtrue/falseではなく、0/1が入る。<br/>
-railsでmysqlのtinyint(1)カラムを扱うと、中身の値は自動的にtrue/falseとして扱われる。<br/>
+そして、railsアプリケーション上でmysqlのtinyint(1)型データを扱う時、値は自動的にtrue/falseとして扱われる。<br/>
 そこまでは知っていたんだけど、<code>select('foobar_flg as fb_flg')</code>というふうに、カラム名をエイリアスして取り出すと値が0/1なのは知らなかった。</p>
 
 <p>具体的には下記のとおりである。</p>
