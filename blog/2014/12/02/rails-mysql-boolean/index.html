@@ -70,9 +70,9 @@ pry(main)&gt; p.first.fb_flg
 <p>ちなみに、selectメソッドの引数に文字列を指定したから0/1が返ってくるというわけではない。<br/>
 下記のようにエイリアス無しなら、文字列で指定してもtrue/falseに解釈される。</p>
 
-<pre><code>pry(main)&gt; p = PortalPage.select('foobar_flg')
-  PortalPage Load (10.0ms)  SELECT  `portal_pages`.`foobar_flg` FROM `portal_pages`
-=&gt; [#&lt;PortalPage id: nil, foobar_flg: false&gt;]
+<pre><code>pry(main)&gt; p = User.select('foobar_flg')
+  User Load (10.0ms)  SELECT  `users`.`foobar_flg` FROM `users`
+=&gt; [#&lt;User id: nil, foobar_flg: false&gt;]
 pry(main)&gt; p.first.foobar_flg
 =&gt; false
 </code></pre>
