@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://takady.github.io/atom.xml" rel="self"/>
   <link href="http://takady.github.io/"/>
-  <updated>2014-12-26T17:38:26+09:00</updated>
+  <updated>2014-12-26T17:40:29+09:00</updated>
   <id>http://takady.github.io/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -19,7 +19,7 @@
     <updated>2014-12-26T17:28:02+09:00</updated>
     <id>http://takady.github.io/blog/2014/12/26/rails-app-without-db</id>
     <content type="html"><![CDATA[<p>外部のweb apiをマッシュアップするだけのrailsアプリケーションを作りたい時に、DBを使わない、つまりactive_recordを使わない事がある。<br/>
-その場合は、下記のようにconfig/のファイルからactive_record用の記述を削除する。</p>
+その場合は、config/以下のファイルから下記のactive_record用の記述を削除する。</p>
 
 <h1>config/application.rb</h1>
 
