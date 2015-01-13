@@ -48,9 +48,8 @@
 
 
 	<h2 class="title">はじめてのcoreos/rocket</h2>
-	<div class="entry-content"><p>rocketは,ざっくり言うとCoreOS社が開発しているDockerのalternative実装.<br/>
-まだprototypeという位置づけである.<br/>
-<a href="https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md">rocket/getting-started-guide.md at master · coreos/rocket</a>を通して,rocketをcoreos上で動かしてみた.</p>
+	<div class="entry-content"><p>rocketとは,ざっくり言うとCoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである.<br/>
+<a href="https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md">rocket/getting-started-guide.md at master · coreos/rocket</a>を通して,rocketをCoreOS上で動かしてみた.</p>
 
 <h1>vagrantでCoreOSのVMを用意</h1>
 
@@ -82,7 +81,7 @@ core@core-01 ~ $ tar zxf appc-spec-v0.1.1.tar.gz
 <h2>go</h2>
 
 <p><a href="http://qiita.com/hnakamur/items/8cda520807f571409f6c#4-1">OSX + Vagrant + CoreOSでKubernetesを試してみた - Qiita</a>を参考にした.<br/>
-ちなみに,go1.4だと次のhello.goがうまくビルド出来くて,断念して1.3系を入れた.(<a href="https://github.com/coreos/rocket/issues/270">参考</a>)</p>
+ちなみに, go1.4だと次のhello.goがうまくビルド出来くて, 断念して1.3系を入れた.(<a href="https://github.com/coreos/rocket/issues/270">参考</a>)</p>
 
 <pre><code>core@core-01 ~ $ wget https://storage.googleapis.com/golang/go1.3.3.linux-amd64.tar.gz
 core@core-01 ~ $ sudo mkdir /opt
@@ -234,6 +233,15 @@ core@core-01 ~ $ cp -i hello hello-layout/rootfs/bin/
 core@core-01 ~ $ ./appc-spec-v0.1.1/actool build hello-layout/ hello.aci
 core@core-01 ~ $ ./appc-spec-v0.1.1/actool -debug validate hello.aci
 hello.aci: valid app container image
+</code></pre>
+
+<p>ちなみに, ACIはtarなので,下記で中身を確認できる.</p>
+
+<pre><code>core@core-01 ~ $ tar tvf hello.aci
+drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs
+drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs/bin
+-rwxr-xr-x 500/500     4383427 2015-01-13 10:26 rootfs/bin/hello
+-rw-r--r-- root/root       510 2015-01-13 10:27 manifest
 </code></pre>
 
 <h1>ACIの起動</h1>
