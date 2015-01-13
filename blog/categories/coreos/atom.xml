@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coreos | Yuichi Takada]]></title>
   <link href="http://takady.github.io/blog/categories/coreos/atom.xml" rel="self"/>
   <link href="http://takady.github.io/"/>
-  <updated>2015-01-13T20:06:07+09:00</updated>
+  <updated>2015-01-13T20:10:07+09:00</updated>
   <id>http://takady.github.io/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -18,11 +18,13 @@
     <link href="http://takady.github.io/blog/2015/01/13/coreos-rocket/"/>
     <updated>2015-01-13T19:46:35+09:00</updated>
     <id>http://takady.github.io/blog/2015/01/13/coreos-rocket</id>
-    <content type="html"><![CDATA[<p>rocketは,ざっくり言うとCoreOS社が開発しているDockerのalternatice.<br/>
-まだprototypeという位置づけ.<br/>
+    <content type="html"><![CDATA[<p>rocketは,ざっくり言うとCoreOS社が開発しているDockerのalternative実装.<br/>
+まだprototypeという位置づけである.<br/>
 <a href="https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md">rocket/getting-started-guide.md at master · coreos/rocket</a>を通して,rocketをcoreos上で動かしてみた.</p>
 
 <h1>vagrantでCoreOSのVMを用意</h1>
+
+<p>まず,CoreOSの環境を用意する.</p>
 
 <pre><code>$ git clone https://github.com/coreos/coreos-vagrant/
 $ cd coreos-vagrant
@@ -135,9 +137,6 @@ func main() {
             "port": 5000
         }
         ]
-    },
-    "annotations": {
-        "authors": "Kelsey Hightower &lt;kelsey.hightower@gmail.com&gt;"
     }
 }
 </code></pre>
