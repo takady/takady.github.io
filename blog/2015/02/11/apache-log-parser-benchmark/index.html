@@ -79,7 +79,7 @@
 </span><span class='line'><span class="nb">require</span> <span class="s1">&#39;benchmark&#39;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">common_line</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1 - - [20/May/2014:20:04:04 +0900] &quot;GET /test/indx.html HTTP/1.1&quot; 200 4576&#39;</span>
-</span><span class='line'><span class="n">combined_line</span> <span class="o">=</span> <span class="s1">&#39;104.24.160.39 - - [07/Jun/2014:14:58:55 +0900] &quot;GET /category/electronics HTTP/1.1&quot; 200 128 &quot;-&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0.1) Gecko/20100101 Firefox/9.0.1&quot;&#39;</span>
+</span><span class='line'><span class="n">combined_line</span> <span class="o">=</span> <span class="s1">&#39;192.168.0.1 - - [07/Jun/2014:14:58:55 +0900] &quot;GET /category/electronics HTTP/1.1&quot; 200 128 &quot;-&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0.1) Gecko/20100101 Firefox/9.0.1&quot;&#39;</span>
 </span><span class='line'><span class="n">customized_line</span> <span class="o">=</span> <span class="s1">&#39;192.168.0.1 - - [07/Feb/2011:10:59:59 +0900] &quot;GET /x/i.cgi/net/0000/ HTTP/1.1&quot; 200 9891 &quot;-&quot; &quot;DoCoMo/2.0 P03B(c500;TB;W24H16)&quot; virtualhost.example.jp &quot;192.0.2.16794832933550&quot; &quot;09011112222333_xx.ezweb.ne.jp&quot; 533593&#39;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">common_parser</span> <span class="o">=</span> <span class="no">ApacheLog</span><span class="o">::</span><span class="no">Parser</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;common&#39;</span><span class="p">)</span>
