@@ -51,7 +51,7 @@
 <time datetime="2015-04-24T13:11:11+09:00" pubdate data-updated="true">Apr 24th, 2015</time></div>
 	</div>
 	<div class="entry-content"><p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br/>
-今回はもう一歩進んで，tmuxのpaneでgemのディレクトリを開くようにしてみた．</p>
+便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">BUNDLER_EDITOR</span><span class="o">=</span><span class="s2">&quot;tmux split-window -c&quot;</span>
@@ -82,7 +82,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>下記のように実行する．</p>
+<p>下記のように実行すると，同じように動作する．</p>
 
 <pre><code>$ bundle_open_tmux activerecord
 </code></pre>
