@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Yuichi Takada]]></title>
   <link href="http://takady.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://takady.github.io/"/>
-  <updated>2015-11-29T23:49:53+09:00</updated>
+  <updated>2015-11-30T00:00:05+09:00</updated>
   <id>http://takady.github.io/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -26,7 +26,7 @@
 
 <p>activerecord に <a href="http://railsdoc.com/references/to_param">to_param</a> というメソッドがあって、これを使うと URL の :id の部分に id 以外を指定できるようになる。</p>
 
-<h2>app/models/user.rb</h2>
+<h2>user.rb</h2>
 
 <pre><code class="ruby">class User &lt; ActiveRecord::Base
   validates_presence_of :username
@@ -38,7 +38,7 @@
 end
 </code></pre>
 
-<h2>app/controllers/users_controller.rb</h2>
+<h2>users_controller.rb</h2>
 
 <pre><code class="ruby">class UsersController &lt; ApplicationController
   def show
@@ -47,7 +47,7 @@ end
 end
 </code></pre>
 
-<h2>config/routes.rb</h2>
+<h2>routes.rb</h2>
 
 <pre><code class="ruby">Rails.application.routes.draw do
   resources :users, path: '/', only: [:show, :edit, :update, :destroy]
@@ -68,7 +68,7 @@ end
 <p>User クラスに to_param を定義せずに、 routes.rb で設定する方法。<br/>
 <code>params[:username]</code> というふうに渡ってくるので、こちらの方が素直な気がして個人的にはこちらを使いたい。</p>
 
-<h2>app/controllers/users_controller.rb</h2>
+<h2>users_controller.rb</h2>
 
 <pre><code class="ruby">class UsersController &lt; ApplicationController
   def show
@@ -77,7 +77,7 @@ end
 end
 </code></pre>
 
-<h2>config/routes.rb</h2>
+<h2>routes.rb</h2>
 
 <pre><code class="ruby">Rails.application.routes.draw do
   resources :users, param: :username, path: '/', only: [:show, :edit, :update, :destroy]
