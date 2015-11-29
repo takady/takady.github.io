@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Yuichi Takada]]></title>
   <link href="http://takady.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://takady.github.io/"/>
-  <updated>2015-11-04T23:19:21+09:00</updated>
+  <updated>2015-11-29T23:49:53+09:00</updated>
   <id>http://takady.github.io/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails で /users/:id ではなく /:username な routing にする方法]]></title>
+    <link href="http://takady.github.io/blog/2015/11/29/rails-routing-with-username-instead-of-id/"/>
+    <updated>2015-11-29T23:06:56+09:00</updated>
+    <id>http://takady.github.io/blog/2015/11/29/rails-routing-with-username-instead-of-id</id>
+    <content type="html"><![CDATA[<p>rails で普通に scaffold すると id が URL に入って <code>example.com/users/:id</code> となる。<br/>
+これを <code>twitter.com/takady7</code> とか <code>github.com/takady</code> みたいにしたい時がある。<br/>
+実現には 2 通りの方法があると思われる。</p>
+
+<h1>to_param を使う方法</h1>
+
+<p>activerecord に <a href="http://railsdoc.com/references/to_param">to_param</a> というメソッドがあって、これを使うと URL の :id の部分に id 以外を指定できるようになる。</p>
+
+<h2>app/models/user.rb</h2>
+
+<pre><code class="ruby">class User &lt; ActiveRecord::Base
+  validates_presence_of :username
+  validates_uniqueness_of :username, case_sensitive: false
+
+  def to_param
+    username
+  end
+end
+</code></pre>
+
+<h2>app/controllers/users_controller.rb</h2>
+
+<pre><code class="ruby">class UsersController &lt; ApplicationController
+  def show
+    @user = User.find_by(username: params[:id])
+  end
+end
+</code></pre>
+
+<h2>config/routes.rb</h2>
+
+<pre><code class="ruby">Rails.application.routes.draw do
+  resources :users, path: '/', only: [:show, :edit, :update, :destroy]
+end
+</code></pre>
+
+<pre><code>$ rake routes
+    Prefix Verb   URI Pattern                        Controller#Action
+ edit_user GET    /:id/edit(.:format)                users#edit
+      user GET    /:id(.:format)                     users#show
+           PATCH  /:id(.:format)                     users#update
+           PUT    /:id(.:format)                     users#update
+           DELETE /:id(.:format)                     users#destroy
+</code></pre>
+
+<h1>to_param を使わずに routing で param を設定する方法</h1>
+
+<p>User クラスに to_param を定義せずに、 routes.rb で設定する方法。<br/>
+<code>params[:username]</code> というふうに渡ってくるので、こちらの方が素直な気がして個人的にはこちらを使いたい。</p>
+
+<h2>app/controllers/users_controller.rb</h2>
+
+<pre><code class="ruby">class UsersController &lt; ApplicationController
+  def show
+    @user = User.find_by(username: params[:username])
+  end
+end
+</code></pre>
+
+<h2>config/routes.rb</h2>
+
+<pre><code class="ruby">Rails.application.routes.draw do
+  resources :users, param: :username, path: '/', only: [:show, :edit, :update, :destroy]
+end
+</code></pre>
+
+<pre><code>$ rake routes
+    Prefix Verb   URI Pattern                        Controller#Action
+ edit_user GET    /:username/edit(.:format)          users#edit
+      user GET    /:username(.:format)               users#show
+           PATCH  /:username(.:format)               users#update
+           PUT    /:username(.:format)               users#update
+           DELETE /:username(.:format)               users#destroy
+</code></pre>
+
+<h1>参考</h1>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/7735315/rails-route-to-username-instead-of-id">ruby - Rails route to username instead of id - Stack Overflow</a></li>
+<li><a href="http://railsdoc.com/references/to_param">to_param - リファレンス - - Railsドキュメント</a></li>
+<li><a href="http://tnakamura.hatenablog.com/entry/2014/01/31/185214">Github みたいにパスの最初のセグメントでユーザー名を使う方法 - present</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[development環境だけbefore_actionをスキップする]]></title>
