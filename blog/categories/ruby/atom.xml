@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | Yuichi Takada]]></title>
-  <link href="http://takady.github.io/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://takady.github.io/"/>
-  <updated>2015-11-30T00:03:08+09:00</updated>
-  <id>http://takady.github.io/</id>
+  <link href="http://blog.takady.net/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.takady.net/"/>
+  <updated>2015-12-18T02:20:48+09:00</updated>
+  <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
     <email><![CDATA[takadyuichi@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[bundle openでtmuxのpaneを開く]]></title>
-    <link href="http://takady.github.io/blog/2015/04/24/bundle-open-tmux/"/>
+    <link href="http://blog.takady.net/blog/2015/04/24/bundle-open-tmux/"/>
     <updated>2015-04-24T13:11:11+09:00</updated>
-    <id>http://takady.github.io/blog/2015/04/24/bundle-open-tmux</id>
+    <id>http://blog.takady.net/blog/2015/04/24/bundle-open-tmux</id>
     <content type="html"><![CDATA[<p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br/>
 便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．</p>
 
@@ -57,9 +57,9 @@
   
   <entry>
     <title type="html"><![CDATA[rubygems.orgに公開しているgemの名前を変更する]]></title>
-    <link href="http://takady.github.io/blog/2015/03/27/how-to-rename-gem/"/>
+    <link href="http://blog.takady.net/blog/2015/03/27/how-to-rename-gem/"/>
     <updated>2015-03-27T00:56:07+09:00</updated>
-    <id>http://takady.github.io/blog/2015/03/27/how-to-rename-gem</id>
+    <id>http://blog.takady.net/blog/2015/03/27/how-to-rename-gem</id>
     <content type="html"><![CDATA[<p>必要になったので調べてみた．<br/>
 結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．<br/>
 調べた結果，自分は下記の方法をとった．</p>
@@ -85,9 +85,9 @@
   
   <entry>
     <title type="html"><![CDATA[apache_log-parserを修正してBenchmarkをとってみた]]></title>
-    <link href="http://takady.github.io/blog/2015/02/11/apache-log-parser-benchmark/"/>
+    <link href="http://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/"/>
     <updated>2015-02-11T16:53:46+09:00</updated>
-    <id>http://takady.github.io/blog/2015/02/11/apache-log-parser-benchmark</id>
+    <id>http://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/takady/apache_log-parser">takady/apache_log-parser</a></p>
 
 <p>先週，とある機会に，とあるエンジニアの方が，僕が作った<a href="https://github.com/takady/apache_log-parser">apache_log-parser</a>というrubyのgemに対してアドバイスをしてくれた．<br/>
@@ -148,9 +148,9 @@ customized:   40.240000   0.070000  40.310000 ( 40.388290)
   
   <entry>
     <title type="html"><![CDATA[embulk-plugin-sqlite3を作った]]></title>
-    <link href="http://takady.github.io/blog/2015/02/08/embulk-plugin-sqlite3/"/>
+    <link href="http://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/"/>
     <updated>2015-02-08T22:17:00+09:00</updated>
-    <id>http://takady.github.io/blog/2015/02/08/embulk-plugin-sqlite3</id>
+    <id>http://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/takady/embulk-plugin-sqlite3">takady/embulk-plugin-sqlite3</a></p>
 
 <h1>embulkとは</h1>
@@ -248,9 +248,9 @@ sqlite&gt;
   
   <entry>
     <title type="html"><![CDATA[facebook graph apiのAccess Tokenを取得するまで]]></title>
-    <link href="http://takady.github.io/blog/2014/12/29/facebook-graph-api-oauth-flow/"/>
+    <link href="http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/"/>
     <updated>2014-12-29T17:45:20+09:00</updated>
-    <id>http://takady.github.io/blog/2014/12/29/facebook-graph-api-oauth-flow</id>
+    <id>http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow</id>
     <content type="html"><![CDATA[<p>OAuth2について、わかってたつもりでわかってないので、<br/>
 <a href="https://github.com/nov/fb_graph">nov/fb_graph</a>を通して、facebook graph apiでAccess Tokenを発行するところまでを追ってみた</p>
 

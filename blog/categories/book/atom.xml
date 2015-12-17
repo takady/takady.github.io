@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: book | Yuichi Takada]]></title>
-  <link href="http://takady.github.io/blog/categories/book/atom.xml" rel="self"/>
-  <link href="http://takady.github.io/"/>
-  <updated>2015-11-30T00:03:08+09:00</updated>
-  <id>http://takady.github.io/</id>
+  <link href="http://blog.takady.net/blog/categories/book/atom.xml" rel="self"/>
+  <link href="http://blog.takady.net/"/>
+  <updated>2015-12-18T02:20:48+09:00</updated>
+  <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
     <email><![CDATA[takadyuichi@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[オブジェクト指向における再利用のためのデザインパターン を読んだ]]></title>
-    <link href="http://takady.github.io/blog/2015/11/04/gof-design-pattern/"/>
+    <link href="http://blog.takady.net/blog/2015/11/04/gof-design-pattern/"/>
     <updated>2015-11-04T20:45:35+09:00</updated>
-    <id>http://takady.github.io/blog/2015/11/04/gof-design-pattern</id>
+    <id>http://blog.takady.net/blog/2015/11/04/gof-design-pattern</id>
     <content type="html"><![CDATA[<p>いわゆる GoF 本を読んだ。</p>
 
 <p><br /></p>
@@ -74,9 +74,9 @@ web 上の記事としては <a href="http://morizyun.github.io/blog/ruby-design
   
   <entry>
     <title type="html"><![CDATA[情熱プログラマー を読んだ]]></title>
-    <link href="http://takady.github.io/blog/2015/10/11/the-passionate-programmer/"/>
+    <link href="http://blog.takady.net/blog/2015/10/11/the-passionate-programmer/"/>
     <updated>2015-10-11T21:01:24+09:00</updated>
-    <id>http://takady.github.io/blog/2015/10/11/the-passionate-programmer</id>
+    <id>http://blog.takady.net/blog/2015/10/11/the-passionate-programmer</id>
     <content type="html"><![CDATA[<p>良い本だった。<br/>
 さすが半谷さんオススメ本。<br/>
 <br /></p>
@@ -109,9 +109,9 @@ web 上の記事としては <a href="http://morizyun.github.io/blog/ruby-design
   
   <entry>
     <title type="html"><![CDATA[WEB+DB PRESS plus の DB 本 3冊を読んで index を学んだ]]></title>
-    <link href="http://takady.github.io/blog/2015/09/24/read-books-about-database/"/>
+    <link href="http://blog.takady.net/blog/2015/09/24/read-books-about-database/"/>
     <updated>2015-09-24T18:43:39+09:00</updated>
-    <id>http://takady.github.io/blog/2015/09/24/read-books-about-database</id>
+    <id>http://blog.takady.net/blog/2015/09/24/read-books-about-database</id>
     <content type="html"><![CDATA[<p>シルバーウィークに、この3冊を読んだ。</p>
 
 <ul>
