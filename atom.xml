@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2015-12-19T00:33:15+09:00</updated>
+  <updated>2015-12-31T21:53:07+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,108 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2015年まとめ]]></title>
+    <link href="http://blog.takady.net/blog/2015/12/31/2015-summary/"/>
+    <updated>2015-12-31T19:50:01+09:00</updated>
+    <id>http://blog.takady.net/blog/2015/12/31/2015-summary</id>
+    <content type="html"><![CDATA[<p>簡単に振り返っとこう。</p>
+
+<h1>転職</h1>
+
+<p>5 月に転職した。</p>
+
+<ul>
+<li><a href="http://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/">転職して１ヶ月経った | Yuichi Takada</a></li>
+</ul>
+
+
+<p>新しい環境というのが一番自分を成長させてくれると思うし、今回もそう思った。<br/>
+インフラ環境など含め前職と違うところも多く、しかし本質的な事に集中できる環境であり逆に自分に言い訳出来なくて厳しい感じになったりもしたけど、10月くらいに自分の中でそれは乗り越えた気がする。</p>
+
+<h1>結婚</h1>
+
+<p>5 月に結婚した。<br/>
+健康的で人間的な生活を送れるようになったし、楽しく毎日を送れている。<br/>
+最近は寝る前に二人で晩酌をするので、そのための美味しい日本酒を探すのも楽しい。</p>
+
+<h1>isucon</h1>
+
+<p>今年は初めて isucon にチャレンジした。</p>
+
+<ul>
+<li><a href="http://blog.takady.net/blog/2015/09/29/isucon5-qualifier/">#isucon 5 予選で惨敗してきました | Yuichi Takada</a></li>
+</ul>
+
+
+<p>予選当日もかなり楽しかったけど、それ以上に予選前に勉強したカーネルチューニングや DB の index やメトリクスの取り方などはエンジニアとして身につけておくべき重要な事だと思っていたので、それを勉強するいい機会になって本当に良かった。<br/>
+でも決勝に進出したかった。</p>
+
+<h1>発表</h1>
+
+<p>社内 LT 大会で毎月発表したのと、社外では一つ発表した。</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/takady/isucon5-qualifier">isucon5 予選をどう惨敗したか / isucon5 qualifier // Speaker Deck</a></li>
+</ul>
+
+
+<h1>github</h1>
+
+<p>業務以外でコード書く事が少なかったかな…。特に年末はその余裕が無かった。残念である。<br/>
+個人的に作っている web サービスを公開したかったけど、年内に間に合わなかった。<br/>
+来年早々に出したい。ひっそりと。</p>
+
+<h2>sign in した状態</h2>
+
+<p><img src="http://blog.takady.net/images/2015-12-31-2015-summary/github_contribution_private.png" alt="" /></p>
+
+<h2>sign out した状態</h2>
+
+<p><img src="http://blog.takady.net/images/2015-12-31-2015-summary/github_contribution_public.png" alt="" /></p>
+
+<h1>読書</h1>
+
+<p>読んだ書籍。</p>
+
+<ul>
+<li><a href="http://www.amazon.co.jp/gp/product/4774150207/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4774150207&amp;linkCode=as2&amp;tag=takadayuichi-22">Webエンジニアのための データベース技術[実践]入門 (Software Design plus)</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4774171972/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4774171972&amp;linkCode=as2&amp;tag=takadayuichi-22">理論から学ぶデータベース実践入門 ~リレーショナルモデルによる効率的なSQL (WEB+DB PRESS plus)</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4774173010/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4774173010&amp;linkCode=as2&amp;tag=takadayuichi-22">SQL実践入門──高速でわかりやすいクエリの書き方 (WEB+DB PRESS plus)</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4274067939/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4274067939&amp;linkCode=as2&amp;tag=takadayuichi-22">情熱プログラマー ソフトウェア開発者の幸せな生き方</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4797311126/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4797311126&amp;linkCode=as2&amp;tag=takadayuichi-22">オブジェクト指向における再利用のためのデザインパターン</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/B01626P712/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B01626P712&amp;linkCode=as2&amp;tag=takadayuichi-22">エンジニアとして世界の最前線で働く選択肢　～渡米・面接・転職・キャリアアップ・レイオフ対策までの実践ガイド</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4413090101/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4413090101&amp;linkCode=as2&amp;tag=takadayuichi-22">自分の中に毒を持て―あなたは“常識人間&#8221;を捨てられるか (青春文庫)</a></li>
+<li><a href="http://www.amazon.co.jp/gp/product/4167502100/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4167502100&amp;linkCode=as2&amp;tag=takadayuichi-22">走ることについて語るときに僕の語ること (文春文庫)</a></li>
+</ul>
+
+
+<h1>android</h1>
+
+<p>12 年くらいソフトバンクユーザーだったけど先日ついに MNP して BIC SIM(IIJmio) に変えた。<br/>
+そのタイミングで iPhone5 から Nexus5 に変わり、android ユーザーになった。<br/>
+まだ慣れない。<br/>
+Android アプリでも作ってみようかな。</p>
+
+<h1>まとめ</h1>
+
+<p>転職・結婚・引越しというイベントが 5月にいっぺんに来たのでその印象が強すぎてそれ以前の時期の事があんまり思い出せない。<br/>
+総じて色々あった年だったなという印象。<br/>
+あんまり自分の事に満足出来ないタイプなので、すごく良かったとも思わない。<br/>
+2 年前まで SQL と Shell スクリプトのバッチしか書いてなくて危機を感じてた頃に比べて web エンジニアらしき者になれてきた気はする。</p>
+
+<h1>来年やること</h1>
+
+<ul>
+<li>海外で働けるように英語を勉強する</li>
+<li>Go もしくは何か Ruby 以外のプログラミング言語習得する</li>
+<li>個人的に作った web サービスの運営をする</li>
+<li>美味しいコーヒーを淹れられるようになる</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi と温度センサーで自宅の温度を可視化]]></title>
@@ -1896,77 +1998,6 @@ Facebookでは上記フローだが、twitterとかgithubとか他のサービ�
 <a href="http://rebuild.fm/43/">Rebuild: 43: Kent is More Professional (Kenn Ejima)</a><br/>
 <a href="https://github.com/nov/fb_graph/wiki">Home · nov/fb_graph Wiki</a><br/>
 <a href="http://morizyun.github.io/blog/facebook-event-api-ruby-fb_graph/">公開中のFacebook EventをGraph APIから取得する - 酒と泪とRubyとRailsと</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rubyのloggerをnewした後にログファイルを削除するとどうなるのか]]></title>
-    <link href="http://blog.takady.net/blog/2014/12/07/file-safe-logger/"/>
-    <updated>2014-12-07T18:01:52+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/12/07/file-safe-logger</id>
-    <content type="html"><![CDATA[<p><strong>この投稿は<a href="http://qiita.com/advent-calendar/2014/ruby">Ruby Advent Calendar 2014</a>の7日目の記事です。</strong></p>
-
-<p>rubyには標準添付ライブラリにloggerクラスがある。<br/>
-そのloggerクラス、newした後に出力先のログファイルが削除された時の挙動について調べた。<br/>
-そして、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。</p>
-
-<h1>検証</h1>
-
-<p>下記のようにして、<code>Logger.new</code>と<code>logger.info</code>の間でファイルを削除してみる</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;logger&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fileutils&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">logfile</span> <span class="o">=</span> <span class="s1">&#39;test.log&#39;</span>
-</span><span class='line'><span class="n">logger</span> <span class="o">=</span> <span class="no">Logger</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-</span><span class='line'><span class="no">FileUtils</span><span class="o">.</span><span class="n">rm</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-</span><span class='line'><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;this is test&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん<code>this is test</code>というlogも残っていない。</p>
-
-<h1>FileSafeLogger</h1>
-
-<p>ファイルが削除されるとlogging出来ないというのが困る時がある。<br/>
-なので、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。<br/>
-やってることはいたって単純で、<a href="https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L593-L612">Logger::LogDevice.#write</a>メソッドをoverrideして、ファイルが存在しない場合は作成しているだけである。<br/>
-<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>を使って、先ほどのlogging処理と同じ処理をやってみる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;file_safe_logger&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;fileutils&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">logfile</span> <span class="o">=</span> <span class="s1">&#39;test.log&#39;</span>
-</span><span class='line'><span class="n">logger</span> <span class="o">=</span> <span class="no">FileSafeLogger</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-</span><span class='line'><span class="no">FileUtils</span><span class="o">.</span><span class="n">rm</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-</span><span class='line'><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;this is test&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これの実行後、カレントディレクトリには<code>test.log</code>が存在し、下記のようにlogが書き出されている。</p>
-
-<pre><code>$ cat test.log
-# Logfile created on 2014-12-06 17:07:53 +0900 by logger.rb/44203
-I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
-</code></pre>
-
-<h1>参考</h1>
-
-<p><a href="https://github.com/sonots/process_safe_logger">sonots/process_safe_logger</a></p>
 ]]></content>
   </entry>
   
