@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-01-27T23:38:29+09:00</updated>
+  <updated>2016-01-27T23:40:59+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -23,8 +23,7 @@ Android Studio には、Emacs キーバインドの設定が元々用意され�
 普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。</p>
 
 <p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br/>
-<a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここ</a> を private.xml で上書いた。<br/>
-こんな感じ。</p>
+<a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここの設定</a> を private.xml でこんな感じに上書きした。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -55,8 +54,6 @@ Android Studio には、Emacs キーバインドの設定が元々用意され�
 
 <p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br/>
 次に Android Studio の Preference > Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
-
-<p>これで Android Studio で Emacs キーバインドでコードが書けるぞぉ！</p>
 ]]></content>
   </entry>
   
