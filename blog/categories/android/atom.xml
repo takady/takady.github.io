@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | Yuichi Takada]]></title>
+  <link href="http://blog.takady.net/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://blog.takady.net/"/>
+  <updated>2016-01-27T23:38:29+09:00</updated>
+  <id>http://blog.takady.net/</id>
+  <author>
+    <name><![CDATA[Yuichi Takada]]></name>
+    <email><![CDATA[takadyuichi@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Android Studio で emacs キーバインドでコードを書く]]></title>
+    <link href="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/"/>
+    <updated>2016-01-27T23:15:54+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds</id>
+    <content type="html"><![CDATA[<p>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。<br/>
+Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。<br/>
+普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。</p>
+
+<p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br/>
+<a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここ</a> を private.xml で上書いた。<br/>
+こんな感じ。</p>
+
+<pre><code class="xml">  &lt;replacementdef&gt;
+    &lt;replacementname&gt;EMACS_MODE_IGNORE_APPS&lt;/replacementname&gt;
+    &lt;replacementvalue&gt;
+      EMACS,
+      REMOTEDESKTOPCONNECTION,
+      TERMINAL,
+      VI,
+      VIRTUALMACHINE,
+      X11,
+      ANDROID_STUDIO,
+    &lt;/replacementvalue&gt;
+  &lt;/replacementdef&gt;
+</code></pre>
+
+<p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br/>
+次に Android Studio の Preference > Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
+
+<p>これで Android Studio で Emacs キーバインドでコードが書けるぞぉ！</p>
+]]></content>
+  </entry>
+  
+</feed>

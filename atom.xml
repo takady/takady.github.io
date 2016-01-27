@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2015-12-31T22:05:58+09:00</updated>
+  <updated>2016-01-27T23:38:29+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android Studio で emacs キーバインドでコードを書く]]></title>
+    <link href="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/"/>
+    <updated>2016-01-27T23:15:54+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds</id>
+    <content type="html"><![CDATA[<p>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。<br/>
+Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。<br/>
+普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。</p>
+
+<p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br/>
+<a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここ</a> を private.xml で上書いた。<br/>
+こんな感じ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;replacementdef&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;replacementname&gt;</span>EMACS_MODE_IGNORE_APPS<span class="nt">&lt;/replacementname&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;replacementvalue&gt;</span>
+</span><span class='line'>      EMACS,
+</span><span class='line'>      REMOTEDESKTOPCONNECTION,
+</span><span class='line'>      TERMINAL,
+</span><span class='line'>      VI,
+</span><span class='line'>      VIRTUALMACHINE,
+</span><span class='line'>      X11,
+</span><span class='line'>      ANDROID_STUDIO,
+</span><span class='line'>    <span class="nt">&lt;/replacementvalue&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/replacementdef&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br/>
+次に Android Studio の Preference > Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
+
+<p>これで Android Studio で Emacs キーバインドでコードが書けるぞぉ！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2015年まとめ]]></title>
@@ -1918,86 +1965,6 @@ hello
 <li>githubで100スターくらい取れるようなものを作る</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[facebook graph apiのAccess Tokenを取得するまで]]></title>
-    <link href="http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/"/>
-    <updated>2014-12-29T17:45:20+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow</id>
-    <content type="html"><![CDATA[<p>OAuth2について、わかってたつもりでわかってないので、<br/>
-<a href="https://github.com/nov/fb_graph">nov/fb_graph</a>を通して、facebook graph apiでAccess Tokenを発行するところまでを追ってみた</p>
-
-<h1>TL;DR</h1>
-
-<p>この面倒なtoken生成作業は、<a href="https://developers.facebook.com/">https://developers.facebook.com/</a>のTools > Graph API Explorerで、<br/>
-Get Access Tokenとボタンを押すと生成できるので、すぐtokenを生成したいのなら、下記を読まずにそこから生成するのが楽で良い</p>
-
-<h1>1.まずfacebookにappを登録</h1>
-
-<p><a href="https://developers.facebook.com/">https://developers.facebook.com/</a>のApps > Add a New Appで作成できる<br/>
-この時、リダイレクト先URLも下記から設定しておくこと<br/>
-Settings > Advanced > Security > Valid OAuth redirect URIs</p>
-
-<h1>2.App IDとApp Secretを確認</h1>
-
-<p>先ほど作成したAppのDashboardに行って確認できる</p>
-
-<h1>3.client_idとredirect_url付きのGETリクエストを送信</h1>
-
-<p>下記のようにリクエストする</p>
-
-<pre><code>GET https://graph.facebook.com/oauth/authorize?client_id=&lt;Your App ID&gt;&amp;redirect_uri=&lt;Your Redirect URL&gt;
-</code></pre>
-
-<h1>4.リダイレクトされたurlのAuthorization Codeパラメータの値を確認</h1>
-
-<p>下記のような感じである</p>
-
-<pre><code>http://example.com?code=&lt;Your Authorization Code&gt;
-</code></pre>
-
-<h1>5.POSTリクエストを送信してAccess Tokenを取得</h1>
-
-<p>取得したAuthorization Codeを含め、パラメータとして下記をセットしてPOSTでリクエストする</p>
-
-<pre><code>POST https://graph.facebook.com/oauth/access_token
-
- grant_type: authorization_code
- code: &lt;Your Authorization Code&gt;
- redirect_uri: &lt;Your Redirect URL&gt;
- client_id: &lt;Your App ID&gt;
- client_secret: &lt;Your App Secret&gt;
-</code></pre>
-
-<p>レスポンスのbodyは下記のようになっている</p>
-
-<pre><code>access_token=&lt;Your Access Token&gt;  
-</code></pre>
-
-<p>この生成されたaccess_tokenを使って、facebook graph apiを利用する事ができる</p>
-
-<h1>6.Access Tokenの有効期限を伸ばす</h1>
-
-<p>facebook graph apiの場合、このままだとAccess Tokenの有効期限が短すぎる<br/>
-下記のGETリクエストを送ることで、有効期限を60日間に伸ばす事ができる</p>
-
-<pre><code>GET https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&amp;client_id=&lt;Your App ID&gt;&amp;client_secret=&lt;Your App Secret&gt;&amp;fb_exchange_token=&lt;Your Access Token&gt;  
-</code></pre>
-
-<h1>まとめ</h1>
-
-<p>OAuth2、Access Token取得後はそれだけでAPIとやりとりできるからシンプルで良いけど、Access Tokenを取得するまでがめんどくさい<br/>
-ブラウザ無しでtoken発行やりたかった(<a href="https://github.com/nov/fb_graph/wiki/Authentication#javascript-sdk">Javascript SDK</a>使ったらできるのか?)<br/>
-Facebookでは上記フローだが、twitterとかgithubとか他のサービスもまったく同じなわけじゃないので、他も触ってみたい</p>
-
-<h1>参考</h1>
-
-<p><a href="http://stackoverflow.com/questions/21978728/obtaining-a-facebook-auth-token-for-a-command-line-desktop-application">ruby - Obtaining a Facebook auth token for a command-line (desktop) application - Stack Overflow</a><br/>
-<a href="http://rebuild.fm/43/">Rebuild: 43: Kent is More Professional (Kenn Ejima)</a><br/>
-<a href="https://github.com/nov/fb_graph/wiki">Home · nov/fb_graph Wiki</a><br/>
-<a href="http://morizyun.github.io/blog/facebook-event-api-ruby-fb_graph/">公開中のFacebook EventをGraph APIから取得する - 酒と泪とRubyとRailsと</a></p>
 ]]></content>
   </entry>
   

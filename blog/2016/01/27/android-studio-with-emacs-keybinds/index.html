@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>rubygems.orgに公開しているgemの名前を変更する | Yuichi Takada</title>
+	<title>Android Studio で emacs キーバインドでコードを書く | Yuichi Takada</title>
 
 	<meta name="author" content="Yuichi Takada"> 
 	
@@ -36,7 +36,7 @@
 </div></header>
 
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">rubygems.orgに公開しているgemの名前を変更する</h2>
+	<h2 class="title">Android Studio で Emacs キーバインドでコードを書く</h2>
 	<div class="meta">
 		<div class="date">
 
@@ -51,28 +51,47 @@
 
 
 
-<time datetime="2015-03-27T00:56:07+09:00" pubdate data-updated="true">Mar 27th, 2015</time></div>
+<time datetime="2016-01-27T23:15:54+09:00" pubdate data-updated="true">Jan 27th, 2016</time></div>
 	</div>
-	<div class="entry-content"><p>必要になったので調べてみた．<br/>
-結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．<br/>
-調べた結果，自分は下記の方法をとった．</p>
+	<div class="entry-content"><p>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。<br/>
+Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。<br/>
+普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。</p>
 
-<ol>
-<li>新しい名前のgemのコードを用意する．既存repositoryをrenameする場合は，.gemspecなど漏れなく修正する．</li>
-<li>新しい名前のgemを<code>rake release</code>する．</li>
-<li><code>gem yank</code>で古い名前のgemをindexから外す．</li>
-</ol>
+<p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br/>
+<a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここ</a> を private.xml で上書いた。<br/>
+こんな感じ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;replacementdef&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;replacementname&gt;</span>EMACS_MODE_IGNORE_APPS<span class="nt">&lt;/replacementname&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;replacementvalue&gt;</span>
+</span><span class='line'>      EMACS,
+</span><span class='line'>      REMOTEDESKTOPCONNECTION,
+</span><span class='line'>      TERMINAL,
+</span><span class='line'>      VI,
+</span><span class='line'>      VIRTUALMACHINE,
+</span><span class='line'>      X11,
+</span><span class='line'>      ANDROID_STUDIO,
+</span><span class='line'>    <span class="nt">&lt;/replacementvalue&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/replacementdef&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>gem yank</code>してもrubygems.org上のページは残るのでその点注意．</p>
+<p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br/>
+次に Android Studio の Preference > Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
 
-<h1>参考</h1>
-
-<ul>
-<li><p><a href="http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem">Removing a published RubyGem / Gemcutter / Knowledge Base - RubyGems.org Support</a></p></li>
-<li><p><a href="http://blog.s21g.com/articles/1755">公開した gem を削除する方法 - ヽ( ・∀・)ノくまくまー - s21g</a></p></li>
-</ul>
-
+<p>これで Android Studio で Emacs キーバインドでコードが書けるぞぉ！</p>
 </div>
 
 
