@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-01-27T23:40:59+09:00</updated>
+  <updated>2016-05-02T23:19:39+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,198 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自分の開発スピードを上げるには]]></title>
+    <link href="http://blog.takady.net/blog/2016/05/02/more-productive/"/>
+    <updated>2016-05-02T01:10:20+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/05/02/more-productive</id>
+    <content type="html"><![CDATA[<p>新しい機能なりサービスをいくつか作って、振り返ってみると、なんかもっと上手くやれた気がするなーって思うことがある。<br/>
+そもそも気をつけているポイント/気をつけたいポイントについて改めて自分の考えをまとめてみたい。</p>
+
+<p>自分はどこを改善できるだろうか。<br/>
+もっと早く、質の良いものを作るにはどうすれば良いのか。</p>
+
+<h1>仕様決め</h1>
+
+<ul>
+<li><p>それを作る理由について納得しているか</p>
+
+<ul>
+<li>納得してないとか、そもそも背景を理解してない状態で仕様決めに入るのはかなり厳しい。</li>
+<li>システムとしてだけでなくて、ビジネス的にそれってどうなんですかっていうのは質問して納得しておきたい。
+
+<ul>
+<li>とはいえ腰の重い開発者にはなりたくないので柔軟に。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解決したい課題が明確になっているか</p>
+
+<ul>
+<li>最初は何か課題があるはずだけど、それをすっ飛ばして具体的な解決方法から話が始まる事がわりとある。
+
+<ul>
+<li>実は別の方法が良かったりするかもしれないので、解決したい課題は何なのか明確にしておきたい。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>誰が最終的に決定するのか</p>
+
+<ul>
+<li>発散はしても良いけど最後決める人がいないとなかなか固まらなくてやきもきする。</li>
+<li>特に関係者が増えると本当に決まらないので、誰が決める人なのかってのはちゃんと認識合わせておきたい。</li>
+</ul>
+</li>
+<li><p>優先度の高いものはどれか</p>
+
+<ul>
+<li>規模が小さければ一気に作っちゃうのだけど、規模が大きい場合は一気に全部作ろうとしないで重要なものから作って出来たところから出していった方が良い。</li>
+<li>優先度の低いものは本当に必要かもわかってなかったりするので最初から詳細まで詰めなくても良い。</li>
+<li>いつまでにどこまで出したいかは確認しておく。</li>
+</ul>
+</li>
+<li><p>そもそも現状の仕様がどうなっているかをシステムレベルで把握しているか</p>
+
+<ul>
+<li>そもそもの前提が間違っていたりすると議論が全くの無駄になることも。</li>
+<li>把握してない状態で課題に対しての解決案を提示するのは結構難しい。</li>
+</ul>
+</li>
+</ul>
+
+
+<h1>設計</h1>
+
+<ul>
+<li><p>既存に引っ張られすぎていないか</p>
+
+<ul>
+<li>既存がこうだからそれを踏襲していく形で考えてしまいがちだが、そこに縛られすぎずに本来どうあるべきかを考えてみる。
+
+<ul>
+<li>時間的制約などにより結果的に理想の形を取れなくても、チーム内で理想の形は共有しておきたい。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>それはそのモデルやサービスの責務か</p>
+
+<ul>
+<li>責務を超えた事をやらせていたり、隠蔽しておきたい知識・概念がその範囲外に流出してしまうのは避けたい。
+
+<ul>
+<li>ここが自分にとっては結構難しくて、もっと上手くやりたいところ。
+
+<ul>
+<li>あしがかりになりそうな DDD の知識を学びたい。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>なぜその名前付けをしたのかを説明できるか</p>
+
+<ul>
+<li>名前重要ってのは最近本当に感じてて、でもいつも結構悩むんだけど、これは何かのサインなのか。</li>
+</ul>
+</li>
+</ul>
+
+
+<h1>実装</h1>
+
+<ul>
+<li><p>集中できているか</p>
+
+<ul>
+<li>とにかく実装は集中してやっているかどうかで掛かる時間が何倍も変わるので、自分が集中している状態にい続けられるように気を遣う。</li>
+<li>詳細な実装方法で迷ったりする時は実際に書いて見比べる方がイメージしやすくて、書いたコードを見てみると意外と悪くないねという感じになる事も多い。</li>
+</ul>
+</li>
+<li><p>テストコードを書く事に時間がかかってないか</p>
+
+<ul>
+<li>プロダクションコード書くよりテストコード書く時間の方が長くなりがち。
+
+<ul>
+<li>ここはもう少し改善できそう。</li>
+<li>テストについては何か一冊本でも読んで学ぶと良さそう。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>コードレビューしやすい PR になっているか</p>
+
+<ul>
+<li>レビュアーが気になりそうなポイントは、先に PR の Description に書いておく。
+
+<ul>
+<li>ただ、Description が長過ぎると重い感じになるので、コードやコミットメッセージなどで明らかにわかることは書かないことにしてる。</li>
+</ul>
+</li>
+<li>1つの PR が大きくなり過ぎたら分けられないか考える。
+
+<ul>
+<li>1つの PR でだいたい変更が 200行くらいまでにした方が見やすくてレビュアーの負担も少ないと思う。</li>
+</ul>
+</li>
+<li>意味の単位でコミット分ける。
+
+<ul>
+<li>コミット単位で見てくれる人もいるので、その人に意図が伝わるように書くと、将来 commit log 見直した時にも意図が分かりやすかったりする。
+
+<ul>
+<li>1行目: 要約</li>
+<li>2行目: 空行</li>
+<li>3行目: 理由含めた説明</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>リリースタイミングを考えられているか</p>
+
+<ul>
+<li>なるべく出来たものから出していきたい。</li>
+<li>db migration があるものはタイミング気をつける。</li>
+</ul>
+</li>
+</ul>
+
+
+<h1>検証</h1>
+
+<ul>
+<li>検証環境特有の問題を取り除けているか
+
+<ul>
+<li>大体時間が掛かるのは、実際に検証したい箇所ではなくて、何か設定の差異等によるつまらない問題である事が多い。
+
+<ul>
+<li>特に他チームのサービスとのインターフェース部分は、開発環境では普段モックしていたりするので、そういう問題がよく起きがち。
+
+<ul>
+<li>そういう問題は起きないように改善するのはもちろんだし、認識してるのであれば事前に取り除いておきたい。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h1>まとめ</h1>
+
+<p>改めてまとめてみると、改善できそうなところが見えてきた気がする。<br/>
+特に設計については、自分の考え方の軸を持ってると議論しやすいのでそこをもっと強くしていきたい。DDD の本とテストの本を読まねば。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android Studio で emacs キーバインドでコードを書く]]></title>
@@ -1749,217 +1941,6 @@ hello
 <li><a href="http://qiita.com/mopemope/items/9f163e4715a8bb5846e9">CoreOS - はじめてのRocket - Qiita</a></li>
 <li><a href="http://qiita.com/mopemope/items/fa9424b094aae3eac580">CoreOS 入門 - Qiita</a></li>
 <li><a href="http://qiita.com/gom/items/0bfc1925a7fddfcdfdaf">Vagrant + CoreOS + Docker でコンテナ環境体験 - Qiita</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2014年まとめ]]></title>
-    <link href="http://blog.takady.net/blog/2014/12/31/2014-summary/"/>
-    <updated>2014-12-31T19:26:56+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/12/31/2014-summary</id>
-    <content type="html"><![CDATA[<p>今年はコードを書く楽しさを知った１年だった<br/>
-去年までのコードをほとんど書いてなかった時間が悔やまれるけど、来年も前向きにいきたい</p>
-
-<h1>よかったこと</h1>
-
-<ul>
-<li>rubygems.orgに4つgemを出した
-
-<ul>
-<li><a href="https://rubygems.org/profiles/takady">https://rubygems.org/profiles/takady</a></li>
-</ul>
-</li>
-<li>テストコード書くようになった</li>
-<li>ruby/railsを業務で使う機会を得られた</li>
-<li>会社のCI環境を整えた</li>
-<li>勉強会に参加するようになった(YAPC::Asia、RubyKaigi、RubyWorld Conference、他)</li>
-<li>Ruby Advent Calenderに当日飛び入り参加した
-
-<ul>
-<li><a href="http://takady.github.io/blog/2014/12/07/file-safe-logger/">rubyのloggerをnewした後にログファイルを削除するとどうなるのか | Yuichi Takada</a></li>
-</ul>
-</li>
-</ul>
-
-
-<h1>わるかったこと</h1>
-
-<ul>
-<li>勉強会は、聞く側としてしか参加できなかった</li>
-</ul>
-
-
-<h2>1月</h2>
-
-<ul>
-<li>Hadoopでデータ処理するチームから、webアプリを書けるチームに移った</li>
-<li>会社の都合でここから3ヶ月間仙台での生活が始まった</li>
-<li><a href="http://rebuild.fm/">rebuild.fm</a>を発見してハマった、毎日聞いた、今も何回も繰り返し聞いてる</li>
-</ul>
-
-
-<h2>2月</h2>
-
-<ul>
-<li>1年かけて、何か一つ言語をまともに書けるようになりたいと思い、仙台の本屋で平積みされていたパーフェクトRubyという本を買った</li>
-<li><a href="http://tagomoris.hatenablog.com/entry/2014/02/25/091607">あるブログエントリ</a>を読んで、<a href="https://github.com/takady">githubアカウント</a>を作り直した</li>
-</ul>
-
-
-<h2>3月</h2>
-
-<ul>
-<li>業務で始めてrubyでスクリプト書いた</li>
-<li>macbook air買った</li>
-<li>jenkinsをチームに導入した</li>
-<li>認定スクラムマスターという研修を受けて認定を取得した</li>
-</ul>
-
-
-<h2>4月</h2>
-
-<ul>
-<li>仙台から東京に戻った</li>
-<li><a href="http://regional.rubykaigi.org/oedo04/">大江戸Ruby会議04</a>に参加して、みんな楽しそうと思った</li>
-<li>良い目標が思いついた
-  <blockquote class="twitter-tweet" lang="ja"><p>今年の目標は、たくさん失敗することだ … <a href="http://t.co/Cy4xjffowl"><a href="http://t.co/Cy4xjffowl">http://t.co/Cy4xjffowl</a></a></p>&mdash; takady (@takady7) <a href="https://twitter.com/takady7/status/458937108955004928">2014, 4月 23</a></blockquote></li>
-</ul>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<h2>5月</h2>
-
-<ul>
-<li>いくつか勉強会行った
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/85298039456/rails-why-choose-ruby-on-rails">【Railsセミナー】Why choose Ruby on Rails ? に行ってきた</a></li>
-<li><a href="http://takady7.tumblr.com/post/85727186336/gree-tech-talk-05">GREE Tech Talk #05 : 並行/並列プログラミング</a></li>
-<li><a href="http://takady7.tumblr.com/post/86500885716/heroku-meetup-12">Heroku Meetup #12 に行ってきた</a></li>
-</ul>
-</li>
-</ul>
-
-
-<h2>6月</h2>
-
-<ul>
-<li>27歳になっちゃった</li>
-<li>始めてrubygemsにgemを出した
-
-<ul>
-<li><a href="http://qiita.com/takady/items/a4858c09b56e2b185814">apache logをパースするgemを作ってrubygems.orgに公開してみた - Qiita</a></li>
-</ul>
-</li>
-<li>hipchat、hubotをチームに導入した</li>
-</ul>
-
-
-<h2>7月</h2>
-
-<ul>
-<li>会社のでかめのプロジェクトのリリースが無事終わった</li>
-<li>組織の色々があった
-  <blockquote class="twitter-tweet" lang="ja"><p>やっぱ言いたいこととか疑問とかはちゃんとぶつけた方がいいな&#10;それで相入れなくても、かげで文句言ってるよりもいいと思う</p>&mdash; takady (@takady7) <a href="https://twitter.com/takady7/status/486426378556813313">2014, 7月 8</a></blockquote></li>
-</ul>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<ul>
-<li>勉強会行った
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/91457205306/api-meetup-tokyo-1">API Meetup Tokyo #1</a></li>
-<li><a href="http://takady7.tumblr.com/post/92888711266/2-ruby-on-rails">第2回「Ruby on Rails チュートリアル」ハンズオンセミナー</a></li>
-</ul>
-</li>
-</ul>
-
-
-<h2>8月</h2>
-
-<ul>
-<li>自分のgemを更新したり、新しく出したりした</li>
-<li>テストコードの良さを身を持って実感し始めた</li>
-<li>有給取ってYAPC::Asia行って、最高に楽しかった
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/96242359616/yapc-asia-tokyo-2014">YAPC::Asia Tokyo 2014</a></li>
-</ul>
-</li>
-</ul>
-
-
-<h2>9月</h2>
-
-<ul>
-<li>有給取ってrubyKaigiに行った
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/98302265911/rubykaigi2014">RubyKaigi2014に行ってきた</a></li>
-</ul>
-</li>
-<li>terminal環境を整えて、emacsを使いはじめる
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/98303277811/zsh-ghq-peco-tmux">zsh、ghq、peco、tmuxなどについて</a></li>
-</ul>
-</li>
-<li>社内rubyコミュニティの集まりに顔を出してみた
-
-<ul>
-<li><a href="http://takady7.tumblr.com/post/98803250651/meetup-1-20140930-issue-1-aoyokorb-aoyoko-rb">meetup #1 20140930 · Issue #1 · Aoyokorb/Aoyoko.rb&hellip;</a></li>
-</ul>
-</li>
-</ul>
-
-
-<h2>10月</h2>
-
-<ul>
-<li>会社のrails案件でコードたくさん書いた</li>
-</ul>
-
-
-<h2>11月</h2>
-
-<ul>
-<li>会社のrails案件でコードたくさん書いた</li>
-<li>会社のPCもmacにしてもらえた</li>
-<li>RubyWorld Conferenceで初めて島根に行った</li>
-<li>blogをtumblrからoctopress on github pagesに変えた</li>
-<li>Goに興味を持ち始める</li>
-<li>Go Conferenceにも行った</li>
-</ul>
-
-
-<h2>12月</h2>
-
-<ul>
-<li>会社のrails案件でコードたくさん書いた</li>
-<li>12/07のRuby Advent Calenderが当日に急遽空いた事に気づいたので、僭越ながら書かせてもらった
-
-<ul>
-<li><a href="http://takady.github.io/blog/2014/12/07/file-safe-logger/">rubyのloggerをnewした後にログファイルを削除するとどうなるのか | Yuichi Takada</a></li>
-</ul>
-</li>
-<li>もっと一次情報を得たいと思い、Feedlyで海外を含めたblogポストをチェックするようになった</li>
-</ul>
-
-
-<h1>来年について</h1>
-
-<ul>
-<li>LTするとか、今年よりもっとアウトプットしたい</li>
-<li>英語の記事も読んで情報をもっと早く得る</li>
-<li>毎週何か作って出すくらいの勢いでOSS活動する</li>
-<li>githubで100スターくらい取れるようなものを作る</li>
 </ul>
 
 ]]></content>
