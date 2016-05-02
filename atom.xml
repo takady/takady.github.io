@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-05-02T23:28:34+09:00</updated>
+  <updated>2016-05-02T23:39:51+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.takady.net/blog/2016/05/02/more-productive</id>
     <content type="html"><![CDATA[<p>新しい機能なりサービスをいくつか作って、振り返ってみると、なんかもっと上手くやれた気がするなーって思うことがある。<br/>
 もっと早く、質の良いものを作るにはどうすれば良いのか。<br/>
-そもそも開発とひとことで言っても、細かくどういうポイントがあって、どこが改善できそうか考えてみた。</p>
+そもそも開発とひとことで言っても、細かくどういうポイントを気にしておく必要があるか、そしてそのどこを改善できそうか考えてみた。</p>
 
 <h1>仕様決め</h1>
 
