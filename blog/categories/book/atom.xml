@@ -4,7 +4,7 @@
   <title><![CDATA[Category: book | Yuichi Takada]]></title>
   <link href="http://blog.takady.net/blog/categories/book/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-05-15T22:42:07+09:00</updated>
+  <updated>2016-05-22T10:39:19+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ]]></title>
+    <link href="http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/"/>
+    <updated>2016-05-22T10:38:56+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book</id>
+    <content type="html"><![CDATA[<p>読んだ。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&o=9&p=8&l=as1&asins=4797376279&ref=qf_sp_asin_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+
+<p>最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリューム自体は重くなく、数時間で読めた。</p>
+
+<h1>感想</h1>
+
+<p>第1部の SQL 初級入門な章は流し読みした。</p>
+
+<p>第2部以降、下記のような話が網羅されていて参考になった。</p>
+
+<ul>
+<li>データソース層、DWH層、データマート層の3層構造</li>
+<li>オンプレミスとクラウドサービス利用のトレードオフ</li>
+<li>ディメンションテーブル（スタースキーマ）</li>
+<li>ETL と ELT</li>
+<li>DWH 向けデータベース製品のそれぞれの特長の説明（BigQueryやHadoop含む）</li>
+<li>データ構築のバッチは処理の粒度を細かくして冪等に作ろうって話</li>
+<li>差分更新・全件更新の話</li>
+</ul>
+
+
+<p>あとテストの話も書いてはあるが、SQLが正常に動くことや件数が正しいことのテストだった。<br/>
+実際にデータの内容が正しいかのテストがデータ基盤のテストとしては最も重要だけど方法として確立されたものは聞いたことがないので、その辺についてなにか書いてくれてることを期待してた。この本に載っていないということは、まだそういうテスト手法は出てきてないのかもしれない。</p>
+
+<h1>その他</h1>
+
+<p>2011年から2013年くらいまでひたすらバッチで Hadoop にデータを入れてそれを HiveQL で集計・抽出という業務をやっていた時期があって、その時に感じていたことやみんなで考えていたような事が書かれていたりして懐かしく思ったし、当時の自分たちの方法が肯定される記述も多くて良かったと思った。<br/>
+当時はこういう大規模データ運用現場に関する知見があまり出回ってなかった気がする。（Hadoop とかビックデータという言葉はやたらバズっていたが。<br/>
+あの時この本読んでたらなーとも思った。</p>
+
+<p>データ分析基盤を作っている人やこれから作っていこうとしている人は本書を読むと大変参考になると思いました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[オブジェクト指向における再利用のためのデザインパターン を読んだ]]></title>
