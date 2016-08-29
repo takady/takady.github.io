@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.takady.net/blog/2016/08/29/rails-form-object/</loc>
+    <lastmod>2016-08-29T19:38:49+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://blog.takady.net/blog/2016/07/23/soft-skills/</loc>
     <lastmod>2016-07-23T10:33:25+09:00</lastmod>
     <priority>0.8</priority>
@@ -172,19 +177,19 @@
   </url>
   <url>
     <loc>http://blog.takady.net/blog/archives/</loc>
-    <lastmod>2016-07-23T10:51:06+09:00</lastmod>
+    <lastmod>2016-08-29T20:56:51+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://blog.takady.net/blog/</loc>
-    <lastmod>2016-07-23T10:51:06+09:00</lastmod>
+    <lastmod>2016-08-29T20:56:51+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://blog.takady.net/</loc>
-    <lastmod>2016-07-23T10:51:06+09:00</lastmod>
+    <lastmod>2016-08-29T20:56:51+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

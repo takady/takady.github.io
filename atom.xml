@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-07-23T10:51:06+09:00</updated>
+  <updated>2016-08-29T20:56:51+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,277 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails で FormObject を使う]]></title>
+    <link href="http://blog.takady.net/blog/2016/08/29/rails-form-object/"/>
+    <updated>2016-08-29T19:38:49+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/08/29/rails-form-object</id>
+    <content type="html"><![CDATA[<p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
+
+<p><br /></p>
+
+<p><img src="http://blog.takady.net/images/2016-08-29-rails-form-object/screenshot1.png" alt="" /></p>
+
+<p>こういうフォーム。</p>
+
+<h1>Model</h1>
+
+<p>uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。</p>
+
+<h2>app/models/foo_day.rb</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:date</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">uniqueness</span><span class="p">:</span> <span class="p">{</span><span class="ss">scope</span><span class="p">:</span> <span class="ss">:user_id</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>FormObject</h1>
+
+<p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br/>
+例えば今回のケースだと、view から文字列で渡ってくる <code>YYY-MM-DD</code> を Date に変換したかったので、一度 Virtus を使ってみたけど、
+例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br/>
+結局、日付の validation のために <a href="https://github.com/adzap/validates_timeliness">validates_timeliness</a> という gem を使ったけど便利だった。</p>
+
+<h2>app/models/foo_day/registration_form.rb</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">:to_date</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:today</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:to_date</span><span class="p">,</span> <span class="ss">allow_blank</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:valid_days</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">save</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">valid?</span>
+</span><span class='line'>      <span class="n">persist!</span>
+</span><span class='line'>      <span class="kp">true</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="kp">false</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">foo_days</span>
+</span><span class='line'>    <span class="vi">@foo_days</span> <span class="o">||=</span> <span class="n">build_foo_days</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">build_foo_days</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">to_date</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>      <span class="o">[</span><span class="no">FooDay</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">date</span><span class="p">:</span> <span class="n">from_date</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="p">(</span><span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">from_date</span><span class="p">)</span><span class="o">.</span><span class="n">.</span><span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">to_date</span><span class="p">))</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">date</span><span class="o">|</span> <span class="no">FooDay</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">date</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">valid_days</span>
+</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">foo_day</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">next</span> <span class="k">if</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">valid?</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;activemodel.errors.invalid_foo_day&#39;</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="ss">message</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">persist!</span>
+</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Controller</h1>
+
+<h2>app/controllers/foo_days_controller.rb</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDaysController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>    <span class="vi">@registration_form</span> <span class="o">=</span> <span class="no">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@registration_form</span> <span class="o">=</span> <span class="no">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:foo_day_registration_form</span><span class="o">].</span><span class="n">merge</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">new_foo_day_path</span><span class="p">,</span> <span class="ss">notice</span><span class="p">:</span> <span class="s1">&#39;登録に成功しました&#39;</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:alert</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;登録に失敗しました&#39;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">render</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:new</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>View</h1>
+
+<h2>app/views/foo_days/new.html.haml</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nc">.row</span>
+</span><span class='line'>  <span class="nt">%h1</span> 日々の登録
+</span><span class='line'>  <span class="p">=</span> <span class="n">form_for</span> <span class="vi">@registration_form</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">foo_days_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:post</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span>
+</span><span class='line'>      <span class="nt">%ul</span>
+</span><span class='line'>        <span class="p">-</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg</span><span class="o">|</span>
+</span><span class='line'>          <span class="nt">%li</span><span class="p">=</span> <span class="n">msg</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="s1">&#39;日付&#39;</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;datepicker&#39;</span>
+</span><span class='line'>    <span class="nt">%span</span> 〜
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:to_date</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;datepicker&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;確定&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">:javascript</span>
+</span><span class='line'>  <span class="nd">$(&#39;.datepicker&#39;).datepicker({dateFormat: &#39;yy-mm-dd&#39;});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Translation</h1>
+
+<h2>config/locales/ja.yml</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ja</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">activemodel</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">foo_day/registration_form</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">from_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">開始日</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">to_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">終了日</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">errors</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">invalid_foo_day</span><span class="p-Indicator">:</span> <span class="s">&#39;%{date}</span><span class="nv"> </span><span class="s">%{message}&#39;</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">models</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">foo_day/registration_form</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">from_date</span><span class="p-Indicator">:</span>
+</span><span class='line'>              <span class="l-Scalar-Plain">on_or_after</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">は %{restriction} 以降の日付を指定してください</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">to_date</span><span class="p-Indicator">:</span>
+</span><span class='line'>              <span class="l-Scalar-Plain">on_or_after</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">は 開始日 以降の日付を指定してください</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>まとめ</h1>
+
+<p>フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。</p>
+
+<h1>参考</h1>
+
+<ul>
+<li><a href="http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/">Creating Form Objects with ActiveModel and Virtus - We build Envato</a></li>
+<li><a href="http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/">7 Patterns to Refactor Fat ActiveRecord Models - Code Climate Blog</a></li>
+<li><a href="http://qiita.com/quattro_4/items/6636efbf58cca13db02a">Form Object実装メモ - Qiita</a></li>
+<li><a href="http://blog.enogineer.com/2014/12/02/rails-form-object/">Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ]]></title>
@@ -1620,34 +1891,6 @@ $ cp -i powerline/config_files/colorschemes/tmux/default.json ~/.config/powerlin
 <ul>
 <li><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst at develop · powerline/powerline</a></li>
 <li><a href="https://github.com/takady/dotfiles">takady/dotfiles</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rubygems.orgに公開しているgemの名前を変更する]]></title>
-    <link href="http://blog.takady.net/blog/2015/03/27/how-to-rename-gem/"/>
-    <updated>2015-03-27T00:56:07+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/03/27/how-to-rename-gem</id>
-    <content type="html"><![CDATA[<p>必要になったので調べてみた．<br/>
-結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．<br/>
-調べた結果，自分は下記の方法をとった．</p>
-
-<ol>
-<li>新しい名前のgemのコードを用意する．既存repositoryをrenameする場合は，.gemspecなど漏れなく修正する．</li>
-<li>新しい名前のgemを<code>rake release</code>する．</li>
-<li><code>gem yank</code>で古い名前のgemをindexから外す．</li>
-</ol>
-
-
-<p><code>gem yank</code>してもrubygems.org上のページは残るのでその点注意．</p>
-
-<h1>参考</h1>
-
-<ul>
-<li><p><a href="http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem">Removing a published RubyGem / Gemcutter / Knowledge Base - RubyGems.org Support</a></p></li>
-<li><p><a href="http://blog.s21g.com/articles/1755">公開した gem を削除する方法 - ヽ( ・∀・)ノくまくまー - s21g</a></p></li>
 </ul>
 
 ]]></content>
