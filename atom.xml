@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-08-29T21:47:33+09:00</updated>
+  <updated>2016-09-01T23:48:47+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -101,6 +101,8 @@
 <span class='line-number'>43</span>
 <span class='line-number'>44</span>
 <span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
 </span><span class='line'>
@@ -135,6 +137,8 @@
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">valid_days</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="n">errors</span><span class="o">.</span><span class="n">any?</span>
+</span><span class='line'>
 </span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">foo_day</span><span class="o">|</span>
 </span><span class='line'>      <span class="k">next</span> <span class="k">if</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">valid?</span>
 </span><span class='line'>
@@ -143,7 +147,7 @@
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">persist!</span>
-</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save!</span><span class="p">)</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -208,9 +212,6 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
 </pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nc">.row</span>
 </span><span class='line'>  <span class="nt">%h1</span> 日々の登録
 </span><span class='line'>  <span class="p">=</span> <span class="n">form_for</span> <span class="vi">@registration_form</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">foo_days_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:post</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
@@ -220,14 +221,11 @@
 </span><span class='line'>          <span class="nt">%li</span><span class="p">=</span> <span class="n">msg</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="s1">&#39;日付&#39;</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;datepicker&#39;</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">date_field</span> <span class="ss">:from_date</span>
 </span><span class='line'>    <span class="nt">%span</span> 〜
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:to_date</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s1">&#39;datepicker&#39;</span>
+</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">date_field</span> <span class="ss">:to_date</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;確定&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">:javascript</span>
-</span><span class='line'>  <span class="nd">$(&#39;.datepicker&#39;).datepicker({dateFormat: &#39;yy-mm-dd&#39;});</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

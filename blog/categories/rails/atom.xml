@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Yuichi Takada]]></title>
   <link href="http://blog.takady.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-08-29T21:47:33+09:00</updated>
+  <updated>2016-09-01T23:48:47+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -83,6 +83,8 @@ end
   end
 
   def valid_days
+    return if errors.any?
+
     foo_days.each do |foo_day|
       next if foo_day.valid?
 
@@ -91,7 +93,7 @@ end
   end
 
   def persist!
-    foo_days.each(&amp;:save)
+    foo_days.each(&amp;:save!)
   end
 end
 </code></pre>
@@ -132,14 +134,11 @@ end
           %li= msg
 
     = f.label '日付'
-    = f.text_field :from_date, class: 'datepicker'
+    = f.date_field :from_date
     %span 〜
-    = f.text_field :to_date, class: 'datepicker'
+    = f.date_field :to_date
 
     = f.submit '確定'
-
-:javascript
-  $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 </code></pre>
 
 <h1>Translation</h1>
