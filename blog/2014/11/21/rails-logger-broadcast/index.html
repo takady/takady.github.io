@@ -7,7 +7,9 @@
 
 	<meta name="author" content="Yuichi Takada"> 
 	
-	<meta name="description" content="a weblog about Programming and Tech."> <meta name="keywords" content="">
+	<meta name="description" content="railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。 前提 ruby 2.1.2
+rails 4.1.4 方法 まず、複数の出力先にロギングするには、ActiveSupport::Logger.#broadcastというメソッドが使える。
+config &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
