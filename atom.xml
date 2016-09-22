@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-09-01T23:48:47+09:00</updated>
+  <updated>2016-09-22T10:22:39+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[isucon6 予選に参加した]]></title>
+    <link href="http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/"/>
+    <updated>2016-09-21T20:11:54+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/09/21/isucon6-qualifier</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.takady.net/blog/2015/09/29/isucon5-qualifier/">去年</a>に引き続き、今年も同じメンバーで チームYashio として isucon6 予選に参加してきた。<br/>
+今回は去年の経験を活かして予選通過できそうな気がしていたけど、またしても結果は惨敗で非常に残念。</p>
+
+<h2>前日までの準備期間</h2>
+
+<p>ちょうど1週間前あたりから、azure にアカウントを作って前回の予選の環境をデプロイして、
+3人で色々な改修・実装を試してベンチマーカーを回したりして楽しんでた。<br/>
+この一週間はとてもイイ感じで、N+1 を解消してみたり、DB のデータを redis にキャッシュしてみたり、3人で愚直にスコアを上げるのを楽しんでいて「なんかこれ今年は行けるんじゃない？！」みたいな雰囲気を感じてた。<br/>
+あと、去年はサーバ上で直接コード修正するなどしてしまい、メンバーが並行して実装する事が非常に困難だった反省から、ローカルでの開発環境構築と deploy の仕組みの整備を @muratayusuke が確立してくれて、当日もおおいに役立った。</p>
+
+<h2>当日</h2>
+
+<p>今回はヒカリエの会場で参加。<br/>
+朝は若干の緊張と期待感で、部活の試合の日の朝っぽい感じだった。</p>
+
+<p><img src="http://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_094840.jpg" width="600" alt="" /></p>
+
+<p>10時に始まってからは、@muratayusuke が競技用のインスタンスの起動とか deploy 周りを整備したり、ruby 実装が起動するようにするなどした。<br/>
+@tatsuyaoiw がコードを読んだりアプリケーションを触って理解を進めてた。<br/>
+僕は、開発用として、マシンイメージを別の環境にデプロイしてインスタンスを起動して、そこの DB にローカルから接続できるように設定して、ローカルでアプリを動かすための設定をするなどした。<br/>
+ローカル環境で開発して本番に deploy できる環境が整ったのがだいたい11時過ぎくらい。</p>
+
+<p>ruby 実装での最初のスコアは 1100 くらいだったけど、スコア安定しなくて大体 0 だった気がする。<br/>
+そこから @muratayusuke が nginx から static ファイル返してクライアントキャッシュ有効にしたり、 unicorn の worker 数増やしたりして 3000 くらいまで上げた。</p>
+
+<p>stackprof の結果見てて、<code>#htmlify</code> がとにかく遅いって事で @tatsuyaoiw と話したりして、正規表現を使わない実装にチャレンジしてみた。<br/>
+で、ここから何度か修正してはベンチマーカーを流して、「リンクがありません」エラーメッセージが出てそれを見て直してを繰り返して15時くらいまでひたすらやったんだけど、エラーが完全に取れなくて一人疲弊してきて、正規表現使わない実装は諦めて、keyword 一覧を redis から取ってきて、それを content に含まれてる keyword だけに限定して <code>gsub</code> に渡すっていう修正にとどまった。<br/>
+これで 16,000 までは上がったけど、もはや上位陣との差が空いていて厳しい感じだった。</p>
+
+<p>それから @tatsuyaoiw が user の情報を redis でキャッシュしたり isutar へのアクセス回数を減らしたり、@muratayusuke が nginx の設定変更とかもろもろやって 19,000 くらいが最高だった。</p>
+
+<p><img src="http://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_180855.jpg" width="600" alt="" /></p>
+
+<h2>まとめ</h2>
+
+<p>一つに時間掛け過ぎた。一時間くらいで諦めて他の方法とか箇所とかに切り替えた方が良かったと思う。<br/>
+終わってから3人で飲みに行って悔しがった。<br/>
+今回のお題は、スロークエリや N+1 みたいなものがほぼ無かったので、とにかく <code>#htmlify</code> をなんとかしないとーっていう感じだった。<br/>
+そこでアルゴリズムの問題としてそれに向き合っていた時間が長すぎたんだけど、生成された html 自体をキャッシュするとかっていう方向でも良かったわけだし、そういう方針の切り替えができるような落ち着きの時間を持てると良さそう。<br/>
+予選後に飲みながら話してた時に「そういう方法があったね」って話になったから、本番中に一旦落ち着いていればそれを思い付いて実行出来てたかもなーって思った。<br/>
+来年こそは…！！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rails で FormObject を使う]]></title>
@@ -1799,96 +1848,6 @@ YAPC::Asia 今年で最後ということで残念だけど、今年も楽しか
 
 <ul>
 <li><a href="http://rebuild.fm/41/">Rebuild: 41: Kids These Days Don&rsquo;t Know Shell (Naoya Ito)</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[tmuxにpowerlineを導入した]]></title>
-    <link href="http://blog.takady.net/blog/2015/04/20/powerline-config/"/>
-    <updated>2015-04-20T16:54:18+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/04/20/powerline-config</id>
-    <content type="html"><![CDATA[<h1>powerlineの導入</h1>
-
-<p>下記の記事を参考にした．<br/>
-<a href="http://qiita.com/tkhr/items/8cc17c02dea1803be9c6">tmux - Powerline導入例 - Qiita</a></p>
-
-<h2>フォントが綺麗に表示されない場合</h2>
-
-<p>自分の環境では，<code>brew reinstall --powerline --vim-powerline ricty</code>でpowerline用のRictyを入れても綺麗に表示されなかったので，自分でfontを合成した．</p>
-
-<pre><code>$ git clone https://github.com/yascentur/Ricty.git
-$ cd Ricty
-
-$ git clone https://github.com/powerline/fonts.git
-
-$ wget http://sourceforge.jp/frs/redir.php\?m\=jaist\&amp;f\=%2Fmix-mplus-ipa%2F59022%2Fmigu-1m-20130617.zip -O migu-1m-20130617.zip
-$ unzip migu-1m-20130617.zip
-$ ./ricty_generator.sh fonts/Inconsolata/Inconsolata\ for\ Powerline.otf migu-1m-20130617/migu-1m-regular.ttf migu-1m-20130617/migu-1m-bold.ttf
-
-$ cp -f ./Ricty*.ttf ~/Library/Fonts
-$ fc-cache -vf
-</code></pre>
-
-<h1>カスタマイズ</h1>
-
-<p>デフォルトは水色．<br/>
-<img src="http://blog.takady.net/images/powerline_config_01.png" alt="before" /></p>
-
-<p><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst</a>に設定方法は書いてある．<br/>
-カスタマイズしたいconfigファイルを<code>powerline/config_files</code>から<code>~/.config/powerline</code>以下にパスそのままにコピーしてきて，それを編集する．</p>
-
-<pre><code>$ mkdir -p ~/.config/powerline/colorschemes/tmux
-$ cp -i powerline/config_files/colorschemes/tmux/default.json ~/.config/powerline/colorschemes/tmux/.
-</code></pre>
-
-<h2>~/.config/powerline/colorschemes/tmux/default.json</h2>
-
-<p>例えば色を変えてみる．<br/>
-色は<code>powerline/config_files/colors.json</code>に定義されているものも使える．</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="nt">&quot;groups&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;active_window_status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;gray70&quot;</span><span class="p">,</span> <span class="nt">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;gray0&quot;</span><span class="p">,</span>       <span class="nt">&quot;attrs&quot;</span><span class="p">:</span> <span class="p">[]},</span>
-</span><span class='line'>    <span class="nt">&quot;window:current&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="nt">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="nt">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;brightgreen&quot;</span><span class="p">,</span> <span class="nt">&quot;attrs&quot;</span><span class="p">:</span> <span class="p">[]},</span>
-</span><span class='line'>    <span class="nt">&quot;window_name&quot;</span><span class="p">:</span>          <span class="p">{</span><span class="nt">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="nt">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;brightgreen&quot;</span><span class="p">,</span> <span class="nt">&quot;attrs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]},</span>
-</span><span class='line'>    <span class="nt">&quot;session:prefix&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="nt">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="nt">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;brightgreen&quot;</span><span class="p">,</span> <span class="nt">&quot;attrs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bold&quot;</span><span class="p">]}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>修正後</h3>
-
-<p><img src="http://blog.takady.net/images/powerline_config_02.png" alt="after" /></p>
-
-<h1>その他</h1>
-
-<p>ちなみに，tmuxの設定をreloadするために毎回tmuxを再起動するのは面倒なので，<code>.tmux.conf</code>に下記のように設定を再読み込みするよう定義しておくと捗る．</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>bind C-r source-file &quot;${HOME}/.tmux.conf&quot;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>まとめ</h1>
-
-<p>もっとこだわるなら表示する情報とかもカスタマイズできるので，やりたくなったらやるつもり．</p>
-
-<h1>参考</h1>
-
-<ul>
-<li><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst at develop · powerline/powerline</a></li>
-<li><a href="https://github.com/takady/dotfiles">takady/dotfiles</a></li>
 </ul>
 
 ]]></content>
