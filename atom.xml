@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-09-22T13:40:13+09:00</updated>
+  <updated>2016-10-23T11:32:53+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -152,6 +152,7 @@
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
+<span class='line-number'>48</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
 </span><span class='line'>
@@ -160,15 +161,12 @@
 </span><span class='line'>  <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'>  <span class="n">validates</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:today</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
 </span><span class='line'>  <span class="n">validates</span> <span class="ss">:to_date</span><span class="p">,</span> <span class="ss">allow_blank</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
-</span><span class='line'>  <span class="n">validate</span> <span class="ss">:valid_days</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">save</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">valid?</span>
-</span><span class='line'>      <span class="n">persist!</span>
-</span><span class='line'>      <span class="kp">true</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="kp">false</span>
-</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="n">valid?</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">persist!</span>
+</span><span class='line'>    <span class="kp">true</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="kp">private</span>
@@ -185,14 +183,18 @@
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">valid_days</span>
-</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="n">errors</span><span class="o">.</span><span class="n">any?</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">valid?</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="k">super</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">foo_day</span><span class="o">|</span>
 </span><span class='line'>      <span class="k">next</span> <span class="k">if</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">valid?</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;activemodel.errors.invalid_foo_day&#39;</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="ss">message</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)))</span>
+</span><span class='line'>      <span class="n">foo_day</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;activemodel.errors.invalid_foo_day&#39;</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="ss">message</span><span class="p">:</span> <span class="n">message</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">end</span>
 </span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="k">super</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">persist!</span>
