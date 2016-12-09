@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Yuichi Takada]]></title>
   <link href="http://blog.takady.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-10-23T11:32:53+09:00</updated>
+  <updated>2016-12-09T21:42:04+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails の validation error message の i18n 対応]]></title>
+    <link href="http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/"/>
+    <updated>2016-12-09T21:20:43+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n</id>
+    <content type="html"><![CDATA[<p>rails で Custom validatior や Custom validation method を定義して、その中で <code>errors.add</code> する際に、
+message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。<br/>
+結論としては、下記のように書くのがスッキリして良さそう。</p>
+
+<h2>Custom Validators</h2>
+
+<p>特定のモデルによらないエラーメッセージの場合は、下記のように <code>locales/en.yml</code> を書くことで、<code>record.errors.add(attribute, :something_invalid)</code>と書ける。</p>
+
+<pre><code class="yml">en:
+  errors:
+    messages:
+      something_invalid: Invalid something.
+</code></pre>
+
+<pre><code class="ruby">class MyCheckValidator &lt; ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless check_something(value)
+      record.errors.add(attribute, :something_invalid)
+      #=&gt; record.errors.add(attribute, I18n.t('errors.messages.something_invalid')) と同じ
+    end
+  end
+
+  def check_something(value)
+   # Something
+  end
+end
+
+class MyModel &lt; ActiveRecord::Base
+  validates :name, my_check: true
+end
+</code></pre>
+
+<h2>Custom Methods</h2>
+
+<p>特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。</p>
+
+<pre><code class="yml">en:
+  activerecord:
+    errors:
+      models:
+        my_model:
+          attributes:
+            start_date:
+              cannot_be_after_end_date: It cannot be after the end date.
+            end_date:
+              cannot_be_before_start_date: It cannot be before the start date.
+</code></pre>
+
+<pre><code class="ruby">class MyModel &lt; ActiveRecord::Base
+  validate :start_date_cannot_be_after_end_date, if: -&gt; { start_date.present? &amp;&amp; end_date.present? }
+
+  private
+
+  def start_date_cannot_be_after_end_date
+    return if start_date &lt;= end_date
+
+    errors.add(:start_date, :cannot_be_after_end_date)
+    #=&gt; errors.add(:start_date, I18n.t('activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date')) と同じ
+    errors.add(:end_date, :cannot_be_before_start_date)
+    #=&gt; errors.add(:end_date, I18n.t('activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date')) と同じ
+  end
+end
+</code></pre>
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://guides.rubyonrails.org/active_record_validations.html">Active Record Validations — Ruby on Rails Guides</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rails で FormObject を使う]]></title>
@@ -340,55 +418,6 @@ end
 <h1>参考</h1>
 
 <p><a href="http://stackoverflow.com/questions/373731/override-activerecord-attribute-methods">ruby on rails - Override ActiveRecord attribute methods - Stack Overflow</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[railsで、複数の出力先にlogを出力する]]></title>
-    <link href="http://blog.takady.net/blog/2014/11/21/rails-logger-broadcast/"/>
-    <updated>2014-11-21T18:57:07+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/11/21/rails-logger-broadcast</id>
-    <content type="html"><![CDATA[<p>railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。</p>
-
-<h1>前提</h1>
-
-<p>ruby 2.1.2<br/>
-rails 4.1.4</p>
-
-<h1>方法</h1>
-
-<p>まず、複数の出力先にロギングするには、<a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/logger.rb#L10-L42">ActiveSupport::Logger.#broadcast</a>というメソッドが使える。<br/>
-config/application.rbのMyapp::Applicationクラス内に下記のように書いてみた。</p>
-
-<pre><code class="ruby">logger = ActiveSupport::Logger.new(config.paths["log"].first)
-error_logger = ActiveSupport::Logger.new("log/error.log")
-error_logger.level = Logger::ERROR
-logger.extend ActiveSupport::Logger.broadcast(error_logger)
-config.logger = logger
-</code></pre>
-
-<p>これで、複数箇所にログが出力されるようにはなった。<br/>
-しかし、今回やりたかったのは、<strong>ERROR以上の時だけ</strong>２箇所にロギングしたいというもので、上記のようにconfig/application.rbでextendした場合、error_loggerのlevelをERRORにセットしていても、Rails.loggerのlevelと同じlevelでのloggingになってしまう。<br/>
-全く同じエラーログを複数箇所に吐かせたいというだけであれば、上記の方法で良いと思う。(その際、上記の<code>error_logger.level = Logger::ERROR</code>は意味が無いので消した方が良い)</p>
-
-<p>error_logger.levelの指定が効くようにするには、<code>run Rails.application</code>よりも後で、error_loggerをRails.loggerにextendすると良い。<br/>
-config.ruに下記を追記する。</p>
-
-<pre><code class="ruby">run Rails.application
-
-error_logger = ActiveSupport::Logger.new("log/error.log")
-error_logger.level = Logger::ERROR
-Rails.logger.extend ActiveSupport::Logger.broadcast(error_logger)
-</code></pre>
-
-<p>これで、log/error.logへは、ERRORレベル以上のログだけが出力されるようになった。<br/>
-もちろん、log/development.logには、これまでどおりDEBUGレベルまで含めた全てのlogが出ている。</p>
-
-<h1>参考</h1>
-
-<p><a href="http://blog.livedoor.jp/sonots/archives/38927788.html">[Ruby] 例えば、Rails の標準ログを止める - sonots:blog</a><br/>
-<a href="http://railsdoc.eiel.info/active_support/logger/">RailsDoc - ActiveSupport::Logger</a><br/>
-<a href="http://mitsu877.hatenablog.com/entry/2014/11/15/193547">【Rails】バッチの実行ログを専用のログファイルと標準出力の両方に出す - おどるダメ人間</a></p>
 ]]></content>
   </entry>
   

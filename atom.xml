@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-10-23T11:32:53+09:00</updated>
+  <updated>2016-12-09T21:42:04+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,136 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails の validation error message の i18n 対応]]></title>
+    <link href="http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/"/>
+    <updated>2016-12-09T21:20:43+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n</id>
+    <content type="html"><![CDATA[<p>rails で Custom validatior や Custom validation method を定義して、その中で <code>errors.add</code> する際に、
+message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。<br/>
+結論としては、下記のように書くのがスッキリして良さそう。</p>
+
+<h2>Custom Validators</h2>
+
+<p>特定のモデルによらないエラーメッセージの場合は、下記のように <code>locales/en.yml</code> を書くことで、<code>record.errors.add(attribute, :something_invalid)</code>と書ける。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">errors</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">messages</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">something_invalid</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Invalid something.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MyCheckValidator</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">EachValidator</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">validate_each</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">unless</span> <span class="n">check_something</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">record</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="ss">:something_invalid</span><span class="p">)</span>
+</span><span class='line'>      <span class="c1">#=&gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">check_something</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span class='line'>   <span class="c1"># Something</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">MyModel</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">my_check</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Custom Methods</h2>
+
+<p>特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">activerecord</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">errors</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">models</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">my_model</span><span class="p-Indicator">:</span>
+</span><span class='line'>          <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">start_date</span><span class="p-Indicator">:</span>
+</span><span class='line'>              <span class="l-Scalar-Plain">cannot_be_after_end_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">It cannot be after the end date.</span>
+</span><span class='line'>            <span class="l-Scalar-Plain">end_date</span><span class="p-Indicator">:</span>
+</span><span class='line'>              <span class="l-Scalar-Plain">cannot_be_before_start_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">It cannot be before the start date.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">MyModel</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:start_date_cannot_be_after_end_date</span><span class="p">,</span> <span class="k">if</span><span class="p">:</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">start_date</span><span class="o">.</span><span class="n">present?</span> <span class="o">&amp;&amp;</span> <span class="n">end_date</span><span class="o">.</span><span class="n">present?</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">start_date_cannot_be_after_end_date</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="n">start_date</span> <span class="o">&lt;=</span> <span class="n">end_date</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:start_date</span><span class="p">,</span> <span class="ss">:cannot_be_after_end_date</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#=&gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:end_date</span><span class="p">,</span> <span class="ss">:cannot_be_before_start_date</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#=&gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考</h3>
+
+<ul>
+<li><a href="http://guides.rubyonrails.org/active_record_validations.html">Active Record Validations — Ruby on Rails Guides</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[isucon6 予選に参加した]]></title>
@@ -1801,57 +1931,6 @@ YAPC::Asia 今年で最後ということで残念だけど、今年も楽しか
 一万人規模の会社から、百人規模の会社に来たので、色々なものごとの距離感の近さが新鮮に感じられる。<br/>
 さすがのスピード感で、入社して3日目から本格的にPRを出すなどの開発に入り、それから毎日頑張ってついて行っている間に1ヶ月経ったという感じだった。<br/>
 周囲のメンバーと切磋琢磨しながら、自分もサービスに貢献していきたいと思う。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[bundle openでtmuxのpaneを開く]]></title>
-    <link href="http://blog.takady.net/blog/2015/04/24/bundle-open-tmux/"/>
-    <updated>2015-04-24T13:11:11+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/04/24/bundle-open-tmux</id>
-    <content type="html"><![CDATA[<p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br/>
-便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">BUNDLER_EDITOR</span><span class="o">=</span><span class="s2">&quot;tmux split-window -c&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上記を<code>~/.zshrc</code>あたりに定義して，コマンドラインで<code>bundle open</code>を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．</p>
-
-<pre><code>$ bundle open activerecord
-</code></pre>
-
-<h1>bundle openを上書きしたくない場合</h1>
-
-<p><code>bundle open</code>の挙動はそのまま残したいという場合には，<code>BUNDLER_EDITOR</code>で設定するのではなく，下記のような関数を別途定義して使うと良い．</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">function</span> bundle_open_tmux<span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;$1&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>        <span class="nb">local </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>bundle show <span class="s2">&quot;$1&quot;</span><span class="k">)</span>
-</span><span class='line'>        tmux split-window -c <span class="s2">&quot;$dir&quot;</span>
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下記のように実行すると，同じように動作する．</p>
-
-<pre><code>$ bundle_open_tmux activerecord
-</code></pre>
-
-<h1>参考</h1>
-
-<ul>
-<li><a href="http://rebuild.fm/41/">Rebuild: 41: Kids These Days Don&rsquo;t Know Shell (Naoya Ito)</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
