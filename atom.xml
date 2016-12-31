@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-12-09T21:42:04+09:00</updated>
+  <updated>2016-12-31T13:32:10+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[2016年まとめ]]></title>
+    <link href="http://blog.takady.net/blog/2016/12/31/2016-summary/"/>
+    <updated>2016-12-31T13:10:16+09:00</updated>
+    <id>http://blog.takady.net/blog/2016/12/31/2016-summary</id>
+    <content type="html"><![CDATA[<p>自分用今年のまとめ。</p>
+
+<h2>英語</h2>
+
+<p>自分の中で英語をやる機運が高まってきたので勉強始めた。</p>
+
+<ul>
+<li>夏あたりからオンライン英会話を週1,2回ペースでやって、オンサイトの英会話に週1ペースで行ってる。
+
+<ul>
+<li>自然言語の習得は毎日継続するのが良いらしいので毎日やるような習慣にしたい。</li>
+</ul>
+</li>
+<li>あとはamazonで買った<a href="https://www.amazon.co.jp/gp/product/0521734770/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=0521734770&amp;linkCode=as2&amp;tag=takadayuichi-22">英語圏の小学生用のテキスト</a>をやってる。</li>
+</ul>
+
+
+<h2>発表</h2>
+
+<ul>
+<li>7月の頭に1回だけ、その時会社でやってたログ収集の基盤とre:dashについて社外でLTした。
+
+<ul>
+<li>もっと発表していく予定だったけど、その後業務でやることが変わったりしてその余裕とかネタが取れなかった。</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>業務</h2>
+
+<ul>
+<li>前半は去年の続きをやっていた感じだった。</li>
+<li>後半は KPI 基盤のリプレースのプロジェクトのメインメンバーとして進めて、そのあと方針変更により別プロジェクトのメンバーになった。</li>
+<li>12月には事業の開発チームに異動することとなった。
+
+<ul>
+<li>動きがあった方が学びは多いと思うが、やってる途中で止めないといけない事もあったりするのでそこの割り切りが必要になった。</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>読書</h2>
+
+<p>5月に Kindle Paperwhite 買ったらめっちゃ読書体験が良くなって以前より本が読みやすくなった。<br/>
+会社の技術書購入支援制度があるのもあって、読む本には困らなかった。</p>
+
+<ul>
+<li><a href="https://www.amazon.co.jp/gp/product/4798121967/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4798121967&amp;linkCode=as2&amp;tag=takadayuichi-22">エリック・エヴァンスのドメイン駆動設計 (IT Architects’Archive ソフトウェア開発の実践) </a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4797376279/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4797376279&amp;linkCode=as2&amp;tag=takadayuichi-22">10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く (Informatics &amp;IDEA) </a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4822284654/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4822284654&amp;linkCode=as2&amp;tag=takadayuichi-22">オブジェクト指向でなぜつくるのか 第2版</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B00I96CJWO/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B00I96CJWO&amp;linkCode=as2&amp;tag=takadayuichi-22">ピープルウエア　第3版</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B01GDS0994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B01GDS0994&amp;linkCode=as2&amp;tag=takadayuichi-22">SOFT SKILLS　ソフトウェア開発者の人生マニュアル</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B015DRJF8W/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B015DRJF8W&amp;linkCode=as2&amp;tag=takadayuichi-22">日本人の働き方の9割がヤバい件について</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B00HOTLXKQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B00HOTLXKQ&amp;linkCode=as2&amp;tag=takadayuichi-22">10年後の仕事のカタチ10のヒント</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4860641345/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4860641345&amp;linkCode=as2&amp;tag=takadayuichi-22">どんどん話すための瞬間英作文トレーニング</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4274217620/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4274217620&amp;linkCode=as2&amp;tag=takadayuichi-22">エクストリームプログラミング</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B01D2UKPFE/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B01D2UKPFE&amp;linkCode=as2&amp;tag=takadayuichi-22">Android実践プログラミング 現場で生まれた設計パターン</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/479813161X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=479813161X&amp;linkCode=as2&amp;tag=takadayuichi-22">実践ドメイン駆動設計 (Object Oriented SELECTION) </a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/B01L8SEVYI/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B01L8SEVYI&amp;linkCode=as2&amp;tag=takadayuichi-22">オブジェクト指向設計実践ガイド ～Rubyでわかる 進化しつづける柔軟なアプリケーションの育て方</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4873117437/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873117437&amp;linkCode=as2&amp;tag=takadayuichi-22">メタプログラミングRuby 第2版</a></li>
+<li><a href="https://leanpub.com/everydayrailsrspec-jp">Everyday Rails - RSpecによるRailsテスト入門</a></li>
+<li><a href="https://www.amazon.co.jp/gp/product/4163902309/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4163902309&amp;linkCode=as2&amp;tag=takadayuichi-22">火花</a></li>
+</ul>
+
+
+<h2>個人的な技術的興味</h2>
+
+<ul>
+<li>Android アプリ開発について勉強しようと思って、アプリを作ってみたりしてた。
+
+<ul>
+<li>軽くしかできてないのでもうちょっと深くやりたい。</li>
+</ul>
+</li>
+<li>js というか React を触ってた。</li>
+</ul>
+
+
+<h2>その他</h2>
+
+<ul>
+<li>メインのエディタを sublime text から RubyMine に完全に移行した。</li>
+<li>プライベートのメールクライアントを gmail から inbox に移行した。</li>
+<li>シンガポール、オランダ、ドイツに旅行に行った。
+
+<ul>
+<li>楽しかったからまた海外旅行行きたい。</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>まとめ</h2>
+
+<p>年初にやってたこととかについては「これも今年だったか」と思うくらいに過去な感じがする。<br/>
+来年の前半はアルゴリズムとデータ構造とかそういう基本的なところをちゃんと学び直したい。<br/>
+あと英語が面白くなってきたから引き続きやっていこう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rails の validation error message の i18n 対応]]></title>
@@ -1919,18 +2026,6 @@ YAPC::Asia 今年で最後ということで残念だけど、今年も楽しか
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[転職して１ヶ月経った]]></title>
-    <link href="http://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/"/>
-    <updated>2015-07-05T20:37:26+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month</id>
-    <content type="html"><![CDATA[<p>5月12日に転職して、1ヶ月くらい経った。<br/>
-一万人規模の会社から、百人規模の会社に来たので、色々なものごとの距離感の近さが新鮮に感じられる。<br/>
-さすがのスピード感で、入社して3日目から本格的にPRを出すなどの開発に入り、それから毎日頑張ってついて行っている間に1ヶ月経ったという感じだった。<br/>
-周囲のメンバーと切磋琢磨しながら、自分もサービスに貢献していきたいと思う。</p>
 ]]></content>
   </entry>
   
