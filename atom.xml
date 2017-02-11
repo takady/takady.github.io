@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2016-12-31T13:39:29+09:00</updated>
+  <updated>2017-02-11T16:50:05+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Let's Encrypt と Nginx で HTTPS 対応]]></title>
+    <link href="http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/"/>
+    <updated>2017-02-11T15:53:29+09:00</updated>
+    <id>http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx</id>
+    <content type="html"><![CDATA[<p>個人的に作ってるサイトを HTTPS 対応させてみた。<br/>
+iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。</p>
+
+<h2>Let&rsquo;s Encrypt</h2>
+
+<p><a href="https://letsencrypt.jp/">https://letsencrypt.jp/</a></p>
+
+<p>無料で証明書を用意できるので今回利用した。</p>
+
+<p>curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。<br/>
+以下、実行例。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。</p>
+
+<p>これで <code>/etc/letsencrypt/live/example.com/</code> 以下に、証明書や秘密鍵が配置されるので(実際にはこれはシンボリックリンクなのだが)、これらのファイルを Nginx の設定で指定する。</p>
+
+<h2>iptables</h2>
+
+<p><code>/etc/sysconfig/iptables</code> を見て、80 と同様に 443 も許可されている事を確認しておく。<br/>
+されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。<br/>
+<code>sudo /sbin/iptables -L</code> で設定を確認できる。最後に <code>iptables save</code> するのを忘れずに。<br/>
+あとは iptables を再起動すると反映されるはず。</p>
+
+<h2>Nginx</h2>
+
+<p>実際の Nginx の設定は下記のようにした。<br/>
+http のリクエストは https にリダイレクトさせるようにした。<br/>
+（unicorn を使ってるのでその記述があるが今回の件には直接関係無い。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">upstream</span> <span class="s">unicorn</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">server</span> <span class="s">unix:/path/to/app/current/tmp/sockets/unicorn.sock</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">server</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">server</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">server_name</span> <span class="s">example.com</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">ssl_protocols</span> <span class="s">TLSv1</span> <span class="s">TLSv1.1</span> <span class="s">TLSv1.2</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">ssl_ciphers</span> <span class="s">&quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">access_log</span> <span class="s">/var/log/nginx/example.com.access.log</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">root</span> <span class="s">/path/to/app/current/public</span><span class="p">;</span>
+</span><span class='line'>    <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">@unicorn</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/assets/</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kn">root</span> <span class="s">/path/to/app/shared/public</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kn">location</span> <span class="s">@unicorn</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Server</span> <span class="nv">$host</span><span class="p">;</span>
+</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span><span class='line'>        <span class="kn">proxy_pass</span> <span class="s">http://unicorn</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kn">location</span> <span class="s">/robots.txt</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kn">alias</span> <span class="s">/path/to/app/current/public/robots.txt</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>SSL LABS</h2>
+
+<p><a href="https://www.ssllabs.com/ssltest/">https://www.ssllabs.com/ssltest/</a></p>
+
+<p>SSL の設定確認できるサイト。<br/>
+以下のようになればうまくいっている。</p>
+
+<p><img src="http://blog.takady.net/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png" width="600" alt="" /></p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://programming.wikihub.io/@r7kamura/20160702202711">Let&rsquo;s EncryptとAmazon LinuxとNginxでamakan.netをHTTPSに対応させた - Programming</a></li>
+<li><a href="http://nobuneko.com/blog/archives/2013/05/linux_centos_6_iptables_http_https.html">Linux(CentOS 6) - iptablesの設定を変更し、http、httpsでのアクセスを許可する - r_nobuホームページ</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2016年まとめ]]></title>
@@ -2015,25 +2151,6 @@ emacs でコードを書いてターミナルでコマンド結果を見なが�
 YAPC::Asia 今年で最後ということで残念だけど、今年も楽しかったし、聴いたセッションは全てとても勉強になるものだったので満足。</p>
 
 <p>最後に運営の皆様、本当にお疲れ様でした！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rebuild Meetup に行ってきた]]></title>
-    <link href="http://blog.takady.net/blog/2015/08/19/rebuild-meetup/"/>
-    <updated>2015-08-19T23:35:36+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/08/19/rebuild-meetup</id>
-    <content type="html"><![CDATA[<p><a href="http://connpass.com/event/18099/">Rebuild Meetup 2015 - connpass</a></p>
-
-<p>昨年のはじめに仙台に出張してる時から rebuild.fm 聴くようになって、プログラミング好きになって、仕事でも web アプリ書けるところに異動して、その後今の会社に転職したので、感慨深かった。</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p lang="ja" dir="ltr">Matz きたー <a href="https://twitter.com/hashtag/rebuildfm?src=hash">#rebuildfm</a> <a href="http://t.co/nPX9OxAsh9">pic.twitter.com/nPX9OxAsh9</a></p>&mdash; takady (@takady7) <a href="https://twitter.com/takady7/status/633967560505978880">2015, 8月 19</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
 ]]></content>
   </entry>
   
