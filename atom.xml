@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2017-02-11T16:50:05+09:00</updated>
+  <updated>2017-02-19T19:22:05+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,173 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails のログを fluentd で slack に通知する]]></title>
+    <link href="http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/"/>
+    <updated>2017-02-19T18:58:24+09:00</updated>
+    <id>http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack</id>
+    <content type="html"><![CDATA[<p>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。</p>
+
+<h2>td-agent</h2>
+
+<h3>インストール</h3>
+
+<p>td-agent のインストールは下記に書いてある通り。<br/>
+<a href="http://docs.fluentd.org/v0.12/articles/install-by-deb">Installing Fluentd Using deb Package | Fluentd</a></p>
+
+<p>Ubuntu 16.04 なので下記で入れた。</p>
+
+<pre><code>$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
+</code></pre>
+
+<h3>プラグインのインストール</h3>
+
+<p>td-agent-gem で slack のプラグインをインストール。</p>
+
+<pre><code>$ td-agent-gem install fluent-plugin-slack
+</code></pre>
+
+<h3>設定ファイルの修正</h3>
+
+<p><code>/etc/td-agent/td-agent.conf</code> を下記のように修正。<br/>
+webhook の URL あらかじめ Slack 取得しておく。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;source&gt;
+</span><span class='line'>  @type forward
+</span><span class='line'>&lt;/source&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;match app.*&gt;
+</span><span class='line'>  type copy
+</span><span class='line'>  &lt;store&gt;
+</span><span class='line'>    @type file
+</span><span class='line'>    path /var/log/app/web
+</span><span class='line'>    time_slice_wait 10m
+</span><span class='line'>    compress gzip
+</span><span class='line'>  &lt;/store&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;store&gt;
+</span><span class='line'>    @type rewrite_tag_filter
+</span><span class='line'>    rewriterule1 severity FATAL app.fatal
+</span><span class='line'>  &lt;/store&gt;
+</span><span class='line'>&lt;/match&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;match app.fatal&gt;
+</span><span class='line'>  @type slack
+</span><span class='line'>  webhook_url https://hooks.slack.com/services/xxxxxxxxxxx
+</span><span class='line'>  channel app_error
+</span><span class='line'>  username ErrorBot
+</span><span class='line'>  icon_emoji :astonished:
+</span><span class='line'>  message_keys messages
+</span><span class='line'>  flush_interval 5s
+</span><span class='line'>&lt;/match&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;match clear&gt;
+</span><span class='line'>  @type null
+</span><span class='line'>&lt;/match&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>再起動</h3>
+
+<p>td-agent を再起動する。</p>
+
+<pre><code>$ /etc/init.d/td-agent restart
+</code></pre>
+
+<h2>rails</h2>
+
+<h3>Gemfile</h3>
+
+<p><code>act-fluent-logger-rails</code> と <code>lograge</code> をインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'act-fluent-logger-rails'
+</span><span class='line'>gem 'lograge'</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>config/environments/production.rb</h3>
+
+<p>loggerの設定。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="ss">:info</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="no">ActFluentLoggerRails</span><span class="o">::</span><span class="no">Logger</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">lograge</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">lograge</span><span class="o">.</span><span class="n">formatter</span> <span class="o">=</span> <span class="no">Lograge</span><span class="o">::</span><span class="no">Formatters</span><span class="o">::</span><span class="no">Json</span><span class="o">.</span><span class="n">new</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>config/fluent-logger.yml</h3>
+
+<p>fluent用の設定ファイル。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">fluent_host</span><span class="p-Indicator">:</span>   <span class="s">&#39;127.0.0.1&#39;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">fluent_port</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">24224</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">tag</span><span class="p-Indicator">:</span>           <span class="s">&#39;app.web&#39;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">messages_type</span><span class="p-Indicator">:</span> <span class="s">&#39;string&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>結果</h2>
+
+<p>ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。</p>
+
+<pre><code>$ tail -f /var/log/app/web.20170219.b548df17385a3a314
+2017-02-19T09:51:42+00:00       app.web    {"messages":"{\"method\":\"GET\",\"path\":\"/\",\"format\":\"html\",\"controller\":\"FooController\",\"action\":\"index\",\"status\":200,\"duration\":1534.33,\"view\":1299.3,\"db\":0.0}","severity":"INFO"}
+2017-02-19T09:51:43+00:00       app.web    {"messages":"{\"method\":\"GET\",\"path\":\"/api/foo.json\",\"format\":\"json\",\"controller\":\"Api::FooController\",\"action\":\"index\",\"status\":200,\"duration\":374.19,\"view\":49.21,\"db\":0.0}","severity":"INFO"}
+</code></pre>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://github.com/actindi/act-fluent-logger-rails">actindi/act-fluent-logger-rails: Fluent logger</a></li>
+<li><a href="http://docs.fluentd.org/v0.12/articles/out_rewrite_tag_filter">rewrite_tag_filter Output Plugin | Fluentd</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Let's Encrypt と Nginx で HTTPS 対応]]></title>
@@ -1973,184 +2140,6 @@ index が前方一致な事を思い出す。</p>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[YAPC::Asia 2015 に行ってきた]]></title>
-    <link href="http://blog.takady.net/blog/2015/08/22/yapc-asia-2015/"/>
-    <updated>2015-08-22T21:00:19+09:00</updated>
-    <id>http://blog.takady.net/blog/2015/08/22/yapc-asia-2015</id>
-    <content type="html"><![CDATA[<p><a href="http://yapcasia.org/2015/">YAPC::Asia 2015</a> の前夜祭と2日目に行ってきた。</p>
-
-<h1>前夜祭</h1>
-
-<h2><a href="http://yapcasia.org/2015/talk/show/7d62caf8-12f4-11e5-881c-d9f87d574c3a">技術ブログを書くことについて語るときに僕の語ること</a></h2>
-
-<p>ブログでブクマ数を稼ぐには、という話だった。<br/>
-なるほど、という感じでとてもおもしろかった。</p>
-
-<ul>
-<li><p>ブログはタイトルが大事</p></li>
-<li><p>投稿タイミングも大事</p>
-
-<ul>
-<li>平日の朝が良い
-
-<ul>
-<li>金曜の夜にテンション高く書き上げても、すぐに公開せずに一旦寝かせる</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<h1>1日目</h1>
-
-<p>不参加</p>
-
-<h1>2日目</h1>
-
-<h2><a href="http://yapcasia.org/2015/talk/show/86ebd212-fab3-11e4-8f5a-8ab37d574c3a">ISUCONの勝ち方</a></h2>
-
-<p>isucon のための tips や チューニング方法についてのお話。<br/>
-とても勉強になった。isucon 出たい。</p>
-
-<ul>
-<li><p>準備</p>
-
-<ul>
-<li>同僚や元同僚など、一緒に働いたことがあるエンジニア同士でチームを組んだ方が良い</li>
-<li>sysctl.conf や my.cnf などの秘伝のタレは、どこかに手順と一緒にまとめておくなりして、すぐに適用できるようにしておく</li>
-<li>できればプライベートリポジトリを用意しておく</li>
-</ul>
-</li>
-<li><p>当日について</p>
-
-<ul>
-<li>7時間は意外と短い</li>
-<li>最初の1時間は、課題、レギュレーション、アプリケーションを理解し、戦略を立てることに使う</li>
-<li>最後の30分で、サーバを再起動しても動作する事を確認しておく</li>
-<li>最初の状態をまず git に push しておく</li>
-<li>こまめに commit して、問題が起きたらすぐに戻れるようにしておく</li>
-<li>諦めたら、そこで終了ですよ</li>
-</ul>
-</li>
-<li><p>チューニング</p>
-
-<ul>
-<li>sysctl の修正は基本的に最初にやっちゃう</li>
-<li>web サーバのログを解析して、ベンチマークツールの動きを知る
-
-<ul>
-<li>アクセスが少ないポイントを頑張ってチューニングしても効果は少ない</li>
-<li>どれだけエラーは許容されるのかを把握する</li>
-</ul>
-</li>
-<li>mysql のデータ構造 B+Tree を頭でイメージする</li>
-<li>strace, tcpdump, top, iftop, iotop などのコマンドを使えるようになっておく</li>
-<li>特にスペックの低めなマシンの場合は、 apache よりも nginx の方が CPU のコンテキストスイッチが少なく済むので向いている</li>
-</ul>
-</li>
-</ul>
-
-
-<h2><a href="http://yapcasia.org/2015/talk/show/f2816038-10ec-11e5-89bf-d7f07d574c3a">我々はどのように冗長化を失敗したのか</a></h2>
-
-<p>式年遷宮アーキテクチャの思想を持ってシステム構築して、最終的にどうなったのか、という話。<br/>
-試行錯誤した体験を発表されていて、すごく良い話だった。<br/>
-インフラの話は本当におもしろい。</p>
-
-<p><a href="https://speakerdeck.com/kenjiskywalker/yapcasia2015">Speaker Deck</a> にすでにスライドが上がってるので、それが詳しい。</p>
-
-<h2><a href="http://yapcasia.org/2015/talk/show/bd04b86c-f9de-11e4-b996-8ab37d574c3a">Adventures in Refactoring</a></h2>
-
-<p>GitHub の中の人による、リファクタリングの話。<br/>
-とにかくためになった。</p>
-
-<ul>
-<li><p>正しい振る舞いを keep していくことが大切</p></li>
-<li><p>コードを減らすのが、良いリファクタリング</p>
-
-<ul>
-<li>１０行減ったら、それだけバグが減る :hocho:</li>
-</ul>
-</li>
-<li><p>リファクタリングの理由</p>
-
-<ol>
-<li>Developer の Happiness のため</li>
-<li>性能向上</li>
-<li>将来の作業に向けての自信を得る</li>
-<li>developer の教育</li>
-</ol>
-</li>
-<li><p>メソッド名（動詞）を名詞にしてクラスにするというアイデア</p></li>
-<li><p>メソッド名にアンダースコアが入っていたら、それはオブジェクトにできるかもしれない</p>
-
-<ul>
-<li><code>pull.branch_valid?</code> -> <code>pull.branch.valid?</code></li>
-</ul>
-</li>
-<li><p>既存のバグ</p>
-
-<ul>
-<li>リファクタリングをやっている時にバグを直すべきではない</li>
-</ul>
-</li>
-<li><p>大きなリファクタリングはリスク</p>
-
-<ul>
-<li>細かく区切っていくことが大切</li>
-</ul>
-</li>
-<li><p>Deprecate</p>
-
-<ul>
-<li>_oldとか作る</li>
-<li>後方互換を持たせる</li>
-<li>たとえば gmail が AB テストしている時に、古いデザインに戻れる機能をユーザに提供しているように</li>
-<li><a href="https://github.com/github/scientist">github/scientist</a> を使う</li>
-</ul>
-</li>
-<li><p>feature の開発とリファクタリング、どちらを優先するかの基準は？</p>
-
-<ul>
-<li>リファクタリングせずに、その feature の開発をすることに自信がもてるかどうかで、どちらを優先するか決まると思う</li>
-</ul>
-</li>
-<li><p>テストが無い時は、まずテスト書いてからリファクタリングするべき</p></li>
-</ul>
-
-
-<h2><a href="http://yapcasia.org/2015/talk/show/6bde6c69-187a-11e5-aca1-525412004261">Profiling &amp; Optimizing in Go</a></h2>
-
-<p>Google の中の人による Go の話。<br/>
-emacs でコードを書いてターミナルでコマンド結果を見ながらの発表という感じだった。<br/>
-自分の知識不足でわからないことが結構あって、 Go もっと勉強したいと思った。</p>
-
-<ul>
-<li>ベンチマークの取得
-
-<ul>
-<li>Go には <code>benchcmp</code> というコマンドが同梱されていて、それを使ってベンチマーク結果を比較してどれだけ改善したかを見れるらしい</li>
-</ul>
-</li>
-</ul>
-
-
-<h2><a href="http://yapcasia.org/2015/talk/show/69caedbd-1872-11e5-aca1-525412004261">Lightning Talks Day 2</a></h2>
-
-<p>どれも面白くて、LTらしくて勢いがあって良かった。</p>
-
-<h1>まとめ</h1>
-
-<p>今年は1日目に参加しなかったので、昨年に比べて、あっという間に終わった感じだった。<br/>
-今年は会場が東京ビッグサイトで、去年の慶応日吉キャンパスとはまた違う雰囲気だった。<br/>
-YAPC::Asia 今年で最後ということで残念だけど、今年も楽しかったし、聴いたセッションは全てとても勉強になるものだったので満足。</p>
-
-<p>最後に運営の皆様、本当にお疲れ様でした！</p>
 ]]></content>
   </entry>
   
