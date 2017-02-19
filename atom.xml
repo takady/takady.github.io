@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2017-02-19T19:22:05+09:00</updated>
+  <updated>2017-02-19T20:20:10+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -174,7 +174,7 @@ webhook の URL あらかじめ Slack 取得しておく。</p>
 
 <ul>
 <li><a href="https://github.com/actindi/act-fluent-logger-rails">actindi/act-fluent-logger-rails: Fluent logger</a></li>
-<li><a href="http://docs.fluentd.org/v0.12/articles/out_rewrite_tag_filter">rewrite_tag_filter Output Plugin | Fluentd</a></li>
+<li><a href="http://www.fluentd.org/datasources/rails">Collecting and Analyzing Ruby on Rails Logs | Fluentd</a></li>
 </ul>
 
 ]]></content>
