@@ -4,7 +4,7 @@
   <title><![CDATA[Yuichi Takada]]></title>
   <link href="http://blog.takady.net/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2017-02-21T23:45:03+09:00</updated>
+  <updated>2017-02-21T23:49:01+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci</id>
     <content type="html"><![CDATA[<p>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で <code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.</code> なエラーが出てしまった。</p>
 
-<p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記のように Ubuntu trasty を指定する形の対応方法が記載されている。</p>
+<p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記の対応方法が記載されている。</p>
 
 <pre><code>sudo: required
 dist: trusty

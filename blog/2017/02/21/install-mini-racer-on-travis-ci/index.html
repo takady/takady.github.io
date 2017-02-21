@@ -71,7 +71,7 @@
 	</div>
 	<div class="entry-content"><p>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で <code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.</code> なエラーが出てしまった。</p>
 
-<p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記のように Ubuntu trasty を指定する形の対応方法が記載されている。</p>
+<p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記の対応方法が記載されている。</p>
 
 <pre><code>sudo: required
 dist: trusty
