@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Yuichi Takada]]></title>
   <link href="http://blog.takady.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.takady.net/"/>
-  <updated>2017-02-19T20:20:10+09:00</updated>
+  <updated>2017-02-21T23:45:03+09:00</updated>
   <id>http://blog.takady.net/</id>
   <author>
     <name><![CDATA[Yuichi Takada]]></name>
@@ -12,6 +12,170 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Travis CI で mini_racer と mysql を使うビルドが失敗する]]></title>
+    <link href="http://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/"/>
+    <updated>2017-02-21T23:07:09+09:00</updated>
+    <id>http://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci</id>
+    <content type="html"><![CDATA[<p>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で <code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.</code> なエラーが出てしまった。</p>
+
+<p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記のように Ubuntu trasty を指定する形の対応方法が記載されている。</p>
+
+<pre><code>sudo: required
+dist: trusty
+</code></pre>
+
+<p>これで実際に、mini_racer は install 出来るようになる。</p>
+
+<p>ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。<br/>
+2017年2月の時点で、<a href="https://docs.travis-ci.com/user/trusty-ci-environment/#Data-Stores">Trusty の環境には mysql が入ってない</a>ので <code>rake db:migrate</code> あたりで DB に接続できませんということでビルドが失敗する。</p>
+
+<p><a href="https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433">この辺の issue</a> など参考にしながら、ひとまず mysql を自分で入れるってことと、mysql の接続ユーザを <code>root</code> にする事で回避した。</p>
+
+<pre><code>dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+</code></pre>
+
+<p>きびしい。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://github.com/discourse/mini_racer#travis-ci">https://github.com/discourse/mini_racer#travis-ci</a></li>
+<li><a href="https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433">&ldquo;Can&rsquo;t connect to local MySQL server through socket &lsquo;/var/run/mysqld/mysqld.sock&rsquo;&rdquo; · Issue #6842 · travis-ci/travis-ci</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rails のログを fluentd で slack に通知する]]></title>
+    <link href="http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/"/>
+    <updated>2017-02-19T18:58:24+09:00</updated>
+    <id>http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack</id>
+    <content type="html"><![CDATA[<p>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。</p>
+
+<h2>td-agent</h2>
+
+<h3>インストール</h3>
+
+<p>td-agent のインストールは下記に書いてある通り。<br/>
+<a href="http://docs.fluentd.org/v0.12/articles/install-by-deb">Installing Fluentd Using deb Package | Fluentd</a></p>
+
+<p>Ubuntu 16.04 なので下記で入れた。</p>
+
+<pre><code>$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
+</code></pre>
+
+<h3>プラグインのインストール</h3>
+
+<p>td-agent-gem で slack のプラグインをインストール。</p>
+
+<pre><code>$ td-agent-gem install fluent-plugin-slack
+</code></pre>
+
+<h3>設定ファイルの修正</h3>
+
+<p><code>/etc/td-agent/td-agent.conf</code> を下記のように修正。<br/>
+webhook の URL あらかじめ Slack 取得しておく。</p>
+
+<pre><code>&lt;source&gt;
+  @type forward
+&lt;/source&gt;
+
+&lt;match app.*&gt;
+  type copy
+  &lt;store&gt;
+    @type file
+    path /var/log/app/web
+    time_slice_wait 10m
+    compress gzip
+  &lt;/store&gt;
+
+  &lt;store&gt;
+    @type rewrite_tag_filter
+    rewriterule1 severity FATAL app.fatal
+  &lt;/store&gt;
+&lt;/match&gt;
+
+&lt;match app.fatal&gt;
+  @type slack
+  webhook_url https://hooks.slack.com/services/xxxxxxxxxxx
+  channel app_error
+  username ErrorBot
+  icon_emoji :astonished:
+  message_keys messages
+  flush_interval 5s
+&lt;/match&gt;
+
+&lt;match clear&gt;
+  @type null
+&lt;/match&gt;
+</code></pre>
+
+<h3>再起動</h3>
+
+<p>td-agent を再起動する。</p>
+
+<pre><code>$ /etc/init.d/td-agent restart
+</code></pre>
+
+<h2>rails</h2>
+
+<h3>Gemfile</h3>
+
+<p><code>act-fluent-logger-rails</code> と <code>lograge</code> をインストール。</p>
+
+<pre><code>gem 'act-fluent-logger-rails'
+gem 'lograge'
+</code></pre>
+
+<h3>config/environments/production.rb</h3>
+
+<p>loggerの設定。</p>
+
+<pre><code class="ruby">config.log_level = :info
+config.logger = ActFluentLoggerRails::Logger.new
+config.lograge.enabled = true
+config.lograge.formatter = Lograge::Formatters::Json.new
+</code></pre>
+
+<h3>config/fluent-logger.yml</h3>
+
+<p>fluent用の設定ファイル。</p>
+
+<pre><code class="yaml">production:
+  fluent_host:   '127.0.0.1'
+  fluent_port:   24224
+  tag:           'app.web'
+  messages_type: 'string'
+</code></pre>
+
+<h2>結果</h2>
+
+<p>ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。</p>
+
+<pre><code>$ tail -f /var/log/app/web.20170219.b548df17385a3a314
+2017-02-19T09:51:42+00:00       app.web    {"messages":"{\"method\":\"GET\",\"path\":\"/\",\"format\":\"html\",\"controller\":\"FooController\",\"action\":\"index\",\"status\":200,\"duration\":1534.33,\"view\":1299.3,\"db\":0.0}","severity":"INFO"}
+2017-02-19T09:51:43+00:00       app.web    {"messages":"{\"method\":\"GET\",\"path\":\"/api/foo.json\",\"format\":\"json\",\"controller\":\"Api::FooController\",\"action\":\"index\",\"status\":200,\"duration\":374.19,\"view\":49.21,\"db\":0.0}","severity":"INFO"}
+</code></pre>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://github.com/actindi/act-fluent-logger-rails">actindi/act-fluent-logger-rails: Fluent logger</a></li>
+<li><a href="http://www.fluentd.org/datasources/rails">Collecting and Analyzing Ruby on Rails Logs | Fluentd</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[rails の validation error message の i18n 対応]]></title>
@@ -345,79 +509,6 @@ end
 <li><a href="http://tnakamura.hatenablog.com/entry/2014/01/31/185214">Github みたいにパスの最初のセグメントでユーザー名を使う方法 - present</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[development環境だけbefore_actionをスキップする]]></title>
-    <link href="http://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env/"/>
-    <updated>2014-12-03T21:02:25+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env</id>
-    <content type="html"><![CDATA[<p>最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、<br/>
-たまにブラウザからGETリクエスト送ってサクッとjsonの中を見たいって時に、認証があって見れない。。。ってパターンがかなりある。<br/>
-開発環境では、認証しなくていいやと思った。<br/>
-下記のようにすることで、before_actionをdevelopment環境ではスキップさせられる。</p>
-
-<pre><code class="ruby">class ApplicationController &lt; ActionController::Base
-  before_action :authenticate unless Rails.env.development?
-
-  def authenticate
-    ...
-  end
-</code></pre>
-
-<h1>参考</h1>
-
-<p><a href="http://memo.yomukaku.net/entries/127">Rails.env.development?でdevelopment環境かどうかを判定できる - memo.yomukaku.net</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[railsでmysqlのbooleanなカラムをエイリアスで扱う時の注意事]]></title>
-    <link href="http://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/"/>
-    <updated>2014-12-02T18:07:11+09:00</updated>
-    <id>http://blog.takady.net/blog/2014/12/02/rails-mysql-boolean</id>
-    <content type="html"><![CDATA[<p>rails+mysqlな環境では、booleanで定義したカラムはtinyint(1)で作られ、中身はtrue/falseではなく、0/1が入る。<br/>
-そして、railsアプリケーション上でmysqlのtinyint(1)型データを扱う時、値は自動的にtrue/falseとして扱われる。<br/>
-そこまでは知っていたんだけど、<code>select('foobar_flg as fb_flg')</code>というふうに、カラム名をエイリアスして取り出すと値が0/1なのは知らなかった。</p>
-
-<p>具体的には下記のとおりである。</p>
-
-<pre><code>pry(main)&gt; p = User.select(:foobar_flg)
-  User Load (10.5ms)  SELECT  `users`.`foobar_flg` FROM `users`
-=&gt; [#&lt;User id: nil, foobar_flg: false&gt;]
-pry(main)&gt; p.first.foobar_flg
-=&gt; false
-
-pry(main)&gt; p = User.select('foobar_flg as fb_flg')
-  User Load (5.8ms)  SELECT  foobar_flg as fb_flg FROM `users`
-=&gt; [#&lt;User id: nil&gt;]
-pry(main)&gt; p.first.fb_flg
-=&gt; 0
-</code></pre>
-
-<p>ちなみに、selectメソッドの引数に文字列を指定したから0/1が返ってくるというわけではない。<br/>
-下記のようにエイリアス無しなら、文字列で指定してもtrue/falseに解釈される。</p>
-
-<pre><code>pry(main)&gt; p = User.select('foobar_flg')
-  User Load (10.0ms)  SELECT  `users`.`foobar_flg` FROM `users`
-=&gt; [#&lt;User id: nil, foobar_flg: false&gt;]
-pry(main)&gt; p.first.foobar_flg
-=&gt; false
-</code></pre>
-
-<p>このままだと結構困る。<br/>
-結論としては、<strong>as使わない</strong>で済むならそれが最善手だと思う。<br/>
-が、それが無理なら、例えば下記のようにModelのattributeメソッドをoverrideしちゃうのが良さそう。</p>
-
-<pre><code class="ruby">def fb_flg
-  read_attribute(:fb_flg) == 1
-end
-</code></pre>
-
-<h1>参考</h1>
-
-<p><a href="http://stackoverflow.com/questions/373731/override-activerecord-attribute-methods">ruby on rails - Override ActiveRecord attribute methods - Stack Overflow</a></p>
 ]]></content>
   </entry>
   
