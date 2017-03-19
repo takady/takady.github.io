@@ -104,15 +104,16 @@ $ ruby benchmarker.rb user &hellip;" />
 <span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby benchmarker.rb
 </span><span class='line'>                           user     system      total        real
-</span><span class='line'>[string]include        0.170000   0.000000   0.170000 (  0.176603)
-</span><span class='line'>[regexp]include        0.330000   0.000000   0.330000 (  0.325735)
-</span><span class='line'>[string]start_with     0.140000   0.000000   0.140000 (  0.143240)
-</span><span class='line'>[regexp]start_with     0.310000   0.000000   0.310000 (  0.309559)
-</span><span class='line'>[string]end_with       0.130000   0.000000   0.130000 (  0.138091)
-</span><span class='line'>[regexp]end_with       0.340000   0.000000   0.340000 (  0.338614)</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>[string]include        0.110000   0.000000   0.110000 (  0.116923)
+</span><span class='line'>[regexp]include        0.230000   0.000000   0.230000 (  0.229775)
+</span><span class='line'>[string]start_with     0.090000   0.010000   0.100000 (  0.087478)
+</span><span class='line'>[regexp]start_with     0.230000   0.000000   0.230000 (  0.234467)
+</span><span class='line'>[string]end_with       0.090000   0.000000   0.090000 (  0.091226)
+</span><span class='line'>[regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>コード。</p>
+<p>コード。<br/>
+生成コストが入らないように定数で宣言したものでベンチマーク取った。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -126,17 +127,31 @@ $ ruby benchmarker.rb user &hellip;" />
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;benchmark&#39;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">n</span> <span class="o">=</span> <span class="mi">1_000_000</span>
 </span><span class='line'>
+</span><span class='line'><span class="no">TEST</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'><span class="no">TE</span> <span class="o">=</span> <span class="s1">&#39;te&#39;</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'><span class="no">ST</span> <span class="o">=</span> <span class="s1">&#39;st&#39;</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'><span class="no">REGEXP_TEST</span> <span class="o">=</span> <span class="sr">/test/</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'><span class="no">REGEXP_TE</span> <span class="o">=</span> <span class="sr">/\Ate/</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'><span class="no">REGEXP_ST</span> <span class="o">=</span> <span class="sr">/st\z/</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'>
 </span><span class='line'><span class="no">Benchmark</span><span class="o">.</span><span class="n">bm</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/es/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;te&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/\Ate/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">end_with?</span><span class="p">(</span><span class="s1">&#39;st&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/st\z/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">TEST</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="no">TE</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">REGEXP_TEST</span> <span class="o">===</span> <span class="no">TEST</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">TEST</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="no">TE</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">REGEXP_TE</span> <span class="o">===</span> <span class="no">TEST</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">TEST</span><span class="o">.</span><span class="n">end_with?</span><span class="p">(</span><span class="no">ST</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="no">REGEXP_ST</span> <span class="o">===</span> <span class="no">TEST</span> <span class="p">}</span> <span class="p">}</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
