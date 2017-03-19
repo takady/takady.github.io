@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ruby の文字列マッチメソッドのパフォーマンス | Yuichi Takada</title>
+
+	<meta name="author" content="Yuichi Takada">
+	
+	<meta name="description" content="下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。 部分文字列が含まれているか
+指定の文字列で始まっているか
+指定の文字列で終わっているか String &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Yuichi Takada" type="application/atom+xml">
+	<link rel="canonical" href="http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<meta property="og:title" content="Ruby の文字列マッチメソッドのパフォーマンス - Yuichi Takada" />
+<meta property="og:description" content="下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。 部分文字列が含まれているか
+指定の文字列で始まっているか
+指定の文字列で終わっているか String &hellip;" />
+<meta property="og:url" content="http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/" />
+<meta property="og:image" content="http://blog.takady.net/images/profile.jpg" />
+<meta property="og:author" content="Yuichi Takada" />
+<meta property="og:site_name" content="Yuichi Takada" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:type" content="article" />
+<meta property="fb:app_id" content="1780204485583166" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@takady7" />
+<meta name="twitter:title" content="Ruby の文字列マッチメソッドのパフォーマンス" />
+<meta name="twitter:description" content="下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。 部分文字列が含まれているか
+指定の文字列で始まっているか
+指定の文字列で終わっているか String のメソッドの方がパフォーマンスが良い。 1
+2
+3
+4
+5
+6
+7
+8
+$ ruby benchmarker.rb user &hellip;" />
+<meta name="twitter:image" content="/images/profile.jpg" />
+<meta name="twitter:url" content="http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/" />
+
+
+</head>
+
+
+
+<body>
+	<header id="header">
+<div class="inner">
+  <ul class="navigation">
+    <li><a href="/"><h1>Yuichi Takada</h1></a></li>
+    <li><a href="/" class="is-selected">Blog</a></li>
+    <li><a href="http://github.com/takady" target="blank">Github</a></li>
+  </ul>
+</div></header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Ruby の文字列マッチメソッドのパフォーマンス</h2>
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2017-03-19T17:36:07+09:00" pubdate data-updated="true">Mar 19th, 2017</time></div>
+	</div>
+	<div class="entry-content"><p>下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。</p>
+
+<ul>
+<li>部分文字列が含まれているか</li>
+<li>指定の文字列で始まっているか</li>
+<li>指定の文字列で終わっているか</li>
+</ul>
+
+
+<p>String のメソッドの方がパフォーマンスが良い。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby benchmarker.rb
+</span><span class='line'>                           user     system      total        real
+</span><span class='line'>[string]include        0.170000   0.000000   0.170000 (  0.176603)
+</span><span class='line'>[regexp]include        0.330000   0.000000   0.330000 (  0.325735)
+</span><span class='line'>[string]start_with     0.140000   0.000000   0.140000 (  0.143240)
+</span><span class='line'>[regexp]start_with     0.310000   0.000000   0.310000 (  0.309559)
+</span><span class='line'>[string]end_with       0.130000   0.000000   0.130000 (  0.138091)
+</span><span class='line'>[regexp]end_with       0.340000   0.000000   0.340000 (  0.338614)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>コード。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;benchmark&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">n</span> <span class="o">=</span> <span class="mi">1_000_000</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Benchmark</span><span class="o">.</span><span class="n">bm</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]include&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/es/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;te&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]start_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/\Ate/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[string]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">end_with?</span><span class="p">(</span><span class="s1">&#39;st&#39;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">b</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s1">&#39;[regexp]end_with&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.n</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="sr">/st\z/</span> <span class="o">===</span> <span class="s1">&#39;test&#39;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみに、<code>start_with?</code>、 <code>end_with?</code> は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="n">pry</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">&gt;</span> <span class="s1">&#39;test&#39;</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;te&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<div class="sharing">
+  
+  <div class="sns-tw">
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js  ';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  
+  <div class="sns-hb">
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </div>
+  
+  <div class="sns-fb">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-like" expr:data-href="data:post.url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+  </div>
+  
+  
+</div>
+</article>
+</div>
+	<footer id="footer" class="inner"><div class="aboutme">
+<hr>
+  <div class="profile">
+    <a href="http://twitter.com/takady7"><img class="icon" src="https://ja.gravatar.com/userimage/64821088/b51b1f5635f1cdf8735a75d7787c6a20.jpeg"></a>
+
+    <h3>Yuichi Takada</h3>
+    <p><a href="http://twitter.com/takady7">@takady7</a>, a software engineer in Tokyo. Born in 1987.</p>
+
+    <div class="codes">
+      <h4>Codes</h4>
+      <div class="github"><a href="https://github.com/takady">github.com/takady</a></div>
+      <div class="rubygems"><a href="https://rubygems.org/profiles/takady">rubygems.org/takady</a></div>
+    </div>
+  </div>
+
+  <div class="float_clear"></div>
+
+</div>
+Copyright &copy; 2017
+ Yuichi Takada 
+<br>
+Powered by Octopress.
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-56996369-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</footer>
+	
+
+</body>
+</html>
