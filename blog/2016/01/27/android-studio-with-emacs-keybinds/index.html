@@ -1,185 +1,185 @@
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Android Studio で emacs キーバインドでコードを書く | Yuichi Takada</title>
-
-	<meta name="author" content="Yuichi Takada">
-	
-	<meta name="description" content="Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。
-普段は Karabinar を使って &hellip;"> <meta name="keywords" content="">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Yuichi Takada" type="application/atom+xml">
-	<link rel="canonical" href="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<meta property="og:title" content="Android Studio で emacs キーバインドでコードを書く - Yuichi Takada" />
-<meta property="og:description" content="Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。
-普段は Karabinar を使って &hellip;" />
-<meta property="og:url" content="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/" />
-<meta property="og:image" content="http://blog.takady.net/images/profile.jpg" />
-<meta property="og:author" content="Yuichi Takada" />
-<meta property="og:site_name" content="Yuichi Takada" />
-<meta property="og:locale" content="ja_JP" />
-<meta property="og:type" content="article" />
-<meta property="fb:app_id" content="1780204485583166" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@takady7" />
-<meta name="twitter:title" content="Android Studio で emacs キーバインドでコードを書く" />
-<meta name="twitter:description" content="Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。
-普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE &hellip;" />
-<meta name="twitter:image" content="/images/profile.jpg" />
-<meta name="twitter:url" content="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/" />
-
-
-</head>
-
-
-
-<body>
-	<header id="header">
-<div class="inner">
-  <ul class="navigation">
-    <li><a href="/"><h1>Yuichi Takada</h1></a></li>
-    <li><a href="/" class="is-selected">Blog</a></li>
-    <li><a href="http://github.com/takady" target="blank">Github</a></li>
-  </ul>
-</div></header>
-
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Android Studio で Emacs キーバインドでコードを書く</h2>
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Android Studio で emacs キーバインドでコードを書く &middot;  Yuichi Takada" />
+  
+  <meta name="theme-color" content="#333" />
+ 
+  <meta property="og:site_name" content="Yuichi Takada" />
+  <meta property="og:url" content="http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2016-01-27T23:15:54Z" />
+  
   
 
+  <title>
+     Android Studio で emacs キーバインドでコードを書く &middot;  Yuichi Takada
+  </title>
+
+  <link rel="stylesheet" href="http://blog.takady.net/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/main.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="stylesheet" href="http://blog.takady.net//style.css">
+  <link rel="shortcut icon" href="http://blog.takady.net/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://blog.takady.net/images/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://blog.takady.net/">Yuichi Takada</a></h1>
+      
+      
+      <a href="http://blog.takady.net/" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
 
 
-<time datetime="2016-01-27T23:15:54+09:00" pubdate data-updated="true">Jan 27th, 2016</time></div>
-	</div>
-	<div class="entry-content"><p>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。<br/>
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。<br/>
+<article>
+  <header>
+    <h1 class="text-primary">Android Studio で emacs キーバインドでコードを書く</h1>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2016-01-27T23:15:54Z">
+          Jan 27, 2016
+        </time>
+      </div>
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    <p>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。<br />
+Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。<br />
 普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。</p>
 
-<p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br/>
+<p>まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。<br />
 <a href="https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114">ここの設定</a> を private.xml でこんな感じに上書きした。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;replacementdef&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;replacementname&gt;</span>EMACS_MODE_IGNORE_APPS<span class="nt">&lt;/replacementname&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;replacementvalue&gt;</span>
-</span><span class='line'>      EMACS,
-</span><span class='line'>      REMOTEDESKTOPCONNECTION,
-</span><span class='line'>      TERMINAL,
-</span><span class='line'>      VI,
-</span><span class='line'>      VIRTUALMACHINE,
-</span><span class='line'>      X11,
-</span><span class='line'>      ANDROID_STUDIO,
-</span><span class='line'>    <span class="nt">&lt;/replacementvalue&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/replacementdef&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-xml">  &lt;replacementdef&gt;
+    &lt;replacementname&gt;EMACS_MODE_IGNORE_APPS&lt;/replacementname&gt;
+    &lt;replacementvalue&gt;
+      EMACS,
+      REMOTEDESKTOPCONNECTION,
+      TERMINAL,
+      VI,
+      VIRTUALMACHINE,
+      X11,
+      ANDROID_STUDIO,
+    &lt;/replacementvalue&gt;
+  &lt;/replacementdef&gt;
+</code></pre>
 
+<p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br />
+次に Android Studio の Preference &gt; Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
 
-<p>書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。<br/>
-次に Android Studio の Preference > Keymap で <code>Keymaps: Emacs</code> に設定すれば OK。</p>
-</div>
-
-
-<div class="sharing">
-  
-  <div class="sns-tw">
-    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js  ';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  
-  <div class="sns-hb">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  
-  <div class="sns-fb">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like" expr:data-href="data:post.url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-  </div>
-  
-  
-</div>
+  </section>
+  <footer>
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog-takady-net';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/images/avatar.png" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">Yuichi Takada</h1>
+        
+        
+        <div class="author-bio">Tokyo based software engineer.</div>
+        
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://blog.takady.net/blog/2015/12/31/2015-summary/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://blog.takady.net/blog/2016/05/01/more-productive/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
 </article>
-</div>
-	<footer id="footer" class="inner"><div class="aboutme">
-<hr>
-  <div class="profile">
-    <a href="http://twitter.com/takady7"><img class="icon" src="https://ja.gravatar.com/userimage/64821088/b51b1f5635f1cdf8735a75d7787c6a20.jpeg"></a>
 
-    <h3>Yuichi Takada</h3>
-    <p><a href="http://twitter.com/takady7">@takady7</a>, a software engineer in Tokyo. Born in 1987.</p>
-
-    <div class="codes">
-      <h4>Codes</h4>
-      <div class="github"><a href="https://github.com/takady">github.com/takady</a></div>
-      <div class="rubygems"><a href="https://rubygems.org/profiles/takady">rubygems.org/takady</a></div>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright Yuichi Takada
     </div>
-  </div>
-
-  <div class="float_clear"></div>
-
+    <div class="sns-links hidden-print">
+  
+  
+  <a href="https://twitter.com/takady7" target="_blank">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  
+  
+  <a href="https://github.com/takady" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  <a href="https://stackoverflow.com/users/4319579" target="_blank">
+    <i class="fa fa-stack-overflow"></i>
+  </a>
+  
+  
+  <a href="https://linkedin.com/in/takady" target="_blank">
+    <i class="fa fa-linkedin"></i>
+  </a>
+  
+  
 </div>
-Copyright &copy; 2017
- Yuichi Takada 
-<br>
-Powered by Octopress.
 
+  </footer>
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-56996369-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-</footer>
-	
-
+  <script src="http://blog.takady.net/js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56996369-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 </body>
 </html>
+

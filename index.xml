@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yuichi Takada</title>
+    <link>http://blog.takady.net/</link>
+    <description>Recent content on Yuichi Takada</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
+    <lastBuildDate>Fri, 24 Mar 2017 22:38:13 +0000</lastBuildDate>
+    <atom:link href="http://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Huawei nova がきた</title>
+      <link>http://blog.takady.net/blog/2017/03/24/huawei-nova/</link>
+      <pubDate>Fri, 24 Mar 2017 22:38:13 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/03/24/huawei-nova/</guid>
+      <description>
+
+&lt;p&gt;Nexus5 を使っていたけどそろそろバッテリーがヘタってきたし、&lt;a href=&#34;http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/&#34;&gt;画面の交換&lt;/a&gt;などで何度か解体したりして背面カバーのツメがいくつか折れてパカパカしていたので、色々調べて Huawei nova を買った。&lt;/p&gt;
+
+&lt;p&gt;NTT-X Store &lt;a href=&#34;http://nttxstore.jp/&#34;&gt;http://nttxstore.jp/&lt;/a&gt; というオンラインストアで割引されていて、約33,000円だった。&lt;br /&gt;
+Zenfone3 が良さそうだと思ってたんだけど、CPU や RAM が同じスペックの Huawei nova が割引されていたので買った。（Zenfone3 は台湾版を買えば安いらしいけど、技適適用にならないんじゃないかと思うので手を出さなかった）&lt;/p&gt;
+
+&lt;p&gt;Nexus5 は micro sim で nova は nano sim なので、ビックカメラに行って sim サイズ変更した。&lt;br /&gt;
+sim サイズ変更キャンペーン中で変更手数料の2,000円は無料になって、即日発行手数料の 1,000円だけで済んだ。&lt;/p&gt;
+
+&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;パフォーマンスは Nexus5 に比べて良くなった。サクサク。&lt;/li&gt;
+&lt;li&gt;ディスプレイもきれい。&lt;/li&gt;
+&lt;li&gt;指紋認証は便利。かなり速い。&lt;/li&gt;
+&lt;li&gt;電池持ちがかなり良い。
+
+&lt;ul&gt;
+&lt;li&gt;100%充電済みで朝9時に出かけて、途中、普通に twitter、Line したり数時間podcastを聞いたりして23時時点で77%残ってる。動画見たりゲームしたりはしてない。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;デザインがなんか iPhone っぽさがある。&lt;/li&gt;
+&lt;li&gt;まだまともな保護ガラスフィルムが見つかってない。
+
+&lt;ul&gt;
+&lt;li&gt;今は Amazon で買ったやつを貼っているけど、普通にサイズが小さくてはみ出してる。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;USB Type-C になった。&lt;/li&gt;
+&lt;li&gt;付属のイヤホンに音量調節機能がある。
+
+&lt;ul&gt;
+&lt;li&gt;Nexus5ではイヤホンで音量調節できなかったので不便だった。付属のやつはボタンがやや押しにくいが。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;初期状態では UI が独自カスタマイズされているけど、ランチャーを Google now ランチャーに戻したら全然大丈夫になった。&lt;/li&gt;
+&lt;li&gt;5インチなので持ちやすい。&lt;/li&gt;
+&lt;li&gt;カメラは普通。Nexsu5よりは良い。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ruby の文字列マッチ判定のパフォーマンス</title>
+      <link>http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</link>
+      <pubDate>Sun, 19 Mar 2017 17:36:07 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
+      <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;br /&gt;
+w
+- 部分文字列が含まれているか
+- 指定の文字列で始まっているか
+- 指定の文字列で終わっているか&lt;/p&gt;
+
+&lt;p&gt;String のメソッドの方がパフォーマンスが良い。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ruby benchmarker.rb
+                           user     system      total        real
+[string]include        0.110000   0.000000   0.110000 (  0.116923)
+[regexp]include        0.230000   0.000000   0.230000 (  0.229775)
+[string]start_with     0.090000   0.010000   0.100000 (  0.087478)
+[regexp]start_with     0.230000   0.000000   0.230000 (  0.234467)
+[string]end_with       0.090000   0.000000   0.090000 (  0.091226)
+[regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;コード。&lt;br /&gt;
+生成コストが入らないように定数で宣言したものでベンチマーク取った。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;benchmark&#39;
+
+n = 1_000_000
+
+TEST = &#39;test&#39;.freeze
+TE = &#39;te&#39;.freeze
+ST = &#39;st&#39;.freeze
+REGEXP_TEST = /test/.freeze
+REGEXP_TE = /\Ate/.freeze
+REGEXP_ST = /st\z/.freeze
+
+Benchmark.bm(20) do |b|
+  b.report(&#39;[string]include&#39;) { (1..n).each { TEST.include?(TE) } }
+  b.report(&#39;[regexp]include&#39;) { (1..n).each { REGEXP_TEST === TEST } }
+  b.report(&#39;[string]start_with&#39;) { (1..n).each { TEST.start_with?(TE) } }
+  b.report(&#39;[regexp]start_with&#39;) { (1..n).each { REGEXP_TE === TEST } }
+  b.report(&#39;[string]end_with&#39;) { (1..n).each { TEST.end_with?(ST) } }
+  b.report(&#39;[regexp]end_with&#39;) { (1..n).each { REGEXP_ST === TEST } }
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに、&lt;code&gt;start_with?&lt;/code&gt;、 &lt;code&gt;end_with?&lt;/code&gt; は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;[1] pry(main)&amp;gt; &#39;test&#39;.start_with?(&#39;ab&#39;, &#39;te&#39;)
+=&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Travis CI で mini_racer と mysql を使うビルドが失敗する</title>
+      <link>http://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/</link>
+      <pubDate>Tue, 21 Feb 2017 23:07:09 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/</guid>
+      <description>
+
+&lt;p&gt;rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で &lt;code&gt;Gem::Ext::BuildError: ERROR: Failed to build gem native extension.&lt;/code&gt; なエラーが出てしまった。&lt;/p&gt;
+
+&lt;p&gt;Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;mini_racer の README.md&lt;/a&gt; には下記の対応方法が記載されている。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo: required
+dist: trusty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで実際に、mini_racer は install 出来るようになる。&lt;/p&gt;
+
+&lt;p&gt;ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。&lt;br /&gt;
+2017年2月の時点で、&lt;a href=&#34;https://docs.travis-ci.com/user/trusty-ci-environment/#Data-Stores&#34;&gt;Trusty の環境には mysql が入ってない&lt;/a&gt;ので &lt;code&gt;rake db:migrate&lt;/code&gt; あたりで DB に接続できませんということでビルドが失敗する。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;この辺の issue&lt;/a&gt; など参考にしながら、ひとまず mysql を自分で入れるってことと、mysql の接続ユーザを &lt;code&gt;root&lt;/code&gt; にする事で回避した。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;きびしい。&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;https://github.com/discourse/mini_racer#travis-ci&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;&amp;ldquo;Can&amp;rsquo;t connect to local MySQL server through socket &amp;lsquo;/var/run/mysqld/mysqld.sock&amp;rsquo;&amp;rdquo; · Issue #6842 · travis-ci/travis-ci&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>rails のログを fluentd で slack に通知する</title>
+      <link>http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/</link>
+      <pubDate>Sun, 19 Feb 2017 18:58:24 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/</guid>
+      <description>
+
+&lt;p&gt;Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。&lt;/p&gt;
+
+&lt;h2 id=&#34;td-agent&#34;&gt;td-agent&lt;/h2&gt;
+
+&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;td-agent のインストールは下記に書いてある通り。&lt;br /&gt;
+&lt;a href=&#34;http://docs.fluentd.org/v0.12/articles/install-by-deb&#34;&gt;Installing Fluentd Using deb Package | Fluentd&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ubuntu 16.04 なので下記で入れた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;プラグインのインストール&#34;&gt;プラグインのインストール&lt;/h3&gt;
+
+&lt;p&gt;td-agent-gem で slack のプラグインをインストール。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ td-agent-gem install fluent-plugin-slack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;設定ファイルの修正&#34;&gt;設定ファイルの修正&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/td-agent/td-agent.conf&lt;/code&gt; を下記のように修正。&lt;br /&gt;
+webhook の URL あらかじめ Slack 取得しておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;source&amp;gt;
+  @type forward
+&amp;lt;/source&amp;gt;
+
+&amp;lt;match app.*&amp;gt;
+  type copy
+  &amp;lt;store&amp;gt;
+    @type file
+    path /var/log/app/web
+    time_slice_wait 10m
+    compress gzip
+  &amp;lt;/store&amp;gt;
+
+  &amp;lt;store&amp;gt;
+    @type rewrite_tag_filter
+    rewriterule1 severity FATAL app.fatal
+  &amp;lt;/store&amp;gt;
+&amp;lt;/match&amp;gt;
+
+&amp;lt;match app.fatal&amp;gt;
+  @type slack
+  webhook_url https://hooks.slack.com/services/xxxxxxxxxxx
+  channel app_error
+  username ErrorBot
+  icon_emoji :astonished:
+  message_keys messages
+  flush_interval 5s
+&amp;lt;/match&amp;gt;
+
+&amp;lt;match clear&amp;gt;
+  @type null
+&amp;lt;/match&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;再起動&#34;&gt;再起動&lt;/h3&gt;
+
+&lt;p&gt;td-agent を再起動する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ /etc/init.d/td-agent restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;rails&#34;&gt;rails&lt;/h2&gt;
+
+&lt;h3 id=&#34;gemfile&#34;&gt;Gemfile&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;act-fluent-logger-rails&lt;/code&gt; と &lt;code&gt;lograge&lt;/code&gt; をインストール。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &#39;act-fluent-logger-rails&#39;
+gem &#39;lograge&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;config-environments-production-rb&#34;&gt;config/environments/production.rb&lt;/h3&gt;
+
+&lt;p&gt;loggerの設定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;config.log_level = :info
+config.logger = ActFluentLoggerRails::Logger.new
+config.lograge.enabled = true
+config.lograge.formatter = Lograge::Formatters::Json.new
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;config-fluent-logger-yml&#34;&gt;config/fluent-logger.yml&lt;/h3&gt;
+
+&lt;p&gt;fluent用の設定ファイル。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;production:
+  fluent_host:   &#39;127.0.0.1&#39;
+  fluent_port:   24224
+  tag:           &#39;app.web&#39;
+  messages_type: &#39;string&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;結果&#34;&gt;結果&lt;/h2&gt;
+
+&lt;p&gt;ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tail -f /var/log/app/web.20170219.b548df17385a3a314
+2017-02-19T09:51:42+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;html\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:1534.33,\&amp;quot;view\&amp;quot;:1299.3,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
+2017-02-19T09:51:43+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/api/foo.json\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;json\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;Api::FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:374.19,\&amp;quot;view\&amp;quot;:49.21,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/actindi/act-fluent-logger-rails&#34;&gt;actindi/act-fluent-logger-rails: Fluent logger&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.fluentd.org/datasources/rails&#34;&gt;Collecting and Analyzing Ruby on Rails Logs | Fluentd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s Encrypt と Nginx で HTTPS 対応</title>
+      <link>http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/</link>
+      <pubDate>Sat, 11 Feb 2017 15:53:29 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/</guid>
+      <description>
+
+&lt;p&gt;個人的に作ってるサイトを HTTPS 対応させてみた。&lt;br /&gt;
+iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。&lt;/p&gt;
+
+&lt;h2 id=&#34;let-s-encrypt&#34;&gt;Let&amp;rsquo;s Encrypt&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://letsencrypt.jp/&#34;&gt;https://letsencrypt.jp/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;無料で証明書を用意できるので今回利用した。&lt;/p&gt;
+
+&lt;p&gt;curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。&lt;br /&gt;
+以下、実行例。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。&lt;/p&gt;
+
+&lt;p&gt;これで &lt;code&gt;/etc/letsencrypt/live/example.com/&lt;/code&gt; 以下に、証明書や秘密鍵が配置されるので(実際にはこれはシンボリックリンクなのだが)、これらのファイルを Nginx の設定で指定する。&lt;/p&gt;
+
+&lt;h2 id=&#34;iptables&#34;&gt;iptables&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/sysconfig/iptables&lt;/code&gt; を見て、80 と同様に 443 も許可されている事を確認しておく。&lt;br /&gt;
+されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。&lt;br /&gt;
+&lt;code&gt;sudo /sbin/iptables -L&lt;/code&gt; で設定を確認できる。最後に &lt;code&gt;iptables save&lt;/code&gt; するのを忘れずに。&lt;br /&gt;
+あとは iptables を再起動すると反映されるはず。&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx&#34;&gt;Nginx&lt;/h2&gt;
+
+&lt;p&gt;実際の Nginx の設定は下記のようにした。&lt;br /&gt;
+http のリクエストは https にリダイレクトさせるようにした。&lt;br /&gt;
+（unicorn を使ってるのでその記述があるが今回の件には直接関係無い。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream unicorn {
+    server unix:/path/to/app/current/tmp/sockets/unicorn.sock;
+}
+
+server {
+    listen 80;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name example.com;
+
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers &amp;quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&amp;quot;;
+    access_log /var/log/nginx/example.com.access.log;
+    root /path/to/app/current/public;
+    try_files $uri @unicorn;
+
+    location ~ ^/assets/ {
+        root /path/to/app/shared/public;
+    }
+
+    location @unicorn {
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://unicorn;
+    }
+
+    location /robots.txt {
+        alias /path/to/app/current/public/robots.txt;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ssl-labs&#34;&gt;SSL LABS&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.ssllabs.com/ssltest/&#34;&gt;https://www.ssllabs.com/ssltest/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SSL の設定確認できるサイト。&lt;br /&gt;
+以下のようになればうまくいっている。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://programming.wikihub.io/@r7kamura/20160702202711&#34;&gt;Let&amp;rsquo;s EncryptとAmazon LinuxとNginxでamakan.netをHTTPSに対応させた - Programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://nobuneko.com/blog/archives/2013/05/linux_centos_6_iptables_http_https.html&#34;&gt;Linux(CentOS 6) - iptablesの設定を変更し、http、httpsでのアクセスを許可する - r_nobuホームページ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2016年まとめ</title>
+      <link>http://blog.takady.net/blog/2016/12/31/2016-summary/</link>
+      <pubDate>Sat, 31 Dec 2016 13:10:16 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/12/31/2016-summary/</guid>
+      <description>
+
+&lt;p&gt;自分用今年のまとめ。&lt;/p&gt;
+
+&lt;h2 id=&#34;英語&#34;&gt;英語&lt;/h2&gt;
+
+&lt;p&gt;自分の中で英語をやる機運が高まってきたので勉強始めた。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;夏あたりからオンライン英会話を週1,2回ペースでやって、オンサイトの英会話に週1ペースで行ってる。
+
+&lt;ul&gt;
+&lt;li&gt;自然言語の習得は毎日継続するのが良いらしいので毎日やるような習慣にしたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;あとはamazonで買った&lt;a href=&#34;https://www.amazon.co.jp/gp/product/0521734770/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=0521734770&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;英語圏の小学生用のテキスト&lt;/a&gt;をやってる。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;発表&#34;&gt;発表&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;7月の頭に1回だけ、その時会社でやってたログ収集の基盤とre:dashについて社外でLTした。
+
+&lt;ul&gt;
+&lt;li&gt;もっと発表していく予定だったけど、その後業務でやることが変わったりしてその余裕とかネタが取れなかった。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;業務&#34;&gt;業務&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;前半は去年の続きをやっていた感じだった。&lt;/li&gt;
+&lt;li&gt;後半は KPI 基盤のリプレースのプロジェクトのメインメンバーとして進めて、そのあと方針変更により別プロジェクトのメンバーになった。&lt;/li&gt;
+&lt;li&gt;12月には事業の開発チームに異動することとなった。
+
+&lt;ul&gt;
+&lt;li&gt;動きがあった方が学びは多いと思うが、やってる途中で止めないといけない事もあったりするのでそこの割り切りが必要になった。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;読書&#34;&gt;読書&lt;/h2&gt;
+
+&lt;p&gt;5月に Kindle Paperwhite 買ったらめっちゃ読書体験が良くなって以前より本が読みやすくなった。&lt;br /&gt;
+会社の技術書購入支援制度があるのもあって、読む本には困らなかった。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4798121967/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4798121967&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;エリック・エヴァンスのドメイン駆動設計 (IT Architects’Archive ソフトウェア開発の実践) &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4797376279/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797376279&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く (Informatics &amp;amp;IDEA) &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4822284654/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4822284654&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;オブジェクト指向でなぜつくるのか 第2版&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B00I96CJWO/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00I96CJWO&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;ピープルウエア　第3版&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01GDS0994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01GDS0994&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B015DRJF8W/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B015DRJF8W&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;日本人の働き方の9割がヤバい件について&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B00HOTLXKQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00HOTLXKQ&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;10年後の仕事のカタチ10のヒント&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4860641345/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4860641345&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;どんどん話すための瞬間英作文トレーニング&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4274217620/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4274217620&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;エクストリームプログラミング&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01D2UKPFE/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01D2UKPFE&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;Android実践プログラミング 現場で生まれた設計パターン&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/479813161X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=479813161X&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;実践ドメイン駆動設計 (Object Oriented SELECTION) &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01L8SEVYI/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01L8SEVYI&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;オブジェクト指向設計実践ガイド ～Rubyでわかる 進化しつづける柔軟なアプリケーションの育て方&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4873117437/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873117437&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;メタプログラミングRuby 第2版&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leanpub.com/everydayrailsrspec-jp&#34;&gt;Everyday Rails - RSpecによるRailsテスト入門&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4163902309/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4163902309&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;火花&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;isucon&#34;&gt;isucon&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;今年も&lt;a href=&#34;http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/&#34;&gt;予選落ち&lt;/a&gt;した。来年こそなんとかしたい。&lt;/li&gt;
+&lt;li&gt;日頃から web アプリケーションに関する技術的な知見を積み重ねていきたい。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;個人的な技術的興味&#34;&gt;個人的な技術的興味&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android アプリ開発について勉強しようと思って、アプリを作ってみたりしてた。
+
+&lt;ul&gt;
+&lt;li&gt;軽くしかできてないのでもうちょっと深くやりたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;js というか React を触ってた。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;その他&#34;&gt;その他&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;メインのエディタを sublime text から RubyMine に完全に移行した。&lt;/li&gt;
+&lt;li&gt;プライベートのメールクライアントを gmail から inbox に移行した。&lt;/li&gt;
+&lt;li&gt;シンガポール、オランダ、ドイツに旅行に行った。
+
+&lt;ul&gt;
+&lt;li&gt;楽しかったからまた海外旅行行きたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;年初にやってたこととかについては「これも今年だったか」と思うくらいに過去な感じがする。&lt;br /&gt;
+来年の前半はアルゴリズムとデータ構造とかそういう基本的なところをちゃんと学び直したい。&lt;br /&gt;
+あと英語が面白くなってきたから引き続きやっていこう。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>rails の validation error message の i18n 対応</title>
+      <link>http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/</link>
+      <pubDate>Fri, 09 Dec 2016 21:20:43 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/</guid>
+      <description>
+
+&lt;p&gt;rails で Custom validatior や Custom validation method を定義して、その中で &lt;code&gt;errors.add&lt;/code&gt; する際に、
+message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。&lt;br /&gt;
+結論としては、下記のように書くのがスッキリして良さそう。&lt;/p&gt;
+
+&lt;h2 id=&#34;custom-validators&#34;&gt;Custom Validators&lt;/h2&gt;
+
+&lt;p&gt;特定のモデルによらないエラーメッセージの場合は、下記のように &lt;code&gt;locales/en.yml&lt;/code&gt; を書くことで、&lt;code&gt;record.errors.add(attribute, :something_invalid)&lt;/code&gt;と書ける。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
+  errors:
+    messages:
+      something_invalid: Invalid something.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyCheckValidator &amp;lt; ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless check_something(value)
+      record.errors.add(attribute, :something_invalid)
+      #=&amp;gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ
+    end
+  end
+
+  def check_something(value)
+   # Something
+  end
+end
+
+class MyModel &amp;lt; ActiveRecord::Base
+  validates :name, my_check: true
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;custom-methods&#34;&gt;Custom Methods&lt;/h2&gt;
+
+&lt;p&gt;特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
+  activerecord:
+    errors:
+      models:
+        my_model:
+          attributes:
+            start_date:
+              cannot_be_after_end_date: It cannot be after the end date.
+            end_date:
+              cannot_be_before_start_date: It cannot be before the start date.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyModel &amp;lt; ActiveRecord::Base
+  validate :start_date_cannot_be_after_end_date, if: -&amp;gt; { start_date.present? &amp;amp;&amp;amp; end_date.present? }
+
+  private
+
+  def start_date_cannot_be_after_end_date
+    return if start_date &amp;lt;= end_date
+
+    errors.add(:start_date, :cannot_be_after_end_date)
+    #=&amp;gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ
+    errors.add(:end_date, :cannot_be_before_start_date)
+    #=&amp;gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://guides.rubyonrails.org/active_record_validations.html&#34;&gt;Active Record Validations — Ruby on Rails Guides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>isucon6 予選に参加した</title>
+      <link>http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/</link>
+      <pubDate>Wed, 21 Sep 2016 20:11:54 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://blog.takady.net/blog/2015/09/29/isucon5-qualifier/&#34;&gt;去年&lt;/a&gt;に引き続き、今年も同じメンバーで チームYashio として isucon6 予選に参加してきた。&lt;br /&gt;
+今回は去年の経験を活かして予選通過できそうな気がしていたけど、またしても結果は惨敗で非常に残念。&lt;/p&gt;
+
+&lt;h2 id=&#34;前日までの準備期間&#34;&gt;前日までの準備期間&lt;/h2&gt;
+
+&lt;p&gt;ちょうど1週間前あたりから、azure にアカウントを作って前回の予選の環境をデプロイして、
+3人で色々な改修・実装を試してベンチマーカーを回したりして楽しんでた。&lt;br /&gt;
+この一週間はとてもイイ感じで、N+1 を解消してみたり、DB のデータを redis にキャッシュしてみたり、3人で愚直にスコアを上げるのを楽しんでいて「なんかこれ今年は行けるんじゃない？！」みたいな雰囲気を感じてた。&lt;br /&gt;
+あと、去年はサーバ上で直接コード修正するなどしてしまい、メンバーが並行して実装する事が非常に困難だった反省から、ローカルでの開発環境構築と deploy の仕組みの整備を @muratayusuke が確立してくれて、当日もおおいに役立った。&lt;/p&gt;
+
+&lt;h2 id=&#34;当日&#34;&gt;当日&lt;/h2&gt;
+
+&lt;p&gt;今回はヒカリエの会場で参加。&lt;br /&gt;
+朝は若干の緊張と期待感で、部活の試合の日の朝っぽい感じだった。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_094840.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;10時に始まってからは、@muratayusuke が競技用のインスタンスの起動とか deploy 周りを整備したり、ruby 実装が起動するようにするなどした。&lt;br /&gt;
+@tatsuyaoiw がコードを読んだりアプリケーションを触って理解を進めてた。&lt;br /&gt;
+僕は、開発用として、マシンイメージを別の環境にデプロイしてインスタンスを起動して、そこの DB にローカルから接続できるように設定して、ローカルでアプリを動かすための設定をするなどした。&lt;br /&gt;
+ローカル環境で開発して本番に deploy できる環境が整ったのがだいたい11時過ぎくらい。&lt;/p&gt;
+
+&lt;p&gt;ruby 実装での最初のスコアは 1100 くらいだったけど、スコア安定しなくて大体 0 だった気がする。&lt;br /&gt;
+そこから @muratayusuke が nginx から static ファイル返してクライアントキャッシュ有効にしたり、 unicorn の worker 数増やしたりして 3000 くらいまで上げた。&lt;/p&gt;
+
+&lt;p&gt;stackprof の結果見てて、&lt;code&gt;#htmlify&lt;/code&gt; がとにかく遅いって事で @tatsuyaoiw と話したりして、正規表現を使わない実装にチャレンジしてみた。&lt;br /&gt;
+で、ここから何度か修正してはベンチマーカーを流して、「リンクがありません」エラーメッセージが出てそれを見て直してを繰り返して15時くらいまでひたすらやったんだけど、エラーが完全に取れなくて一人疲弊してきて、正規表現使わない実装は諦めて、keyword 一覧を redis から取ってきて、それを content に含まれてる keyword だけに限定して &lt;code&gt;gsub&lt;/code&gt; に渡すっていう修正にとどまった。&lt;br /&gt;
+これで 16,000 までは上がったけど、もはや上位陣との差が空いていて厳しい感じだった。&lt;/p&gt;
+
+&lt;p&gt;それから @tatsuyaoiw が user の情報を redis でキャッシュしたり isutar へのアクセス回数を減らしたり、@muratayusuke が nginx の設定変更とかもろもろやって 19,000 くらいが最高だった。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_180855.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;一つに時間掛け過ぎた。一時間くらいで諦めて他の方法とか箇所とかに切り替えた方が良かったと思う。&lt;br /&gt;
+終わってから3人で飲みに行って悔しがった。&lt;br /&gt;
+今回のお題は、スロークエリや N+1 みたいなものがほぼ無かったので、とにかく &lt;code&gt;#htmlify&lt;/code&gt; をなんとかしないとーっていう感じだった。&lt;br /&gt;
+そこでアルゴリズムの問題としてそれに向き合っていた時間が長すぎたんだけど、生成された html 自体をキャッシュするとかっていう方向でも良かったわけだし、そういう方針の切り替えができるような落ち着きの時間を持てると良さそう。&lt;br /&gt;
+予選後に飲みながら話してた時に「そういう方法があったね」って話になったから、本番中に一旦落ち着いていればそれを思い付いて実行出来てたかもなーって思った。&lt;br /&gt;
+来年こそは…！！&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>rails で FormObject を使う</title>
+      <link>http://blog.takady.net/blog/2016/08/29/rails-form-object/</link>
+      <pubDate>Mon, 29 Aug 2016 19:38:49 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/08/29/rails-form-object/</guid>
+      <description>
+
+&lt;p&gt;フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-08-29-rails-form-object/screenshot1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;こういうフォーム。&lt;/p&gt;
+
+&lt;h1 id=&#34;model&#34;&gt;Model&lt;/h1&gt;
+
+&lt;p&gt;uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。&lt;/p&gt;
+
+&lt;h2 id=&#34;app-models-foo-day-rb&#34;&gt;app/models/foo_day.rb&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay &amp;lt; ActiveRecord::Base
+  belongs_to :user
+
+  validates :user_id, presence: true
+  validates :date, presence: true, uniqueness: {scope: :user_id}
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;formobject&#34;&gt;FormObject&lt;/h1&gt;
+
+&lt;p&gt;FormObject の参考では、よく &lt;a href=&#34;https://github.com/solnic/virtus&#34;&gt;virtus&lt;/a&gt; を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。&lt;br /&gt;
+例えば今回のケースだと、view から文字列で渡ってくる &lt;code&gt;YYY-MM-DD&lt;/code&gt; を Date に変換したかったので、一度 Virtus を使ってみたけど、
+例えば &lt;code&gt;2016-08-32&lt;/code&gt; のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。&lt;br /&gt;
+結局、日付の validation のために &lt;a href=&#34;https://github.com/adzap/validates_timeliness&#34;&gt;validates_timeliness&lt;/a&gt; という gem を使ったけど便利だった。&lt;/p&gt;
+
+&lt;h2 id=&#34;app-models-foo-day-registration-form-rb&#34;&gt;app/models/foo_day/registration_form.rb&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay::RegistrationForm
+  include ActiveModel::Model
+
+  attr_accessor :user_id, :from_date, :to_date
+
+  validates :user_id, presence: true
+  validates :from_date, presence: true, timeliness: {on_or_after: :today, type: :date}
+  validates :to_date, allow_blank: true, timeliness: {on_or_after: :from_date, type: :date}
+
+  def save
+    return false unless valid?
+
+    persist!
+    true
+  end
+
+  private
+
+  def foo_days
+    @foo_days ||= build_foo_days
+  end
+
+  def build_foo_days
+    if to_date.blank?
+      [FooDay.new(date: from_date, user_id: user_id)]
+    else
+      (Date.parse(from_date)..Date.parse(to_date)).map {|date| FooDay.new(user_id: user_id, date: date) }
+    end
+  end
+
+  def valid?
+    return false unless super
+
+    foo_days.each do |foo_day|
+      next if foo_day.valid?
+
+      foo_day.errors.full_messages.each do |message|
+        errors.add(:base, I18n.t(&#39;activemodel.errors.invalid_foo_day&#39;, date: foo_day.date, message: message))
+      end
+    end
+
+    return super
+  end
+
+  def persist!
+    foo_days.each(&amp;amp;:save!)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;controller&#34;&gt;Controller&lt;/h1&gt;
+
+&lt;h2 id=&#34;app-controllers-foo-days-controller-rb&#34;&gt;app/controllers/foo_days_controller.rb&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDaysController &amp;lt; ApplicationController
+  def new
+    @registration_form = FooDay::RegistrationForm.new
+  end
+
+  def create
+    @registration_form = FooDay::RegistrationForm.new(params[:foo_day_registration_form].merge(user_id: current_user.id))
+
+    if @registration_form.save
+      redirect_to new_foo_day_path, notice: &#39;登録に成功しました&#39;
+    else
+      flash.now[:alert] = &#39;登録に失敗しました&#39;
+
+      render action: :new
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;view&#34;&gt;View&lt;/h1&gt;
+
+&lt;h2 id=&#34;app-views-foo-days-new-html-haml&#34;&gt;app/views/foo_days/new.html.haml&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haml&#34;&gt;.row
+  %h1 日々の登録
+  = form_for @registration_form, url: foo_days_path, method: :post do |f|
+    - if @registration_form.errors.any?
+      %ul
+        - @registration_form.errors.full_messages.each do |msg|
+          %li= msg
+
+    = f.label &#39;日付&#39;
+    = f.date_field :from_date
+    %span 〜
+    = f.date_field :to_date
+
+    = f.submit &#39;確定&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;translation&#34;&gt;Translation&lt;/h1&gt;
+
+&lt;h2 id=&#34;config-locales-ja-yml&#34;&gt;config/locales/ja.yml&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;ja:
+  activemodel:
+    attributes:
+      foo_day/registration_form:
+        from_date: 開始日
+        to_date: 終了日
+    errors:
+      invalid_foo_day: &#39;%{date} %{message}&#39;
+      models:
+        foo_day/registration_form:
+          attributes:
+            from_date:
+              on_or_after: は %{restriction} 以降の日付を指定してください
+            to_date:
+              on_or_after: は 開始日 以降の日付を指定してください
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;p&gt;フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。&lt;/p&gt;
+
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/&#34;&gt;Creating Form Objects with ActiveModel and Virtus - We build Envato&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/&#34;&gt;7 Patterns to Refactor Fat ActiveRecord Models - Code Climate Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://qiita.com/quattro_4/items/6636efbf58cca13db02a&#34;&gt;Form Object実装メモ - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.enogineer.com/2014/12/02/rails-form-object/&#34;&gt;Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
+      <link>http://blog.takady.net/blog/2016/07/23/soft-skills/</link>
+      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
+      <description>&lt;p&gt;先月、日本語版が発売された直後に買って読んだ。&lt;/p&gt;
+
+&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B01GDS0994&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内容で、とてもおもしろかった。&lt;br /&gt;
+責任範囲を増やすことが自分にとってどういうメリットがあるのかとか、プロというのはどういうものかとか、なんなんだろうと思っていた事が語られていて、そういう事か〜っていう納得感が僕にはあった。&lt;br /&gt;
+読んで1ヶ月経って、ハイライトしたところなど読みなおしていたけど、改めて良い本だと思いました。&lt;/p&gt;
+
+&lt;p&gt;何度も読みなおすのが良さそう。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>10年後の仕事のカタチ10のヒント を読んだ</title>
+      <link>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
+      <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://tango-ruby.hatenablog.com/entry/2015/11/04/172930&#34;&gt;こちらのブログ記事&lt;/a&gt; でオススメされていたので読んでみた。&lt;br /&gt;
+対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃。&lt;/p&gt;
+
+&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B00HOTLXKQ&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
+
+&lt;p&gt;印象に残ってるところ。&lt;/p&gt;
+
+&lt;h2 id=&#34;会社以外でのプロジェクト&#34;&gt;会社以外でのプロジェクト&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「自分で決める、自分でリスクを背負う」っていうのは、会社で言われてことをやるのとは全く違うんです。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;東京とベトナムのピザ屋の話&#34;&gt;東京とベトナムのピザ屋の話&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;東京だともうすでに美味しいピザのお店がたくさんあって競合が多いし、初期の設備投資のお金もたくさん必要。&lt;/li&gt;
+&lt;li&gt;ベトナムにはまだ本格的なピザを食べられるお店があまりなかったので、同じくらいの実力でもベトナムでトップになれた。&lt;/li&gt;
+&lt;li&gt;トップになって儲かり始めるので、もっとクオリティが良くなり、飛び抜けていく。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;日本の中のものさしで測って怖がらない&#34;&gt;日本の中のものさしで測って怖がらない&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;イチローとか松井とか、安定した日本球界でのキャリアよりも大リーグに挑戦したのも、未知のものにトライするとワクワクするから。&lt;/li&gt;
+&lt;li&gt;なんとかなる。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ</title>
+      <link>http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
+      <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
+      <description>
+
+&lt;p&gt;読んだ。&lt;/p&gt;
+
+&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4797376279&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリューム自体は重くなく、数時間で読めた。&lt;/p&gt;
+
+&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
+
+&lt;p&gt;第1部の SQL 初級入門な章は流し読みした。&lt;/p&gt;
+
+&lt;p&gt;第2部以降、下記のような話が網羅されていて参考になった。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;データソース層、DWH層、データマート層の3層構造&lt;/li&gt;
+&lt;li&gt;オンプレミスとクラウドサービス利用のトレードオフ&lt;/li&gt;
+&lt;li&gt;ディメンションテーブル（スタースキーマ）&lt;/li&gt;
+&lt;li&gt;ETL と ELT&lt;/li&gt;
+&lt;li&gt;DWH 向けデータベース製品のそれぞれの特長の説明（BigQueryやHadoop含む）&lt;/li&gt;
+&lt;li&gt;データ構築のバッチは処理の粒度を細かくして冪等に作ろうって話&lt;/li&gt;
+&lt;li&gt;差分更新・全件更新の話&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;あとテストの話も書いてはあるが、SQLが正常に動くことや件数が正しいことのテストだった。&lt;br /&gt;
+実際にデータの内容が正しいかのテストがデータ基盤のテストとしては最も重要だけど方法として確立されたものは聞いたことがないので、その辺についてなにか書いてくれてることを期待してた。この本に載っていないということは、まだそういうテスト手法は出てきてないのかもしれない。&lt;/p&gt;
+
+&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
+
+&lt;p&gt;2011年から2013年くらいまでひたすらバッチで Hadoop にデータを入れてそれを HiveQL で集計・抽出という業務をやっていた時期があって、その時に感じていたことやみんなで考えていたような事が書かれていたりして懐かしく思ったし、当時の自分たちの方法が肯定される記述も多くて良かったと思った。&lt;br /&gt;
+当時はこういう大規模データ運用現場に関する知見があまり出回ってなかった気がする。（Hadoop とかビックデータという言葉はやたらバズっていたが。&lt;br /&gt;
+あの時この本読んでたらなーとも思った。&lt;/p&gt;
+
+&lt;p&gt;データ分析基盤を作っている人やこれから作っていこうとしている人にとって本書はとても良いものだとおもいました。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>nexus5 の画面が割れたので自分で交換した</title>
+      <link>http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</link>
+      <pubDate>Sun, 15 May 2016 21:56:33 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</guid>
+      <description>
+
+&lt;p&gt;3日前に nexus5 を落としてしまって画面が思いっきり割れてしまった。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5931_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;端末の画面を割ってしまったのは初めてだったし、まだ買って半年だったのでとても残念な気持ちになった。&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;はじめてスマホの仮面が割れたバキバキに&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731131513887031297&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;最低の気分なんですけど！！！！！1&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731131644845817858&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;やばい、ほんと、ありえない&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731132397010345986&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;とにかく落ち着いて「nexus5 画面 交換」とかでググッて修理についての情報を集めた。&lt;br /&gt;
+どうやら修理に出すと2万円超えみたいだ。高い…。&lt;br /&gt;
+とはいえ、この割れた画面を見るたびにテンションが下がってどうしようもない。&lt;/p&gt;
+
+&lt;p&gt;そんな中、自力で直してたという記事を発見。&lt;br /&gt;
+&lt;a href=&#34;http://www.blogershin.link/archives/242&#34;&gt;Nexus 5 ガラス割れを自力で交換修理する件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;用意するものは、Amazon で売ってるこの交換用ディスプレイと必要な工具のセット。13,500円。&lt;br /&gt;
+結構高いけどこれが画面を交換する最安の方法のようなので、こちらを購入した。&lt;/p&gt;
+
+&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B00V7VB8U2&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;実際の分解・交換にはYoutube のこちらの動画も参考にした。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nexus 5 Screen Replacement Part 1 How To Change&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/nVAtEyRBny0&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Amazon のレビューのコメントでは「30分くらいで意外と簡単にできました！」みたいなコメントがあったけど、やってみると1時間以上かかったし、両面テープでくっついている箇所を剥がしたりするのに非常に神経を使った。&lt;/p&gt;
+
+&lt;p&gt;交換の様子。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5922_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5923_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5924_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5925_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5926_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5927_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5928_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5930_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5932_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後の最後に背面カバーをはめる時に、バッテリー横の線が一本挟まって切れてしまって、絶望したけど電源を入れて確認しても何も問題無いので、一旦様子見。&lt;/p&gt;
+
+&lt;p&gt;ということで、交換は無事に成功！&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;nexus5 の画面取り替えに成功した！&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731827195639783424&#34;&gt;2016年5月15日&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;注意&#34;&gt;注意&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;自力での交換は失敗の可能性があったり、メーカー保証の対象外となるなどするので、くれぐれも自己責任でお願いします。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>自分の開発スピードを上げるには</title>
+      <link>http://blog.takady.net/blog/2016/05/01/more-productive/</link>
+      <pubDate>Sun, 01 May 2016 01:10:20 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/05/01/more-productive/</guid>
+      <description>
+
+&lt;p&gt;新しい機能なりサービスを作った後に振り返ってみると、もっと上手くやれた気がするなーって思う。&lt;br /&gt;
+もっと早く、質の良いものを作るにはどうすれば良いのか。&lt;br /&gt;
+そもそも開発とひとことで言っても、細かくどういうポイントを気にしておく必要があるか、そしてそのどこを改善できそうか考えてみた。&lt;/p&gt;
+
+&lt;h1 id=&#34;仕様決め&#34;&gt;仕様決め&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;それを作る理由について納得しているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;納得してないとか、そもそも背景を理解してない状態で仕様決めに入るのはかなり厳しい。&lt;/li&gt;
+&lt;li&gt;システムとしてだけでなくて、ビジネス的にそれってどうなんですかっていうのは質問して納得しておきたい。&lt;/li&gt;
+&lt;li&gt;とはいえ腰の重い開発者にはなりたくないので柔軟に。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;解決したい課題が明確になっているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最初は何か課題があるはずだけど、それをすっ飛ばして具体的な解決方法から話が始まる事がわりとある。&lt;/li&gt;
+&lt;li&gt;実は別の方法が良かったりするかもしれないので、解決したい課題は何なのか明確にしておきたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;誰が最終的に決定するのか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;発散はしても良いけど最後決める人がいないとなかなか固まらなくてやきもきする。&lt;/li&gt;
+&lt;li&gt;特に関係者が増えると本当に決まらないので、誰が決める人なのかってのはちゃんと認識合わせておきたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;優先順位の高いものはどれか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;規模が小さければ一気に作っちゃうのだけど、規模が大きい場合は一気に全部作ろうとしないで重要なものから作って出来たところから出していった方が良い。&lt;/li&gt;
+&lt;li&gt;優先順位の低いものは本当に必要かもわかってなかったりするので最初から詳細まで詰めなくても良い。&lt;/li&gt;
+&lt;li&gt;いつまでにどこまで出したいかは確認しておく。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;そもそも現状の仕様がどうなっているかをシステムレベルで把握しているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;そもそもの前提が間違っていたりすると議論が全くの無駄になることも。&lt;/li&gt;
+&lt;li&gt;把握してない状態で課題に対しての解決案を提示するのは結構難しい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;設計&#34;&gt;設計&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;既存に引っ張られすぎていないか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;既存がこうだからそれを踏襲していく形で考えてしまいがちだが、そこに縛られすぎずに本来どうあるべきかを考えてみる。&lt;/li&gt;
+&lt;li&gt;時間的制約などにより結果的に理想の形を取れなくても、チーム内で理想の形は共有しておきたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;それはそのモデルやサービスの責務か&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;責務を超えた事をやらせていたり、隠蔽しておきたい知識・概念がその範囲外に流出してしまうのは避けたい。&lt;/li&gt;
+&lt;li&gt;ここが自分にとっては結構難しくて、もっと上手くやりたいところ。
+
+&lt;ul&gt;
+&lt;li&gt;あしがかりになりそうな DDD の知識を学びたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;なぜその名前付けをしたのかを説明できるか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;名前重要ってのは最近本当に感じてて、でもいつも結構悩むんだけど、これは何かのサインなのか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;実装&#34;&gt;実装&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;集中できているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;とにかく実装は集中してやっているかどうかで掛かる時間が何倍も変わるので、自分が集中している状態にい続けられるように気を遣う。&lt;/li&gt;
+&lt;li&gt;詳細な実装方法で迷ったりする時は実際に書いて見比べる方がイメージしやすくて、書いたコードを見てみると意外と悪くないねという感じになる事も多い。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;テストコードを書く事に時間がかかってないか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プロダクションコード書くよりテストコード書く時間の方が長くなりがち。&lt;/li&gt;
+&lt;li&gt;ここはもう少し改善できそう。&lt;/li&gt;
+&lt;li&gt;テストについては何か一冊本でも読んで学ぶと良さそう。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;コードレビューしやすい PR になっているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;レビュアーが気になりそうなポイントは、先に PR の Description に書いておく。&lt;/li&gt;
+&lt;li&gt;ただ、Description が長過ぎると重い感じになるので、コードやコミットメッセージなどで明らかにわかることは書かないことにしてる。&lt;/li&gt;
+&lt;li&gt;1つの PR が大きくなり過ぎたら分けられないか考える。&lt;/li&gt;
+&lt;li&gt;1つの PR でだいたい変更が 200行くらいまでにした方が見やすくてレビュアーの負担も少ないと思う。&lt;/li&gt;
+&lt;li&gt;意味の単位でコミット分ける。&lt;/li&gt;
+&lt;li&gt;コミット単位で見てくれる人もいるので、その人に意図が伝わるように書くと、将来 commit log 見直した時にも意図が分かりやすかったりする。
+
+&lt;ul&gt;
+&lt;li&gt;1行目: 要約&lt;/li&gt;
+&lt;li&gt;2行目: 空行&lt;/li&gt;
+&lt;li&gt;3行目: 理由含めた説明&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;リリースタイミングを考えられているか&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;なるべく出来たものから出していきたい。&lt;/li&gt;
+&lt;li&gt;db migration があるものはタイミング気をつける。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;検証&#34;&gt;検証&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;検証環境特有の問題を取り除けているか
+
+&lt;ul&gt;
+&lt;li&gt;大体時間が掛かるのは、実際に検証したい箇所ではなくて、何か設定の差異等によるつまらない問題である事が多い。&lt;/li&gt;
+&lt;li&gt;特に他チームのサービスとのインターフェース部分は、開発環境では普段モックしていたりするので、そういう問題がよく起きがち。
+
+&lt;ul&gt;
+&lt;li&gt;そういう問題は起きないように改善するのはもちろんだし、認識してるのであれば事前に取り除いておきたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;p&gt;改めてまとめてみると、改善できそうなところが見えてきた気がする。&lt;br /&gt;
+DDD の本とテストの本を読まねば。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Android Studio で emacs キーバインドでコードを書く</title>
+      <link>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
+      <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
+      <description>&lt;p&gt;Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。&lt;br /&gt;
+Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。&lt;br /&gt;
+普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。&lt;/p&gt;
+
+&lt;p&gt;まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。&lt;br /&gt;
+&lt;a href=&#34;https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114&#34;&gt;ここの設定&lt;/a&gt; を private.xml でこんな感じに上書きした。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;  &amp;lt;replacementdef&amp;gt;
+    &amp;lt;replacementname&amp;gt;EMACS_MODE_IGNORE_APPS&amp;lt;/replacementname&amp;gt;
+    &amp;lt;replacementvalue&amp;gt;
+      EMACS,
+      REMOTEDESKTOPCONNECTION,
+      TERMINAL,
+      VI,
+      VIRTUALMACHINE,
+      X11,
+      ANDROID_STUDIO,
+    &amp;lt;/replacementvalue&amp;gt;
+  &amp;lt;/replacementdef&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。&lt;br /&gt;
+次に Android Studio の Preference &amp;gt; Keymap で &lt;code&gt;Keymaps: Emacs&lt;/code&gt; に設定すれば OK。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

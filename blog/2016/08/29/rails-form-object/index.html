@@ -1,81 +1,72 @@
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>rails で FormObject を使う | Yuichi Takada</title>
-
-	<meta name="author" content="Yuichi Takada">
-	
-	<meta name="description" content="フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。 こういうフォーム。 Model uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは &hellip;"> <meta name="keywords" content="">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Yuichi Takada" type="application/atom+xml">
-	<link rel="canonical" href="http://blog.takady.net/blog/2016/08/29/rails-form-object/">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<meta property="og:title" content="rails で FormObject を使う - Yuichi Takada" />
-<meta property="og:description" content="フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。 こういうフォーム。 Model uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは &hellip;" />
-<meta property="og:url" content="http://blog.takady.net/blog/2016/08/29/rails-form-object/" />
-<meta property="og:image" content="http://blog.takady.net/images/profile.jpg" />
-<meta property="og:author" content="Yuichi Takada" />
-<meta property="og:site_name" content="Yuichi Takada" />
-<meta property="og:locale" content="ja_JP" />
-<meta property="og:type" content="article" />
-<meta property="fb:app_id" content="1780204485583166" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@takady7" />
-<meta name="twitter:title" content="rails で FormObject を使う" />
-<meta name="twitter:description" content="フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。 こういうフォーム。 Model uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。 app/models/foo_day.rb 1
-2
-3
-4
-5
-6
-class &hellip;" />
-<meta name="twitter:image" content="/images/profile.jpg" />
-<meta name="twitter:url" content="http://blog.takady.net/blog/2016/08/29/rails-form-object/" />
-
-
-</head>
-
-
-
-<body>
-	<header id="header">
-<div class="inner">
-  <ul class="navigation">
-    <li><a href="/"><h1>Yuichi Takada</h1></a></li>
-    <li><a href="/" class="is-selected">Blog</a></li>
-    <li><a href="http://github.com/takady" target="blank">Github</a></li>
-  </ul>
-</div></header>
-
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Rails で FormObject を使う</h2>
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" rails で FormObject を使う &middot;  Yuichi Takada" />
+  
+  <meta name="theme-color" content="#333" />
+ 
+  <meta property="og:site_name" content="Yuichi Takada" />
+  <meta property="og:url" content="http://blog.takady.net/blog/2016/08/29/rails-form-object/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2016-08-29T19:38:49Z" />
+  
   
 
+  <title>
+     rails で FormObject を使う &middot;  Yuichi Takada
+  </title>
+
+  <link rel="stylesheet" href="http://blog.takady.net/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/main.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="stylesheet" href="http://blog.takady.net//style.css">
+  <link rel="shortcut icon" href="http://blog.takady.net/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://blog.takady.net/images/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://blog.takady.net/">Yuichi Takada</a></h1>
+      
+      
+      <a href="http://blog.takady.net/" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
 
 
-<time datetime="2016-08-29T19:38:49+09:00" pubdate data-updated="true">Aug 29th, 2016</time></div>
-	</div>
-	<div class="entry-content"><p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
+<article>
+  <header>
+    <h1 class="text-primary">rails で FormObject を使う</h1>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2016-08-29T19:38:49Z">
+          Aug 29, 2016
+        </time>
+      </div>
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
 
 <p><br /></p>
 
@@ -83,253 +74,148 @@ class &hellip;" />
 
 <p>こういうフォーム。</p>
 
-<h1>Model</h1>
+<h1 id="model">Model</h1>
 
 <p>uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。</p>
 
-<h2>app/models/foo_day.rb</h2>
+<h2 id="app-models-foo-day-rb">app/models/foo_day.rb</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:date</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">uniqueness</span><span class="p">:</span> <span class="p">{</span><span class="ss">scope</span><span class="p">:</span> <span class="ss">:user_id</span><span class="p">}</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-ruby">class FooDay &lt; ActiveRecord::Base
+  belongs_to :user
 
+  validates :user_id, presence: true
+  validates :date, presence: true, uniqueness: {scope: :user_id}
+end
+</code></pre>
 
-<h1>FormObject</h1>
+<h1 id="formobject">FormObject</h1>
 
-<p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br/>
+<p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br />
 例えば今回のケースだと、view から文字列で渡ってくる <code>YYY-MM-DD</code> を Date に変換したかったので、一度 Virtus を使ってみたけど、
-例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br/>
+例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br />
 結局、日付の validation のために <a href="https://github.com/adzap/validates_timeliness">validates_timeliness</a> という gem を使ったけど便利だった。</p>
 
-<h2>app/models/foo_day/registration_form.rb</h2>
+<h2 id="app-models-foo-day-registration-form-rb">app/models/foo_day/registration_form.rb</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">:to_date</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:today</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
-</span><span class='line'>  <span class="n">validates</span> <span class="ss">:to_date</span><span class="p">,</span> <span class="ss">allow_blank</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">timeliness</span><span class="p">:</span> <span class="p">{</span><span class="ss">on_or_after</span><span class="p">:</span> <span class="ss">:from_date</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">save</span>
-</span><span class='line'>    <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="n">valid?</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">persist!</span>
-</span><span class='line'>    <span class="kp">true</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">foo_days</span>
-</span><span class='line'>    <span class="vi">@foo_days</span> <span class="o">||=</span> <span class="n">build_foo_days</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">build_foo_days</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">to_date</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>      <span class="o">[</span><span class="no">FooDay</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">date</span><span class="p">:</span> <span class="n">from_date</span><span class="p">,</span> <span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">)</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="p">(</span><span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">from_date</span><span class="p">)</span><span class="o">.</span><span class="n">.</span><span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">to_date</span><span class="p">))</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">date</span><span class="o">|</span> <span class="no">FooDay</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">date</span><span class="p">)</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">valid?</span>
-</span><span class='line'>    <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="k">super</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">foo_day</span><span class="o">|</span>
-</span><span class='line'>      <span class="k">next</span> <span class="k">if</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">valid?</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">foo_day</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;activemodel.errors.invalid_foo_day&#39;</span><span class="p">,</span> <span class="ss">date</span><span class="p">:</span> <span class="n">foo_day</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="ss">message</span><span class="p">:</span> <span class="n">message</span><span class="p">))</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="k">super</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">persist!</span>
-</span><span class='line'>    <span class="n">foo_days</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:save!</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-ruby">class FooDay::RegistrationForm
+  include ActiveModel::Model
 
+  attr_accessor :user_id, :from_date, :to_date
 
-<h1>Controller</h1>
+  validates :user_id, presence: true
+  validates :from_date, presence: true, timeliness: {on_or_after: :today, type: :date}
+  validates :to_date, allow_blank: true, timeliness: {on_or_after: :from_date, type: :date}
 
-<h2>app/controllers/foo_days_controller.rb</h2>
+  def save
+    return false unless valid?
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">FooDaysController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
-</span><span class='line'>    <span class="vi">@registration_form</span> <span class="o">=</span> <span class="no">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="vi">@registration_form</span> <span class="o">=</span> <span class="no">FooDay</span><span class="o">::</span><span class="no">RegistrationForm</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:foo_day_registration_form</span><span class="o">].</span><span class="n">merge</span><span class="p">(</span><span class="ss">user_id</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">new_foo_day_path</span><span class="p">,</span> <span class="ss">notice</span><span class="p">:</span> <span class="s1">&#39;登録に成功しました&#39;</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">flash</span><span class="o">.</span><span class="n">now</span><span class="o">[</span><span class="ss">:alert</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;登録に失敗しました&#39;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+    persist!
+    true
+  end
 
+  private
 
-<h1>View</h1>
+  def foo_days
+    @foo_days ||= build_foo_days
+  end
 
-<h2>app/views/foo_days/new.html.haml</h2>
+  def build_foo_days
+    if to_date.blank?
+      [FooDay.new(date: from_date, user_id: user_id)]
+    else
+      (Date.parse(from_date)..Date.parse(to_date)).map {|date| FooDay.new(user_id: user_id, date: date) }
+    end
+  end
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='haml'><span class='line'><span class="nc">.row</span>
-</span><span class='line'>  <span class="nt">%h1</span> 日々の登録
-</span><span class='line'>  <span class="p">=</span> <span class="n">form_for</span> <span class="vi">@registration_form</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">foo_days_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:post</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">any?</span>
-</span><span class='line'>      <span class="nt">%ul</span>
-</span><span class='line'>        <span class="p">-</span> <span class="vi">@registration_form</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">full_messages</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg</span><span class="o">|</span>
-</span><span class='line'>          <span class="nt">%li</span><span class="p">=</span> <span class="n">msg</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="s1">&#39;日付&#39;</span>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">date_field</span> <span class="ss">:from_date</span>
-</span><span class='line'>    <span class="nt">%span</span> 〜
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">date_field</span> <span class="ss">:to_date</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="p">=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="s1">&#39;確定&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+  def valid?
+    return false unless super
 
+    foo_days.each do |foo_day|
+      next if foo_day.valid?
 
-<h1>Translation</h1>
+      foo_day.errors.full_messages.each do |message|
+        errors.add(:base, I18n.t('activemodel.errors.invalid_foo_day', date: foo_day.date, message: message))
+      end
+    end
 
-<h2>config/locales/ja.yml</h2>
+    return super
+  end
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">ja</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">activemodel</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">foo_day/registration_form</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">from_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">開始日</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">to_date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">終了日</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">errors</span><span class="p-Indicator">:</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">invalid_foo_day</span><span class="p-Indicator">:</span> <span class="s">&#39;%{date}</span><span class="nv"> </span><span class="s">%{message}&#39;</span>
-</span><span class='line'>      <span class="l-Scalar-Plain">models</span><span class="p-Indicator">:</span>
-</span><span class='line'>        <span class="l-Scalar-Plain">foo_day/registration_form</span><span class="p-Indicator">:</span>
-</span><span class='line'>          <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">from_date</span><span class="p-Indicator">:</span>
-</span><span class='line'>              <span class="l-Scalar-Plain">on_or_after</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">は %{restriction} 以降の日付を指定してください</span>
-</span><span class='line'>            <span class="l-Scalar-Plain">to_date</span><span class="p-Indicator">:</span>
-</span><span class='line'>              <span class="l-Scalar-Plain">on_or_after</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">は 開始日 以降の日付を指定してください</span>
-</span></code></pre></td></tr></table></div></figure>
+  def persist!
+    foo_days.each(&amp;:save!)
+  end
+end
+</code></pre>
 
+<h1 id="controller">Controller</h1>
 
-<h1>まとめ</h1>
+<h2 id="app-controllers-foo-days-controller-rb">app/controllers/foo_days_controller.rb</h2>
+
+<pre><code class="language-ruby">class FooDaysController &lt; ApplicationController
+  def new
+    @registration_form = FooDay::RegistrationForm.new
+  end
+
+  def create
+    @registration_form = FooDay::RegistrationForm.new(params[:foo_day_registration_form].merge(user_id: current_user.id))
+
+    if @registration_form.save
+      redirect_to new_foo_day_path, notice: '登録に成功しました'
+    else
+      flash.now[:alert] = '登録に失敗しました'
+
+      render action: :new
+    end
+  end
+end
+</code></pre>
+
+<h1 id="view">View</h1>
+
+<h2 id="app-views-foo-days-new-html-haml">app/views/foo_days/new.html.haml</h2>
+
+<pre><code class="language-haml">.row
+  %h1 日々の登録
+  = form_for @registration_form, url: foo_days_path, method: :post do |f|
+    - if @registration_form.errors.any?
+      %ul
+        - @registration_form.errors.full_messages.each do |msg|
+          %li= msg
+
+    = f.label '日付'
+    = f.date_field :from_date
+    %span 〜
+    = f.date_field :to_date
+
+    = f.submit '確定'
+</code></pre>
+
+<h1 id="translation">Translation</h1>
+
+<h2 id="config-locales-ja-yml">config/locales/ja.yml</h2>
+
+<pre><code class="language-yaml">ja:
+  activemodel:
+    attributes:
+      foo_day/registration_form:
+        from_date: 開始日
+        to_date: 終了日
+    errors:
+      invalid_foo_day: '%{date} %{message}'
+      models:
+        foo_day/registration_form:
+          attributes:
+            from_date:
+              on_or_after: は %{restriction} 以降の日付を指定してください
+            to_date:
+              on_or_after: は 開始日 以降の日付を指定してください
+</code></pre>
+
+<h1 id="まとめ">まとめ</h1>
 
 <p>フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。</p>
 
-<h1>参考</h1>
+<h1 id="参考">参考</h1>
 
 <ul>
 <li><a href="http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/">Creating Form Objects with ActiveModel and Virtus - We build Envato</a></li>
@@ -338,75 +224,98 @@ class &hellip;" />
 <li><a href="http://blog.enogineer.com/2014/12/02/rails-form-object/">Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog</a></li>
 </ul>
 
-</div>
-
-
-<div class="sharing">
-  
-  <div class="sns-tw">
-    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js  ';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  
-  <div class="sns-hb">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  
-  <div class="sns-fb">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like" expr:data-href="data:post.url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-  </div>
-  
-  
-</div>
+  </section>
+  <footer>
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog-takady-net';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/images/avatar.png" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">Yuichi Takada</h1>
+        
+        
+        <div class="author-bio">Tokyo based software engineer.</div>
+        
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://blog.takady.net/blog/2016/07/23/soft-skills/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
 </article>
-</div>
-	<footer id="footer" class="inner"><div class="aboutme">
-<hr>
-  <div class="profile">
-    <a href="http://twitter.com/takady7"><img class="icon" src="https://ja.gravatar.com/userimage/64821088/b51b1f5635f1cdf8735a75d7787c6a20.jpeg"></a>
 
-    <h3>Yuichi Takada</h3>
-    <p><a href="http://twitter.com/takady7">@takady7</a>, a software engineer in Tokyo. Born in 1987.</p>
-
-    <div class="codes">
-      <h4>Codes</h4>
-      <div class="github"><a href="https://github.com/takady">github.com/takady</a></div>
-      <div class="rubygems"><a href="https://rubygems.org/profiles/takady">rubygems.org/takady</a></div>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright Yuichi Takada
     </div>
-  </div>
-
-  <div class="float_clear"></div>
-
+    <div class="sns-links hidden-print">
+  
+  
+  <a href="https://twitter.com/takady7" target="_blank">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  
+  
+  <a href="https://github.com/takady" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  <a href="https://stackoverflow.com/users/4319579" target="_blank">
+    <i class="fa fa-stack-overflow"></i>
+  </a>
+  
+  
+  <a href="https://linkedin.com/in/takady" target="_blank">
+    <i class="fa fa-linkedin"></i>
+  </a>
+  
+  
 </div>
-Copyright &copy; 2017
- Yuichi Takada 
-<br>
-Powered by Octopress.
 
+  </footer>
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-56996369-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-</footer>
-	
-
+  <script src="http://blog.takady.net/js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56996369-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 </body>
 </html>
+

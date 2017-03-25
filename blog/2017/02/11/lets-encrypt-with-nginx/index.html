@@ -1,274 +1,251 @@
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Let&#8217;s Encrypt と Nginx で HTTPS 対応 | Yuichi Takada</title>
-
-	<meta name="author" content="Yuichi Takada">
-	
-	<meta name="description" content="個人的に作ってるサイトを HTTPS 対応させてみた。
-iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。 Let&rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意できるので今回利用した。 curl &hellip;"> <meta name="keywords" content="">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Yuichi Takada" type="application/atom+xml">
-	<link rel="canonical" href="http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<meta property="og:title" content="Let's Encrypt と Nginx で HTTPS 対応 - Yuichi Takada" />
-<meta property="og:description" content="個人的に作ってるサイトを HTTPS 対応させてみた。
-iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。 Let&rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意できるので今回利用した。 curl &hellip;" />
-<meta property="og:url" content="http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/" />
-<meta property="og:image" content="http://blog.takady.net/images/profile.jpg" />
-<meta property="og:author" content="Yuichi Takada" />
-<meta property="og:site_name" content="Yuichi Takada" />
-<meta property="og:locale" content="ja_JP" />
-<meta property="og:type" content="article" />
-<meta property="fb:app_id" content="1780204485583166" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@takady7" />
-<meta name="twitter:title" content="Let's Encrypt と Nginx で HTTPS 対応" />
-<meta name="twitter:description" content="個人的に作ってるサイトを HTTPS 対応させてみた。
-iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。 Let&rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意できるので今回利用した。 curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、 &hellip;" />
-<meta name="twitter:image" content="/images/profile.jpg" />
-<meta name="twitter:url" content="http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/" />
-
-
-</head>
-
-
-
-<body>
-	<header id="header">
-<div class="inner">
-  <ul class="navigation">
-    <li><a href="/"><h1>Yuichi Takada</h1></a></li>
-    <li><a href="/" class="is-selected">Blog</a></li>
-    <li><a href="http://github.com/takady" target="blank">Github</a></li>
-  </ul>
-</div></header>
-
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Let&#8217;s Encrypt と Nginx で HTTPS 対応</h2>
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Let&#39;s Encrypt と Nginx で HTTPS 対応 &middot;  Yuichi Takada" />
+  
+  <meta name="theme-color" content="#333" />
+ 
+  <meta property="og:site_name" content="Yuichi Takada" />
+  <meta property="og:url" content="http://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2017-02-11T15:53:29Z" />
+  
   
 
+  <title>
+     Let&#39;s Encrypt と Nginx で HTTPS 対応 &middot;  Yuichi Takada
+  </title>
+
+  <link rel="stylesheet" href="http://blog.takady.net/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/main.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="stylesheet" href="http://blog.takady.net//style.css">
+  <link rel="shortcut icon" href="http://blog.takady.net/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://blog.takady.net/images/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://blog.takady.net/">Yuichi Takada</a></h1>
+      
+      
+      <a href="http://blog.takady.net/" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
 
 
-<time datetime="2017-02-11T15:53:29+09:00" pubdate data-updated="true">Feb 11th, 2017</time></div>
-	</div>
-	<div class="entry-content"><p>個人的に作ってるサイトを HTTPS 対応させてみた。<br/>
+<article>
+  <header>
+    <h1 class="text-primary">Let&#39;s Encrypt と Nginx で HTTPS 対応</h1>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2017-02-11T15:53:29Z">
+          Feb 11, 2017
+        </time>
+      </div>
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<p>個人的に作ってるサイトを HTTPS 対応させてみた。<br />
 iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。</p>
 
-<h2>Let&rsquo;s Encrypt</h2>
+<h2 id="let-s-encrypt">Let&rsquo;s Encrypt</h2>
 
 <p><a href="https://letsencrypt.jp/">https://letsencrypt.jp/</a></p>
 
 <p>無料で証明書を用意できるので今回利用した。</p>
 
-<p>curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。<br/>
+<p>curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。<br />
 以下、実行例。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com</span></code></pre></td></tr></table></div></figure>
-
+<pre><code>$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com
+</code></pre>
 
 <p>webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。</p>
 
 <p>これで <code>/etc/letsencrypt/live/example.com/</code> 以下に、証明書や秘密鍵が配置されるので(実際にはこれはシンボリックリンクなのだが)、これらのファイルを Nginx の設定で指定する。</p>
 
-<h2>iptables</h2>
+<h2 id="iptables">iptables</h2>
 
-<p><code>/etc/sysconfig/iptables</code> を見て、80 と同様に 443 も許可されている事を確認しておく。<br/>
-されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。<br/>
-<code>sudo /sbin/iptables -L</code> で設定を確認できる。最後に <code>iptables save</code> するのを忘れずに。<br/>
+<p><code>/etc/sysconfig/iptables</code> を見て、80 と同様に 443 も許可されている事を確認しておく。<br />
+されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。<br />
+<code>sudo /sbin/iptables -L</code> で設定を確認できる。最後に <code>iptables save</code> するのを忘れずに。<br />
 あとは iptables を再起動すると反映されるはず。</p>
 
-<h2>Nginx</h2>
+<h2 id="nginx">Nginx</h2>
 
-<p>実際の Nginx の設定は下記のようにした。<br/>
-http のリクエストは https にリダイレクトさせるようにした。<br/>
+<p>実際の Nginx の設定は下記のようにした。<br />
+http のリクエストは https にリダイレクトさせるようにした。<br />
 （unicorn を使ってるのでその記述があるが今回の件には直接関係無い。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class='nginx'><span class='line'><span class="k">upstream</span> <span class="s">unicorn</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">server</span> <span class="s">unix:/path/to/app/current/tmp/sockets/unicorn.sock</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">server</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">server_name</span> <span class="s">example.com</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">ssl_protocols</span> <span class="s">TLSv1</span> <span class="s">TLSv1.1</span> <span class="s">TLSv1.2</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">ssl_ciphers</span> <span class="s">&quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">access_log</span> <span class="s">/var/log/nginx/example.com.access.log</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">root</span> <span class="s">/path/to/app/current/public</span><span class="p">;</span>
-</span><span class='line'>    <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">@unicorn</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/assets/</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kn">root</span> <span class="s">/path/to/app/shared/public</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="s">@unicorn</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Host</span> <span class="nv">$host</span><span class="p">;</span>
-</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Server</span> <span class="nv">$host</span><span class="p">;</span>
-</span><span class='line'>        <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
-</span><span class='line'>        <span class="kn">proxy_pass</span> <span class="s">http://unicorn</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kn">location</span> <span class="s">/robots.txt</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kn">alias</span> <span class="s">/path/to/app/current/public/robots.txt</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-nginx">upstream unicorn {
+    server unix:/path/to/app/current/tmp/sockets/unicorn.sock;
+}
 
+server {
+    listen 80;
+    return 301 https://$host$request_uri;
+}
 
-<h2>SSL LABS</h2>
+server {
+    listen 443 ssl;
+    server_name example.com;
+
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers &quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&quot;;
+    access_log /var/log/nginx/example.com.access.log;
+    root /path/to/app/current/public;
+    try_files $uri @unicorn;
+
+    location ~ ^/assets/ {
+        root /path/to/app/shared/public;
+    }
+
+    location @unicorn {
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://unicorn;
+    }
+
+    location /robots.txt {
+        alias /path/to/app/current/public/robots.txt;
+    }
+}
+</code></pre>
+
+<h2 id="ssl-labs">SSL LABS</h2>
 
 <p><a href="https://www.ssllabs.com/ssltest/">https://www.ssllabs.com/ssltest/</a></p>
 
-<p>SSL の設定確認できるサイト。<br/>
+<p>SSL の設定確認できるサイト。<br />
 以下のようになればうまくいっている。</p>
 
-<p><img src="/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png" width="600" alt="" /></p>
+<p><img src="/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png" alt="" /></p>
 
-<h2>参考</h2>
+<h2 id="参考">参考</h2>
 
 <ul>
 <li><a href="https://programming.wikihub.io/@r7kamura/20160702202711">Let&rsquo;s EncryptとAmazon LinuxとNginxでamakan.netをHTTPSに対応させた - Programming</a></li>
 <li><a href="http://nobuneko.com/blog/archives/2013/05/linux_centos_6_iptables_http_https.html">Linux(CentOS 6) - iptablesの設定を変更し、http、httpsでのアクセスを許可する - r_nobuホームページ</a></li>
 </ul>
 
-</div>
-
-
-<div class="sharing">
-  
-  <div class="sns-tw">
-    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js  ';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  
-  <div class="sns-hb">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  
-  <div class="sns-fb">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like" expr:data-href="data:post.url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-  </div>
-  
-  
-</div>
+  </section>
+  <footer>
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog-takady-net';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/images/avatar.png" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">Yuichi Takada</h1>
+        
+        
+        <div class="author-bio">Tokyo based software engineer.</div>
+        
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://blog.takady.net/blog/2016/12/31/2016-summary/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
 </article>
-</div>
-	<footer id="footer" class="inner"><div class="aboutme">
-<hr>
-  <div class="profile">
-    <a href="http://twitter.com/takady7"><img class="icon" src="https://ja.gravatar.com/userimage/64821088/b51b1f5635f1cdf8735a75d7787c6a20.jpeg"></a>
 
-    <h3>Yuichi Takada</h3>
-    <p><a href="http://twitter.com/takady7">@takady7</a>, a software engineer in Tokyo. Born in 1987.</p>
-
-    <div class="codes">
-      <h4>Codes</h4>
-      <div class="github"><a href="https://github.com/takady">github.com/takady</a></div>
-      <div class="rubygems"><a href="https://rubygems.org/profiles/takady">rubygems.org/takady</a></div>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright Yuichi Takada
     </div>
-  </div>
-
-  <div class="float_clear"></div>
-
+    <div class="sns-links hidden-print">
+  
+  
+  <a href="https://twitter.com/takady7" target="_blank">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  
+  
+  <a href="https://github.com/takady" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  <a href="https://stackoverflow.com/users/4319579" target="_blank">
+    <i class="fa fa-stack-overflow"></i>
+  </a>
+  
+  
+  <a href="https://linkedin.com/in/takady" target="_blank">
+    <i class="fa fa-linkedin"></i>
+  </a>
+  
+  
 </div>
-Copyright &copy; 2017
- Yuichi Takada 
-<br>
-Powered by Octopress.
 
+  </footer>
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-56996369-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-</footer>
-	
-
+  <script src="http://blog.takady.net/js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56996369-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 </body>
 </html>
+

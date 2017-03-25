@@ -1,84 +1,78 @@
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Raspberry Pi と温度センサーで自宅の温度を可視化 | Yuichi Takada</title>
-
-	<meta name="author" content="Yuichi Takada">
-	
-	<meta name="description" content="この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。
-動機は 2年くらい前に買ったまま放置してた Raspberry Pi に備わっている &hellip;"> <meta name="keywords" content="">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<link href="/atom.xml" rel="alternate" title="Yuichi Takada" type="application/atom+xml">
-	<link rel="canonical" href="http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<meta property="og:title" content="Raspberry Pi と温度センサーで自宅の温度を可視化 - Yuichi Takada" />
-<meta property="og:description" content="この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。
-動機は 2年くらい前に買ったまま放置してた Raspberry Pi に備わっている &hellip;" />
-<meta property="og:url" content="http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/" />
-<meta property="og:image" content="http://blog.takady.net/images/profile.jpg" />
-<meta property="og:author" content="Yuichi Takada" />
-<meta property="og:site_name" content="Yuichi Takada" />
-<meta property="og:locale" content="ja_JP" />
-<meta property="og:type" content="article" />
-<meta property="fb:app_id" content="1780204485583166" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@takady7" />
-<meta name="twitter:title" content="Raspberry Pi と温度センサーで自宅の温度を可視化" />
-<meta name="twitter:description" content="この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。
-動機は 2年くらい前に買ったまま放置してた Raspberry Pi に備わっている GPIO のことがずっと気になっていたから。 用意したもの Raspberry Pi Model B &hellip;" />
-<meta name="twitter:image" content="/images/profile.jpg" />
-<meta name="twitter:url" content="http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/" />
-
-
-</head>
-
-
-
-<body>
-	<header id="header">
-<div class="inner">
-  <ul class="navigation">
-    <li><a href="/"><h1>Yuichi Takada</h1></a></li>
-    <li><a href="/" class="is-selected">Blog</a></li>
-    <li><a href="http://github.com/takady" target="blank">Github</a></li>
-  </ul>
-</div></header>
-
-	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Raspberry Pi と温度センサーで自宅の温度を可視化</h2>
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Raspberry Pi と温度センサーで自宅の温度を可視化 &middot;  Yuichi Takada" />
+  
+  <meta name="theme-color" content="#333" />
+ 
+  <meta property="og:site_name" content="Yuichi Takada" />
+  <meta property="og:url" content="http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/" />
+  
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:published_time" content="2015-12-18T00:46:37Z" />
+  
   
 
+  <title>
+     Raspberry Pi と温度センサーで自宅の温度を可視化 &middot;  Yuichi Takada
+  </title>
+
+  <link rel="stylesheet" href="http://blog.takady.net/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/main.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="http://blog.takady.net/css/github.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="stylesheet" href="http://blog.takady.net//style.css">
+  <link rel="shortcut icon" href="http://blog.takady.net/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="http://blog.takady.net/images/apple-touch-icon.png" />
+  
+</head>
+<body>
+    <header class="global-header"  style="background-image:url( /images/bg.jpg )">
+    <section class="header-text">
+      <h1><a href="http://blog.takady.net/">Yuichi Takada</a></h1>
+      
+      
+      <a href="http://blog.takady.net/" class="btn-header btn-back hidden-xs">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        &nbsp;Home
+      </a>
+      
+      
+    </section>
+  </header>
+  <main class="container">
 
 
-<time datetime="2015-12-18T00:46:37+09:00" pubdate data-updated="true">Dec 18th, 2015</time></div>
-	</div>
-	<div class="entry-content"><p><strong><em>この記事は <a href="http://qiita.com/advent-calendar/2015/sansan">Sansan Advent Calendar 2015</a> の 18日目の記事です。</em></strong><br/>
+<article>
+  <header>
+    <h1 class="text-primary">Raspberry Pi と温度センサーで自宅の温度を可視化</h1>
+    <div class="post-meta clearfix">
+      <div class="post-date pull-left">
+        Posted on
+        <time datetime="2015-12-18T00:46:37Z">
+          Dec 18, 2015
+        </time>
+      </div>
+      <div class="pull-right">
+        
+      </div>
+    </div>
+  </header>
+  <section>
+    
+
+<p><strong><em>この記事は <a href="http://qiita.com/advent-calendar/2015/sansan">Sansan Advent Calendar 2015</a> の 18日目の記事です。</em></strong><br />
 <br /></p>
 
-<p>Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 <a href="https://github.com/focuslight/focuslight">focusligt</a> でグラフにした。<br/>
+<p>Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 <a href="https://github.com/focuslight/focuslight">focusligt</a> でグラフにした。<br />
 動機は 2年くらい前に買ったまま放置してた Raspberry Pi に備わっている GPIO のことがずっと気になっていたから。</p>
 
-<h1>用意したもの</h1>
+<h1 id="用意したもの">用意したもの</h1>
 
 <ul>
 <li>Raspberry Pi Model B</li>
@@ -89,21 +83,20 @@
 <li><a rel="nofollow" href="http://www.amazon.co.jp/gp/product/B0029LGAJI/ref=as_li_qf_sp_asin_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B0029LGAJI&linkCode=as2&tag=takadayuichi-22">goot 高密度集積基板用はんだ SD-60</a><img src="http://ir-jp.amazon-adsystem.com/e/ir?t=takadayuichi-22&l=as2&o=9&a=B0029LGAJI" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></li>
 </ul>
 
+<h1 id="工程">工程</h1>
 
-<h1>工程</h1>
-
-<p>まず Raspberry Pi の初期設定をした。<br/>
-詳細は割愛するが、RASPBIAN JESSIE の最新版を <a href="https://www.raspberrypi.org/downloads/raspbian/">Download Raspbian for Raspberry Pi</a> からダウンロードして SD に焼き、本体を起動して設定。<br/>
+<p>まず Raspberry Pi の初期設定をした。<br />
+詳細は割愛するが、RASPBIAN JESSIE の最新版を <a href="https://www.raspberrypi.org/downloads/raspbian/">Download Raspbian for Raspberry Pi</a> からダウンロードして SD に焼き、本体を起動して設定。<br />
 <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">公式のインストールガイド</a>を参考にすれば問題ないと思われる。</p>
 
-<p>次に、温度センサーをブレッドボードにつなぐために、付属のピンヘッダをはんだ付けする。<br/>
+<p>次に、温度センサーをブレッドボードにつなぐために、付属のピンヘッダをはんだ付けする。<br />
 小さいので、ブリッジしないように注意する。(15年ぶりくらいにやったけど意外と出来た)</p>
 
 <p><img src="/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5876.JPG" alt="" /></p>
 
 <p><img src="/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5877.JPG" alt="" /></p>
 
-<p>温度センサーを下記のようにブリッジボード経由で GND, VDD, SDA, SCL につなぐ。<br/>
+<p>温度センサーを下記のようにブリッジボード経由で GND, VDD, SDA, SCL につなぐ。<br />
 どのピンが何なのかは <a href="https://www.raspberrypi.org/documentation/usage/gpio/">こちら</a>で確認。</p>
 
 <p><img src="/images/2015-12-18-raspberry-pi-with-adt7410/ADT7410_raspi_breadboard.png" alt="" /></p>
@@ -116,7 +109,7 @@
 # /etc/modules: kernel modules to load at boot time.
 #
 # This file contains the names of kernel modules that should be loaded
-# at boot time, one per line. Lines beginning with "#" are ignored.
+# at boot time, one per line. Lines beginning with &quot;#&quot; are ignored.
 
 i2c-dev
 i2c-bcm2708
@@ -173,7 +166,7 @@ e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
 f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
 </code></pre>
 
-<p>あとは、 ruby の <code>i2c-devices</code> という gem を利用して温度を取得するスクリプトを用意する。<br/>
+<p>あとは、 ruby の <code>i2c-devices</code> という gem を利用して温度を取得するスクリプトを用意する。<br />
 ちなみに ruby はデフォルトで入っている。</p>
 
 <pre><code>pi@raspberrypi:~ $ ruby -v
@@ -187,24 +180,15 @@ pi@raspberrypi:~ $ vim adt7410.rb
 
 <p>下記のような簡単なスクリプト。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;i2c/device/adt7410&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;i2c/driver/i2c-dev&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">device</span> <span class="o">=</span> <span class="no">I2CDevice</span><span class="o">::</span><span class="no">ADT7410</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">driver</span><span class="p">:</span> <span class="no">I2CDevice</span><span class="o">::</span><span class="no">Driver</span><span class="o">::</span><span class="no">I2CDev</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;/dev/i2c-1&#39;</span><span class="p">),</span> <span class="ss">address</span><span class="p">:</span> <span class="mh">0x48</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">device</span><span class="o">.</span><span class="n">calculate_temperature</span><span class="o">.</span><span class="n">round</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-ruby">#!/usr/bin/env ruby
 
+require 'i2c/device/adt7410'
+require 'i2c/driver/i2c-dev'
+
+device = I2CDevice::ADT7410.new(driver: I2CDevice::Driver::I2CDev.new('/dev/i2c-1'), address: 0x48)
+
+puts device.calculate_temperature.round
+</code></pre>
 
 <p>実行結果。</p>
 
@@ -224,14 +208,14 @@ pi@raspberrypi:~ $ vim adt7410.rb
 
 <p>ちゃんと取れてる！</p>
 
-<h1>まとめ</h1>
+<h1 id="まとめ">まとめ</h1>
 
-<p>Raspberry Pi と adt7410 で室内の温度を測ってグラフにした。<br/>
-これで外出先から自宅の温度が確認できるようになった。<br/>
-IRkit と組み合わせることで、外出先からもエアコンの消し忘れに気づき、電源を OFF にすることができる。<br/>
+<p>Raspberry Pi と adt7410 で室内の温度を測ってグラフにした。<br />
+これで外出先から自宅の温度が確認できるようになった。<br />
+IRkit と組み合わせることで、外出先からもエアコンの消し忘れに気づき、電源を OFF にすることができる。<br />
 ハードウェアを使って何かするというの、かなりおもしろいものだなと思った。これからも電子工作してきたい。</p>
 
-<h1>参考</h1>
+<h1 id="参考">参考</h1>
 
 <ul>
 <li><a href="http://www.myu.ac.jp/~xkozima/lab/raspTutorial1.html">こじ研（Raspberry Pi）</a></li>
@@ -242,75 +226,98 @@ IRkit と組み合わせることで、外出先からもエアコンの消し�
 <li><a href="http://www.e-ark.jp/2013/02/12/%E9%9B%BB%E5%AD%90%E5%9B%9E%E8%B7%AF%E8%A8%AD%E8%A8%88%E3%83%84%E3%83%BC%E3%83%AB-fritzing-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/">電子回路設計ツール Fritzing を使ってみた | ε-ARK Project</a></li>
 </ul>
 
-</div>
-
-
-<div class="sharing">
-  
-  <div class="sns-tw">
-    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js  ';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  
-  <div class="sns-hb">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  
-  <div class="sns-fb">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like" expr:data-href="data:post.url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-  </div>
-  
-  
-</div>
+  </section>
+  <footer>
+    
+    <hr/>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog-takady-net';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <section class="author-info row">
+      <div class="author-avatar col-md-2">
+        
+        <img alt="Author Avatar" src="/images/avatar.png" />
+        
+      </div>
+      <div class="author-meta col-md-6">
+        
+        <h1 class="author-name text-primary">Yuichi Takada</h1>
+        
+        
+        <div class="author-bio">Tokyo based software engineer.</div>
+        
+      </div>
+      
+    </section>
+    <ul class="pager">
+      
+      <li class="previous"><a href="http://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      
+      
+      <li class="next"><a href="http://blog.takady.net/blog/2015/12/31/2015-summary/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      
+    </ul>
+  </footer>
 </article>
-</div>
-	<footer id="footer" class="inner"><div class="aboutme">
-<hr>
-  <div class="profile">
-    <a href="http://twitter.com/takady7"><img class="icon" src="https://ja.gravatar.com/userimage/64821088/b51b1f5635f1cdf8735a75d7787c6a20.jpeg"></a>
 
-    <h3>Yuichi Takada</h3>
-    <p><a href="http://twitter.com/takady7">@takady7</a>, a software engineer in Tokyo. Born in 1987.</p>
-
-    <div class="codes">
-      <h4>Codes</h4>
-      <div class="github"><a href="https://github.com/takady">github.com/takady</a></div>
-      <div class="rubygems"><a href="https://rubygems.org/profiles/takady">rubygems.org/takady</a></div>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      &copy; Copyright Yuichi Takada
     </div>
-  </div>
-
-  <div class="float_clear"></div>
-
+    <div class="sns-links hidden-print">
+  
+  
+  <a href="https://twitter.com/takady7" target="_blank">
+    <i class="fa fa-twitter"></i>
+  </a>
+  
+  
+  
+  
+  
+  <a href="https://github.com/takady" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  <a href="https://stackoverflow.com/users/4319579" target="_blank">
+    <i class="fa fa-stack-overflow"></i>
+  </a>
+  
+  
+  <a href="https://linkedin.com/in/takady" target="_blank">
+    <i class="fa fa-linkedin"></i>
+  </a>
+  
+  
 </div>
-Copyright &copy; 2017
- Yuichi Takada 
-<br>
-Powered by Octopress.
 
+  </footer>
 
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-56996369-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-
-
-</footer>
-	
-
+  <script src="http://blog.takady.net/js/highlight.pack.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56996369-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
 </body>
 </html>
+
