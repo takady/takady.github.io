@@ -16,11 +16,13 @@
       <pubDate>Sun, 19 Mar 2017 17:36:07 +0000</pubDate>
       
       <guid>http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
-      <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;br /&gt;
-w
-- 部分文字列が含まれているか
-- 指定の文字列で始まっているか
-- 指定の文字列で終わっているか&lt;/p&gt;
+      <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;部分文字列が含まれているか&lt;/li&gt;
+&lt;li&gt;指定の文字列で始まっているか&lt;/li&gt;
+&lt;li&gt;指定の文字列で終わっているか&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;String のメソッドの方がパフォーマンスが良い。&lt;/p&gt;
 
