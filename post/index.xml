@@ -11,7 +11,7 @@
     <atom:link href="http://blog.takady.net/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Octoporess から Hugo に移行した</title>
+      <title>Octopress から Hugo に移行した</title>
       <link>http://blog.takady.net/blog/2017/03/26/hello-hugo/</link>
       <pubDate>Sun, 26 Mar 2017 12:14:44 +0900</pubDate>
       
