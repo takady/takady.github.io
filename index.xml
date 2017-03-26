@@ -7,8 +7,45 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Fri, 24 Mar 2017 22:38:13 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Mar 2017 12:14:44 +0900</lastBuildDate>
     <atom:link href="http://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Octoporess から Hugo に移行した</title>
+      <link>http://blog.takady.net/blog/2017/03/26/hello-hugo/</link>
+      <pubDate>Sun, 26 Mar 2017 12:14:44 +0900</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/03/26/hello-hugo/</guid>
+      <description>
+
+&lt;p&gt;このブログのエンジンを Octopress から &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; に移行した。&lt;br /&gt;
+2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイムラグが結構気になってきていた。&lt;br /&gt;
+jekyll からのインポートコマンドも hugo に用意されているので、わりと楽に移行出来た。&lt;/p&gt;
+
+&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;再生成が一瞬で完了するのでとても快適。&lt;/li&gt;
+&lt;li&gt;theme が少ないとか言われているけどシンプルなやつは結構良いやつある。
+
+&lt;ul&gt;
+&lt;li&gt;vienna のテーマをちょっとイジって使ってる。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;disqus を初めて使ってみたけど設定でハマった。
+
+&lt;ul&gt;
+&lt;li&gt;アカウント作るだけじゃなくて Create a new site して short name を用意しないといけなかった。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hugo - Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ja.mhatta.org/blog/2016/08/21/migrated-from-octopress-to-hugo/&#34;&gt;OctopressからHugoへ移行 · Masayuki Hatta a.k.a. mhatta&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Huawei nova がきた</title>
@@ -1100,38 +1137,6 @@ end
 
 &lt;p&gt;改めてまとめてみると、改善できそうなところが見えてきた気がする。&lt;br /&gt;
 DDD の本とテストの本を読まねば。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Android Studio で emacs キーバインドでコードを書く</title>
-      <link>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
-      <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
-      
-      <guid>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
-      <description>&lt;p&gt;Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。&lt;br /&gt;
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。&lt;br /&gt;
-普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。&lt;/p&gt;
-
-&lt;p&gt;まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114&#34;&gt;ここの設定&lt;/a&gt; を private.xml でこんな感じに上書きした。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;  &amp;lt;replacementdef&amp;gt;
-    &amp;lt;replacementname&amp;gt;EMACS_MODE_IGNORE_APPS&amp;lt;/replacementname&amp;gt;
-    &amp;lt;replacementvalue&amp;gt;
-      EMACS,
-      REMOTEDESKTOPCONNECTION,
-      TERMINAL,
-      VI,
-      VIRTUALMACHINE,
-      X11,
-      ANDROID_STUDIO,
-    &amp;lt;/replacementvalue&amp;gt;
-  &amp;lt;/replacementdef&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。&lt;br /&gt;
-次に Android Studio の Preference &amp;gt; Keymap で &lt;code&gt;Keymaps: Emacs&lt;/code&gt; に設定すれば OK。&lt;/p&gt;
 </description>
     </item>
     
