@@ -7,8 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Sun, 28 May 2017 17:35:42 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Jun 2017 22:51:59 +0900</lastBuildDate>
     <atom:link href="http://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>エラスティックリーダーシップを読んだ</title>
+      <link>http://blog.takady.net/blog/2017/06/06/elastic_leadership/</link>
+      <pubDate>Tue, 06 Jun 2017 22:51:59 +0900</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/06/06/elastic_leadership/</guid>
+      <description>&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873118026/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118026&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=eea906f8ff925c4768149ddbe852e1f2&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873118026&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
+&lt;p&gt;エラスティックリーダーシップ ―自己組織化チームの育て方&lt;/p&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;読んだ。&lt;/p&gt;
+
+&lt;p&gt;普段、自分がメンバーとしての立場から、リーダーに対してどこまで求めて良いのかよくわからなくなる時があるので、そういう観点からリーダーシップについての本を読んでみることにした。&lt;br /&gt;
+たまに、自分がリーダーに対して期待していることが、過剰なものだったり、単なるめんどくさいことを引き受けてほしいというわがままだったりするのではないかと思う時がある。&lt;/p&gt;
+
+&lt;p&gt;その辺のところは、自分がプロジェクトのリーダーをやる時もどうするべきか良くわからないし、雰囲気でやっていく感じだけど、実際どうなんですかという感じで読んだ。&lt;/p&gt;
+
+&lt;p&gt;あと、リーダーとマネージャーは違うと言うのは理解しつつも、コードを書く時間が減るのは事実なのではという気がしてて（いわゆるテックリード的なものであればそんなことは無いかも）、その点がリーダー業をやるにあたってのネックなんだが、本書はその件にも少し触れていた。&lt;/p&gt;
+
+&lt;p&gt;リーダーシップについてはまだ良くわからないが、本書の「日本人執筆者によるチームリーダーシップについて知るべきこと」の部は特に読んでいておもしろかった。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MiSTEL のセパレートキーボードを買った</title>
@@ -982,76 +1005,6 @@ end
 あの時この本読んでたらなーとも思った。&lt;/p&gt;
 
 &lt;p&gt;データ分析基盤を作っている人やこれから作っていこうとしている人にとって本書はとても良いものだとおもいました。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>nexus5 の画面が割れたので自分で交換した</title>
-      <link>http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</link>
-      <pubDate>Sun, 15 May 2016 21:56:33 +0000</pubDate>
-      
-      <guid>http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</guid>
-      <description>
-
-&lt;p&gt;3日前に nexus5 を落としてしまって画面が思いっきり割れてしまった。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5931_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;端末の画面を割ってしまったのは初めてだったし、まだ買って半年だったのでとても残念な気持ちになった。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;はじめてスマホの仮面が割れたバキバキに&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731131513887031297&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;最低の気分なんですけど！！！！！1&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731131644845817858&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;やばい、ほんと、ありえない&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731132397010345986&#34;&gt;2016年5月13日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;とにかく落ち着いて「nexus5 画面 交換」とかでググッて修理についての情報を集めた。&lt;br /&gt;
-どうやら修理に出すと2万円超えみたいだ。高い…。&lt;br /&gt;
-とはいえ、この割れた画面を見るたびにテンションが下がってどうしようもない。&lt;/p&gt;
-
-&lt;p&gt;そんな中、自力で直してたという記事を発見。&lt;br /&gt;
-&lt;a href=&#34;http://www.blogershin.link/archives/242&#34;&gt;Nexus 5 ガラス割れを自力で交換修理する件&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;用意するものは、Amazon で売ってるこの交換用ディスプレイと必要な工具のセット。13,500円。&lt;br /&gt;
-結構高いけどこれが画面を交換する最安の方法のようなので、こちらを購入した。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B00V7VB8U2&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;実際の分解・交換にはYoutube のこちらの動画も参考にした。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Nexus 5 Screen Replacement Part 1 How To Change&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/nVAtEyRBny0&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;p&gt;Amazon のレビューのコメントでは「30分くらいで意外と簡単にできました！」みたいなコメントがあったけど、やってみると1時間以上かかったし、両面テープでくっついている箇所を剥がしたりするのに非常に神経を使った。&lt;/p&gt;
-
-&lt;p&gt;交換の様子。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5922_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5923_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5924_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5925_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5926_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5927_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5928_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5930_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/2016-05-15-nexus5-screen-replacement/thumb_IMG_5932_1024.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最後の最後に背面カバーをはめる時に、バッテリー横の線が一本挟まって切れてしまって、絶望したけど電源を入れて確認しても何も問題無いので、一旦様子見。&lt;/p&gt;
-
-&lt;p&gt;ということで、交換は無事に成功！&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;nexus5 の画面取り替えに成功した！&lt;/p&gt;&amp;mdash; Yuichi Takada (@takady7) &lt;a href=&#34;https://twitter.com/takady7/status/731827195639783424&#34;&gt;2016年5月15日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;注意&#34;&gt;注意&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;自力での交換は失敗の可能性があったり、メーカー保証の対象外となるなどするので、くれぐれも自己責任でお願いします。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
     </item>
     
