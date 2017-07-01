@@ -7,8 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Sat, 24 Jun 2017 12:18:34 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jul 2017 17:28:33 +0900</lastBuildDate>
     <atom:link href="http://blog.takady.net/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reactビギナーズガイド を読んだ</title>
+      <link>http://blog.takady.net/blog/2017/07/01/react_up_and_running/</link>
+      <pubDate>Sat, 01 Jul 2017 17:28:33 +0900</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/07/01/react_up_and_running/</guid>
+      <description>&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873117887/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873117887&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=7f4e6601420eec8bc27438573ff786fa&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873117887&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
+&lt;p&gt;Reactビギナーズガイド&lt;/p&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;React はプライベートで書いているけども、一度ちゃんと基礎を抑えておきたいので読んだ。&lt;br /&gt;
+本書を読む前に、どこかのサイトでの本書のレビューとして、&lt;code&gt;React.createClass&lt;/code&gt; を使った古い書き方が一部あって云々みたいな記述を見かけていたので若干内容が古いのかなと思っていた。&lt;br /&gt;
+ただ実際に読んでみると、前半はたしかに class を使った書き方をしていないが、これはトランスパイル無しでブラウザで React をまずは動かそうという主旨もあり es2015 の記法を使っていないだけなのかなと思った。後半ではちゃんと babel でトランスパイルして es2015 以降の class を使った書き方をしている。&lt;/p&gt;
+
+&lt;p&gt;本書が良いのは、著者が Facebook に所属している React の開発者の人というところで、おかげで安心して読める。&lt;br /&gt;
+今まで React を書く時に、サードパーティーの npm パッケージは使うべきかどうかが判断出来なくて使っていなかったけど、例えば &lt;a href=&#34;https://github.com/JedWatson/classnames&#34;&gt;classnames&lt;/a&gt; については本書でも利用されているので、今後使っていこうという気になった。&lt;br /&gt;
+他にも、flow でカスタムの型を使えば React の propTypes は不要になるし実行時の型チェックが不要になる分、処理速度に良い影響があるなど、実践的でどういうメリットがあるかまで説明されている。&lt;br /&gt;
+広く使われているから使った方がいいのかなくらいに思っていた周辺ライブラリやツールについて、使う動機を示してくれているのが良かった。&lt;/p&gt;
+
+&lt;p&gt;その他にも、いくつかの慣例などについても触れられていて、ネットで細切れの情報をかき集めて学ぶだけではなかなか把握しづらいところも、やはり本で体系的に学ぶことで得られるものは多かった。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>初めての Javascript 第3版 を読んだ</title>
@@ -949,46 +972,6 @@ end
 読んで1ヶ月経って、ハイライトしたところなど読みなおしていたけど、改めて良い本だと思いました。&lt;/p&gt;
 
 &lt;p&gt;何度も読みなおすのが良さそう。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>10年後の仕事のカタチ10のヒント を読んだ</title>
-      <link>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
-      <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
-      
-      <guid>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://tango-ruby.hatenablog.com/entry/2015/11/04/172930&#34;&gt;こちらのブログ記事&lt;/a&gt; でオススメされていたので読んでみた。&lt;br /&gt;
-対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B00HOTLXKQ&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
-
-&lt;p&gt;印象に残ってるところ。&lt;/p&gt;
-
-&lt;h2 id=&#34;会社以外でのプロジェクト&#34;&gt;会社以外でのプロジェクト&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;「自分で決める、自分でリスクを背負う」っていうのは、会社で言われてことをやるのとは全く違うんです。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;東京とベトナムのピザ屋の話&#34;&gt;東京とベトナムのピザ屋の話&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;東京だともうすでに美味しいピザのお店がたくさんあって競合が多いし、初期の設備投資のお金もたくさん必要。&lt;/li&gt;
-&lt;li&gt;ベトナムにはまだ本格的なピザを食べられるお店があまりなかったので、同じくらいの実力でもベトナムでトップになれた。&lt;/li&gt;
-&lt;li&gt;トップになって儲かり始めるので、もっとクオリティが良くなり、飛び抜けていく。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;日本の中のものさしで測って怖がらない&#34;&gt;日本の中のものさしで測って怖がらない&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;イチローとか松井とか、安定した日本球界でのキャリアよりも大リーグに挑戦したのも、未知のものにトライするとワクワクするから。&lt;/li&gt;
-&lt;li&gt;なんとかなる。&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
