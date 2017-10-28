@@ -36,15 +36,6 @@
 &lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$params = json_decode(file_get_contents(&#39;php://input&#39;), true);  // NOTE 第2引数に true を指定しているのは連想配列にするため
 echo $params[&#39;title&#39;];
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちなみに、&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;php://input は、 enctype=&amp;ldquo;multipart/form-data&amp;rdquo; に対しては使用できません。
-&lt;a href=&#34;http://php.net/manual/ja/wrappers.php.php&#34;&gt;http://php.net/manual/ja/wrappers.php.php&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;とのことで、&lt;code&gt;php://input&lt;/code&gt; で form-data のリクエストデータは取得できない。&lt;/p&gt;
 </description>
     </item>
     
