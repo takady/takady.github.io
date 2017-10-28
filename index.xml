@@ -7,8 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Sat, 01 Jul 2017 17:28:33 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Oct 2017 14:49:00 +0900</lastBuildDate>
     <atom:link href="http://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PHP で json の POST request の body を参照するには</title>
+      <link>http://blog.takady.net/blog/2017/10/28/php_get_json_from_post_request_body/</link>
+      <pubDate>Sat, 28 Oct 2017 14:49:00 +0900</pubDate>
+      
+      <guid>http://blog.takady.net/blog/2017/10/28/php_get_json_from_post_request_body/</guid>
+      <description>&lt;p&gt;PHP で web アプリケーションを作るに当たって、POST リクエストの body の内容は  &lt;code&gt;$_POST&lt;/code&gt; に入ってくるというふうに、いろんなドキュメントには書いてある。&lt;/p&gt;
+
+&lt;p&gt;json でやり取りする web api なんかを PHP で作るにあたって、POST された json の内容を取得したい事は多い。&lt;br /&gt;
+しかし、&lt;code&gt;$_POST&lt;/code&gt; を参照しても、中身は空だった。&lt;/p&gt;
+
+&lt;p&gt;公式ドキュメントサイトを見てみると、&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Content-Type に application/x-www-form-urlencoded あるいは multipart/form-data を用いた HTTP リクエストで、 HTTP POST メソッドから現在のスクリプトに渡された変数の連想配列です。
+&lt;a href=&#34;http://php.net/manual/ja/reserved.variables.post.php&#34;&gt;http://php.net/manual/ja/reserved.variables.post.php&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とのこと。つまり、Content-Type が &lt;code&gt;application/json&lt;/code&gt; の POST リクエストの場合は、&lt;code&gt;$_POST&lt;/code&gt; には入ってこないらしい。&lt;/p&gt;
+
+&lt;p&gt;json の POST request body を参照するには、 &lt;code&gt;php://input&lt;/code&gt; というストリームを使ってリクエストの生の body を取得する事になる。&lt;br /&gt;
+下記のような感じだと思う。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$params = json_decode(file_get_contents(&#39;php://input&#39;), true);  // NOTE 第2引数に true を指定しているのは連想配列にするため
+echo $params[&#39;title&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに、&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;php://input は、 enctype=&amp;ldquo;multipart/form-data&amp;rdquo; に対しては使用できません。
+&lt;a href=&#34;http://php.net/manual/ja/wrappers.php.php&#34;&gt;http://php.net/manual/ja/wrappers.php.php&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とのことで、&lt;code&gt;php://input&lt;/code&gt; で form-data のリクエストデータは取得できない。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Reactビギナーズガイド を読んだ</title>
@@ -954,24 +992,6 @@ end
 &lt;li&gt;&lt;a href=&#34;http://qiita.com/quattro_4/items/6636efbf58cca13db02a&#34;&gt;Form Object実装メモ - Qiita&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://blog.enogineer.com/2014/12/02/rails-form-object/&#34;&gt;Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
-      <link>http://blog.takady.net/blog/2016/07/23/soft-skills/</link>
-      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
-      
-      <guid>http://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
-      <description>&lt;p&gt;先月、日本語版が発売された直後に買って読んだ。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B01GDS0994&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内容で、とてもおもしろかった。&lt;br /&gt;
-責任範囲を増やすことが自分にとってどういうメリットがあるのかとか、プロというのはどういうものかとか、なんなんだろうと思っていた事が語られていて、そういう事か〜っていう納得感が僕にはあった。&lt;br /&gt;
-読んで1ヶ月経って、ハイライトしたところなど読みなおしていたけど、改めて良い本だと思いました。&lt;/p&gt;
-
-&lt;p&gt;何度も読みなおすのが良さそう。&lt;/p&gt;
 </description>
     </item>
     
