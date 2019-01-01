@@ -7,35 +7,69 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Sat, 28 Oct 2017 14:49:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 31 Dec 2018 21:12:32 +0900</lastBuildDate>
     <atom:link href="http://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>PHP で json の POST request の body を参照するには</title>
-      <link>http://blog.takady.net/blog/2017/10/28/php_get_json_from_post_request_body/</link>
-      <pubDate>Sat, 28 Oct 2017 14:49:00 +0900</pubDate>
+      <title>2018年</title>
+      <link>http://blog.takady.net/blog/2018/12/31/2018-summary/</link>
+      <pubDate>Mon, 31 Dec 2018 21:12:32 +0900</pubDate>
       
-      <guid>http://blog.takady.net/blog/2017/10/28/php_get_json_from_post_request_body/</guid>
-      <description>&lt;p&gt;PHP で web アプリケーションを作るに当たって、POST リクエストの body の内容は  &lt;code&gt;$_POST&lt;/code&gt; に入ってくるというふうに、いろんなドキュメントには書いてある。&lt;/p&gt;
+      <guid>http://blog.takady.net/blog/2018/12/31/2018-summary/</guid>
+      <description>
 
-&lt;p&gt;json でやり取りする web api なんかを PHP で作るにあたって、POST された json の内容を取得したい事は多い。&lt;br /&gt;
-しかし、&lt;code&gt;$_POST&lt;/code&gt; を参照しても、中身は空だった。&lt;/p&gt;
+&lt;p&gt;かなり久しぶりのブログ更新。&lt;br /&gt;
+去年のおわり頃〜今年のことを簡単に書いておく。&lt;/p&gt;
 
-&lt;p&gt;公式ドキュメントサイトを見てみると、&lt;/p&gt;
+&lt;h1 id=&#34;子ども&#34;&gt;子ども&lt;/h1&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;Content-Type に application/x-www-form-urlencoded あるいは multipart/form-data を用いた HTTP リクエストで、 HTTP POST メソッドから現在のスクリプトに渡された変数の連想配列です。
-&lt;a href=&#34;http://php.net/manual/ja/reserved.variables.post.php&#34;&gt;http://php.net/manual/ja/reserved.variables.post.php&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;2017年の12月に息子が生まれた。&lt;br /&gt;
+今年は育休取らせてもらったり、仕事早く帰ったりして、家族のサポート優先させてもらって、会社とチームには本当に感謝。&lt;br /&gt;
+息子は朝6時前後に起きるので一緒に起きて相手したりしながら、8時頃に朝ごはん作って9時半くらいまで食べさせてあげて10時くらいから会社行くっていう流れ。自分に余裕がある日は勉強しながら対応したりしてたけど、眠かったり疲れてたりで、ぼーっとしながらやることが多かった。&lt;/p&gt;
 
-&lt;p&gt;とのこと。つまり、Content-Type が &lt;code&gt;application/json&lt;/code&gt; の POST リクエストの場合は、&lt;code&gt;$_POST&lt;/code&gt; には入ってこないらしい。&lt;/p&gt;
+&lt;h1 id=&#34;会社&#34;&gt;会社&lt;/h1&gt;
 
-&lt;p&gt;json の POST request body を参照するには、 &lt;code&gt;php://input&lt;/code&gt; というストリームを使ってリクエストの生の body を取得する事になる。&lt;br /&gt;
-下記のような感じだと思う。&lt;/p&gt;
+&lt;p&gt;2017年の11月に今の会社に転職した。&lt;br /&gt;
+US版のアプリのバックエンド開発をやっている。4月から Search 周りをやって、10月くらいからはアプリの Home 周りをやってた。
+どっちも基本チームにバックエンドエンジニアは自分一人か、自分とメンティーの二人って状況だったから大体メインでやれた。7月くらいに Palo Alto のオフィスに出張行ってマイクロサービス作ったりとかしたのが良い経験だった。Go 9割、PHP 1割くらいの割合で書いてた。&lt;br /&gt;
+コミュニケーションは英語が必須になってきた。自分もまだまだ頑張らないとだけど、ちょっとは上達したかな。。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$params = json_decode(file_get_contents(&#39;php://input&#39;), true);  // NOTE 第2引数に true を指定しているのは連想配列にするため
-echo $params[&#39;title&#39;];
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;英語&#34;&gt;英語&lt;/h1&gt;
+
+&lt;p&gt;週に数回 DMM 英会話をやってた。これは1年ずっと継続してできたから良かったと思う。来年も続けよう。&lt;br /&gt;
+あとは会社が提供してくれている英語レッスンもやらせてもらってる。&lt;br /&gt;
+コードのこととか英語で話すのは割とコミュニケーションできるんだけど、普段の会話とかは絶望的にできない。正直自分は日本語でもあんま喋れないっていうのはあるんだけど、、アメリカ行った時にランチとかディナーで本当に悲しくなるくらい喋れなかった。&lt;br /&gt;
+10月に TOEIC 835 点取った。それなりに取れることがわかって嬉しかったんだけど、実際のところまだまだなのでこれからも精進が必要。特に聞くのと喋るのをこれからもっと良くしていきたい。&lt;/p&gt;
+
+&lt;h1 id=&#34;引っ越し&#34;&gt;引っ越し&lt;/h1&gt;
+
+&lt;p&gt;前のところには半年くらいしか住んでなかったんだけど6月に引っ越した。横浜の港北区内での近場での引っ越し。&lt;br /&gt;
+前のところは下に住んでる大家さんがうるさすぎて、寝てる息子が起きちゃうことが度々あってツラすぎた。引っ越すまでは本当に大変だった。&lt;br /&gt;
+多分もう上下に他人が住んでる建物に住むことはないと思う。家買う前にわかって良かったよ。&lt;/p&gt;
+
+&lt;h1 id=&#34;読書&#34;&gt;読書&lt;/h1&gt;
+
+&lt;p&gt;例年よりも本読まなかった。&lt;br /&gt;
+本（というか kindle）は離乳食あげながらでも読める事に気づいてからは結構読んだ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;プロダクションレディマイクロサービス&lt;/li&gt;
+&lt;li&gt;Go言語によるWebアプリケーション開発&lt;/li&gt;
+&lt;li&gt;入門 Kubernetes&lt;/li&gt;
+&lt;li&gt;仕事ではじめる機械学習&lt;/li&gt;
+&lt;li&gt;みんなのGo言語&lt;/li&gt;
+&lt;li&gt;SHOE DOG&lt;/li&gt;
+&lt;li&gt;諦める力&lt;/li&gt;
+&lt;li&gt;最高の結果を引き出す質問力&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
+
+&lt;p&gt;濃い一年でした。&lt;br /&gt;
+奥さんと息子と一緒に休みの日にでかけたりできると楽しいし、これからも成長が楽しみです。&lt;br /&gt;
+思いっきり長時間労働できないというもどかしさがあったんですが、最近は会社の飲み会に行けたりする余裕が出てきて、徐々にこの状況も落ち着くだろうと思ってます。&lt;br /&gt;
+来年はもっとコード書いて、承認欲求を満たせるようにがんばります。&lt;br /&gt;
+あと英語は普段の業務が困らないくらいに上達したいです。&lt;/p&gt;
 </description>
     </item>
     
