@@ -18,12 +18,11 @@
       <guid>https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/</guid>
       <description>
 
-&lt;p&gt;このブログは &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。
-必要なことはたった2つ。&lt;/p&gt;
+&lt;p&gt;このブログは &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。&lt;/p&gt;
 
 &lt;h1 id=&#34;hugo-側の設定&#34;&gt;hugo 側の設定&lt;/h1&gt;
 
-&lt;p&gt;config.toml の baseurl を https に修正する。&lt;/p&gt;
+&lt;h2 id=&#34;config-toml&#34;&gt;config.toml&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;diff --git a/config.toml b/config.toml
 index 9aa98a1..4949f9d 100644
@@ -35,6 +34,20 @@ index 9aa98a1..4949f9d 100644
  languageCode = &amp;quot;ja&amp;quot;
  hasCJKLanguage = &amp;quot;true&amp;quot;
  title = &amp;quot;Yuichi Takada&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;robots-txt&#34;&gt;robots.txt&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;diff --git a/static/robots.txt b/static/robots.txt
+index 0752adc..b3f03e0 100644
+--- a/static/robots.txt
++++ b/static/robots.txt
+@@ -1,4 +1,4 @@
+ User-agent: *
+ Disallow:
+
+-Sitemap: http://blog.takady.net/sitemap.xml
++Sitemap: https://blog.takady.net/sitemap.xml
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&#34;github-側の利用設定&#34;&gt;Github 側の利用設定&lt;/h1&gt;
