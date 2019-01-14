@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ruby on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/ruby/</link>
+    <link>https://blog.takady.net/categories/ruby/</link>
     <description>Recent content in Ruby on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sun, 19 Mar 2017 17:36:07 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Ruby の文字列マッチ判定のパフォーマンス</title>
-      <link>http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</link>
+      <link>https://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</link>
       <pubDate>Sun, 19 Mar 2017 17:36:07 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
+      <guid>https://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
       <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -70,10 +70,10 @@ end
     
     <item>
       <title>rubygems.orgに公開しているgemの名前を変更する</title>
-      <link>http://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</link>
+      <link>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</link>
       <pubDate>Fri, 27 Mar 2015 00:56:07 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
+      <guid>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
       <description>
 
 &lt;p&gt;必要になったので調べてみた．&lt;br /&gt;
@@ -100,10 +100,10 @@ end
     
     <item>
       <title>apache_log-parserを修正してBenchmarkをとってみた</title>
-      <link>http://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</link>
+      <link>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</link>
       <pubDate>Wed, 11 Feb 2015 16:53:46 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
+      <guid>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/takady/apache_log-parser&#34;&gt;takady/apache_log-parser&lt;/a&gt;&lt;/p&gt;
@@ -166,10 +166,10 @@ customized:   40.240000   0.070000  40.310000 ( 40.388290)
     
     <item>
       <title>facebook graph apiのAccess Tokenを取得するまで</title>
-      <link>http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</link>
+      <link>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</link>
       <pubDate>Mon, 29 Dec 2014 17:45:20 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
+      <guid>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
       <description>
 
 &lt;p&gt;OAuth2について、わかってたつもりでわかってないので、&lt;br /&gt;
@@ -249,10 +249,10 @@ Facebookでは上記フローだが、twitterとかgithubとか他のサービ�
     
     <item>
       <title>rubyのloggerをnewした後にログファイルを削除するとどうなるのか</title>
-      <link>http://blog.takady.net/blog/2014/12/07/file-safe-logger/</link>
+      <link>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</link>
       <pubDate>Sun, 07 Dec 2014 18:01:52 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2014/12/07/file-safe-logger/</guid>
+      <guid>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;この投稿は&lt;a href=&#34;http://qiita.com/advent-calendar/2014/ruby&#34;&gt;Ruby Advent Calendar 2014&lt;/a&gt;の7日目の記事です。&lt;/strong&gt;&lt;/p&gt;
@@ -307,10 +307,10 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
     
     <item>
       <title>turnipを使ってシナリオテストを自動化</title>
-      <link>http://blog.takady.net/blog/2014/11/26/turnip/</link>
+      <link>https://blog.takady.net/blog/2014/11/26/turnip/</link>
       <pubDate>Wed, 26 Nov 2014 19:17:48 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2014/11/26/turnip/</guid>
+      <guid>https://blog.takady.net/blog/2014/11/26/turnip/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/jnicklas/turnip&#34;&gt;turnip&lt;/a&gt;は、シナリオテストを自然言語風のDSLで記述・実行させることができるruby製のツールです。&lt;br /&gt;
@@ -445,10 +445,10 @@ featureファイルの&lt;code&gt;Then ウィキペディアへようこそと�
     
     <item>
       <title>rubyのloggerでlogのヘッダを出力しない</title>
-      <link>http://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</link>
+      <link>https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</link>
       <pubDate>Sat, 22 Nov 2014 13:11:18 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</guid>
+      <guid>https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</guid>
       <description>
 
 &lt;p&gt;rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。&lt;br /&gt;

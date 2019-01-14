@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coreos on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/coreos/</link>
+    <link>https://blog.takady.net/categories/coreos/</link>
     <description>Recent content in Coreos on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Tue, 13 Jan 2015 19:46:35 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/coreos/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/coreos/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>はじめてのcoreos/rocket</title>
-      <link>http://blog.takady.net/blog/2015/01/13/coreos-rocket/</link>
+      <link>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</link>
       <pubDate>Tue, 13 Jan 2015 19:46:35 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/01/13/coreos-rocket/</guid>
+      <guid>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</guid>
       <description>
 
 &lt;p&gt;rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである.&lt;br /&gt;

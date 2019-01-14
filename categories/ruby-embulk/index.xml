@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ruby Embulk on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/ruby-embulk/</link>
+    <link>https://blog.takady.net/categories/ruby-embulk/</link>
     <description>Recent content in Ruby Embulk on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sun, 08 Feb 2015 22:17:00 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/ruby-embulk/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/ruby-embulk/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>embulk-plugin-sqlite3を作った</title>
-      <link>http://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</link>
+      <link>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</link>
       <pubDate>Sun, 08 Feb 2015 22:17:00 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</guid>
+      <guid>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/takady/embulk-plugin-sqlite3&#34;&gt;takady/embulk-plugin-sqlite3&lt;/a&gt;&lt;/p&gt;

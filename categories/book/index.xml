@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Book on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/book/</link>
+    <link>https://blog.takady.net/categories/book/</link>
     <description>Recent content in Book on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sat, 23 Jul 2016 10:33:25 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
-      <link>http://blog.takady.net/blog/2016/07/23/soft-skills/</link>
+      <link>https://blog.takady.net/blog/2016/07/23/soft-skills/</link>
       <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
+      <guid>https://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
       <description>&lt;p&gt;先月、日本語版が発売された直後に買って読んだ。&lt;/p&gt;
 
 &lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B01GDS0994&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
@@ -30,10 +30,10 @@
     
     <item>
       <title>10年後の仕事のカタチ10のヒント を読んだ</title>
-      <link>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
+      <link>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
       <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
+      <guid>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://tango-ruby.hatenablog.com/entry/2015/11/04/172930&#34;&gt;こちらのブログ記事&lt;/a&gt; でオススメされていたので読んでみた。&lt;br /&gt;
@@ -70,10 +70,10 @@
     
     <item>
       <title>10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ</title>
-      <link>http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
+      <link>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
       <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
+      <guid>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
       <description>
 
 &lt;p&gt;読んだ。&lt;/p&gt;
@@ -113,10 +113,10 @@
     
     <item>
       <title>オブジェクト指向における再利用のためのデザインパターン を読んだ</title>
-      <link>http://blog.takady.net/blog/2015/11/04/gof-design-pattern/</link>
+      <link>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</link>
       <pubDate>Wed, 04 Nov 2015 20:45:35 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
+      <guid>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
       <description>
 
 &lt;p&gt;いわゆる GoF 本を読んだ。&lt;/p&gt;
@@ -172,10 +172,10 @@ web 上の記事としては &lt;a href=&#34;http://morizyun.github.io/blog/ruby
     
     <item>
       <title>情熱プログラマー を読んだ</title>
-      <link>http://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</link>
+      <link>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</link>
       <pubDate>Sun, 11 Oct 2015 21:01:24 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
+      <guid>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
       <description>&lt;p&gt;良い本だった。&lt;br /&gt;
 さすが半谷さんオススメ本。&lt;br /&gt;
 &lt;br /&gt;&lt;/p&gt;
@@ -212,10 +212,10 @@ web 上の記事としては &lt;a href=&#34;http://morizyun.github.io/blog/ruby
     
     <item>
       <title>WEB&#43;DB PRESS plus の DB 本 3冊を読んで index を学んだ</title>
-      <link>http://blog.takady.net/blog/2015/09/24/read-books-about-database/</link>
+      <link>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</link>
       <pubDate>Thu, 24 Sep 2015 18:43:39 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/09/24/read-books-about-database/</guid>
+      <guid>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</guid>
       <description>
 
 &lt;p&gt;シルバーウィークに、この3冊を読んだ。&lt;/p&gt;

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/android/</link>
+    <link>https://blog.takady.net/categories/android/</link>
     <description>Recent content in Android on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Wed, 27 Jan 2016 23:15:54 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Android Studio で emacs キーバインドでコードを書く</title>
-      <link>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
+      <link>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
       <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
+      <guid>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
       <description>&lt;p&gt;Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。&lt;br /&gt;
 Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。&lt;br /&gt;
 普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。&lt;/p&gt;

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Raspberrypi on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/raspberrypi/</link>
+    <link>https://blog.takady.net/categories/raspberrypi/</link>
     <description>Recent content in Raspberrypi on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Fri, 18 Dec 2015 00:46:37 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Raspberry Pi と温度センサーで自宅の温度を可視化</title>
-      <link>http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</link>
+      <link>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</link>
       <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
+      <guid>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;この記事は &lt;a href=&#34;http://qiita.com/advent-calendar/2015/sansan&#34;&gt;Sansan Advent Calendar 2015&lt;/a&gt; の 18日目の記事です。&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
@@ -44,16 +44,16 @@
 &lt;p&gt;次に、温度センサーをブレッドボードにつなぐために、付属のピンヘッダをはんだ付けする。&lt;br /&gt;
 小さいので、ブリッジしないように注意する。(15年ぶりくらいにやったけど意外と出来た)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5876.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5876.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5877.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5877.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;温度センサーを下記のようにブリッジボード経由で GND, VDD, SDA, SCL につなぐ。&lt;br /&gt;
 どのピンが何なのかは &lt;a href=&#34;https://www.raspberrypi.org/documentation/usage/gpio/&#34;&gt;こちら&lt;/a&gt;で確認。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/ADT7410_raspi_breadboard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/ADT7410_raspi_breadboard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5878.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5878.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;そして &lt;code&gt;/etc/modules&lt;/code&gt; に &lt;code&gt;i2c-bcm2708&lt;/code&gt; を追記する。&lt;/p&gt;
 
@@ -156,7 +156,7 @@ puts device.calculate_temperature.round
 
 &lt;p&gt;ブラウザから見てみると。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/focuslight.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/focuslight.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ちゃんと取れてる！&lt;/p&gt;
 

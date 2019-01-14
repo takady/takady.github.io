@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Terminal Tmux on Yuichi Takada</title>
-    <link>http://blog.takady.net/categories/terminal-tmux/</link>
+    <link>https://blog.takady.net/categories/terminal-tmux/</link>
     <description>Recent content in Terminal Tmux on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Mon, 20 Apr 2015 16:54:18 +0000</lastBuildDate>
-    <atom:link href="http://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>tmuxにpowerlineを導入した</title>
-      <link>http://blog.takady.net/blog/2015/04/20/powerline-config/</link>
+      <link>https://blog.takady.net/blog/2015/04/20/powerline-config/</link>
       <pubDate>Mon, 20 Apr 2015 16:54:18 +0000</pubDate>
       
-      <guid>http://blog.takady.net/blog/2015/04/20/powerline-config/</guid>
+      <guid>https://blog.takady.net/blog/2015/04/20/powerline-config/</guid>
       <description>
 
 &lt;h1 id=&#34;powerlineの導入&#34;&gt;powerlineの導入&lt;/h1&gt;
@@ -43,7 +43,7 @@ $ fc-cache -vf
 &lt;h1 id=&#34;カスタマイズ&#34;&gt;カスタマイズ&lt;/h1&gt;
 
 &lt;p&gt;デフォルトは水色．&lt;br /&gt;
-&lt;img src=&#34;http://blog.takady.net/images/powerline_config_01.png&#34; alt=&#34;before&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://blog.takady.net/images/powerline_config_01.png&#34; alt=&#34;before&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst&#34;&gt;powerline/configuration.rst&lt;/a&gt;に設定方法は書いてある．&lt;br /&gt;
 カスタマイズしたいconfigファイルを&lt;code&gt;powerline/config_files&lt;/code&gt;から&lt;code&gt;~/.config/powerline&lt;/code&gt;以下にパスそのままにコピーしてきて，それを編集する．&lt;/p&gt;
@@ -69,7 +69,7 @@ $ cp -i powerline/config_files/colorschemes/tmux/default.json ~/.config/powerlin
 
 &lt;h3 id=&#34;修正後&#34;&gt;修正後&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://blog.takady.net/images/powerline_config_02.png&#34; alt=&#34;after&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/powerline_config_02.png&#34; alt=&#34;after&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
 
