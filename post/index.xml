@@ -7,8 +7,43 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Mon, 31 Dec 2018 21:12:32 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jan 2019 10:39:16 +0900</lastBuildDate>
     <atom:link href="https://blog.takady.net/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>https 対応した</title>
+      <link>https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/</link>
+      <pubDate>Mon, 14 Jan 2019 10:39:16 +0900</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/</guid>
+      <description>
+
+&lt;p&gt;このブログは &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。
+必要なことはたった2つ。&lt;/p&gt;
+
+&lt;h1 id=&#34;hugo-側の設定&#34;&gt;hugo 側の設定&lt;/h1&gt;
+
+&lt;p&gt;config.toml の baseurl を https に修正する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;diff --git a/config.toml b/config.toml
+index 9aa98a1..4949f9d 100644
+--- a/config.toml
++++ b/config.toml
+@@ -1,4 +1,4 @@
+-baseurl = &amp;quot;http://blog.takady.net/&amp;quot;
++baseurl = &amp;quot;https://blog.takady.net/&amp;quot;
+ languageCode = &amp;quot;ja&amp;quot;
+ hasCJKLanguage = &amp;quot;true&amp;quot;
+ title = &amp;quot;Yuichi Takada&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;github-側の利用設定&#34;&gt;Github 側の利用設定&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site&#34;&gt;https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site&lt;/a&gt; に書いてあるとおり、 &lt;code&gt;Enforce HTTPS&lt;/code&gt; にチェックを入れる。&lt;/p&gt;
+
+&lt;p&gt;以上。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>2018年まとめ</title>
@@ -849,174 +884,6 @@ end
 そこでアルゴリズムの問題としてそれに向き合っていた時間が長すぎたんだけど、生成された html 自体をキャッシュするとかっていう方向でも良かったわけだし、そういう方針の切り替えができるような落ち着きの時間を持てると良さそう。&lt;br /&gt;
 予選後に飲みながら話してた時に「そういう方法があったね」って話になったから、本番中に一旦落ち着いていればそれを思い付いて実行出来てたかもなーって思った。&lt;br /&gt;
 来年こそは…！！&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>rails で FormObject を使う</title>
-      <link>https://blog.takady.net/blog/2016/08/29/rails-form-object/</link>
-      <pubDate>Mon, 29 Aug 2016 19:38:49 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/08/29/rails-form-object/</guid>
-      <description>
-
-&lt;p&gt;フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2016-08-29-rails-form-object/screenshot1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;こういうフォーム。&lt;/p&gt;
-
-&lt;h1 id=&#34;model&#34;&gt;Model&lt;/h1&gt;
-
-&lt;p&gt;uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。&lt;/p&gt;
-
-&lt;h2 id=&#34;app-models-foo-day-rb&#34;&gt;app/models/foo_day.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay &amp;lt; ActiveRecord::Base
-  belongs_to :user
-
-  validates :user_id, presence: true
-  validates :date, presence: true, uniqueness: {scope: :user_id}
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;formobject&#34;&gt;FormObject&lt;/h1&gt;
-
-&lt;p&gt;FormObject の参考では、よく &lt;a href=&#34;https://github.com/solnic/virtus&#34;&gt;virtus&lt;/a&gt; を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。&lt;br /&gt;
-例えば今回のケースだと、view から文字列で渡ってくる &lt;code&gt;YYY-MM-DD&lt;/code&gt; を Date に変換したかったので、一度 Virtus を使ってみたけど、
-例えば &lt;code&gt;2016-08-32&lt;/code&gt; のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。&lt;br /&gt;
-結局、日付の validation のために &lt;a href=&#34;https://github.com/adzap/validates_timeliness&#34;&gt;validates_timeliness&lt;/a&gt; という gem を使ったけど便利だった。&lt;/p&gt;
-
-&lt;h2 id=&#34;app-models-foo-day-registration-form-rb&#34;&gt;app/models/foo_day/registration_form.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay::RegistrationForm
-  include ActiveModel::Model
-
-  attr_accessor :user_id, :from_date, :to_date
-
-  validates :user_id, presence: true
-  validates :from_date, presence: true, timeliness: {on_or_after: :today, type: :date}
-  validates :to_date, allow_blank: true, timeliness: {on_or_after: :from_date, type: :date}
-
-  def save
-    return false unless valid?
-
-    persist!
-    true
-  end
-
-  private
-
-  def foo_days
-    @foo_days ||= build_foo_days
-  end
-
-  def build_foo_days
-    if to_date.blank?
-      [FooDay.new(date: from_date, user_id: user_id)]
-    else
-      (Date.parse(from_date)..Date.parse(to_date)).map {|date| FooDay.new(user_id: user_id, date: date) }
-    end
-  end
-
-  def valid?
-    return false unless super
-
-    foo_days.each do |foo_day|
-      next if foo_day.valid?
-
-      foo_day.errors.full_messages.each do |message|
-        errors.add(:base, I18n.t(&#39;activemodel.errors.invalid_foo_day&#39;, date: foo_day.date, message: message))
-      end
-    end
-
-    return super
-  end
-
-  def persist!
-    foo_days.each(&amp;amp;:save!)
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;controller&#34;&gt;Controller&lt;/h1&gt;
-
-&lt;h2 id=&#34;app-controllers-foo-days-controller-rb&#34;&gt;app/controllers/foo_days_controller.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDaysController &amp;lt; ApplicationController
-  def new
-    @registration_form = FooDay::RegistrationForm.new
-  end
-
-  def create
-    @registration_form = FooDay::RegistrationForm.new(params[:foo_day_registration_form].merge(user_id: current_user.id))
-
-    if @registration_form.save
-      redirect_to new_foo_day_path, notice: &#39;登録に成功しました&#39;
-    else
-      flash.now[:alert] = &#39;登録に失敗しました&#39;
-
-      render action: :new
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;view&#34;&gt;View&lt;/h1&gt;
-
-&lt;h2 id=&#34;app-views-foo-days-new-html-haml&#34;&gt;app/views/foo_days/new.html.haml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haml&#34;&gt;.row
-  %h1 日々の登録
-  = form_for @registration_form, url: foo_days_path, method: :post do |f|
-    - if @registration_form.errors.any?
-      %ul
-        - @registration_form.errors.full_messages.each do |msg|
-          %li= msg
-
-    = f.label &#39;日付&#39;
-    = f.date_field :from_date
-    %span 〜
-    = f.date_field :to_date
-
-    = f.submit &#39;確定&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;translation&#34;&gt;Translation&lt;/h1&gt;
-
-&lt;h2 id=&#34;config-locales-ja-yml&#34;&gt;config/locales/ja.yml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;ja:
-  activemodel:
-    attributes:
-      foo_day/registration_form:
-        from_date: 開始日
-        to_date: 終了日
-    errors:
-      invalid_foo_day: &#39;%{date} %{message}&#39;
-      models:
-        foo_day/registration_form:
-          attributes:
-            from_date:
-              on_or_after: は %{restriction} 以降の日付を指定してください
-            to_date:
-              on_or_after: は 開始日 以降の日付を指定してください
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/&#34;&gt;Creating Form Objects with ActiveModel and Virtus - We build Envato&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/&#34;&gt;7 Patterns to Refactor Fat ActiveRecord Models - Code Climate Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/quattro_4/items/6636efbf58cca13db02a&#34;&gt;Form Object実装メモ - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.enogineer.com/2014/12/02/rails-form-object/&#34;&gt;Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
