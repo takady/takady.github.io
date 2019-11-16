@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coreos on Yuichi Takada</title>
+    <title>coreos on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/coreos/</link>
-    <description>Recent content in Coreos on Yuichi Takada</description>
+    <description>Recent content in coreos on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Tue, 13 Jan 2015 19:46:35 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/coreos/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/coreos/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>はじめてのcoreos/rocket</title>
@@ -16,224 +18,7 @@
       <pubDate>Tue, 13 Jan 2015 19:46:35 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</guid>
-      <description>
-
-&lt;p&gt;rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである.&lt;br /&gt;
-&lt;a href=&#34;https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md&#34;&gt;rocket/getting-started-guide.md at master · coreos/rocket&lt;/a&gt;を通して, rocketをCoreOS上で動かしてみた.&lt;/p&gt;
-
-&lt;h1 id=&#34;vagrantでcoreosのvmを用意&#34;&gt;vagrantでCoreOSのVMを用意&lt;/h1&gt;
-
-&lt;p&gt;まず, CoreOSの環境を用意する.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/coreos/coreos-vagrant/
-$ cd coreos-vagrant
-$ vagrant up
-$ vagrant ssh
-Last login: Tue Jan 13 08:50:19 2015 from 10.0.2.2
-CoreOS alpha (557.0.0)
-core@core-01 ~ $
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;rkt-actool-goのinstall&#34;&gt;rkt, actool, goのinstall&lt;/h1&gt;
-
-&lt;h2 id=&#34;rkt&#34;&gt;rkt&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ wget https://github.com/coreos/rocket/releases/download/v0.1.1/rocket-v0.1.1.tar.gz
-core@core-01 ~ $ tar zxf rocket-v0.1.1.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;actool&#34;&gt;actool&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ wget https://github.com/appc/spec/releases/download/v0.1.1/appc-spec-v0.1.1.tar.gz
-core@core-01 ~ $ tar zxf appc-spec-v0.1.1.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;go&#34;&gt;go&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/hnakamur/items/8cda520807f571409f6c#4-1&#34;&gt;OSX + Vagrant + CoreOSでKubernetesを試してみた - Qiita&lt;/a&gt;を参考にした.&lt;br /&gt;
-ちなみに, go1.4だと次のhello.goがうまくビルド出来くて, 断念して1.3系を入れた.(&lt;a href=&#34;https://github.com/coreos/rocket/issues/270&#34;&gt;参考&lt;/a&gt;)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ wget https://storage.googleapis.com/golang/go1.3.3.linux-amd64.tar.gz
-core@core-01 ~ $ sudo mkdir /opt
-core@core-01 ~ $ sudo tar zxf go1.3.3.linux-amd64.tar.gz -C /opt/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;gopath等の設定&#34;&gt;GOPATH等の設定&lt;/h2&gt;
-
-&lt;p&gt;bash_profileはシムリンクを削除して実ファイルを用意した.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ ls -l ~/.bash_profile
-lrwxrwxrwx 1 core core 34 Jan  9 04:47 /home/core/.bash_profile -&amp;gt; ../../usr/share/skel/.bash_profile
-core@core-01 ~ $ rm ~/.bash_profile
-core@core-01 ~ $ cat &amp;lt;&amp;lt;&#39;EOF&#39; &amp;gt;&amp;gt; ~/.bash_profile
-&amp;gt;
-&amp;gt; export GOROOT=/opt/go
-&amp;gt; export GOPATH=~/go
-&amp;gt; export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-&amp;gt; EOF
-
-core@core-01 ~ $ mkdir ~/go
-core@core-01 ~ $ exec $SHELL -l
-core@core-01 ~ $ go version
-go version go1.3.3 linux/amd64
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;サンプルアプリケーション作成&#34;&gt;サンプルアプリケーション作成&lt;/h1&gt;
-
-&lt;h2 id=&#34;hello-goの作成とビルド&#34;&gt;hello.goの作成とビルド&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
-
-import (
-    &amp;quot;log&amp;quot;
-    &amp;quot;net/http&amp;quot;
-)
-
-func main() {
-    http.HandleFunc(&amp;quot;/&amp;quot;, func(w http.ResponseWriter, r *http.Request) {
-        log.Printf(&amp;quot;request from %v\n&amp;quot;, r.RemoteAddr)
-        w.Write([]byte(&amp;quot;hello\n&amp;quot;))
-    })
-    log.Fatal(http.ListenAndServe(&amp;quot;:5000&amp;quot;, nil))
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ビルドする.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ CGO_ENABLED=0 GOOS=linux go build -a -tags netgo -ldflags &#39;-w&#39; hello.go
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;manifest-jsonの作成&#34;&gt;manifest.jsonの作成&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-    &amp;quot;acKind&amp;quot;: &amp;quot;ImageManifest&amp;quot;,
-    &amp;quot;acVersion&amp;quot;: &amp;quot;0.1.1&amp;quot;,
-    &amp;quot;name&amp;quot;: &amp;quot;coreos.com/hello&amp;quot;,
-    &amp;quot;labels&amp;quot;: [
-        {
-            &amp;quot;name&amp;quot;: &amp;quot;version&amp;quot;,
-            &amp;quot;val&amp;quot;: &amp;quot;1.0.0&amp;quot;
-        },
-        {
-            &amp;quot;name&amp;quot;: &amp;quot;arch&amp;quot;,
-            &amp;quot;val&amp;quot;: &amp;quot;amd64&amp;quot;
-        },
-        {
-            &amp;quot;name&amp;quot;: &amp;quot;os&amp;quot;,
-            &amp;quot;val&amp;quot;: &amp;quot;linux&amp;quot;
-        }
-    ],
-    &amp;quot;app&amp;quot;: {
-        &amp;quot;user&amp;quot;: &amp;quot;root&amp;quot;,
-        &amp;quot;group&amp;quot;: &amp;quot;root&amp;quot;,
-        &amp;quot;exec&amp;quot;: [
-            &amp;quot;/bin/hello&amp;quot;
-        ],
-        &amp;quot;ports&amp;quot;: [
-        {
-            &amp;quot;name&amp;quot;: &amp;quot;www&amp;quot;,
-            &amp;quot;protocol&amp;quot;: &amp;quot;tcp&amp;quot;,
-            &amp;quot;port&amp;quot;: 5000
-        }
-        ]
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;validationする.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ ./appc-spec-v0.1.1/actool -debug validate manifest.json
-manifest.json: valid ImageManifest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;app-container-image-aci-のビルド&#34;&gt;App Container Image(ACI)のビルド&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ mkdir -p hello-layout/rootfs/bin
-core@core-01 ~ $ cp -i manifest.json hello-layout/manifest
-core@core-01 ~ $ cp -i hello hello-layout/rootfs/bin/
-core@core-01 ~ $ ./appc-spec-v0.1.1/actool build hello-layout/ hello.aci
-core@core-01 ~ $ ./appc-spec-v0.1.1/actool -debug validate hello.aci
-hello.aci: valid app container image
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちなみに, ACIはtarなので,下記で中身を確認できる.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ tar tvf hello.aci
-drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs
-drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs/bin
--rwxr-xr-x 500/500     4383427 2015-01-13 10:26 rootfs/bin/hello
--rw-r--r-- root/root       510 2015-01-13 10:27 manifest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;aciの起動&#34;&gt;ACIの起動&lt;/h1&gt;
-
-&lt;p&gt;ここでcontainerを起動し, helloアプリがhttpリクエストを受けられる状態になる.&lt;br /&gt;
-ちなみに, containerを落としたい時は&lt;code&gt;ctrl-]&lt;/code&gt;を3回押す.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ sudo ./rocket-v0.1.1/rkt --debug run hello.aci
-2015/01/13 10:27:43 Unpacking stage1 rootfs
-2015/01/13 10:27:43 Writing stage1 init
-2015/01/13 10:27:43 Wrote filesystem to /var/lib/rkt/containers/5c59cdfd-648a-421f-8390-74f8cea7306c
-2015/01/13 10:27:43 Loading image sha256-9454dfc3433953623bbe91fe09608a4dd44a7d21dbb9da093adb2f9d44f97005
-2015/01/13 10:27:43 Writing container manifest
-2015/01/13 10:27:43 Pivoting to filesystem /var/lib/rkt/containers/5c59cdfd-648a-421f-8390-74f8cea7306c
-2015/01/13 10:27:43 Execing stage1/init
-Spawning container stage1 on /var/lib/rkt/containers/5c59cdfd-648a-421f-8390-74f8cea7306c/stage1.
-Press ^] three times within 1s to kill container.
-Timezone UTC does not exist in container, not updating container timezone.
-systemd 215 running in system mode. (-PAM -AUDIT -SELINUX +IMA -SYSVINIT +LIBCRYPTSETUP -GCRYPT -ACL -XZ +SECCOMP -APPARMOR)
-Detected virtualization &#39;systemd-nspawn&#39;.
-Detected architecture &#39;x86-64&#39;.
-
-Welcome to Linux!
-
-Initializing machine ID from container UUID.
-[  OK  ] Created slice -.slice.
-[  OK  ] Created slice system.slice.
-         Starting Graceful exit watcher...
-[  OK  ] Started Graceful exit watcher.
-         Starting coreos.com/hello...
-[  OK  ] Started coreos.com/hello.
-[  OK  ] Reached target Rocket apps target.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;アクセスしてみる&#34;&gt;アクセスしてみる&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;core@core-01 ~ $ curl 127.0.0.1:5000
-hello
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;アクセスログが表示される&#34;&gt;アクセスログが表示される&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;2015/01/13 10:31:30 request from 127.0.0.1:36742
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;環境&#34;&gt;環境&lt;/h1&gt;
-
-&lt;h2 id=&#34;osx&#34;&gt;OSX&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;OSX 10.9.5&lt;/li&gt;
-&lt;li&gt;Vagrant 1.6.5&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;coreos&#34;&gt;CoreOS&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CoreOS alpha (557.0.0)&lt;/li&gt;
-&lt;li&gt;go 1.3.3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md&#34;&gt;rocket/getting-started-guide.md at master · coreos/rocket&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/kelseyhightower/rocket-tutorial&#34;&gt;kelseyhightower/rocket-tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/mopemope/items/9f163e4715a8bb5846e9&#34;&gt;CoreOS - はじめてのRocket - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/mopemope/items/fa9424b094aae3eac580&#34;&gt;CoreOS 入門 - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/gom/items/0bfc1925a7fddfcdfdaf&#34;&gt;Vagrant + CoreOS + Docker でコンテナ環境体験 - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである. rocket/getting-started-guide.md at master</description>
     </item>
     
   </channel>

@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rails on Yuichi Takada</title>
+    <title>rails on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/rails/</link>
-    <description>Recent content in Rails on Yuichi Takada</description>
+    <description>Recent content in rails on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Tue, 21 Feb 2017 23:07:09 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/rails/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/rails/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Travis CI で mini_racer と mysql を使うビルドが失敗する</title>
@@ -16,42 +18,7 @@
       <pubDate>Tue, 21 Feb 2017 23:07:09 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/</guid>
-      <description>
-
-&lt;p&gt;rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で &lt;code&gt;Gem::Ext::BuildError: ERROR: Failed to build gem native extension.&lt;/code&gt; なエラーが出てしまった。&lt;/p&gt;
-
-&lt;p&gt;Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;mini_racer の README.md&lt;/a&gt; には下記の対応方法が記載されている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo: required
-dist: trusty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで実際に、mini_racer は install 出来るようになる。&lt;/p&gt;
-
-&lt;p&gt;ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。&lt;br /&gt;
-2017年2月の時点で、&lt;a href=&#34;https://docs.travis-ci.com/user/trusty-ci-environment/#Data-Stores&#34;&gt;Trusty の環境には mysql が入ってない&lt;/a&gt;ので &lt;code&gt;rake db:migrate&lt;/code&gt; あたりで DB に接続できませんということでビルドが失敗する。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;この辺の issue&lt;/a&gt; など参考にしながら、ひとまず mysql を自分で入れるってことと、mysql の接続ユーザを &lt;code&gt;root&lt;/code&gt; にする事で回避した。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;dist: trusty
-sudo: required
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;きびしい。&lt;/p&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;https://github.com/discourse/mini_racer#travis-ci&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;&amp;ldquo;Can&amp;rsquo;t connect to local MySQL server through socket &amp;lsquo;/var/run/mysqld/mysqld.sock&amp;rsquo;&amp;rdquo; · Issue #6842 · travis-ci/travis-ci&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で Gem::Ext::BuildError: ERROR: Failed to build gem native extension. なエラーが出てしまった</description>
     </item>
     
     <item>
@@ -60,122 +27,7 @@ addons:
       <pubDate>Sun, 19 Feb 2017 18:58:24 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/</guid>
-      <description>
-
-&lt;p&gt;Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。&lt;/p&gt;
-
-&lt;h2 id=&#34;td-agent&#34;&gt;td-agent&lt;/h2&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;td-agent のインストールは下記に書いてある通り。&lt;br /&gt;
-&lt;a href=&#34;http://docs.fluentd.org/v0.12/articles/install-by-deb&#34;&gt;Installing Fluentd Using deb Package | Fluentd&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ubuntu 16.04 なので下記で入れた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;プラグインのインストール&#34;&gt;プラグインのインストール&lt;/h3&gt;
-
-&lt;p&gt;td-agent-gem で slack のプラグインをインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ td-agent-gem install fluent-plugin-slack
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;設定ファイルの修正&#34;&gt;設定ファイルの修正&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/td-agent/td-agent.conf&lt;/code&gt; を下記のように修正。&lt;br /&gt;
-webhook の URL あらかじめ Slack 取得しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;source&amp;gt;
-  @type forward
-&amp;lt;/source&amp;gt;
-
-&amp;lt;match app.*&amp;gt;
-  type copy
-  &amp;lt;store&amp;gt;
-    @type file
-    path /var/log/app/web
-    time_slice_wait 10m
-    compress gzip
-  &amp;lt;/store&amp;gt;
-
-  &amp;lt;store&amp;gt;
-    @type rewrite_tag_filter
-    rewriterule1 severity FATAL app.fatal
-  &amp;lt;/store&amp;gt;
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match app.fatal&amp;gt;
-  @type slack
-  webhook_url https://hooks.slack.com/services/xxxxxxxxxxx
-  channel app_error
-  username ErrorBot
-  icon_emoji :astonished:
-  message_keys messages
-  flush_interval 5s
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match clear&amp;gt;
-  @type null
-&amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;再起動&#34;&gt;再起動&lt;/h3&gt;
-
-&lt;p&gt;td-agent を再起動する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ /etc/init.d/td-agent restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;rails&#34;&gt;rails&lt;/h2&gt;
-
-&lt;h3 id=&#34;gemfile&#34;&gt;Gemfile&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;act-fluent-logger-rails&lt;/code&gt; と &lt;code&gt;lograge&lt;/code&gt; をインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem &#39;act-fluent-logger-rails&#39;
-gem &#39;lograge&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;config-environments-production-rb&#34;&gt;config/environments/production.rb&lt;/h3&gt;
-
-&lt;p&gt;loggerの設定。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;config.log_level = :info
-config.logger = ActFluentLoggerRails::Logger.new
-config.lograge.enabled = true
-config.lograge.formatter = Lograge::Formatters::Json.new
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;config-fluent-logger-yml&#34;&gt;config/fluent-logger.yml&lt;/h3&gt;
-
-&lt;p&gt;fluent用の設定ファイル。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;production:
-  fluent_host:   &#39;127.0.0.1&#39;
-  fluent_port:   24224
-  tag:           &#39;app.web&#39;
-  messages_type: &#39;string&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;結果&#34;&gt;結果&lt;/h2&gt;
-
-&lt;p&gt;ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ tail -f /var/log/app/web.20170219.b548df17385a3a314
-2017-02-19T09:51:42+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;html\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:1534.33,\&amp;quot;view\&amp;quot;:1299.3,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
-2017-02-19T09:51:43+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/api/foo.json\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;json\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;Api::FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:374.19,\&amp;quot;view\&amp;quot;:49.21,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/actindi/act-fluent-logger-rails&#34;&gt;actindi/act-fluent-logger-rails: Fluent logger&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.fluentd.org/datasources/rails&#34;&gt;Collecting and Analyzing Ruby on Rails Logs | Fluentd&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。 td-agent インストール td-agent のインストールは下記に書いてある通り。 Installing Fluentd Using deb Package | Fluentd Ubuntu 16.04 な</description>
     </item>
     
     <item>
@@ -184,78 +36,7 @@ config.lograge.formatter = Lograge::Formatters::Json.new
       <pubDate>Fri, 09 Dec 2016 21:20:43 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/</guid>
-      <description>
-
-&lt;p&gt;rails で Custom validatior や Custom validation method を定義して、その中で &lt;code&gt;errors.add&lt;/code&gt; する際に、
-message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。&lt;br /&gt;
-結論としては、下記のように書くのがスッキリして良さそう。&lt;/p&gt;
-
-&lt;h2 id=&#34;custom-validators&#34;&gt;Custom Validators&lt;/h2&gt;
-
-&lt;p&gt;特定のモデルによらないエラーメッセージの場合は、下記のように &lt;code&gt;locales/en.yml&lt;/code&gt; を書くことで、&lt;code&gt;record.errors.add(attribute, :something_invalid)&lt;/code&gt;と書ける。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
-  errors:
-    messages:
-      something_invalid: Invalid something.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyCheckValidator &amp;lt; ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless check_something(value)
-      record.errors.add(attribute, :something_invalid)
-      #=&amp;gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ
-    end
-  end
-
-  def check_something(value)
-   # Something
-  end
-end
-
-class MyModel &amp;lt; ActiveRecord::Base
-  validates :name, my_check: true
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;custom-methods&#34;&gt;Custom Methods&lt;/h2&gt;
-
-&lt;p&gt;特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
-  activerecord:
-    errors:
-      models:
-        my_model:
-          attributes:
-            start_date:
-              cannot_be_after_end_date: It cannot be after the end date.
-            end_date:
-              cannot_be_before_start_date: It cannot be before the start date.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyModel &amp;lt; ActiveRecord::Base
-  validate :start_date_cannot_be_after_end_date, if: -&amp;gt; { start_date.present? &amp;amp;&amp;amp; end_date.present? }
-
-  private
-
-  def start_date_cannot_be_after_end_date
-    return if start_date &amp;lt;= end_date
-
-    errors.add(:start_date, :cannot_be_after_end_date)
-    #=&amp;gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ
-    errors.add(:end_date, :cannot_be_before_start_date)
-    #=&amp;gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://guides.rubyonrails.org/active_record_validations.html&#34;&gt;Active Record Validations — Ruby on Rails Guides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rails で Custom validatior や Custom validation method を定義して、その中で errors.add する際に、 message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。 結論としては、下記のよ</description>
     </item>
     
     <item>
@@ -264,166 +45,7 @@ end
       <pubDate>Mon, 29 Aug 2016 19:38:49 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/08/29/rails-form-object/</guid>
-      <description>
-
-&lt;p&gt;フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2016-08-29-rails-form-object/screenshot1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;こういうフォーム。&lt;/p&gt;
-
-&lt;h1 id=&#34;model&#34;&gt;Model&lt;/h1&gt;
-
-&lt;p&gt;uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。&lt;/p&gt;
-
-&lt;h2 id=&#34;app-models-foo-day-rb&#34;&gt;app/models/foo_day.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay &amp;lt; ActiveRecord::Base
-  belongs_to :user
-
-  validates :user_id, presence: true
-  validates :date, presence: true, uniqueness: {scope: :user_id}
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;formobject&#34;&gt;FormObject&lt;/h1&gt;
-
-&lt;p&gt;FormObject の参考では、よく &lt;a href=&#34;https://github.com/solnic/virtus&#34;&gt;virtus&lt;/a&gt; を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。&lt;br /&gt;
-例えば今回のケースだと、view から文字列で渡ってくる &lt;code&gt;YYY-MM-DD&lt;/code&gt; を Date に変換したかったので、一度 Virtus を使ってみたけど、
-例えば &lt;code&gt;2016-08-32&lt;/code&gt; のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。&lt;br /&gt;
-結局、日付の validation のために &lt;a href=&#34;https://github.com/adzap/validates_timeliness&#34;&gt;validates_timeliness&lt;/a&gt; という gem を使ったけど便利だった。&lt;/p&gt;
-
-&lt;h2 id=&#34;app-models-foo-day-registration-form-rb&#34;&gt;app/models/foo_day/registration_form.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDay::RegistrationForm
-  include ActiveModel::Model
-
-  attr_accessor :user_id, :from_date, :to_date
-
-  validates :user_id, presence: true
-  validates :from_date, presence: true, timeliness: {on_or_after: :today, type: :date}
-  validates :to_date, allow_blank: true, timeliness: {on_or_after: :from_date, type: :date}
-
-  def save
-    return false unless valid?
-
-    persist!
-    true
-  end
-
-  private
-
-  def foo_days
-    @foo_days ||= build_foo_days
-  end
-
-  def build_foo_days
-    if to_date.blank?
-      [FooDay.new(date: from_date, user_id: user_id)]
-    else
-      (Date.parse(from_date)..Date.parse(to_date)).map {|date| FooDay.new(user_id: user_id, date: date) }
-    end
-  end
-
-  def valid?
-    return false unless super
-
-    foo_days.each do |foo_day|
-      next if foo_day.valid?
-
-      foo_day.errors.full_messages.each do |message|
-        errors.add(:base, I18n.t(&#39;activemodel.errors.invalid_foo_day&#39;, date: foo_day.date, message: message))
-      end
-    end
-
-    return super
-  end
-
-  def persist!
-    foo_days.each(&amp;amp;:save!)
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;controller&#34;&gt;Controller&lt;/h1&gt;
-
-&lt;h2 id=&#34;app-controllers-foo-days-controller-rb&#34;&gt;app/controllers/foo_days_controller.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class FooDaysController &amp;lt; ApplicationController
-  def new
-    @registration_form = FooDay::RegistrationForm.new
-  end
-
-  def create
-    @registration_form = FooDay::RegistrationForm.new(params[:foo_day_registration_form].merge(user_id: current_user.id))
-
-    if @registration_form.save
-      redirect_to new_foo_day_path, notice: &#39;登録に成功しました&#39;
-    else
-      flash.now[:alert] = &#39;登録に失敗しました&#39;
-
-      render action: :new
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;view&#34;&gt;View&lt;/h1&gt;
-
-&lt;h2 id=&#34;app-views-foo-days-new-html-haml&#34;&gt;app/views/foo_days/new.html.haml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haml&#34;&gt;.row
-  %h1 日々の登録
-  = form_for @registration_form, url: foo_days_path, method: :post do |f|
-    - if @registration_form.errors.any?
-      %ul
-        - @registration_form.errors.full_messages.each do |msg|
-          %li= msg
-
-    = f.label &#39;日付&#39;
-    = f.date_field :from_date
-    %span 〜
-    = f.date_field :to_date
-
-    = f.submit &#39;確定&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;translation&#34;&gt;Translation&lt;/h1&gt;
-
-&lt;h2 id=&#34;config-locales-ja-yml&#34;&gt;config/locales/ja.yml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;ja:
-  activemodel:
-    attributes:
-      foo_day/registration_form:
-        from_date: 開始日
-        to_date: 終了日
-    errors:
-      invalid_foo_day: &#39;%{date} %{message}&#39;
-      models:
-        foo_day/registration_form:
-          attributes:
-            from_date:
-              on_or_after: は %{restriction} 以降の日付を指定してください
-            to_date:
-              on_or_after: は 開始日 以降の日付を指定してください
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/&#34;&gt;Creating Form Objects with ActiveModel and Virtus - We build Envato&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/&#34;&gt;7 Patterns to Refactor Fat ActiveRecord Models - Code Climate Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/quattro_4/items/6636efbf58cca13db02a&#34;&gt;Form Object実装メモ - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.enogineer.com/2014/12/02/rails-form-object/&#34;&gt;Rails4でFormオブジェクトを作る際に気をつける3つのポイント｜江の島エンジニアBlog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。 こういうフォ</description>
     </item>
     
     <item>
@@ -432,91 +54,7 @@ end
       <pubDate>Sun, 29 Nov 2015 23:06:56 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/</guid>
-      <description>
-
-&lt;p&gt;rails で普通に scaffold すると id が URL に入って &lt;code&gt;example.com/users/:id&lt;/code&gt; となる。&lt;br /&gt;
-これを &lt;code&gt;twitter.com/takady7&lt;/code&gt; とか &lt;code&gt;github.com/takady&lt;/code&gt; みたいにしたい時がある。&lt;br /&gt;
-実現には 2 通りの方法があると思われる。&lt;/p&gt;
-
-&lt;h1 id=&#34;to-param-を使う方法&#34;&gt;to_param を使う方法&lt;/h1&gt;
-
-&lt;p&gt;activerecord に &lt;a href=&#34;http://railsdoc.com/references/to_param&#34;&gt;to_param&lt;/a&gt; というメソッドがあって、これを使うと URL の :id の部分に id 以外を指定できるようになる。&lt;/p&gt;
-
-&lt;h2 id=&#34;user-rb&#34;&gt;user.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class User &amp;lt; ActiveRecord::Base
-  validates_presence_of :username
-  validates_uniqueness_of :username, case_sensitive: false
-
-  def to_param
-    username
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;users-controller-rb&#34;&gt;users_controller.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class UsersController &amp;lt; ApplicationController
-  def show
-    @user = User.find_by(username: params[:id])
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;routes-rb&#34;&gt;routes.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Rails.application.routes.draw do
-  resources :users, path: &#39;/&#39;, only: [:show, :edit, :update, :destroy]
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake routes
-    Prefix Verb   URI Pattern                        Controller#Action
- edit_user GET    /:id/edit(.:format)                users#edit
-      user GET    /:id(.:format)                     users#show
-           PATCH  /:id(.:format)                     users#update
-           PUT    /:id(.:format)                     users#update
-           DELETE /:id(.:format)                     users#destroy
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;routing-で-param-を設定する方法&#34;&gt;routing で param を設定する方法&lt;/h1&gt;
-
-&lt;p&gt;User クラスに to_param を定義せずに、 routes.rb で設定する方法。&lt;br /&gt;
-&lt;code&gt;params[:username]&lt;/code&gt; というふうに渡ってくるので、こちらの方が素直な気がして個人的にはこちらを使いたい。&lt;/p&gt;
-
-&lt;h2 id=&#34;users-controller-rb-1&#34;&gt;users_controller.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class UsersController &amp;lt; ApplicationController
-  def show
-    @user = User.find_by(username: params[:username])
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;routes-rb-1&#34;&gt;routes.rb&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Rails.application.routes.draw do
-  resources :users, param: :username, path: &#39;/&#39;, only: [:show, :edit, :update, :destroy]
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake routes
-    Prefix Verb   URI Pattern                        Controller#Action
- edit_user GET    /:username/edit(.:format)          users#edit
-      user GET    /:username(.:format)               users#show
-           PATCH  /:username(.:format)               users#update
-           PUT    /:username(.:format)               users#update
-           DELETE /:username(.:format)               users#destroy
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/7735315/rails-route-to-username-instead-of-id&#34;&gt;ruby - Rails route to username instead of id - Stack Overflow&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://railsdoc.com/references/to_param&#34;&gt;to_param - リファレンス - - Railsドキュメント&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://tnakamura.hatenablog.com/entry/2014/01/31/185214&#34;&gt;Github みたいにパスの最初のセグメントでユーザー名を使う方法 - present&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/takady7 とか github.com/takady みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
     </item>
     
     <item>
@@ -525,25 +63,7 @@ end
       <pubDate>Wed, 03 Dec 2014 21:02:25 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env/</guid>
-      <description>
-
-&lt;p&gt;最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、&lt;br /&gt;
-たまにブラウザからGETリクエスト送ってサクッとjsonの中を見たいって時に、認証があって見れない。。。ってパターンがかなりある。&lt;br /&gt;
-開発環境では、認証しなくていいやと思った。&lt;br /&gt;
-下記のようにすることで、before_actionをdevelopment環境ではスキップさせられる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class ApplicationController &amp;lt; ActionController::Base
-  before_action :authenticate unless Rails.env.development?
-
-  def authenticate
-    ...
-  end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://memo.yomukaku.net/entries/127&#34;&gt;Rails.env.development?でdevelopment環境かどうかを判定できる - memo.yomukaku.net&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、 たまにブラウザからGETリクエスト送ってサクッとjsonの中を見</description>
     </item>
     
     <item>
@@ -552,50 +72,7 @@ end
       <pubDate>Tue, 02 Dec 2014 18:07:11 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/</guid>
-      <description>
-
-&lt;p&gt;rails+mysqlな環境では、booleanで定義したカラムはtinyint(1)で作られ、中身はtrue/falseではなく、0/1が入る。&lt;br /&gt;
-そして、railsアプリケーション上でmysqlのtinyint(1)型データを扱う時、値は自動的にtrue/falseとして扱われる。&lt;br /&gt;
-そこまでは知っていたんだけど、&lt;code&gt;select(&#39;foobar_flg as fb_flg&#39;)&lt;/code&gt;というふうに、カラム名をエイリアスして取り出すと値が0/1なのは知らなかった。&lt;/p&gt;
-
-&lt;p&gt;具体的には下記のとおりである。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pry(main)&amp;gt; p = User.select(:foobar_flg)
-  User Load (10.5ms)  SELECT  `users`.`foobar_flg` FROM `users`
-=&amp;gt; [#&amp;lt;User id: nil, foobar_flg: false&amp;gt;]
-pry(main)&amp;gt; p.first.foobar_flg
-=&amp;gt; false
-
-pry(main)&amp;gt; p = User.select(&#39;foobar_flg as fb_flg&#39;)
-  User Load (5.8ms)  SELECT  foobar_flg as fb_flg FROM `users`
-=&amp;gt; [#&amp;lt;User id: nil&amp;gt;]
-pry(main)&amp;gt; p.first.fb_flg
-=&amp;gt; 0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちなみに、selectメソッドの引数に文字列を指定したから0/1が返ってくるというわけではない。&lt;br /&gt;
-下記のようにエイリアス無しなら、文字列で指定してもtrue/falseに解釈される。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pry(main)&amp;gt; p = User.select(&#39;foobar_flg&#39;)
-  User Load (10.0ms)  SELECT  `users`.`foobar_flg` FROM `users`
-=&amp;gt; [#&amp;lt;User id: nil, foobar_flg: false&amp;gt;]
-pry(main)&amp;gt; p.first.foobar_flg
-=&amp;gt; false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;このままだと結構困る。&lt;br /&gt;
-結論としては、&lt;strong&gt;as使わない&lt;/strong&gt;で済むならそれが最善手だと思う。&lt;br /&gt;
-が、それが無理なら、例えば下記のようにModelのattributeメソッドをoverrideしちゃうのが良さそう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;def fb_flg
-  read_attribute(:fb_flg) == 1
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/373731/override-activerecord-attribute-methods&#34;&gt;ruby on rails - Override ActiveRecord attribute methods - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>rails+mysqlな環境では、booleanで定義したカラムはtinyint(1)で作られ、中身はtrue/falseではなく、0/1が</description>
     </item>
     
     <item>
@@ -604,50 +81,7 @@ end
       <pubDate>Fri, 21 Nov 2014 18:57:07 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/11/21/rails-logger-broadcast/</guid>
-      <description>
-
-&lt;p&gt;railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。&lt;/p&gt;
-
-&lt;h1 id=&#34;前提&#34;&gt;前提&lt;/h1&gt;
-
-&lt;p&gt;ruby 2.1.2&lt;br /&gt;
-rails 4.1.4&lt;/p&gt;
-
-&lt;h1 id=&#34;方法&#34;&gt;方法&lt;/h1&gt;
-
-&lt;p&gt;まず、複数の出力先にロギングするには、&lt;a href=&#34;https://github.com/rails/rails/blob/master/activesupport/lib/active_support/logger.rb#L10-L42&#34;&gt;ActiveSupport::Logger.#broadcast&lt;/a&gt;というメソッドが使える。&lt;br /&gt;
-config/application.rbのMyapp::Applicationクラス内に下記のように書いてみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;logger = ActiveSupport::Logger.new(config.paths[&amp;quot;log&amp;quot;].first)
-error_logger = ActiveSupport::Logger.new(&amp;quot;log/error.log&amp;quot;)
-error_logger.level = Logger::ERROR
-logger.extend ActiveSupport::Logger.broadcast(error_logger)
-config.logger = logger
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、複数箇所にログが出力されるようにはなった。&lt;br /&gt;
-しかし、今回やりたかったのは、&lt;strong&gt;ERROR以上の時だけ&lt;/strong&gt;２箇所にロギングしたいというもので、上記のようにconfig/application.rbでextendした場合、error_loggerのlevelをERRORにセットしていても、Rails.loggerのlevelと同じlevelでのloggingになってしまう。&lt;br /&gt;
-全く同じエラーログを複数箇所に吐かせたいというだけであれば、上記の方法で良いと思う。(その際、上記の&lt;code&gt;error_logger.level = Logger::ERROR&lt;/code&gt;は意味が無いので消した方が良い)&lt;/p&gt;
-
-&lt;p&gt;error_logger.levelの指定が効くようにするには、&lt;code&gt;run Rails.application&lt;/code&gt;よりも後で、error_loggerをRails.loggerにextendすると良い。&lt;br /&gt;
-config.ruに下記を追記する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;run Rails.application
-
-error_logger = ActiveSupport::Logger.new(&amp;quot;log/error.log&amp;quot;)
-error_logger.level = Logger::ERROR
-Rails.logger.extend ActiveSupport::Logger.broadcast(error_logger)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、log/error.logへは、ERRORレベル以上のログだけが出力されるようになった。&lt;br /&gt;
-もちろん、log/development.logには、これまでどおりDEBUGレベルまで含めた全てのlogが出ている。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.livedoor.jp/sonots/archives/38927788.html&#34;&gt;[Ruby] 例えば、Rails の標準ログを止める - sonots:blog&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://railsdoc.eiel.info/active_support/logger/&#34;&gt;RailsDoc - ActiveSupport::Logger&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://mitsu877.hatenablog.com/entry/2014/11/15/193547&#34;&gt;【Rails】バッチの実行ログを専用のログファイルと標準出力の両方に出す - おどるダメ人間&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。 前提 ruby 2.1.2 rails 4.1.4 方法 まず、複数の出力先にロギン</description>
     </item>
     
   </channel>

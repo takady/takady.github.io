@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Yuichi Takada</title>
@@ -7,8 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Mon, 14 Jan 2019 10:39:16 +0900</lastBuildDate>
-    <atom:link href="https://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Jan 2019 15:24:32 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.takady.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>赤ちゃん関連で買ったものレビュー</title>
+      <link>https://blog.takady.net/blog/2019/11/16/baby/</link>
+      <pubDate>Wed, 16 Jan 2019 15:24:32 +0900</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2019/11/16/baby/</guid>
+      <description>息子が来月で2歳になるので。 はじめてママ&amp;amp;パパの育児―0~3才赤ちゃんとの暮らし 気がかりがスッキリ! (実用No.1シリーズ) 離乳食、</description>
+    </item>
     
     <item>
       <title>https 対応した</title>
@@ -16,46 +27,7 @@
       <pubDate>Mon, 14 Jan 2019 10:39:16 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/</guid>
-      <description>
-
-&lt;p&gt;このブログは &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。&lt;/p&gt;
-
-&lt;h1 id=&#34;hugo-側の設定&#34;&gt;hugo 側の設定&lt;/h1&gt;
-
-&lt;h2 id=&#34;config-toml&#34;&gt;config.toml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;diff --git a/config.toml b/config.toml
-index 9aa98a1..4949f9d 100644
---- a/config.toml
-+++ b/config.toml
-@@ -1,4 +1,4 @@
--baseurl = &amp;quot;http://blog.takady.net/&amp;quot;
-+baseurl = &amp;quot;https://blog.takady.net/&amp;quot;
- languageCode = &amp;quot;ja&amp;quot;
- hasCJKLanguage = &amp;quot;true&amp;quot;
- title = &amp;quot;Yuichi Takada&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;robots-txt&#34;&gt;robots.txt&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;diff --git a/static/robots.txt b/static/robots.txt
-index 0752adc..b3f03e0 100644
---- a/static/robots.txt
-+++ b/static/robots.txt
-@@ -1,4 +1,4 @@
- User-agent: *
- Disallow:
-
--Sitemap: http://blog.takady.net/sitemap.xml
-+Sitemap: https://blog.takady.net/sitemap.xml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;github-側の利用設定&#34;&gt;Github 側の利用設定&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site&#34;&gt;https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site&lt;/a&gt; に書いてあるとおり、 &lt;code&gt;Enforce HTTPS&lt;/code&gt; にチェックを入れる。&lt;/p&gt;
-
-&lt;p&gt;以上。&lt;/p&gt;
-</description>
+      <description>このブログは Hugo を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。 hugo 側の設定 config.toml diff --git a/config.toml b/config.toml index 9aa98a1..4949f9d 100644 --- a/config.toml +++ b/config.toml @@ -1,4 +1,4 @@ -baseurl</description>
     </item>
     
     <item>
@@ -64,61 +36,7 @@ index 0752adc..b3f03e0 100644
       <pubDate>Mon, 31 Dec 2018 21:12:32 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2018/12/31/2018-summary/</guid>
-      <description>
-
-&lt;p&gt;かなり久しぶりのブログ更新。&lt;br /&gt;
-去年のおわり頃〜今年のことを簡単に書いておく。&lt;/p&gt;
-
-&lt;h1 id=&#34;子ども&#34;&gt;子ども&lt;/h1&gt;
-
-&lt;p&gt;2017年の12月に息子が生まれた。&lt;br /&gt;
-今年は育休取らせてもらったり、仕事早く帰ったりして、家族のサポート優先させてもらって、会社とチームには本当に感謝。&lt;br /&gt;
-息子は朝6時前後に起きるので一緒に起きて相手したりしながら、8時頃に朝ごはん作って9時半くらいまで食べさせてあげて10時くらいから会社行くっていう流れ。自分に余裕がある日は勉強しながら対応したりしてたけど、眠かったり疲れてたりで、ぼーっとしながらやることが多かった。&lt;/p&gt;
-
-&lt;h1 id=&#34;会社&#34;&gt;会社&lt;/h1&gt;
-
-&lt;p&gt;2017年の11月に今の会社に転職した。&lt;br /&gt;
-US版のアプリのバックエンド開発をやっている。4月から Search 周りをやって、10月くらいからはアプリの Home 周りをやってた。
-どっちも基本チームにバックエンドエンジニアは自分一人か、自分とメンティーの二人って状況だったから大体メインでやれた。7月くらいに Palo Alto のオフィスに出張行ってマイクロサービス作ったりとかしたのが良い経験だった。Go 9割、PHP 1割くらいの割合で書いてた。&lt;br /&gt;
-コミュニケーションは英語が必須になってきた。自分もまだまだ頑張らないとだけど、ちょっとは上達したかな。。&lt;/p&gt;
-
-&lt;h1 id=&#34;英語&#34;&gt;英語&lt;/h1&gt;
-
-&lt;p&gt;週に数回 DMM 英会話をやってた。これは1年ずっと継続してできたから良かったと思う。来年も続けよう。&lt;br /&gt;
-あとは会社が提供してくれている英語レッスンもやらせてもらってる。&lt;br /&gt;
-コードのこととか英語で話すのは割とコミュニケーションできるんだけど、普段の会話とかは絶望的にできない。正直自分は日本語でもあんま喋れないっていうのはあるんだけど、、アメリカ行った時にランチとかディナーで本当に悲しくなるくらい喋れなかった。&lt;br /&gt;
-10月に TOEIC 835 点取った。それなりに取れることがわかって嬉しかったんだけど、実際のところまだまだなのでこれからも精進が必要。特に聞くのと喋るのをこれからもっと良くしていきたい。&lt;/p&gt;
-
-&lt;h1 id=&#34;引っ越し&#34;&gt;引っ越し&lt;/h1&gt;
-
-&lt;p&gt;前のところには半年くらいしか住んでなかったんだけど6月に引っ越した。横浜の港北区内での近場での引っ越し。&lt;br /&gt;
-前のところは下に住んでる大家さんがうるさすぎて、寝てる息子が起きちゃうことが度々あってツラすぎた。引っ越すまでは本当に大変だった。&lt;br /&gt;
-多分もう上下に他人が住んでる建物に住むことはないと思う。家買う前にわかって良かったよ。&lt;/p&gt;
-
-&lt;h1 id=&#34;読書&#34;&gt;読書&lt;/h1&gt;
-
-&lt;p&gt;例年よりも本読まなかった。&lt;br /&gt;
-本（というか kindle）は離乳食あげながらでも読める事に気づいてからは結構読んだ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;プロダクションレディマイクロサービス&lt;/li&gt;
-&lt;li&gt;Go言語によるWebアプリケーション開発&lt;/li&gt;
-&lt;li&gt;入門 Kubernetes&lt;/li&gt;
-&lt;li&gt;仕事ではじめる機械学習&lt;/li&gt;
-&lt;li&gt;みんなのGo言語&lt;/li&gt;
-&lt;li&gt;SHOE DOG&lt;/li&gt;
-&lt;li&gt;諦める力&lt;/li&gt;
-&lt;li&gt;最高の結果を引き出す質問力&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;濃い一年でした。&lt;br /&gt;
-奥さんと息子と一緒に休みの日にでかけたりできると楽しいし、これからも成長が楽しみです。&lt;br /&gt;
-思いっきり長時間労働できないというもどかしさがあったんですが、最近は会社の飲み会に行けたりする余裕が出てきて、徐々にこの状況も落ち着くだろうと思ってます。&lt;br /&gt;
-来年はもっとコード書いて、承認欲求を満たせるようにがんばります。&lt;br /&gt;
-あと英語は普段の業務が困らないくらいに上達したいです。&lt;/p&gt;
-</description>
+      <description>かなり久しぶりのブログ更新。 去年のおわり頃〜今年のことを簡単に書いておく。 子ども 2017年の12月に息子が生まれた。 今年は育休取らせてもらっ</description>
     </item>
     
     <item>
@@ -127,21 +45,7 @@ US版のアプリのバックエンド開発をやっている。4月から Sear
       <pubDate>Sat, 01 Jul 2017 17:28:33 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/07/01/react_up_and_running/</guid>
-      <description>&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873117887/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873117887&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=7f4e6601420eec8bc27438573ff786fa&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873117887&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
-&lt;p&gt;Reactビギナーズガイド ―コンポーネントベースのフロントエンド開発入門&lt;/p&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;React はプライベートで書いているけども、一度ちゃんと基礎を抑えておきたいので読んだ。&lt;br /&gt;
-本書を読む前に、どこかのサイトでの本書のレビューとして、&lt;code&gt;React.createClass&lt;/code&gt; を使った古い書き方が一部あって云々みたいな記述を見かけていたので若干内容が古いのかなと思っていた。&lt;br /&gt;
-ただ実際に読んでみると、前半はたしかに class を使った書き方をしていないが、これはトランスパイル無しでブラウザで React をまずは動かそうという主旨もあり es2015 の記法を使っていないだけなのかなと思った。後半ではちゃんと babel でトランスパイルして es2015 以降の class を使った書き方をしている。&lt;/p&gt;
-
-&lt;p&gt;本書が良いのは、著者が Facebook に所属している React の開発者の人というところで、おかげで安心して読める。&lt;br /&gt;
-今まで React を書く時に、サードパーティーの npm パッケージは使うべきかどうかが判断出来なくて使っていなかったけど、例えば &lt;a href=&#34;https://github.com/JedWatson/classnames&#34;&gt;classnames&lt;/a&gt; については本書でも利用されているので、今後使っていこうという気になった。&lt;br /&gt;
-他にも、flow でカスタムの型を使えば React の propTypes は不要になるし実行時の型チェックが不要になる分、処理速度に良い影響があるなど、実践的でどういうメリットがあるかまで説明されている。&lt;br /&gt;
-広く使われているから使った方がいいのかなくらいに思っていた周辺ライブラリやツールについて、使う動機を示してくれているのが良かった。&lt;/p&gt;
-
-&lt;p&gt;その他にも、いくつかの慣例などについても触れられていて、ネットで細切れの情報をかき集めて学ぶだけではなかなか把握しづらいところも、やはり本で体系的に学ぶことで得られるものは多かった。&lt;/p&gt;
-</description>
+      <description>Reactビギナーズガイド ―コンポーネントベースのフロントエンド開発入門 React はプライベートで書いているけども、一度ちゃんと基礎を抑えておきたい</description>
     </item>
     
     <item>
@@ -150,25 +54,7 @@ US版のアプリのバックエンド開発をやっている。4月から Sear
       <pubDate>Sat, 24 Jun 2017 12:18:34 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/06/24/learning_javascript_3rd_edition/</guid>
-      <description>&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873117836/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873117836&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=bcb02b5ef176f892d28b9801798da15c&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873117836&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
-&lt;p&gt;初めてのJavaScript 第3版 ―ES2015以降の最新ウェブ開発&lt;/p&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;読んだ。&lt;br /&gt;
-読んだ理由として以下のようなところがあった。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;たまに React とか書くものの、職場では API などサーバサイド側がメインなので js あまり書かない&lt;/li&gt;
-&lt;li&gt;js 書くときは雰囲気で書いてるから Promise とかよくわかってなかった&lt;/li&gt;
-&lt;li&gt;モダンな書き方を理解しておきたい&lt;/li&gt;
-&lt;li&gt;サーバサイドエンジニアが片手間でフロントエンド書く時代は終わったらしい&lt;/li&gt;
-&lt;li&gt;本書は比較的最近の出版で、ES6 含む js を網羅的に把握するのに最適そうだった&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;結論としては、今までまともに学習せず雰囲気で書いていた js について理解が深まったし、曖昧だった部分が補完されて非常に良かった。&lt;/p&gt;
-
-&lt;p&gt;サーバーサイドやってるけど js そろそろキャッチアップしておかないと置いて行かれそうと思ってる人にはオススメです。&lt;/p&gt;
-</description>
+      <description>初めてのJavaScript 第3版 ―ES2015以降の最新ウェブ開発 読んだ。 読んだ理由として以下のようなところがあった。 たまに React とか書くもの</description>
     </item>
     
     <item>
@@ -177,21 +63,7 @@ US版のアプリのバックエンド開発をやっている。4月から Sear
       <pubDate>Tue, 06 Jun 2017 22:51:59 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/06/06/elastic_leadership/</guid>
-      <description>&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/4873118026/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4873118026&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=eea906f8ff925c4768149ddbe852e1f2&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=4873118026&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
-&lt;p&gt;エラスティックリーダーシップ ―自己組織化チームの育て方&lt;/p&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;読んだ。&lt;/p&gt;
-
-&lt;p&gt;普段、自分がメンバーとしての立場から、リーダーに対してどこまで求めて良いのかよくわからなくなる時があるので、そういう観点からリーダーシップについての本を読んでみることにした。&lt;br /&gt;
-たまに、自分がリーダーに対して期待していることが、過剰なものだったり、単なるめんどくさいことを引き受けてほしいというわがままだったりするのではないかと思う時がある。&lt;/p&gt;
-
-&lt;p&gt;その辺のところは、自分がプロジェクトのリーダーをやる時も、どこまでやってあげれば良いかがいつもよくわからないし、雰囲気でやっている感じだけど、実際どうなんですかという感じで読んだ。&lt;/p&gt;
-
-&lt;p&gt;あと、リーダーとマネージャーは違うと言うのは理解しつつも、コードを書く時間が減るのは事実なのではという気がしてて（いわゆるテックリード的なものであればそんなことは無いかも）、その点がリーダー業をやるにあたってのネックなんだが、本書はその件にも少し触れていた。&lt;/p&gt;
-
-&lt;p&gt;リーダーシップについてはまだ良くわからないが、本書の「日本人執筆者によるチームリーダーシップについて知るべきこと」の部は特に読んでいておもしろかった。&lt;/p&gt;
-</description>
+      <description>エラスティックリーダーシップ ―自己組織化チームの育て方 読んだ。 普段、自分がメンバーとしての立場から、リーダーに対してどこまで求めて良いのかよ</description>
     </item>
     
     <item>
@@ -200,59 +72,7 @@ US版のアプリのバックエンド開発をやっている。4月から Sear
       <pubDate>Sun, 28 May 2017 17:35:42 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/05/28/mistel_keyboard/</guid>
-      <description>
-
-&lt;p&gt;これまで3年ほど、キーボードは Apple の Wireless Keyboard からの Magic Keyboard と、Apple のペタペタしたキーボードをずっと使っていた。&lt;br /&gt;
-理由は、比較的打鍵音が静かだった事と、Apple 純正なので Bluetooth が切れたりするストレスが無いし、デスクがスッキリして気分が良いということだった。
-あと、Macbook 自体のキーボードと同じキーレイアウトなので、出先や会議中などでもキーボードの変化によるストレスを感じなくて済むという良さもあった。&lt;/p&gt;
-
-&lt;p&gt;ただ、ここ最近、肩や首のこりがかなり深刻になってきたことと、強くタイプしすぎなのか、たまに指とか手の甲がじんじん痛む事に悩んでいて、キーボードを変えたら改善しないかなと考えていた。&lt;br /&gt;
-これまではメインのキーボードが使えない時の不便さを考えて、別のキーボードを使うのは避けてきたんだけど、結局一番長い時間タイプする環境の向上を優先した方が良さそうと思った。&lt;/p&gt;
-
-&lt;p&gt;最初は肩こり改善の視点から Ergodox や Kinesis みたいなセパレートのキーボードを検討してた。
-腕を開いた姿勢を保ちやすいので肩こりとかに良いらしいのだけど、キー配列が独特なので、もし合わなかったらと思うと結構な価格なので手を出しづらかった。&lt;br /&gt;
-他には手の痛み解消の視点から HHKB とかも検討してた。&lt;/p&gt;
-
-&lt;p&gt;で、最終的に、メカニカルキーボードで分離型（だけどくっつけて普通に使うことも可能）なMiSTELのキーボードを買ってみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a target=&#34;_blank&#34;  href=&#34;https://www.amazon.co.jp/gp/product/B01KN6VEYG/ref=as_li_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B01KN6VEYG&amp;linkCode=as2&amp;tag=takadayuichi-22&amp;linkId=ff3e582a13e8b9ac2c91180634ff121c&#34;&gt;&lt;img border=&#34;0&#34; src=&#34;//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=JP&amp;ASIN=B01KN6VEYG&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=takadayuichi-22&#34; &gt;
-&lt;p&gt;MiSTEL BAROCCO MD600 分離式 メカニカルキーボード 英語配列 62キー CHERRY 赤軸 PBTキーキャップ ブラック MD600-RUSPLGAA1&lt;/p&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;セパレートキーボードの初手として良かった&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;万が一セパレートが無理だった場合でも最悪くっつけて普通のメカニカルキーボードとして使えるし、キー配列もまぁ普通&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;キーは赤軸にした&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;赤軸キーはキーを押し下げるほど重くなる感じで、軽い力で打てるし底を思いっきり打つ事もすくない&lt;/li&gt;
-&lt;li&gt;結果的に指に優しい&lt;/li&gt;
-&lt;li&gt;&lt;img src=&#34;https://blog.takady.net/images/mistel_keyboard/IMG_20170429_144637.jpg&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Y と H のキーが右のキーボードにある&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;僕は元々そのキーを左手で打っていたのでたまに打ち損じて難儀した。ただ1ヶ月くらい経ってだいぶ慣れた&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;キーボードに高さがある&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;手を反らせることになって疲れるので、リストレストを買った&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;肩こりはだいぶ改善された&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ちなみに会社でハードウェアやソフトウェア、あと技術書の購入支援制度があって、このキーボード買う時にもそれを使った。ありがとう。&lt;/p&gt;
-</description>
+      <description>これまで3年ほど、キーボードは Apple の Wireless Keyboard からの Magic Keyboard と、Apple のペタペタしたキーボードをずっと使っていた。 理由は、比較的打鍵音が静かだった事</description>
     </item>
     
     <item>
@@ -261,35 +81,7 @@ US版のアプリのバックエンド開発をやっている。4月から Sear
       <pubDate>Sun, 26 Mar 2017 12:14:44 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/03/26/hello-hugo/</guid>
-      <description>
-
-&lt;p&gt;このブログのエンジンを Octopress から &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; に移行した。&lt;br /&gt;
-2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイムラグが結構気になってきていた。&lt;br /&gt;
-jekyll からのインポートコマンドも hugo に用意されているので、わりと楽に移行出来た。&lt;/p&gt;
-
-&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;再生成が一瞬で完了するのでとても快適。&lt;/li&gt;
-&lt;li&gt;theme が少ないとか言われているけどシンプルなやつは結構良いやつある。
-
-&lt;ul&gt;
-&lt;li&gt;vienna のテーマをちょっとイジって使ってる。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;disqus を初めて使ってみたけど設定でハマった。
-
-&lt;ul&gt;
-&lt;li&gt;アカウント作るだけじゃなくて Create a new site して short name を用意しないといけなかった。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hugo - Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://ja.mhatta.org/blog/2016/08/21/migrated-from-octopress-to-hugo/&#34;&gt;OctopressからHugoへ移行 · Masayuki Hatta a.k.a. mhatta&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>このブログのエンジンを Octopress から Hugo に移行した。 2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイ</description>
     </item>
     
     <item>
@@ -298,44 +90,7 @@ jekyll からのインポートコマンドも hugo に用意されているの�
       <pubDate>Fri, 24 Mar 2017 22:38:13 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/03/24/huawei-nova/</guid>
-      <description>
-
-&lt;p&gt;Nexus5 を使っていたけどそろそろバッテリーがヘタってきたし、&lt;a href=&#34;http://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/&#34;&gt;画面の交換&lt;/a&gt;などで何度か解体したりして背面カバーのツメがいくつか折れてパカパカしていたので、色々調べて Huawei nova を買った。&lt;/p&gt;
-
-&lt;p&gt;NTT-X Store &lt;a href=&#34;http://nttxstore.jp/&#34;&gt;http://nttxstore.jp/&lt;/a&gt; というオンラインストアで割引されていて、約33,000円だった。&lt;br /&gt;
-Zenfone3 が良さそうだと思ってたんだけど、CPU や RAM が同じスペックの Huawei nova が割引されていたので買った。（Zenfone3 は台湾版を買えば安いらしいけど、技適適用にならないんじゃないかと思うので手を出さなかった）&lt;/p&gt;
-
-&lt;p&gt;Nexus5 は micro sim で nova は nano sim なので、ビックカメラに行って sim サイズ変更した。&lt;br /&gt;
-sim サイズ変更キャンペーン中で変更手数料の2,000円は無料になって、即日発行手数料の 1,000円だけで済んだ。&lt;/p&gt;
-
-&lt;h2 id=&#34;感想&#34;&gt;感想&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;パフォーマンスは Nexus5 に比べて良くなった。サクサク。&lt;/li&gt;
-&lt;li&gt;ディスプレイもきれい。&lt;/li&gt;
-&lt;li&gt;指紋認証は便利。かなり速い。&lt;/li&gt;
-&lt;li&gt;電池持ちがかなり良い。
-
-&lt;ul&gt;
-&lt;li&gt;100%充電済みで朝9時に出かけて、途中、普通に twitter、Line したり数時間podcastを聞いたりして23時時点で77%残ってる。動画見たりゲームしたりはしてない。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;デザインがなんか iPhone っぽさがある。&lt;/li&gt;
-&lt;li&gt;まだまともな保護ガラスフィルムが見つかってない。
-
-&lt;ul&gt;
-&lt;li&gt;今は Amazon で買ったやつを貼っているけど、普通にサイズが小さくてはみ出してる。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;USB Type-C になった。&lt;/li&gt;
-&lt;li&gt;付属のイヤホンに音量調節機能がある。
-
-&lt;ul&gt;
-&lt;li&gt;Nexus5ではイヤホンで音量調節できなかったので不便だった。付属のやつはボタンがやや押しにくいが。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;初期状態では UI が独自カスタマイズされているけど、ランチャーを Google now ランチャーに戻したら全然大丈夫になった。&lt;/li&gt;
-&lt;li&gt;5インチなので持ちやすい。&lt;/li&gt;
-&lt;li&gt;カメラは普通。Nexsu5よりは良い。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Nexus5 を使っていたけどそろそろバッテリーがヘタってきたし、画面の交換などで何度か解体したりして背面カバーのツメがいくつか折れてパカパカしていたの</description>
     </item>
     
     <item>
@@ -344,56 +99,7 @@ sim サイズ変更キャンペーン中で変更手数料の2,000円は無料�
       <pubDate>Sun, 19 Mar 2017 17:36:07 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
-      <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;部分文字列が含まれているか&lt;/li&gt;
-&lt;li&gt;指定の文字列で始まっているか&lt;/li&gt;
-&lt;li&gt;指定の文字列で終わっているか&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;String のメソッドの方がパフォーマンスが良い。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ruby benchmarker.rb
-                           user     system      total        real
-[string]include        0.110000   0.000000   0.110000 (  0.116923)
-[regexp]include        0.230000   0.000000   0.230000 (  0.229775)
-[string]start_with     0.090000   0.010000   0.100000 (  0.087478)
-[regexp]start_with     0.230000   0.000000   0.230000 (  0.234467)
-[string]end_with       0.090000   0.000000   0.090000 (  0.091226)
-[regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;コード。&lt;br /&gt;
-生成コストが入らないように定数で宣言したものでベンチマーク取った。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;benchmark&#39;
-
-n = 1_000_000
-
-TEST = &#39;test&#39;.freeze
-TE = &#39;te&#39;.freeze
-ST = &#39;st&#39;.freeze
-REGEXP_TEST = /test/.freeze
-REGEXP_TE = /\Ate/.freeze
-REGEXP_ST = /st\z/.freeze
-
-Benchmark.bm(20) do |b|
-  b.report(&#39;[string]include&#39;) { (1..n).each { TEST.include?(TE) } }
-  b.report(&#39;[regexp]include&#39;) { (1..n).each { REGEXP_TEST === TEST } }
-  b.report(&#39;[string]start_with&#39;) { (1..n).each { TEST.start_with?(TE) } }
-  b.report(&#39;[regexp]start_with&#39;) { (1..n).each { REGEXP_TE === TEST } }
-  b.report(&#39;[string]end_with&#39;) { (1..n).each { TEST.end_with?(ST) } }
-  b.report(&#39;[regexp]end_with&#39;) { (1..n).each { REGEXP_ST === TEST } }
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちなみに、&lt;code&gt;start_with?&lt;/code&gt;、 &lt;code&gt;end_with?&lt;/code&gt; は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;[1] pry(main)&amp;gt; &#39;test&#39;.start_with?(&#39;ab&#39;, &#39;te&#39;)
-=&amp;gt; true
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク</description>
     </item>
     
     <item>
@@ -402,42 +108,7 @@ end
       <pubDate>Tue, 21 Feb 2017 23:07:09 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/</guid>
-      <description>
-
-&lt;p&gt;rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で &lt;code&gt;Gem::Ext::BuildError: ERROR: Failed to build gem native extension.&lt;/code&gt; なエラーが出てしまった。&lt;/p&gt;
-
-&lt;p&gt;Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;mini_racer の README.md&lt;/a&gt; には下記の対応方法が記載されている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo: required
-dist: trusty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで実際に、mini_racer は install 出来るようになる。&lt;/p&gt;
-
-&lt;p&gt;ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。&lt;br /&gt;
-2017年2月の時点で、&lt;a href=&#34;https://docs.travis-ci.com/user/trusty-ci-environment/#Data-Stores&#34;&gt;Trusty の環境には mysql が入ってない&lt;/a&gt;ので &lt;code&gt;rake db:migrate&lt;/code&gt; あたりで DB に接続できませんということでビルドが失敗する。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;この辺の issue&lt;/a&gt; など参考にしながら、ひとまず mysql を自分で入れるってことと、mysql の接続ユーザを &lt;code&gt;root&lt;/code&gt; にする事で回避した。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;dist: trusty
-sudo: required
-addons:
-  apt:
-    packages:
-    - mysql-server-5.6
-    - mysql-client-core-5.6
-    - mysql-client-5.6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;きびしい。&lt;/p&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/discourse/mini_racer#travis-ci&#34;&gt;https://github.com/discourse/mini_racer#travis-ci&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433&#34;&gt;&amp;ldquo;Can&amp;rsquo;t connect to local MySQL server through socket &amp;lsquo;/var/run/mysqld/mysqld.sock&amp;rsquo;&amp;rdquo; · Issue #6842 · travis-ci/travis-ci&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で Gem::Ext::BuildError: ERROR: Failed to build gem native extension. なエラーが出てしまった</description>
     </item>
     
     <item>
@@ -446,122 +117,7 @@ addons:
       <pubDate>Sun, 19 Feb 2017 18:58:24 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/19/fluentd-send-error-to-slack/</guid>
-      <description>
-
-&lt;p&gt;Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。&lt;/p&gt;
-
-&lt;h2 id=&#34;td-agent&#34;&gt;td-agent&lt;/h2&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;td-agent のインストールは下記に書いてある通り。&lt;br /&gt;
-&lt;a href=&#34;http://docs.fluentd.org/v0.12/articles/install-by-deb&#34;&gt;Installing Fluentd Using deb Package | Fluentd&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ubuntu 16.04 なので下記で入れた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;プラグインのインストール&#34;&gt;プラグインのインストール&lt;/h3&gt;
-
-&lt;p&gt;td-agent-gem で slack のプラグインをインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ td-agent-gem install fluent-plugin-slack
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;設定ファイルの修正&#34;&gt;設定ファイルの修正&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/td-agent/td-agent.conf&lt;/code&gt; を下記のように修正。&lt;br /&gt;
-webhook の URL あらかじめ Slack 取得しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;source&amp;gt;
-  @type forward
-&amp;lt;/source&amp;gt;
-
-&amp;lt;match app.*&amp;gt;
-  type copy
-  &amp;lt;store&amp;gt;
-    @type file
-    path /var/log/app/web
-    time_slice_wait 10m
-    compress gzip
-  &amp;lt;/store&amp;gt;
-
-  &amp;lt;store&amp;gt;
-    @type rewrite_tag_filter
-    rewriterule1 severity FATAL app.fatal
-  &amp;lt;/store&amp;gt;
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match app.fatal&amp;gt;
-  @type slack
-  webhook_url https://hooks.slack.com/services/xxxxxxxxxxx
-  channel app_error
-  username ErrorBot
-  icon_emoji :astonished:
-  message_keys messages
-  flush_interval 5s
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match clear&amp;gt;
-  @type null
-&amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;再起動&#34;&gt;再起動&lt;/h3&gt;
-
-&lt;p&gt;td-agent を再起動する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ /etc/init.d/td-agent restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;rails&#34;&gt;rails&lt;/h2&gt;
-
-&lt;h3 id=&#34;gemfile&#34;&gt;Gemfile&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;act-fluent-logger-rails&lt;/code&gt; と &lt;code&gt;lograge&lt;/code&gt; をインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem &#39;act-fluent-logger-rails&#39;
-gem &#39;lograge&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;config-environments-production-rb&#34;&gt;config/environments/production.rb&lt;/h3&gt;
-
-&lt;p&gt;loggerの設定。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;config.log_level = :info
-config.logger = ActFluentLoggerRails::Logger.new
-config.lograge.enabled = true
-config.lograge.formatter = Lograge::Formatters::Json.new
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;config-fluent-logger-yml&#34;&gt;config/fluent-logger.yml&lt;/h3&gt;
-
-&lt;p&gt;fluent用の設定ファイル。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;production:
-  fluent_host:   &#39;127.0.0.1&#39;
-  fluent_port:   24224
-  tag:           &#39;app.web&#39;
-  messages_type: &#39;string&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;結果&#34;&gt;結果&lt;/h2&gt;
-
-&lt;p&gt;ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ tail -f /var/log/app/web.20170219.b548df17385a3a314
-2017-02-19T09:51:42+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;html\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:1534.33,\&amp;quot;view\&amp;quot;:1299.3,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
-2017-02-19T09:51:43+00:00       app.web    {&amp;quot;messages&amp;quot;:&amp;quot;{\&amp;quot;method\&amp;quot;:\&amp;quot;GET\&amp;quot;,\&amp;quot;path\&amp;quot;:\&amp;quot;/api/foo.json\&amp;quot;,\&amp;quot;format\&amp;quot;:\&amp;quot;json\&amp;quot;,\&amp;quot;controller\&amp;quot;:\&amp;quot;Api::FooController\&amp;quot;,\&amp;quot;action\&amp;quot;:\&amp;quot;index\&amp;quot;,\&amp;quot;status\&amp;quot;:200,\&amp;quot;duration\&amp;quot;:374.19,\&amp;quot;view\&amp;quot;:49.21,\&amp;quot;db\&amp;quot;:0.0}&amp;quot;,&amp;quot;severity&amp;quot;:&amp;quot;INFO&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/actindi/act-fluent-logger-rails&#34;&gt;actindi/act-fluent-logger-rails: Fluent logger&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.fluentd.org/datasources/rails&#34;&gt;Collecting and Analyzing Ruby on Rails Logs | Fluentd&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。 td-agent インストール td-agent のインストールは下記に書いてある通り。 Installing Fluentd Using deb Package | Fluentd Ubuntu 16.04 な</description>
     </item>
     
     <item>
@@ -570,96 +126,7 @@ config.lograge.formatter = Lograge::Formatters::Json.new
       <pubDate>Sat, 11 Feb 2017 15:53:29 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/</guid>
-      <description>
-
-&lt;p&gt;個人的に作ってるサイトを HTTPS 対応させてみた。&lt;br /&gt;
-iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-encrypt&#34;&gt;Let&amp;rsquo;s Encrypt&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://letsencrypt.jp/&#34;&gt;https://letsencrypt.jp/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;無料で証明書を用意できるので今回利用した。&lt;/p&gt;
-
-&lt;p&gt;curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。&lt;br /&gt;
-以下、実行例。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。&lt;/p&gt;
-
-&lt;p&gt;これで &lt;code&gt;/etc/letsencrypt/live/example.com/&lt;/code&gt; 以下に、証明書や秘密鍵が配置されるので(実際にはこれはシンボリックリンクなのだが)、これらのファイルを Nginx の設定で指定する。&lt;/p&gt;
-
-&lt;h2 id=&#34;iptables&#34;&gt;iptables&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/sysconfig/iptables&lt;/code&gt; を見て、80 と同様に 443 も許可されている事を確認しておく。&lt;br /&gt;
-されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。&lt;br /&gt;
-&lt;code&gt;sudo /sbin/iptables -L&lt;/code&gt; で設定を確認できる。最後に &lt;code&gt;iptables save&lt;/code&gt; するのを忘れずに。&lt;br /&gt;
-あとは iptables を再起動すると反映されるはず。&lt;/p&gt;
-
-&lt;h2 id=&#34;nginx&#34;&gt;Nginx&lt;/h2&gt;
-
-&lt;p&gt;実際の Nginx の設定は下記のようにした。&lt;br /&gt;
-http のリクエストは https にリダイレクトさせるようにした。&lt;br /&gt;
-（unicorn を使ってるのでその記述があるが今回の件には直接関係無い。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-nginx&#34;&gt;upstream unicorn {
-    server unix:/path/to/app/current/tmp/sockets/unicorn.sock;
-}
-
-server {
-    listen 80;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name example.com;
-
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers &amp;quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&amp;quot;;
-    access_log /var/log/nginx/example.com.access.log;
-    root /path/to/app/current/public;
-    try_files $uri @unicorn;
-
-    location ~ ^/assets/ {
-        root /path/to/app/shared/public;
-    }
-
-    location @unicorn {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://unicorn;
-    }
-
-    location /robots.txt {
-        alias /path/to/app/current/public/robots.txt;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;ssl-labs&#34;&gt;SSL LABS&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.ssllabs.com/ssltest/&#34;&gt;https://www.ssllabs.com/ssltest/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;SSL の設定確認できるサイト。&lt;br /&gt;
-以下のようになればうまくいっている。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://programming.wikihub.io/@r7kamura/20160702202711&#34;&gt;Let&amp;rsquo;s EncryptとAmazon LinuxとNginxでamakan.netをHTTPSに対応させた - Programming&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://nobuneko.com/blog/archives/2013/05/linux_centos_6_iptables_http_https.html&#34;&gt;Linux(CentOS 6) - iptablesの設定を変更し、http、httpsでのアクセスを許可する - r_nobuホームページ&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>個人的に作ってるサイトを HTTPS 対応させてみた。 iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。 Let&amp;rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意でき</description>
     </item>
     
     <item>
@@ -668,104 +135,7 @@ server {
       <pubDate>Sat, 31 Dec 2016 13:10:16 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/12/31/2016-summary/</guid>
-      <description>
-
-&lt;p&gt;自分用今年のまとめ。&lt;/p&gt;
-
-&lt;h2 id=&#34;英語&#34;&gt;英語&lt;/h2&gt;
-
-&lt;p&gt;自分の中で英語をやる機運が高まってきたので勉強始めた。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;夏あたりからオンライン英会話を週1,2回ペースでやって、オンサイトの英会話に週1ペースで行ってる。
-
-&lt;ul&gt;
-&lt;li&gt;自然言語の習得は毎日継続するのが良いらしいので毎日やるような習慣にしたい。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;あとはamazonで買った&lt;a href=&#34;https://www.amazon.co.jp/gp/product/0521734770/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=0521734770&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;英語圏の小学生用のテキスト&lt;/a&gt;をやってる。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;発表&#34;&gt;発表&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;7月の頭に1回だけ、その時会社でやってたログ収集の基盤とre:dashについて社外でLTした。
-
-&lt;ul&gt;
-&lt;li&gt;もっと発表していく予定だったけど、その後業務でやることが変わったりしてその余裕とかネタが取れなかった。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;業務&#34;&gt;業務&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;前半は去年の続きをやっていた感じだった。&lt;/li&gt;
-&lt;li&gt;後半は KPI 基盤のリプレースのプロジェクトのメインメンバーとして進めて、そのあと方針変更により別プロジェクトのメンバーになった。&lt;/li&gt;
-&lt;li&gt;12月には事業の開発チームに異動することとなった。
-
-&lt;ul&gt;
-&lt;li&gt;動きがあった方が学びは多いと思うが、やってる途中で止めないといけない事もあったりするのでそこの割り切りが必要になった。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;読書&#34;&gt;読書&lt;/h2&gt;
-
-&lt;p&gt;5月に Kindle Paperwhite 買ったらめっちゃ読書体験が良くなって以前より本が読みやすくなった。&lt;br /&gt;
-会社の技術書購入支援制度があるのもあって、読む本には困らなかった。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4798121967/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4798121967&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;エリック・エヴァンスのドメイン駆動設計 (IT Architects’Archive ソフトウェア開発の実践) &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4797376279/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4797376279&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く (Informatics &amp;amp;IDEA) &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4822284654/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4822284654&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;オブジェクト指向でなぜつくるのか 第2版&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B00I96CJWO/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00I96CJWO&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;ピープルウエア　第3版&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01GDS0994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01GDS0994&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B015DRJF8W/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B015DRJF8W&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;日本人の働き方の9割がヤバい件について&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B00HOTLXKQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B00HOTLXKQ&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;10年後の仕事のカタチ10のヒント&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4860641345/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4860641345&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;どんどん話すための瞬間英作文トレーニング&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4274217620/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4274217620&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;エクストリームプログラミング&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01D2UKPFE/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01D2UKPFE&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;Android実践プログラミング 現場で生まれた設計パターン&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/479813161X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=479813161X&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;実践ドメイン駆動設計 (Object Oriented SELECTION) &lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/B01L8SEVYI/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=B01L8SEVYI&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;オブジェクト指向設計実践ガイド ～Rubyでわかる 進化しつづける柔軟なアプリケーションの育て方&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4873117437/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4873117437&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;メタプログラミングRuby 第2版&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://leanpub.com/everydayrailsrspec-jp&#34;&gt;Everyday Rails - RSpecによるRailsテスト入門&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/gp/product/4163902309/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4163902309&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;火花&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;isucon&#34;&gt;isucon&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;今年も&lt;a href=&#34;http://blog.takady.net/blog/2016/09/21/isucon6-qualifier/&#34;&gt;予選落ち&lt;/a&gt;した。来年こそなんとかしたい。&lt;/li&gt;
-&lt;li&gt;日頃から web アプリケーションに関する技術的な知見を積み重ねていきたい。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;個人的な技術的興味&#34;&gt;個人的な技術的興味&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Android アプリ開発について勉強しようと思って、アプリを作ってみたりしてた。
-
-&lt;ul&gt;
-&lt;li&gt;軽くしかできてないのでもうちょっと深くやりたい。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;js というか React を触ってた。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;その他&#34;&gt;その他&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;メインのエディタを sublime text から RubyMine に完全に移行した。&lt;/li&gt;
-&lt;li&gt;プライベートのメールクライアントを gmail から inbox に移行した。&lt;/li&gt;
-&lt;li&gt;シンガポール、オランダ、ドイツに旅行に行った。
-
-&lt;ul&gt;
-&lt;li&gt;楽しかったからまた海外旅行行きたい。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;年初にやってたこととかについては「これも今年だったか」と思うくらいに過去な感じがする。&lt;br /&gt;
-来年の前半はアルゴリズムとデータ構造とかそういう基本的なところをちゃんと学び直したい。&lt;br /&gt;
-あと英語が面白くなってきたから引き続きやっていこう。&lt;/p&gt;
-</description>
+      <description>自分用今年のまとめ。 英語 自分の中で英語をやる機運が高まってきたので勉強始めた。 夏あたりからオンライン英会話を週1,2回ペースでやって、オンサ</description>
     </item>
     
     <item>
@@ -774,78 +144,7 @@ server {
       <pubDate>Fri, 09 Dec 2016 21:20:43 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/</guid>
-      <description>
-
-&lt;p&gt;rails で Custom validatior や Custom validation method を定義して、その中で &lt;code&gt;errors.add&lt;/code&gt; する際に、
-message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。&lt;br /&gt;
-結論としては、下記のように書くのがスッキリして良さそう。&lt;/p&gt;
-
-&lt;h2 id=&#34;custom-validators&#34;&gt;Custom Validators&lt;/h2&gt;
-
-&lt;p&gt;特定のモデルによらないエラーメッセージの場合は、下記のように &lt;code&gt;locales/en.yml&lt;/code&gt; を書くことで、&lt;code&gt;record.errors.add(attribute, :something_invalid)&lt;/code&gt;と書ける。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
-  errors:
-    messages:
-      something_invalid: Invalid something.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyCheckValidator &amp;lt; ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless check_something(value)
-      record.errors.add(attribute, :something_invalid)
-      #=&amp;gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ
-    end
-  end
-
-  def check_something(value)
-   # Something
-  end
-end
-
-class MyModel &amp;lt; ActiveRecord::Base
-  validates :name, my_check: true
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;custom-methods&#34;&gt;Custom Methods&lt;/h2&gt;
-
-&lt;p&gt;特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;en:
-  activerecord:
-    errors:
-      models:
-        my_model:
-          attributes:
-            start_date:
-              cannot_be_after_end_date: It cannot be after the end date.
-            end_date:
-              cannot_be_before_start_date: It cannot be before the start date.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class MyModel &amp;lt; ActiveRecord::Base
-  validate :start_date_cannot_be_after_end_date, if: -&amp;gt; { start_date.present? &amp;amp;&amp;amp; end_date.present? }
-
-  private
-
-  def start_date_cannot_be_after_end_date
-    return if start_date &amp;lt;= end_date
-
-    errors.add(:start_date, :cannot_be_after_end_date)
-    #=&amp;gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ
-    errors.add(:end_date, :cannot_be_before_start_date)
-    #=&amp;gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://guides.rubyonrails.org/active_record_validations.html&#34;&gt;Active Record Validations — Ruby on Rails Guides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>rails で Custom validatior や Custom validation method を定義して、その中で errors.add する際に、 message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。 結論としては、下記のよ</description>
     </item>
     
     <item>
@@ -854,50 +153,322 @@ end
       <pubDate>Wed, 21 Sep 2016 20:11:54 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/09/21/isucon6-qualifier/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/&#34;&gt;去年&lt;/a&gt;に引き続き、今年も同じメンバーで チームYashio として isucon6 予選に参加してきた。&lt;br /&gt;
-今回は去年の経験を活かして予選通過できそうな気がしていたけど、またしても結果は惨敗で非常に残念。&lt;/p&gt;
-
-&lt;h2 id=&#34;前日までの準備期間&#34;&gt;前日までの準備期間&lt;/h2&gt;
-
-&lt;p&gt;ちょうど1週間前あたりから、azure にアカウントを作って前回の予選の環境をデプロイして、
-3人で色々な改修・実装を試してベンチマーカーを回したりして楽しんでた。&lt;br /&gt;
-この一週間はとてもイイ感じで、N+1 を解消してみたり、DB のデータを redis にキャッシュしてみたり、3人で愚直にスコアを上げるのを楽しんでいて「なんかこれ今年は行けるんじゃない？！」みたいな雰囲気を感じてた。&lt;br /&gt;
-あと、去年はサーバ上で直接コード修正するなどしてしまい、メンバーが並行して実装する事が非常に困難だった反省から、ローカルでの開発環境構築と deploy の仕組みの整備を @muratayusuke が確立してくれて、当日もおおいに役立った。&lt;/p&gt;
-
-&lt;h2 id=&#34;当日&#34;&gt;当日&lt;/h2&gt;
-
-&lt;p&gt;今回はヒカリエの会場で参加。&lt;br /&gt;
-朝は若干の緊張と期待感で、部活の試合の日の朝っぽい感じだった。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_094840.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;10時に始まってからは、@muratayusuke が競技用のインスタンスの起動とか deploy 周りを整備したり、ruby 実装が起動するようにするなどした。&lt;br /&gt;
-@tatsuyaoiw がコードを読んだりアプリケーションを触って理解を進めてた。&lt;br /&gt;
-僕は、開発用として、マシンイメージを別の環境にデプロイしてインスタンスを起動して、そこの DB にローカルから接続できるように設定して、ローカルでアプリを動かすための設定をするなどした。&lt;br /&gt;
-ローカル環境で開発して本番に deploy できる環境が整ったのがだいたい11時過ぎくらい。&lt;/p&gt;
-
-&lt;p&gt;ruby 実装での最初のスコアは 1100 くらいだったけど、スコア安定しなくて大体 0 だった気がする。&lt;br /&gt;
-そこから @muratayusuke が nginx から static ファイル返してクライアントキャッシュ有効にしたり、 unicorn の worker 数増やしたりして 3000 くらいまで上げた。&lt;/p&gt;
-
-&lt;p&gt;stackprof の結果見てて、&lt;code&gt;#htmlify&lt;/code&gt; がとにかく遅いって事で @tatsuyaoiw と話したりして、正規表現を使わない実装にチャレンジしてみた。&lt;br /&gt;
-で、ここから何度か修正してはベンチマーカーを流して、「リンクがありません」エラーメッセージが出てそれを見て直してを繰り返して15時くらいまでひたすらやったんだけど、エラーが完全に取れなくて一人疲弊してきて、正規表現使わない実装は諦めて、keyword 一覧を redis から取ってきて、それを content に含まれてる keyword だけに限定して &lt;code&gt;gsub&lt;/code&gt; に渡すっていう修正にとどまった。&lt;br /&gt;
-これで 16,000 までは上がったけど、もはや上位陣との差が空いていて厳しい感じだった。&lt;/p&gt;
-
-&lt;p&gt;それから @tatsuyaoiw が user の情報を redis でキャッシュしたり isutar へのアクセス回数を減らしたり、@muratayusuke が nginx の設定変更とかもろもろやって 19,000 くらいが最高だった。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2016-09-21-isucon6-qualifier/IMG_20160917_180855.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;一つに時間掛け過ぎた。一時間くらいで諦めて他の方法とか箇所とかに切り替えた方が良かったと思う。&lt;br /&gt;
-終わってから3人で飲みに行って悔しがった。&lt;br /&gt;
-今回のお題は、スロークエリや N+1 みたいなものがほぼ無かったので、とにかく &lt;code&gt;#htmlify&lt;/code&gt; をなんとかしないとーっていう感じだった。&lt;br /&gt;
-そこでアルゴリズムの問題としてそれに向き合っていた時間が長すぎたんだけど、生成された html 自体をキャッシュするとかっていう方向でも良かったわけだし、そういう方針の切り替えができるような落ち着きの時間を持てると良さそう。&lt;br /&gt;
-予選後に飲みながら話してた時に「そういう方法があったね」って話になったから、本番中に一旦落ち着いていればそれを思い付いて実行出来てたかもなーって思った。&lt;br /&gt;
-来年こそは…！！&lt;/p&gt;
-</description>
+      <description>去年に引き続き、今年も同じメンバーで チームYashio として isucon6 予選に参加してきた。 今回は去年の経験を活かして予選通過できそうな気がしていたけ</description>
+    </item>
+    
+    <item>
+      <title>rails で FormObject を使う</title>
+      <link>https://blog.takady.net/blog/2016/08/29/rails-form-object/</link>
+      <pubDate>Mon, 29 Aug 2016 19:38:49 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/08/29/rails-form-object/</guid>
+      <description>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。 こういうフォ</description>
+    </item>
+    
+    <item>
+      <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
+      <link>https://blog.takady.net/blog/2016/07/23/soft-skills/</link>
+      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
+      <description>先月、日本語版が発売された直後に買って読んだ。 ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内</description>
+    </item>
+    
+    <item>
+      <title>10年後の仕事のカタチ10のヒント を読んだ</title>
+      <link>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
+      <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
+      <description>こちらのブログ記事 でオススメされていたので読んでみた。 対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃</description>
+    </item>
+    
+    <item>
+      <title>10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ</title>
+      <link>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
+      <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
+      <description>読んだ。 最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリュ</description>
+    </item>
+    
+    <item>
+      <title>nexus5 の画面が割れたので自分で交換した</title>
+      <link>https://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</link>
+      <pubDate>Sun, 15 May 2016 21:56:33 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</guid>
+      <description>3日前に nexus5 を落としてしまって画面が思いっきり割れてしまった。 端末の画面を割ってしまったのは初めてだったし、まだ買って半年だったのでとても残念</description>
+    </item>
+    
+    <item>
+      <title>自分の開発スピードを上げるには</title>
+      <link>https://blog.takady.net/blog/2016/05/02/more-productive/</link>
+      <pubDate>Mon, 02 May 2016 01:10:20 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/05/02/more-productive/</guid>
+      <description>新しい機能なりサービスを作った後に振り返ってみると、もっと上手くやれた気がするなーって思う。 もっと早く、質の良いものを作るにはどうすれば良い</description>
+    </item>
+    
+    <item>
+      <title>Android Studio で emacs キーバインドでコードを書く</title>
+      <link>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
+      <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
+      <description>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。 Android Studio には、Em</description>
+    </item>
+    
+    <item>
+      <title>2015年まとめ</title>
+      <link>https://blog.takady.net/blog/2015/12/31/2015-summary/</link>
+      <pubDate>Thu, 31 Dec 2015 19:50:01 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/12/31/2015-summary/</guid>
+      <description>簡単に振り返っとこう。 転職 5 月に転職した。 転職して１ヶ月経った | Yuichi Takada 新しい環境というのが一番自分を成長させてくれると思うし、今回もそう思った</description>
+    </item>
+    
+    <item>
+      <title>Raspberry Pi と温度センサーで自宅の温度を可視化</title>
+      <link>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</link>
+      <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
+      <description>この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 動機は 2年くらい前に買ったまま放置してた Raspberry</description>
+    </item>
+    
+    <item>
+      <title>rails で /users/:id ではなく /:username な routing にする方法</title>
+      <link>https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/</link>
+      <pubDate>Sun, 29 Nov 2015 23:06:56 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/</guid>
+      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/takady7 とか github.com/takady みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
+    </item>
+    
+    <item>
+      <title>オブジェクト指向における再利用のためのデザインパターン を読んだ</title>
+      <link>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</link>
+      <pubDate>Wed, 04 Nov 2015 20:45:35 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
+      <description>いわゆる GoF 本を読んだ。 動機 こういう設計に関する本は今まで読んだことがなくて、なんとなくそういうことは本で勉強するより実践から身につけるものな</description>
+    </item>
+    
+    <item>
+      <title>情熱プログラマー を読んだ</title>
+      <link>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</link>
+      <pubDate>Sun, 11 Oct 2015 21:01:24 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
+      <description>良い本だった。 さすが半谷さんオススメ本。 4: 一番の下手くそでいよう 13: 師匠を探す 手本となる人物の特長10個を重要度で並べて、その10項目それぞれ</description>
+    </item>
+    
+    <item>
+      <title>#isucon 5 予選で惨敗してきました</title>
+      <link>https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/</link>
+      <pubDate>Tue, 29 Sep 2015 00:05:00 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/</guid>
+      <description>isucon5 予選で惨敗しました。 出場の動機 isucon というものの存在を知ってから、とにかく出てみたいと思っていた。 年初くらいには @tatsuyaoiw に声を掛け快諾してくれていた</description>
+    </item>
+    
+    <item>
+      <title>WEB&#43;DB PRESS plus の DB 本 3冊を読んで index を学んだ</title>
+      <link>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</link>
+      <pubDate>Thu, 24 Sep 2015 18:43:39 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</guid>
+      <description>シルバーウィークに、この3冊を読んだ。 Webエンジニアのための データベース技術[実践]入門 (Software Design plus) RDBMS としては mysql を題材にしている。 インデックスか</description>
+    </item>
+    
+    <item>
+      <title>個人情報保護士認定試験を受験した</title>
+      <link>https://blog.takady.net/blog/2015/09/14/kojin-joho-hogo-shi/</link>
+      <pubDate>Mon, 14 Sep 2015 22:59:40 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/09/14/kojin-joho-hogo-shi/</guid>
+      <description>個人情報保護士認定試験 会社で必要になったので、9/13(日)に受験した。 下記の流れで2週間ほど勉強した。 公式テキストを読む 公式精選過去問題集</description>
+    </item>
+    
+    <item>
+      <title>YAPC::Asia 2015 に行ってきた</title>
+      <link>https://blog.takady.net/blog/2015/08/22/yapc-asia-2015/</link>
+      <pubDate>Sat, 22 Aug 2015 21:00:19 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/08/22/yapc-asia-2015/</guid>
+      <description>YAPC::Asia 2015 の前夜祭と2日目に行ってきた。 前夜祭 技術ブログを書くことについて語るときに僕の語ること ブログでブクマ数を稼ぐには、という話だった。 なるほ</description>
+    </item>
+    
+    <item>
+      <title>Rebuild Meetup に行ってきた</title>
+      <link>https://blog.takady.net/blog/2015/08/19/rebuild-meetup/</link>
+      <pubDate>Wed, 19 Aug 2015 23:35:36 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/08/19/rebuild-meetup/</guid>
+      <description>Rebuild Meetup 2015 - connpass 昨年のはじめに仙台に出張してる時から rebuild.fm 聴くようになって、プログラミング好きになって、仕事でも web アプリ書けるところに異動して、その後</description>
+    </item>
+    
+    <item>
+      <title>転職して１ヶ月経った</title>
+      <link>https://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/</link>
+      <pubDate>Sun, 05 Jul 2015 20:37:26 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/</guid>
+      <description>5月12日に転職して、1ヶ月くらい経った。 一万人規模の会社から、百人規模の会社に来たので、色々なものごとの距離感の近さが新鮮に感じられる。 さ</description>
+    </item>
+    
+    <item>
+      <title>bundle openでtmuxのpaneを開く</title>
+      <link>https://blog.takady.net/blog/2015/04/24/bundle-open-tmux/</link>
+      <pubDate>Fri, 24 Apr 2015 13:11:11 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/04/24/bundle-open-tmux/</guid>
+      <description>bundle openでgemのソースをエディタで開いたり，bundle showでgemのパスを見たりすることができるので，gemの挙動を知りたくてコー</description>
+    </item>
+    
+    <item>
+      <title>tmuxにpowerlineを導入した</title>
+      <link>https://blog.takady.net/blog/2015/04/20/powerline-config/</link>
+      <pubDate>Mon, 20 Apr 2015 16:54:18 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/04/20/powerline-config/</guid>
+      <description>powerlineの導入 下記の記事を参考にした． tmux - Powerline導入例 - Qiita フォントが綺麗に表示されない場合 自分の環境では，brew reinstall --powerline</description>
+    </item>
+    
+    <item>
+      <title>rubygems.orgに公開しているgemの名前を変更する</title>
+      <link>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</link>
+      <pubDate>Fri, 27 Mar 2015 00:56:07 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
+      <description>必要になったので調べてみた． 結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる． 調べた結</description>
+    </item>
+    
+    <item>
+      <title>標準出力のjson文字列を手軽にpretty printする</title>
+      <link>https://blog.takady.net/blog/2015/03/27/json-pp/</link>
+      <pubDate>Fri, 27 Mar 2015 00:41:40 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/03/27/json-pp/</guid>
+      <description>jq使えばいいんですが，入ってない時とかに． $ echo &#39;{ &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;, &amp;quot;test&amp;quot;: 10 }&#39; | python -mjson.tool { &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;, &amp;quot;test&amp;quot;: 10 }</description>
+    </item>
+    
+    <item>
+      <title>apache_log-parserを修正してBenchmarkをとってみた</title>
+      <link>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</link>
+      <pubDate>Wed, 11 Feb 2015 16:53:46 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
+      <description>takady/apache_log-parser 先週，とある機会に，とあるエンジニアの方が，僕が作ったapache_log-parserというrubyのgemに対してアドバイスをしてくれ</description>
+    </item>
+    
+    <item>
+      <title>embulk-plugin-sqlite3を作った</title>
+      <link>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</link>
+      <pubDate>Sun, 08 Feb 2015 22:17:00 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</guid>
+      <description>takady/embulk-plugin-sqlite3 embulkとは いわゆるbulk loaderと言われる並列にデータを移動させるためのプロダクトの一つ．embulkがユニークなのはinpu</description>
+    </item>
+    
+    <item>
+      <title>はじめてのcoreos/rocket</title>
+      <link>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</link>
+      <pubDate>Tue, 13 Jan 2015 19:46:35 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</guid>
+      <description>rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである. rocket/getting-started-guide.md at master</description>
+    </item>
+    
+    <item>
+      <title>2014年まとめ</title>
+      <link>https://blog.takady.net/blog/2014/12/31/2014-summary/</link>
+      <pubDate>Wed, 31 Dec 2014 19:26:56 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/31/2014-summary/</guid>
+      <description>今年はコードを書く楽しさを知った１年だった 去年までのコードをほとんど書いてなかった時間が悔やまれるけど、来年も前向きにいきたい よかったこと r</description>
+    </item>
+    
+    <item>
+      <title>facebook graph apiのAccess Tokenを取得するまで</title>
+      <link>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</link>
+      <pubDate>Mon, 29 Dec 2014 17:45:20 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
+      <description>OAuth2について、わかってたつもりでわかってないので、 nov/fb_graphを通して、facebook graph apiでAccess Token</description>
+    </item>
+    
+    <item>
+      <title>rubyのloggerをnewした後にログファイルを削除するとどうなるのか</title>
+      <link>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</link>
+      <pubDate>Sun, 07 Dec 2014 18:01:52 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</guid>
+      <description>この投稿はRuby Advent Calendar 2014の7日目の記事です。 rubyには標準添付ライブラリにloggerクラスがある。 そのloggerクラス、newし</description>
+    </item>
+    
+    <item>
+      <title>チームで情報をスタックするためのwikiの運用で気をつけていること</title>
+      <link>https://blog.takady.net/blog/2014/12/03/documentation/</link>
+      <pubDate>Wed, 03 Dec 2014 21:14:11 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/03/documentation/</guid>
+      <description>僕のいるチームではConfluenceを使っているが、一般的なwikiのようなものであれば適用できる話だと思う。 ちなみにこれは個人的に気をつ</description>
+    </item>
+    
+    <item>
+      <title>development環境だけbefore_actionをスキップする</title>
+      <link>https://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env/</link>
+      <pubDate>Wed, 03 Dec 2014 21:02:25 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env/</guid>
+      <description>最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、 たまにブラウザからGETリクエスト送ってサクッとjsonの中を見</description>
+    </item>
+    
+    <item>
+      <title>railsでmysqlのbooleanなカラムをエイリアスで扱う時の注意事</title>
+      <link>https://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/</link>
+      <pubDate>Tue, 02 Dec 2014 18:07:11 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/</guid>
+      <description>rails+mysqlな環境では、booleanで定義したカラムはtinyint(1)で作られ、中身はtrue/falseではなく、0/1が</description>
+    </item>
+    
+    <item>
+      <title>turnipを使ってシナリオテストを自動化</title>
+      <link>https://blog.takady.net/blog/2014/11/26/turnip/</link>
+      <pubDate>Wed, 26 Nov 2014 19:17:48 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/11/26/turnip/</guid>
+      <description>turnipは、シナリオテストを自然言語風のDSLで記述・実行させることができるruby製のツールです。 ここでは、wikipediaを開いて</description>
+    </item>
+    
+    <item>
+      <title>rubyのloggerでlogのヘッダを出力しない</title>
+      <link>https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</link>
+      <pubDate>Sat, 22 Nov 2014 13:11:18 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</guid>
+      <description>rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。</description>
+    </item>
+    
+    <item>
+      <title>railsで、複数の出力先にlogを出力する</title>
+      <link>https://blog.takady.net/blog/2014/11/21/rails-logger-broadcast/</link>
+      <pubDate>Fri, 21 Nov 2014 18:57:07 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/11/21/rails-logger-broadcast/</guid>
+      <description>railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。 前提 ruby 2.1.2 rails 4.1.4 方法 まず、複数の出力先にロギン</description>
+    </item>
+    
+    <item>
+      <title>Octopress</title>
+      <link>https://blog.takady.net/blog/2014/11/15/fist-of-octopress/</link>
+      <pubDate>Sat, 15 Nov 2014 15:52:35 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/blog/2014/11/15/fist-of-octopress/</guid>
+      <description>今更ながら、octopress使ってみる。 markdownで書いて、投稿がterminalからできるってのが良いです。</description>
     </item>
     
   </channel>

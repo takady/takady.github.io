@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Raspberrypi on Yuichi Takada</title>
+    <title>RaspberryPi on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/raspberrypi/</link>
-    <description>Recent content in Raspberrypi on Yuichi Takada</description>
+    <description>Recent content in RaspberryPi on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Fri, 18 Dec 2015 00:46:37 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/raspberrypi/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Raspberry Pi と温度センサーで自宅の温度を可視化</title>
@@ -16,168 +18,7 @@
       <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;この記事は &lt;a href=&#34;http://qiita.com/advent-calendar/2015/sansan&#34;&gt;Sansan Advent Calendar 2015&lt;/a&gt; の 18日目の記事です。&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 &lt;a href=&#34;https://github.com/focuslight/focuslight&#34;&gt;focusligt&lt;/a&gt; でグラフにした。&lt;br /&gt;
-動機は 2年くらい前に買ったまま放置してた Raspberry Pi に備わっている GPIO のことがずっと気になっていたから。&lt;/p&gt;
-
-&lt;h1 id=&#34;用意したもの&#34;&gt;用意したもの&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Raspberry Pi Model B&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://akizukidenshi.com/catalog/g/gM-06675/&#34;&gt;ADT7410使用 高精度・高分解能 I2C・16Bit 温度センサモジュール&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://akizukidenshi.com/catalog/g/gP-05294/&#34;&gt;ブレッドボード BB-801&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://akizukidenshi.com/catalog/g/gC-08932/&#34;&gt;ブレッドボード・ジャンパーコード（オス-メス） 15cm（黒）&lt;/a&gt; x 4本&lt;/li&gt;
-&lt;li&gt;&lt;a rel=&#34;nofollow&#34; href=&#34;http://www.amazon.co.jp/gp/product/B0016VDGIA/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B0016VDGIA&amp;linkCode=as2&amp;tag=takadayuichi-22&#34;&gt;goot 一般電気用はんだこて KS-30R&lt;/a&gt;&lt;img src=&#34;http://ir-jp.amazon-adsystem.com/e/ir?t=takadayuichi-22&amp;l=as2&amp;o=9&amp;a=B0016VDGIA&#34; width=&#34;1&#34; height=&#34;1&#34; border=&#34;0&#34; alt=&#34;&#34; style=&#34;border:none !important; margin:0px !important;&#34; /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a rel=&#34;nofollow&#34; href=&#34;http://www.amazon.co.jp/gp/product/B0029LGAJI/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=B0029LGAJI&amp;linkCode=as2&amp;tag=takadayuichi-22&#34;&gt;goot 高密度集積基板用はんだ SD-60&lt;/a&gt;&lt;img src=&#34;http://ir-jp.amazon-adsystem.com/e/ir?t=takadayuichi-22&amp;l=as2&amp;o=9&amp;a=B0029LGAJI&#34; width=&#34;1&#34; height=&#34;1&#34; border=&#34;0&#34; alt=&#34;&#34; style=&#34;border:none !important; margin:0px !important;&#34; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;工程&#34;&gt;工程&lt;/h1&gt;
-
-&lt;p&gt;まず Raspberry Pi の初期設定をした。&lt;br /&gt;
-詳細は割愛するが、RASPBIAN JESSIE の最新版を &lt;a href=&#34;https://www.raspberrypi.org/downloads/raspbian/&#34;&gt;Download Raspbian for Raspberry Pi&lt;/a&gt; からダウンロードして SD に焼き、本体を起動して設定。&lt;br /&gt;
-&lt;a href=&#34;https://www.raspberrypi.org/documentation/installation/installing-images/README.md&#34;&gt;公式のインストールガイド&lt;/a&gt;を参考にすれば問題ないと思われる。&lt;/p&gt;
-
-&lt;p&gt;次に、温度センサーをブレッドボードにつなぐために、付属のピンヘッダをはんだ付けする。&lt;br /&gt;
-小さいので、ブリッジしないように注意する。(15年ぶりくらいにやったけど意外と出来た)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5876.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5877.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;温度センサーを下記のようにブリッジボード経由で GND, VDD, SDA, SCL につなぐ。&lt;br /&gt;
-どのピンが何なのかは &lt;a href=&#34;https://www.raspberrypi.org/documentation/usage/gpio/&#34;&gt;こちら&lt;/a&gt;で確認。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/ADT7410_raspi_breadboard.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/IMG_5878.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;そして &lt;code&gt;/etc/modules&lt;/code&gt; に &lt;code&gt;i2c-bcm2708&lt;/code&gt; を追記する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ cat /etc/modules
-# /etc/modules: kernel modules to load at boot time.
-#
-# This file contains the names of kernel modules that should be loaded
-# at boot time, one per line. Lines beginning with &amp;quot;#&amp;quot; are ignored.
-
-i2c-dev
-i2c-bcm2708
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;/boot/config.txt&lt;/code&gt; を編集。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ sudo vim /boot/config.txt
-
-device_tree=bcm2708-rpi-b.dtb
-device_tree_param=i2c1=on
-device_tree_param=spi=on
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再起動。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ sudo reboot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでデバイスとつながった。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ sudo /usr/sbin/i2cdetect -y 1
-     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00:          -- -- -- -- -- -- -- -- -- -- -- -- --
-10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: -- -- -- -- -- -- -- -- 48 -- -- -- -- -- -- --
-50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: -- -- -- -- -- -- -- --
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;温度が取れているようだ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ sudo i2cdump -y 1 0x48
-No size specified (using byte-data access)
-     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f    0123456789abcdef
-00: 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c    ????????????????
-10: 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c    ????????????????
-20: 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 0c 00    ???????????????.
-30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは、 ruby の &lt;code&gt;i2c-devices&lt;/code&gt; という gem を利用して温度を取得するスクリプトを用意する。&lt;br /&gt;
-ちなみに ruby はデフォルトで入っている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ ruby -v
-ruby 2.1.5p273 (2014-11-13) [arm-linux-gnueabihf]
-
-pi@raspberrypi:~ $ sudo gem install i2c
-pi@raspberrypi:~ $ sudo gem install i2c-devices
-
-pi@raspberrypi:~ $ vim adt7410.rb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下記のような簡単なスクリプト。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;#!/usr/bin/env ruby
-
-require &#39;i2c/device/adt7410&#39;
-require &#39;i2c/driver/i2c-dev&#39;
-
-device = I2CDevice::ADT7410.new(driver: I2CDevice::Driver::I2CDev.new(&#39;/dev/i2c-1&#39;), address: 0x48)
-
-puts device.calculate_temperature.round
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;実行結果。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ ruby adt7410.rb
-26
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;この数値を 5分おきに focusligt に送るように crontab に設定する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pi@raspberrypi:~ $ crontab -l
-*/5 * * * * curl -d number=`ruby adt7410.rb` http://localhost/api/myhome/living/temperature &amp;gt;&amp;gt; /home/pi/cron.log 2&amp;gt;&amp;amp;1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ブラウザから見てみると。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/2015-12-18-raspberry-pi-with-adt7410/focuslight.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ちゃんと取れてる！&lt;/p&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;Raspberry Pi と adt7410 で室内の温度を測ってグラフにした。&lt;br /&gt;
-これで外出先から自宅の温度が確認できるようになった。&lt;br /&gt;
-IRkit と組み合わせることで、外出先からもエアコンの消し忘れに気づき、電源を OFF にすることができる。&lt;br /&gt;
-ハードウェアを使って何かするというの、かなりおもしろいものだなと思った。これからも電子工作してきたい。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.myu.ac.jp/~xkozima/lab/raspTutorial1.html&#34;&gt;こじ研（Raspberry Pi）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.raspberrypi.org/documentation/usage/gpio/&#34;&gt;GPIO: Raspberry Pi Models A and B - Raspberry Pi Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Dz8hQGo3YwQ&amp;amp;feature=youtu.be&#34;&gt;ウェッブエンジニアのローレベルプログラミング / cho45 - YouTube&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/cho45/ruby-i2c-devices&#34;&gt;cho45/ruby-i2c-devices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/MozOpenHard/examples/blob/master/i2c-ADT7410/ADT7410.fzz&#34;&gt;examples/ADT7410.fzz at master · MozOpenHard/examples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.e-ark.jp/2013/02/12/%E9%9B%BB%E5%AD%90%E5%9B%9E%E8%B7%AF%E8%A8%AD%E8%A8%88%E3%83%84%E3%83%BC%E3%83%AB-fritzing-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/&#34;&gt;電子回路設計ツール Fritzing を使ってみた | ε-ARK Project&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 動機は 2年くらい前に買ったまま放置してた Raspberry</description>
     </item>
     
   </channel>

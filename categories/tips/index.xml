@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tips on Yuichi Takada</title>
+    <title>tips on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/tips/</link>
-    <description>Recent content in Tips on Yuichi Takada</description>
+    <description>Recent content in tips on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Fri, 27 Mar 2015 00:41:40 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>標準出力のjson文字列を手軽にpretty printする</title>
@@ -16,15 +18,7 @@
       <pubDate>Fri, 27 Mar 2015 00:41:40 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/03/27/json-pp/</guid>
-      <description>&lt;p&gt;&lt;code&gt;jq&lt;/code&gt;使えばいいんですが，入ってない時とかに．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ echo &#39;{ &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;, &amp;quot;test&amp;quot;: 10 }&#39; | python -mjson.tool
-{
-    &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;,
-    &amp;quot;test&amp;quot;: 10
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>jq使えばいいんですが，入ってない時とかに． $ echo &#39;{ &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;, &amp;quot;test&amp;quot;: 10 }&#39; | python -mjson.tool { &amp;quot;foo&amp;quot;: &amp;quot;bar&amp;quot;, &amp;quot;test&amp;quot;: 10 }</description>
     </item>
     
   </channel>

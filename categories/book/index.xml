@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Book on Yuichi Takada</title>
+    <title>book on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/book/</link>
-    <description>Recent content in Book on Yuichi Takada</description>
+    <description>Recent content in book on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sat, 23 Jul 2016 10:33:25 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
@@ -16,16 +18,7 @@
       <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
-      <description>&lt;p&gt;先月、日本語版が発売された直後に買って読んだ。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B01GDS0994&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内容で、とてもおもしろかった。&lt;br /&gt;
-責任範囲を増やすことが自分にとってどういうメリットがあるのかとか、プロというのはどういうものかとか、なんなんだろうと思っていた事が語られていて、そういう事か〜っていう納得感が僕にはあった。&lt;br /&gt;
-読んで1ヶ月経って、ハイライトしたところなど読みなおしていたけど、改めて良い本だと思いました。&lt;/p&gt;
-
-&lt;p&gt;何度も読みなおすのが良さそう。&lt;/p&gt;
-</description>
+      <description>先月、日本語版が発売された直後に買って読んだ。 ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内</description>
     </item>
     
     <item>
@@ -34,38 +27,7 @@
       <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://tango-ruby.hatenablog.com/entry/2015/11/04/172930&#34;&gt;こちらのブログ記事&lt;/a&gt; でオススメされていたので読んでみた。&lt;br /&gt;
-対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=B00HOTLXKQ&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
-
-&lt;p&gt;印象に残ってるところ。&lt;/p&gt;
-
-&lt;h2 id=&#34;会社以外でのプロジェクト&#34;&gt;会社以外でのプロジェクト&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;「自分で決める、自分でリスクを背負う」っていうのは、会社で言われてことをやるのとは全く違うんです。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;東京とベトナムのピザ屋の話&#34;&gt;東京とベトナムのピザ屋の話&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;東京だともうすでに美味しいピザのお店がたくさんあって競合が多いし、初期の設備投資のお金もたくさん必要。&lt;/li&gt;
-&lt;li&gt;ベトナムにはまだ本格的なピザを食べられるお店があまりなかったので、同じくらいの実力でもベトナムでトップになれた。&lt;/li&gt;
-&lt;li&gt;トップになって儲かり始めるので、もっとクオリティが良くなり、飛び抜けていく。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;日本の中のものさしで測って怖がらない&#34;&gt;日本の中のものさしで測って怖がらない&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;イチローとか松井とか、安定した日本球界でのキャリアよりも大リーグに挑戦したのも、未知のものにトライするとワクワクするから。&lt;/li&gt;
-&lt;li&gt;なんとかなる。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>こちらのブログ記事 でオススメされていたので読んでみた。 対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃</description>
     </item>
     
     <item>
@@ -74,41 +36,7 @@
       <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
-      <description>
-
-&lt;p&gt;読んだ。&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4797376279&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリューム自体は重くなく、数時間で読めた。&lt;/p&gt;
-
-&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
-
-&lt;p&gt;第1部の SQL 初級入門な章は流し読みした。&lt;/p&gt;
-
-&lt;p&gt;第2部以降、下記のような話が網羅されていて参考になった。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;データソース層、DWH層、データマート層の3層構造&lt;/li&gt;
-&lt;li&gt;オンプレミスとクラウドサービス利用のトレードオフ&lt;/li&gt;
-&lt;li&gt;ディメンションテーブル（スタースキーマ）&lt;/li&gt;
-&lt;li&gt;ETL と ELT&lt;/li&gt;
-&lt;li&gt;DWH 向けデータベース製品のそれぞれの特長の説明（BigQueryやHadoop含む）&lt;/li&gt;
-&lt;li&gt;データ構築のバッチは処理の粒度を細かくして冪等に作ろうって話&lt;/li&gt;
-&lt;li&gt;差分更新・全件更新の話&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;あとテストの話も書いてはあるが、SQLが正常に動くことや件数が正しいことのテストだった。&lt;br /&gt;
-実際にデータの内容が正しいかのテストがデータ基盤のテストとしては最も重要だけど方法として確立されたものは聞いたことがないので、その辺についてなにか書いてくれてることを期待してた。この本に載っていないということは、まだそういうテスト手法は出てきてないのかもしれない。&lt;/p&gt;
-
-&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
-
-&lt;p&gt;2011年から2013年くらいまでひたすらバッチで Hadoop にデータを入れてそれを HiveQL で集計・抽出という業務をやっていた時期があって、その時に感じていたことやみんなで考えていたような事が書かれていたりして懐かしく思ったし、当時の自分たちの方法が肯定される記述も多くて良かったと思った。&lt;br /&gt;
-当時はこういう大規模データ運用現場に関する知見があまり出回ってなかった気がする。（Hadoop とかビックデータという言葉はやたらバズっていたが。&lt;br /&gt;
-あの時この本読んでたらなーとも思った。&lt;/p&gt;
-
-&lt;p&gt;データ分析基盤を作っている人やこれから作っていこうとしている人にとって本書はとても良いものだとおもいました。&lt;/p&gt;
-</description>
+      <description>読んだ。 最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリュ</description>
     </item>
     
     <item>
@@ -117,57 +45,7 @@
       <pubDate>Wed, 04 Nov 2015 20:45:35 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
-      <description>
-
-&lt;p&gt;いわゆる GoF 本を読んだ。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4797311126&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;h1 id=&#34;動機&#34;&gt;動機&lt;/h1&gt;
-
-&lt;p&gt;こういう設計に関する本は今まで読んだことがなくて、なんとなくそういうことは本で勉強するより実践から身につけるものなんだろうという考えがあったんだけど、チームリーダーからそういう本も読んでみたらいいよと言われたこともあり、どうせ読むなら一番ベタなやつをということでこの本を選んだ。&lt;/p&gt;
-
-&lt;h1 id=&#34;感想&#34;&gt;感想&lt;/h1&gt;
-
-&lt;p&gt;書いてあるパターンには、よく知っているものから、よくわからないものまであった。&lt;br /&gt;
-今までなんとなく書いていた書き方に、oo パターンという名前が付いたような感じ。&lt;br /&gt;
-ただ、違いがいまいち理解出来ないものもあったりして、引き続き勉強しないとなと思った。&lt;/p&gt;
-
-&lt;p&gt;役に立ちそうなところとか、良かったと思ったことはこの辺だろうか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;共通の設計用語が身につく&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;oo パターンという名前によって伝えられるので、他の人にも伝えやすい。&lt;/li&gt;
-&lt;li&gt;他の開発者とのコミュニケーションの助けになると思う。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;先人の知恵を借りられる&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;実践の中でぼんやりと見えてくるであろう良い設計というものが、この本を読むことで学べた。かもしれない。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;リファクタリングの道すじを考えやすくなる&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;そもそも最初からデザインパターンを適用して設計すれば、リファクタリングの必要性すら減るのかもしれない。&lt;/li&gt;
-&lt;li&gt;既存のコードに対してリファクタリングをする際には、デザインパターンを適用出来ないか検討してみたい。拡張・保守しやすいものにするために。&lt;/li&gt;
-&lt;li&gt;もちろんそれを振りかざしてはいけないと思う。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;実際に開発をするときには rails などのフレームワークを使うことがほぼ 100% なわけで、そのフレームワークが自然に求める書き方をするべきだと思っている。そうしないとそのフレームワークを選ぶ意味が無いから。同じように言語自体の特性というものもあるだろう。&lt;br /&gt;
-言語、フレームワークとデザインパターンを上手く使いこなしていきたいし、アイデアの引き出しを増やす意味でもこの本を読んだ意味があったと思う。&lt;/p&gt;
-
-&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
-
-&lt;p&gt;サンプルが C++ なのがつらくて、Ruby で書いてあるものを探したら &lt;a rel=&#34;nofollow&#34; href=&#34;http://www.amazon.co.jp/gp/product/4894712857/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=247&amp;creative=1211&amp;creativeASIN=4894712857&amp;linkCode=as2&amp;tag=takadayuichi-22&#34;&gt;Rubyによるデザインパターン&lt;/a&gt;&lt;img src=&#34;http://ir-jp.amazon-adsystem.com/e/ir?t=takadayuichi-22&amp;l=as2&amp;o=9&amp;a=4894712857&#34; width=&#34;1&#34; height=&#34;1&#34; border=&#34;0&#34; alt=&#34;&#34; style=&#34;border:none !important; margin:0px !important;&#34; /&gt; という本が見つかったが、残念ながら絶版になっていた。&lt;br /&gt;
-web 上の記事としては &lt;a href=&#34;http://morizyun.github.io/blog/ruby-design-pattern-matome-mokuzi/&#34;&gt;Ruby 2.0.0で学ぶ、14個のデザインパターンを作りました[GoF][Design Pattern] - 酒と泪とRubyとRailsと&lt;/a&gt; がかなり参考になった。&lt;/p&gt;
-</description>
+      <description>いわゆる GoF 本を読んだ。 動機 こういう設計に関する本は今まで読んだことがなくて、なんとなくそういうことは本で勉強するより実践から身につけるものな</description>
     </item>
     
     <item>
@@ -176,38 +54,7 @@ web 上の記事としては &lt;a href=&#34;http://morizyun.github.io/blog/ruby
       <pubDate>Sun, 11 Oct 2015 21:01:24 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
-      <description>&lt;p&gt;良い本だった。&lt;br /&gt;
-さすが半谷さんオススメ本。&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;4: 一番の下手くそでいよう&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;13: 師匠を探す&lt;br /&gt;
-手本となる人物の特長10個を重要度で並べて、その10項目それぞれに対して、師匠は自分に10点中何点をつけるか考える。重要度から自分の評価点数を引いた値が高いものから順に、今すぐ始められる具体的なリストをまとめていく。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;15: 一に練習、ニに練習&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;27: 保守作業の真価を知る&lt;br /&gt;
-測定、改善、測定。そのうちゲームみたいに楽しくなってくるだろう。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;38: 世界を変えよう&lt;br /&gt;
-職場で自分が目撃した聖戦をリストにまとめる。まるで使命を帯びているように見えた人はいなかっただろうか。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;39: 業界で名前を売ろう&lt;br /&gt;
-ブログを始めよう。10分か20分で書けそうな話題で。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;48: 市場に気を配る&lt;br /&gt;
-今後1年間、アルファギークの仲間入りをすべく努力してみよう。あるいは、少なくともアルファギークの友達を一人作ろう。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;意外とキャリア戦略的な要素も入ってた。&lt;br /&gt;
-あと、米国とインドの話と、Jave と .NET の話がちょいちょい出てきたのが印象に残った。&lt;br /&gt;
-たまに読み返すのが良さそう。&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4274067939&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-</description>
+      <description>良い本だった。 さすが半谷さんオススメ本。 4: 一番の下手くそでいよう 13: 師匠を探す 手本となる人物の特長10個を重要度で並べて、その10項目それぞれ</description>
     </item>
     
     <item>
@@ -216,135 +63,7 @@ web 上の記事としては &lt;a href=&#34;http://morizyun.github.io/blog/ruby
       <pubDate>Thu, 24 Sep 2015 18:43:39 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</guid>
-      <description>
-
-&lt;p&gt;シルバーウィークに、この3冊を読んだ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.amazon.co.jp/gp/product/4774150207/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774150207&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;Webエンジニアのための データベース技術[実践]入門 (Software Design plus)&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;RDBMS としては mysql を題材にしている。&lt;/li&gt;
-&lt;li&gt;インデックスから my.cnf の項目の説明や mysql のソースコードを読む所まで、 mysql をメインに書かれている。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.amazon.co.jp/gp/product/4774171972/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774171972&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;理論から学ぶデータベース実践入門 ~リレーショナルモデルによる効率的なSQL (WEB+DB PRESS plus)&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;RDBMS の構造や設計についても書かれていて、正規化理論や NULL について、またインデックスの設計戦略までカバーされている。&lt;/li&gt;
-&lt;li&gt;個別の RDBMS 製品に偏った記載はほぼ無い。&lt;/li&gt;
-&lt;li&gt;著者は、&lt;a href=&#34;http://nippondanji.blogspot.jp/&#34;&gt;漢(オトコ)のコンピュータ道&lt;/a&gt; の人。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.amazon.co.jp/gp/product/4774173010/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=247&amp;amp;creative=1211&amp;amp;creativeASIN=4774173010&amp;amp;linkCode=as2&amp;amp;tag=takadayuichi-22&#34;&gt;SQL実践入門──高速でわかりやすいクエリの書き方 (WEB+DB PRESS plus)&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;SQL と実行計画を主軸に、効果的な SQL の書き方、実行計画の見方などについて書かれている。&lt;/li&gt;
-&lt;li&gt;クエリと実行計画のサンプルには、 Oracle と PostgresQL のものが使われている。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;特に index について知りたかったのでその辺まとめとく。&lt;/p&gt;
-
-&lt;h1 id=&#34;b-tree&#34;&gt;B+Tree&lt;/h1&gt;
-
-&lt;p&gt;RDBMS の index で最も使われている。&lt;br /&gt;
-データ構造が木みたいに、ルート、ブランチ、リーフから成っている。&lt;br /&gt;
-B+Tree は B-Tree と違って、必ずリーフノードに値を持つ。ブランチノードがコンパクトになり、検索の効率が良いらしい。&lt;/p&gt;
-
-&lt;h1 id=&#34;index-を貼ることのデメリット&#34;&gt;index を貼ることのデメリット&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;更新処理が遅くなる&lt;/li&gt;
-&lt;li&gt;データ量が増える&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;index-をはらない方が良いケース&#34;&gt;index をはらない方が良いケース&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;データ件数が少ないテーブル&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;index を参照してからデータ領域を参照することになるので、データ件数が少ない場合は逆にテーブルフルスキャンの方が速い。&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;値のばらつきが少ないカラム&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;boolean なカラムのように取りうる値にバラつきが少ないカラムや、大半のレコードに同じ値が入っているカラムには、 index を貼っても効果が少ない。逆に、1件に絞り込めるような値が入っているカラムは、インデックスが有効に作用する。&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;値のバラつきのことをカーディナリティ（集合の濃度）という。&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;index-は前方一致に対してのみ有効&#34;&gt;index は前方一致に対してのみ有効&lt;/h1&gt;
-
-&lt;p&gt;これは index 有効。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * WHERE name LIKE &#39;高田%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これは index 効かない。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * WHERE name LIKE &#39;%祐一&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;演算や関数にかけてしまうと-index-は効かない&#34;&gt;演算や関数にかけてしまうと index は効かない&lt;/h1&gt;
-
-&lt;p&gt;col1 に index を貼っていても、下記のクエリは index が効かない。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * WHERE col1 * 10 &amp;gt; 123;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;index を効かせたい場合は、こうする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * WHERE col1 &amp;gt; 123 / 10;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;マルチカラムインデックスでは-カラムの順番も意味がある&#34;&gt;マルチカラムインデックスでは、カラムの順番も意味がある&lt;/h1&gt;
-
-&lt;p&gt;下記のクエリに対して効果的な index は、(col1, col2) ではなく (col2, col1) な index である。&lt;br /&gt;
-index が前方一致な事を思い出す。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * WHERE col1 &amp;gt; 100 AND col2 = 3;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;index-オンリースキャン&#34;&gt;index オンリースキャン&lt;/h1&gt;
-
-&lt;p&gt;index を貼ると、index を見てから、データ領域を参照する事になる。&lt;br /&gt;
-しかし、index の参照だけで取得できるようなクエリだと、データ領域への参照が必要無いのでさらに高速になる。&lt;br /&gt;
-(col1, col2) というindex を貼ってあるテーブル tbl に対して、下記のクエリを発行すると、index の参照だけで済む。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT col1, col2 FROM tbl WHERE col1 = 1 AND col2 &amp;gt; 100;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;集計関数の場合も、うまく使えば index だけで済ませられる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT COUNT(1) FROM tbl WHERE col1 = 1 AND col2 &amp;gt; 100;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;b-tree-はキーの順にソートされて格納されている&#34;&gt;B+Tree はキーの順にソートされて格納されている&lt;/h1&gt;
-
-&lt;p&gt;index のキーはソートされているので、name に index があるテーブルに、下記のようなクエリを発行すると範囲検索とソートの両方にインデックスが使われるので高速。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;SELECT * FROM tbl WHERE name LIKE &#39;高田%&#39; ORDER BY name;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;index という概念が導入される前の hiveQL を長年使っていたので、 SQL は書けるけど index に対しては理解弱かったので、勉強になった。&lt;br /&gt;
-頭の中で B+Tree をイメージすると、効果的な index をイメージしやすい気がする。&lt;br /&gt;
-あと、前方一致の特徴などからも やはり index は、本の索引をイメージするとわかりやすい。&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;&lt;/p&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4774150207&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4774171972&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-
-&lt;iframe src=&#34;http://rcm-fe.amazon-adsystem.com/e/cm?t=takadayuichi-22&amp;o=9&amp;p=8&amp;l=as1&amp;asins=4774173010&amp;ref=qf_sp_asin_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr&#34; style=&#34;width:120px;height:240px;&#34; scrolling=&#34;no&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
-</description>
+      <description>シルバーウィークに、この3冊を読んだ。 Webエンジニアのための データベース技術[実践]入門 (Software Design plus) RDBMS としては mysql を題材にしている。 インデックスか</description>
     </item>
     
   </channel>

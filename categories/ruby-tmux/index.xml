@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ruby Tmux on Yuichi Takada</title>
+    <title>ruby tmux on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/ruby-tmux/</link>
-    <description>Recent content in Ruby Tmux on Yuichi Takada</description>
+    <description>Recent content in ruby tmux on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Fri, 24 Apr 2015 13:11:11 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/ruby-tmux/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/ruby-tmux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>bundle openでtmuxのpaneを開く</title>
@@ -16,42 +18,7 @@
       <pubDate>Fri, 24 Apr 2015 13:11:11 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/04/24/bundle-open-tmux/</guid>
-      <description>
-
-&lt;p&gt;&lt;code&gt;bundle open&lt;/code&gt;でgemのソースをエディタで開いたり，&lt;code&gt;bundle show&lt;/code&gt;でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．&lt;br /&gt;
-便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export BUNDLER_EDITOR=&amp;quot;tmux split-window -c&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記を&lt;code&gt;~/.zshrc&lt;/code&gt;あたりに定義して，コマンドラインで&lt;code&gt;bundle open&lt;/code&gt;を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bundle open activerecord
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;bundle-openを上書きしたくない場合&#34;&gt;bundle openを上書きしたくない場合&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;bundle open&lt;/code&gt;の挙動はそのまま残したいという場合には，&lt;code&gt;BUNDLER_EDITOR&lt;/code&gt;で設定するのではなく，下記のような関数を別途定義して使うと良い．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function bundle_open_tmux() {
-    if [ -n &amp;quot;$1&amp;quot; ]; then
-        local dir=$(bundle show &amp;quot;$1&amp;quot;)
-        tmux split-window -c &amp;quot;$dir&amp;quot;
-    fi
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下記のように実行すると，同じように動作する．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bundle_open_tmux activerecord
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://rebuild.fm/41/&#34;&gt;Rebuild: 41: Kids These Days Don&amp;rsquo;t Know Shell (Naoya Ito)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>bundle openでgemのソースをエディタで開いたり，bundle showでgemのパスを見たりすることができるので，gemの挙動を知りたくてコー</description>
     </item>
     
   </channel>

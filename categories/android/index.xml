@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on Yuichi Takada</title>
+    <title>android on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/android/</link>
-    <description>Recent content in Android on Yuichi Takada</description>
+    <description>Recent content in android on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Wed, 27 Jan 2016 23:15:54 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Android Studio で emacs キーバインドでコードを書く</title>
@@ -16,30 +18,7 @@
       <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
-      <description>&lt;p&gt;Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。&lt;br /&gt;
-Android Studio には、Emacs キーバインドの設定が元々用意されているのでそれを使った。&lt;br /&gt;
-普段は Karabinar を使って Emacs キーバインドにしているからそれで良いかとも思ったけど、IDE 側のキーバインドと競合したりしてつらいので Android Studio の時は Karabinar が OFF になるようにして Android Studio のキーバインド設定を使うことにした。&lt;/p&gt;
-
-&lt;p&gt;まず Karabinar の Emacs キーバインドの設定を Android Studio の時は無効になるようにする。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/tekezo/Karabiner/blob/version_10.15.0/src/core/server/Resources/replacementdef.xml#L104-L114&#34;&gt;ここの設定&lt;/a&gt; を private.xml でこんな感じに上書きした。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;  &amp;lt;replacementdef&amp;gt;
-    &amp;lt;replacementname&amp;gt;EMACS_MODE_IGNORE_APPS&amp;lt;/replacementname&amp;gt;
-    &amp;lt;replacementvalue&amp;gt;
-      EMACS,
-      REMOTEDESKTOPCONNECTION,
-      TERMINAL,
-      VI,
-      VIRTUALMACHINE,
-      X11,
-      ANDROID_STUDIO,
-    &amp;lt;/replacementvalue&amp;gt;
-  &amp;lt;/replacementdef&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;書き換えたら Karabinar の Preference で Reload XML すれば設定が反映される。&lt;br /&gt;
-次に Android Studio の Preference &amp;gt; Keymap で &lt;code&gt;Keymaps: Emacs&lt;/code&gt; に設定すれば OK。&lt;/p&gt;
-</description>
+      <description>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。 Android Studio には、Em</description>
     </item>
     
   </channel>

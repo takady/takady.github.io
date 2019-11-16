@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ruby Embulk on Yuichi Takada</title>
+    <title>ruby embulk on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/ruby-embulk/</link>
-    <description>Recent content in Ruby Embulk on Yuichi Takada</description>
+    <description>Recent content in ruby embulk on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sun, 08 Feb 2015 22:17:00 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/ruby-embulk/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/ruby-embulk/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>embulk-plugin-sqlite3を作った</title>
@@ -16,100 +18,7 @@
       <pubDate>Sun, 08 Feb 2015 22:17:00 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/takady/embulk-plugin-sqlite3&#34;&gt;takady/embulk-plugin-sqlite3&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;embulkとは&#34;&gt;embulkとは&lt;/h1&gt;
-
-&lt;p&gt;いわゆるbulk loaderと言われる並列にデータを移動させるためのプロダクトの一つ．embulkがユニークなのはinput/outputなどの部分がpluggableになっている点．&lt;br /&gt;
-つまり，データの移動に際して発生するリソースへの接続処理の実装や，データのクレンジング・フォーマット変換，その他必要になる雑多な処理をプラグインという形で定義しておくことで，再利用しやすくなるというわけ．&lt;/p&gt;
-
-&lt;h2 id=&#34;fluentdとの違い&#34;&gt;Fluentdとの違い&lt;/h2&gt;
-
-&lt;p&gt;同じくTreasure Data社が開発しているFluentdも，input/outputのpluginをrubyで書けるなど，一見同じ感じである．&lt;br /&gt;
-ただ，Fluentdのユースケースは&lt;strong&gt;リアルタイム&lt;/strong&gt;にlogを流すという部分であり，一方でembulkは&lt;strong&gt;バッチ処理&lt;/strong&gt;でデータをimport/exportする用途にフォーカスしているというところに違いがある．&lt;/p&gt;
-
-&lt;h1 id=&#34;導入&#34;&gt;導入&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/embulk/embulk&#34;&gt;embulkのREADME.md&lt;/a&gt;にはjarをdownloadしてきて使う方法だけが書かれているが，普通にrubygems.orgにリリースされているので&lt;code&gt;gem install&lt;/code&gt;で入れられる．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ gem install embulk
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そして，&lt;code&gt;embulk gem install&lt;/code&gt;でpluginをinstallする．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ embulk gem install embulk-plugin-sqlite3
-Fetching: jdbc-sqlite3-3.8.7.gem (100%)
-Successfully installed jdbc-sqlite3-3.8.7
-Fetching: embulk-plugin-sqlite3-0.0.1.gem (100%)
-Successfully installed embulk-plugin-sqlite3-0.0.1
-2 gems installed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;実行&#34;&gt;実行&lt;/h1&gt;
-
-&lt;p&gt;今回はexampleのcsvファイルを，sqlite3のテーブルにloadしてみる.&lt;/p&gt;
-
-&lt;p&gt;下記で，exampleのcsvファイルを生成する．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ embulk example /tmp
-$ embulk guess /tmp/example.yml -o /tmp/config.yml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;/tmp/config.yml&lt;/code&gt;のoutputの設定を下記のように修正する．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;out:
-  type: sqlite3
-  database: &#39;/tmp/test.db&#39;
-  table: &#39;load01&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;embulk run&lt;/code&gt;する．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ embulk run /tmp/config.yml
-2015-02-08 22:29:38,623 [INFO]: main:org.embulk.standards.LocalFileInputPlugin: Listing local files with prefix &#39;/tmp/csv&#39;
-2015-02-08 22:29:38,885 [INFO]: main:org.embulk.exec.LocalExecutor: Running 1 tasks using 8 local threads
-2015-02-08 22:29:38,885 [INFO]: main:org.embulk.exec.LocalExecutor: {done:  0 / 1, running: 0}
-2015-02-08 22:29:39,035 [INFO]: main:org.embulk.exec.LocalExecutor: {done:  1 / 1, running: 0}
-Output finished. Commit reports = [{&amp;quot;records&amp;quot;:4}]
-2015-02-08 22:29:39,041 [INFO]: main:org.embulk.command.Runner: next config: {&amp;quot;in&amp;quot;:{},&amp;quot;out&amp;quot;:{}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;テーブルの中身を確認すると，insertできていることがわかる．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sqlite3 /tmp/test.db
-SQLite version 3.7.13 2012-07-17 17:46:21
-Enter &amp;quot;.help&amp;quot; for instructions
-Enter SQL statements terminated with a &amp;quot;;&amp;quot;
-sqlite&amp;gt; .schema load01
-CREATE TABLE load01(`id` integer,`account` integer,`time` text,`purchase` text,`comment` text);
-sqlite&amp;gt; select * from load01;
-1|32864|2015-01-27 19:23:49 UTC|2015-01-27 00:00:00 UTC|embulk
-2|14824|2015-01-27 19:01:23 UTC|2015-01-27 00:00:00 UTC|embulk jruby
-3|27559|2015-01-28 02:20:02 UTC|2015-01-28 00:00:00 UTC|embulk core
-4|11270|2015-01-29 11:54:36 UTC|2015-01-29 00:00:00 UTC|Embulk &amp;quot;csv&amp;quot; parser plugin
-sqlite&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;embulk自体がjrubyで書かれており，pluginでC拡張のgemは使えないみたい．&lt;br /&gt;
-なので，DB接続する場合はjdbc-sqlite3などのgemを使うことになる．(間違ってたら指摘お願いします)&lt;br /&gt;
-あと，pluginの作り方のベスト・プラクティスがまだわからない．&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/embulk/embulk&#34;&gt;embulk/embulk&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dev.classmethod.jp/tool/embulk-ataglance/&#34;&gt;Treasure Dataの新データ転送ツールEmbulkを触ってみた #dtm_meetup ｜ Developers.IO&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/frsyuki/embuk-making-data-integration-works-relaxed&#34;&gt;Embulk, an open-source plugin-based parallel bulk data loader&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/frsyuki/embulk-plugin-postgres-json&#34;&gt;frsyuki/embulk-plugin-postgres-json&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/takebayashi/embulk-plugin-input-hbase&#34;&gt;takebayashi/embulk-plugin-input-hbase&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/jruby/activerecord-jdbc-adapter&#34;&gt;jruby/activerecord-jdbc-adapter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://bitbucket.org/xerial/sqlite-jdbc/overview&#34;&gt;xerial / sqlite-jdbc — Bitbucket&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>takady/embulk-plugin-sqlite3 embulkとは いわゆるbulk loaderと言われる並列にデータを移動させるためのプロダクトの一つ．embulkがユニークなのはinpu</description>
     </item>
     
   </channel>

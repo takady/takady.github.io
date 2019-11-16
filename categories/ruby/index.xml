@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ruby on Yuichi Takada</title>
+    <title>ruby on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/ruby/</link>
-    <description>Recent content in Ruby on Yuichi Takada</description>
+    <description>Recent content in ruby on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Sun, 19 Mar 2017 17:36:07 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ruby の文字列マッチ判定のパフォーマンス</title>
@@ -16,56 +18,7 @@
       <pubDate>Sun, 19 Mar 2017 17:36:07 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</guid>
-      <description>&lt;p&gt;下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;部分文字列が含まれているか&lt;/li&gt;
-&lt;li&gt;指定の文字列で始まっているか&lt;/li&gt;
-&lt;li&gt;指定の文字列で終わっているか&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;String のメソッドの方がパフォーマンスが良い。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ruby benchmarker.rb
-                           user     system      total        real
-[string]include        0.110000   0.000000   0.110000 (  0.116923)
-[regexp]include        0.230000   0.000000   0.230000 (  0.229775)
-[string]start_with     0.090000   0.010000   0.100000 (  0.087478)
-[regexp]start_with     0.230000   0.000000   0.230000 (  0.234467)
-[string]end_with       0.090000   0.000000   0.090000 (  0.091226)
-[regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;コード。&lt;br /&gt;
-生成コストが入らないように定数で宣言したものでベンチマーク取った。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;benchmark&#39;
-
-n = 1_000_000
-
-TEST = &#39;test&#39;.freeze
-TE = &#39;te&#39;.freeze
-ST = &#39;st&#39;.freeze
-REGEXP_TEST = /test/.freeze
-REGEXP_TE = /\Ate/.freeze
-REGEXP_ST = /st\z/.freeze
-
-Benchmark.bm(20) do |b|
-  b.report(&#39;[string]include&#39;) { (1..n).each { TEST.include?(TE) } }
-  b.report(&#39;[regexp]include&#39;) { (1..n).each { REGEXP_TEST === TEST } }
-  b.report(&#39;[string]start_with&#39;) { (1..n).each { TEST.start_with?(TE) } }
-  b.report(&#39;[regexp]start_with&#39;) { (1..n).each { REGEXP_TE === TEST } }
-  b.report(&#39;[string]end_with&#39;) { (1..n).each { TEST.end_with?(ST) } }
-  b.report(&#39;[regexp]end_with&#39;) { (1..n).each { REGEXP_ST === TEST } }
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちなみに、&lt;code&gt;start_with?&lt;/code&gt;、 &lt;code&gt;end_with?&lt;/code&gt; は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;[1] pry(main)&amp;gt; &#39;test&#39;.start_with?(&#39;ab&#39;, &#39;te&#39;)
-=&amp;gt; true
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク</description>
     </item>
     
     <item>
@@ -74,28 +27,7 @@ end
       <pubDate>Fri, 27 Mar 2015 00:56:07 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
-      <description>
-
-&lt;p&gt;必要になったので調べてみた．&lt;br /&gt;
-結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．&lt;br /&gt;
-調べた結果，自分は下記の方法をとった．&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;新しい名前のgemのコードを用意する．既存repositoryをrenameする場合は，.gemspecなど漏れなく修正する．&lt;/li&gt;
-&lt;li&gt;新しい名前のgemを&lt;code&gt;rake release&lt;/code&gt;する．&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;gem yank&lt;/code&gt;で古い名前のgemをindexから外す．&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code&gt;gem yank&lt;/code&gt;してもrubygems.org上のページは残るのでその点注意．&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem&#34;&gt;Removing a published RubyGem / Gemcutter / Knowledge Base - RubyGems.org Support&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://blog.s21g.com/articles/1755&#34;&gt;公開した gem を削除する方法 - ヽ( ・∀・)ノくまくまー - s21g&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>必要になったので調べてみた． 結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる． 調べた結</description>
     </item>
     
     <item>
@@ -104,64 +36,7 @@ end
       <pubDate>Wed, 11 Feb 2015 16:53:46 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/takady/apache_log-parser&#34;&gt;takady/apache_log-parser&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;先週，とある機会に，とあるエンジニアの方が，僕が作った&lt;a href=&#34;https://github.com/takady/apache_log-parser&#34;&gt;apache_log-parser&lt;/a&gt;というrubyのgemに対してアドバイスをしてくれた．&lt;br /&gt;
-「parseメソッド呼ぶ度に毎回Patternクラスのインスタンスとか作ったりしてるけど，Parserをクラスにして，最初にインスタンス作る時に1回だけやるようにした方が効率良いよ」みたいな指摘だった．確かにその通りだった．指摘ありがとうございます！&lt;br /&gt;
-ついでに，修正する前と後でパフォーマンスどれだけ良くなったのかを，rubyの標準ライブラリのBenchmarkを使って計測してみた．&lt;/p&gt;
-
-&lt;p&gt;benchmark.rb自体はこんな感じで，100万行parseするのにかかる時間を計測している．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;$LOAD_PATH.unshift File.expand_path(&#39;../lib&#39;, __FILE__)
-require &#39;apache_log/parser&#39;
-require &#39;benchmark&#39;
-
-common_line = &#39;127.0.0.1 - - [20/May/2014:20:04:04 +0900] &amp;quot;GET /test/indx.html HTTP/1.1&amp;quot; 200 4576&#39;
-combined_line = &#39;192.168.0.1 - - [07/Jun/2014:14:58:55 +0900] &amp;quot;GET /category/electronics HTTP/1.1&amp;quot; 200 128 &amp;quot;-&amp;quot; &amp;quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0.1) Gecko/20100101 Firefox/9.0.1&amp;quot;&#39;
-customized_line = &#39;192.168.0.1 - - [07/Feb/2011:10:59:59 +0900] &amp;quot;GET /x/i.cgi/net/0000/ HTTP/1.1&amp;quot; 200 9891 &amp;quot;-&amp;quot; &amp;quot;DoCoMo/2.0 P03B(c500;TB;W24H16)&amp;quot; virtualhost.example.jp &amp;quot;192.0.2.16794832933550&amp;quot; &amp;quot;09011112222333_xx.ezweb.ne.jp&amp;quot; 533593&#39;
-
-common_parser = ApacheLog::Parser.new(&#39;common&#39;)
-combined_parser = ApacheLog::Parser.new(&#39;combined&#39;)
-customized_parser = ApacheLog::Parser.new(&#39;combined&#39;, %w(vhost usertrack mobileid request_duration))
-
-n = 1_000_000
-Benchmark.bm(12) do |x|
-  x.report(&#39;common:&#39;)     { (1..n).each{common_parser.parse(common_line)} }
-  x.report(&#39;combined:&#39;)   { (1..n).each{combined_parser.parse(combined_line)} }
-  x.report(&#39;customized:&#39;) { (1..n).each{customized_parser.parse(customized_line)} }
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;before&#34;&gt;Before&lt;/h2&gt;
-
-&lt;p&gt;まず，修正前のコードでのベンチマーク．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ruby benchmark.rb
-                   user     system      total        real
-common:      125.630000   0.180000 125.810000 (125.889122)
-combined:    151.530000   0.440000 151.970000 (152.090644)
-customized:  186.610000   0.460000 187.070000 (187.200379)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;after&#34;&gt;After&lt;/h2&gt;
-
-&lt;p&gt;次に，修正後のコードでのベンチマーク．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ruby benchmark.rb
-                   user     system      total        real
-common:       20.770000   0.020000  20.790000 ( 20.797196)
-combined:     30.090000   0.050000  30.140000 ( 30.161369)
-customized:   40.240000   0.070000  40.310000 ( 40.388290)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;めちゃくちゃ改善された！！&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://a-newcomer.com/29&#34;&gt;RubyでのBenchmarkの取り方をば。&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>takady/apache_log-parser 先週，とある機会に，とあるエンジニアの方が，僕が作ったapache_log-parserというrubyのgemに対してアドバイスをしてくれ</description>
     </item>
     
     <item>
@@ -170,81 +45,7 @@ customized:   40.240000   0.070000  40.310000 ( 40.388290)
       <pubDate>Mon, 29 Dec 2014 17:45:20 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
-      <description>
-
-&lt;p&gt;OAuth2について、わかってたつもりでわかってないので、&lt;br /&gt;
-&lt;a href=&#34;https://github.com/nov/fb_graph&#34;&gt;nov/fb_graph&lt;/a&gt;を通して、facebook graph apiでAccess Tokenを発行するところまでを追ってみた&lt;/p&gt;
-
-&lt;h1 id=&#34;tl-dr&#34;&gt;TL;DR&lt;/h1&gt;
-
-&lt;p&gt;この面倒なtoken生成作業は、&lt;a href=&#34;https://developers.facebook.com/&#34;&gt;https://developers.facebook.com/&lt;/a&gt;のTools &amp;gt; Graph API Explorerで、&lt;br /&gt;
-Get Access Tokenとボタンを押すと生成できるので、すぐtokenを生成したいのなら、下記を読まずにそこから生成するのが楽で良い&lt;/p&gt;
-
-&lt;h1 id=&#34;1-まずfacebookにappを登録&#34;&gt;1.まずfacebookにappを登録&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://developers.facebook.com/&#34;&gt;https://developers.facebook.com/&lt;/a&gt;のApps &amp;gt; Add a New Appで作成できる&lt;br /&gt;
-この時、リダイレクト先URLも下記から設定しておくこと&lt;br /&gt;
-Settings &amp;gt; Advanced &amp;gt; Security &amp;gt; Valid OAuth redirect URIs&lt;/p&gt;
-
-&lt;h1 id=&#34;2-app-idとapp-secretを確認&#34;&gt;2.App IDとApp Secretを確認&lt;/h1&gt;
-
-&lt;p&gt;先ほど作成したAppのDashboardに行って確認できる&lt;/p&gt;
-
-&lt;h1 id=&#34;3-client-idとredirect-url付きのgetリクエストを送信&#34;&gt;3.client_idとredirect_url付きのGETリクエストを送信&lt;/h1&gt;
-
-&lt;p&gt;下記のようにリクエストする&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET https://graph.facebook.com/oauth/authorize?client_id=&amp;lt;Your App ID&amp;gt;&amp;amp;redirect_uri=&amp;lt;Your Redirect URL&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;4-リダイレクトされたurlのauthorization-codeパラメータの値を確認&#34;&gt;4.リダイレクトされたurlのAuthorization Codeパラメータの値を確認&lt;/h1&gt;
-
-&lt;p&gt;下記のような感じである&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;http://example.com?code=&amp;lt;Your Authorization Code&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;5-postリクエストを送信してaccess-tokenを取得&#34;&gt;5.POSTリクエストを送信してAccess Tokenを取得&lt;/h1&gt;
-
-&lt;p&gt;取得したAuthorization Codeを含め、パラメータとして下記をセットしてPOSTでリクエストする&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;POST https://graph.facebook.com/oauth/access_token
-
- grant_type: authorization_code
- code: &amp;lt;Your Authorization Code&amp;gt;
- redirect_uri: &amp;lt;Your Redirect URL&amp;gt;
- client_id: &amp;lt;Your App ID&amp;gt;
- client_secret: &amp;lt;Your App Secret&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;レスポンスのbodyは下記のようになっている&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;access_token=&amp;lt;Your Access Token&amp;gt;  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;この生成されたaccess_tokenを使って、facebook graph apiを利用する事ができる&lt;/p&gt;
-
-&lt;h1 id=&#34;6-access-tokenの有効期限を伸ばす&#34;&gt;6.Access Tokenの有効期限を伸ばす&lt;/h1&gt;
-
-&lt;p&gt;facebook graph apiの場合、このままだとAccess Tokenの有効期限が短すぎる&lt;br /&gt;
-下記のGETリクエストを送ることで、有効期限を60日間に伸ばす事ができる&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&amp;amp;client_id=&amp;lt;Your App ID&amp;gt;&amp;amp;client_secret=&amp;lt;Your App Secret&amp;gt;&amp;amp;fb_exchange_token=&amp;lt;Your Access Token&amp;gt;  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;OAuth2、Access Token取得後はそれだけでAPIとやりとりできるからシンプルで良いけど、Access Tokenを取得するまでがめんどくさい&lt;br /&gt;
-ブラウザ無しでtoken発行やりたかった(&lt;a href=&#34;https://github.com/nov/fb_graph/wiki/Authentication#javascript-sdk&#34;&gt;Javascript SDK&lt;/a&gt;使ったらできるのか?)&lt;br /&gt;
-Facebookでは上記フローだが、twitterとかgithubとか他のサービスもまったく同じなわけじゃないので、他も触ってみたい&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/21978728/obtaining-a-facebook-auth-token-for-a-command-line-desktop-application&#34;&gt;ruby - Obtaining a Facebook auth token for a command-line (desktop) application - Stack Overflow&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://rebuild.fm/43/&#34;&gt;Rebuild: 43: Kent is More Professional (Kenn Ejima)&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;https://github.com/nov/fb_graph/wiki&#34;&gt;Home · nov/fb_graph Wiki&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://morizyun.github.io/blog/facebook-event-api-ruby-fb_graph/&#34;&gt;公開中のFacebook EventをGraph APIから取得する - 酒と泪とRubyとRailsと&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>OAuth2について、わかってたつもりでわかってないので、 nov/fb_graphを通して、facebook graph apiでAccess Token</description>
     </item>
     
     <item>
@@ -253,56 +54,7 @@ Facebookでは上記フローだが、twitterとかgithubとか他のサービ�
       <pubDate>Sun, 07 Dec 2014 18:01:52 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;この投稿は&lt;a href=&#34;http://qiita.com/advent-calendar/2014/ruby&#34;&gt;Ruby Advent Calendar 2014&lt;/a&gt;の7日目の記事です。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;rubyには標準添付ライブラリにloggerクラスがある。&lt;br /&gt;
-そのloggerクラス、newした後に出力先のログファイルが削除された時の挙動について調べた。&lt;br /&gt;
-そして、&lt;a href=&#34;https://github.com/takady/file_safe_logger&#34;&gt;file_safe_logger&lt;/a&gt;というgemを作った。&lt;/p&gt;
-
-&lt;h1 id=&#34;検証&#34;&gt;検証&lt;/h1&gt;
-
-&lt;p&gt;下記のようにして、&lt;code&gt;Logger.new&lt;/code&gt;と&lt;code&gt;logger.info&lt;/code&gt;の間でファイルを削除してみる&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;logger&#39;
-require &#39;fileutils&#39;
-
-logfile = &#39;test.log&#39;
-logger = Logger.new(logfile)
-FileUtils.rm(logfile)
-logger.info(&#39;this is test&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん&lt;code&gt;this is test&lt;/code&gt;というlogも残っていない。&lt;/p&gt;
-
-&lt;h1 id=&#34;filesafelogger&#34;&gt;FileSafeLogger&lt;/h1&gt;
-
-&lt;p&gt;ファイルが削除されるとlogging出来ないというのが困る時がある。&lt;br /&gt;
-なので、&lt;a href=&#34;https://github.com/takady/file_safe_logger&#34;&gt;file_safe_logger&lt;/a&gt;というgemを作った。&lt;br /&gt;
-やってることはいたって単純で、&lt;a href=&#34;https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L593-L612&#34;&gt;Logger::LogDevice.#write&lt;/a&gt;メソッドをoverrideして、ファイルが存在しない場合は作成しているだけである。&lt;br /&gt;
-&lt;a href=&#34;https://github.com/takady/file_safe_logger&#34;&gt;file_safe_logger&lt;/a&gt;を使って、先ほどのlogging処理と同じ処理をやってみる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;file_safe_logger&#39;
-require &#39;fileutils&#39;
-
-logfile = &#39;test.log&#39;
-logger = FileSafeLogger.new(logfile)
-FileUtils.rm(logfile)
-logger.info(&#39;this is test&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これの実行後、カレントディレクトリには&lt;code&gt;test.log&lt;/code&gt;が存在し、下記のようにlogが書き出されている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cat test.log
-# Logfile created on 2014-12-06 17:07:53 +0900 by logger.rb/44203
-I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/sonots/process_safe_logger&#34;&gt;sonots/process_safe_logger&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>この投稿はRuby Advent Calendar 2014の7日目の記事です。 rubyには標準添付ライブラリにloggerクラスがある。 そのloggerクラス、newし</description>
     </item>
     
     <item>
@@ -311,136 +63,7 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
       <pubDate>Wed, 26 Nov 2014 19:17:48 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/11/26/turnip/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/jnicklas/turnip&#34;&gt;turnip&lt;/a&gt;は、シナリオテストを自然言語風のDSLで記述・実行させることができるruby製のツールです。&lt;br /&gt;
-ここでは、wikipediaを開いて「カブ」を検索するというシナリオを例にしてみます。&lt;/p&gt;
-
-&lt;h1 id=&#34;事前に&#34;&gt;事前に&lt;/h1&gt;
-
-&lt;p&gt;webページの操作には&lt;a href=&#34;https://github.com/jnicklas/capybara&#34;&gt;Capybara&lt;/a&gt;を使います。&lt;br /&gt;
-今回はrackアプリではないので、HTTP通信を行うためのdriverを別途用意する必要があります。&lt;br /&gt;
-今回は比較的導入が楽でありHeadless(GUIを必要としない)ドライバであるPhantomJSを利用します。&lt;br /&gt;
-OSXであれば、下記でインストールできます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ brew install phantomjs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;準備&#34;&gt;準備&lt;/h1&gt;
-
-&lt;p&gt;まずディレクトリを用意しましょう。&lt;br /&gt;
-今回は、railsなどとは組み合わせず、シンプルにturnipだけを使います。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ mkdir turnip_sample
-$ cd !$
-
-$ bundle init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Gemfileに下記を記載し、&lt;code&gt;bundle install&lt;/code&gt;を実行します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;source &amp;quot;https://rubygems.org&amp;quot;
-
-gem &#39;turnip&#39;
-gem &#39;capybara&#39;
-gem &#39;poltergeist&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;rspecとturnipの設定ファイルを用意します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rspec init
-$ echo &#39;-r turnip/rspec&#39; &amp;gt;&amp;gt; .rspec
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;spec/turnip_helper.rb&lt;/code&gt;を下記の内容で作成します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;turnip/capybara&#39;
-require &#39;capybara/poltergeist&#39;
-
-Capybara.default_driver = :poltergeist
-
-Dir.glob(&amp;quot;spec/**/*steps.rb&amp;quot;) { |f| load f, true }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、turnipでwebアプリのシナリオテストを書く準備が整いました。&lt;/p&gt;
-
-&lt;h1 id=&#34;featureファイル&#34;&gt;featureファイル&lt;/h1&gt;
-
-&lt;p&gt;featureファイルを下記の内容で作成します。&lt;/p&gt;
-
-&lt;p&gt;spec/features/sample.feature&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-Text&#34;&gt;Feature: 検索する
-
-  Scenario: wikipediaでカブを検索する
-    Given wikipediaトップページにアクセスする
-    When wikipediaトップページを表示する
-    Then ウィキペディアへようこそと表示されている
-    And searchにカブを入力する
-    And searchButtonボタンをクリックする
-    Then アブラナ科アブラナ属の越年草と表示されている
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;featureファイルは、いわゆるテストシナリオの定義ファイルです。&lt;br /&gt;
-自然言語で書ける(日本語にも対応している)ため、非エンジニアにとっても理解しやすいと思います。&lt;/p&gt;
-
-&lt;h1 id=&#34;stepファイル&#34;&gt;stepファイル&lt;/h1&gt;
-
-&lt;p&gt;stepファイルを下記の内容で作成します。&lt;/p&gt;
-
-&lt;p&gt;spec/steps/sample_step.rb&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;step &#39;wikipediaトップページにアクセスする&#39; do
-  Capybara.app_host = &amp;quot;http://ja.wikipedia.org&amp;quot;
-end
-
-step &#39;wikipediaトップページを表示する&#39; do
-  visit &#39;/&#39;
-end
-
-step %(:textと表示されている) do |text|
-  expect(page).to have_content(text)
-end
-
-step %(:fieldに:valueを入力する) do |field, value|
-  fill_in field, with: value
-end
-
-step %(:textボタンをクリックする) do |text|
-  click_button text
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;テスト実行&#34;&gt;テスト実行&lt;/h1&gt;
-
-&lt;p&gt;無事にテストが通過するはずです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rspec
-JQMIGRATE: Logging is active
-JQMIGRATE: Logging is active
-.
-
-Finished in 5.6 seconds (files took 0.29979 seconds to load)
-1 example, 0 failures
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;featureファイルとstepファイルの関係&#34;&gt;featureファイルとstepファイルの関係&lt;/h1&gt;
-
-&lt;p&gt;featureファイルが自然言語風なDSLなのでイメージしにくいかもしれませんが、featureファイルから、stepファイルに定義したメソッド(実際にはstep)を呼び出している、と考えるとわかりやすいかと思います。&lt;br /&gt;
-上記の例ですと、&lt;br /&gt;
-featureファイルの&lt;code&gt;Then ウィキペディアへようこそと表示されている&lt;/code&gt;という記述で、stepファイルの、&lt;code&gt;step %(:textと表示されている)&lt;/code&gt;のstepが呼ばれます。&lt;br /&gt;
-&lt;code&gt;:text&lt;/code&gt;とすることで、そこに入る文字列を動的に指定出来て汎用的になります。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://magazine.rubyist.net/?0042-FromCucumberToTurnip&#34;&gt;Rubyist Magazine - エンドツーエンドテストの自動化は Cucumber から Turnip へ&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://techracho.bpsinc.jp/hachi8833/2014_06_26/18068&#34;&gt;[RSpec][Turnip] 一般的に使えるTurnipステップ集 | TechRacho&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://gongo.hatenablog.com/entry/2013/05/29/223218&#34;&gt;Turnip について (1) / まずは動かす - Thanks Driven Life&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://orangain.hatenablog.com/entry/turnip&#34;&gt;Ruby製アプリじゃなくてもTurnipで自動受け入れテストがしたい - orangain flavor&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://qiita.com/moriyaman/items/af2a0264adbaaa0d2029&#34;&gt;Rails + Turnip + Capybara + poltergeistでBDDテスト - Qiita&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://tmpla.info/installation-of-capybara-webkit/&#34;&gt;Capybara WebkitをCentOSで使えるようにする方法 – 日本の天ぷら情報&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://qiita.com/take/items/779747e0981355e569ad&#34;&gt;poltergeist - Capybaraを使う際に知っておきたいこと - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>turnipは、シナリオテストを自然言語風のDSLで記述・実行させることができるruby製のツールです。 ここでは、wikipediaを開いて</description>
     </item>
     
     <item>
@@ -449,25 +72,7 @@ featureファイルの&lt;code&gt;Then ウィキペディアへようこそと�
       <pubDate>Sat, 22 Nov 2014 13:11:18 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/</guid>
-      <description>
-
-&lt;p&gt;rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。&lt;br /&gt;
-&lt;code&gt;# Logfile created on 2014-11-22 13:15:26 +0900 by logger.rb/44203&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;これを出したくない場合は、下記のようにヘッダをつける&lt;a href=&#34;https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L649-L653&#34;&gt;Logger::LogDevice#add_log_header&lt;/a&gt;メソッドを空にoverrideすると良い。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Logger::LogDevice
-  def add_log_header(file)
-  end
-end
-
-log = Logger.new(&#39;info.log&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/4096336/can-i-disable-the-log-header-for-ruby-logger&#34;&gt;Can I disable the log header for ruby logger? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。</description>
     </item>
     
   </channel>

@@ -1,9 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://blog.takady.net/post/</loc>
+    <lastmod>2019-01-16T15:24:32+09:00</lastmod>
+  </url>
   
   <url>
     <loc>https://blog.takady.net/</loc>
-    <lastmod>2019-01-14T10:39:16+09:00</lastmod>
+    <lastmod>2019-01-16T15:24:32+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/blog/2019/11/16/baby/</loc>
+    <lastmod>2019-01-16T15:24:32+09:00</lastmod>
   </url>
   
   <url>
@@ -47,8 +58,23 @@
   </url>
   
   <url>
+    <loc>https://blog.takady.net/categories/</loc>
+    <lastmod>2017-03-19T17:36:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/ruby/</loc>
+    <lastmod>2017-03-19T17:36:07+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.takady.net/blog/2017/03/19/measure-performance-of-match-methods/</loc>
     <lastmod>2017-03-19T17:36:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/rails/</loc>
+    <lastmod>2017-02-21T23:07:09+00:00</lastmod>
   </url>
   
   <url>
@@ -87,6 +113,11 @@
   </url>
   
   <url>
+    <loc>https://blog.takady.net/categories/book/</loc>
+    <lastmod>2016-07-23T10:33:25+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.takady.net/blog/2016/07/23/soft-skills/</loc>
     <lastmod>2016-07-23T10:33:25+00:00</lastmod>
   </url>
@@ -112,6 +143,11 @@
   </url>
   
   <url>
+    <loc>https://blog.takady.net/categories/android/</loc>
+    <lastmod>2016-01-27T23:15:54+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</loc>
     <lastmod>2016-01-27T23:15:54+00:00</lastmod>
   </url>
@@ -123,6 +159,11 @@
   
   <url>
     <loc>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</loc>
+    <lastmod>2015-12-18T00:46:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/raspberrypi/</loc>
     <lastmod>2015-12-18T00:46:37+00:00</lastmod>
   </url>
   
@@ -177,6 +218,16 @@
   </url>
   
   <url>
+    <loc>https://blog.takady.net/categories/ruby-tmux/</loc>
+    <lastmod>2015-04-24T13:11:11+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/terminal-tmux/</loc>
+    <lastmod>2015-04-20T16:54:18+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.takady.net/blog/2015/04/20/powerline-config/</loc>
     <lastmod>2015-04-20T16:54:18+00:00</lastmod>
   </url>
@@ -184,6 +235,11 @@
   <url>
     <loc>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</loc>
     <lastmod>2015-03-27T00:56:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/tips/</loc>
+    <lastmod>2015-03-27T00:41:40+00:00</lastmod>
   </url>
   
   <url>
@@ -199,6 +255,16 @@
   <url>
     <loc>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</loc>
     <lastmod>2015-02-08T22:17:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/ruby-embulk/</loc>
+    <lastmod>2015-02-08T22:17:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/categories/coreos/</loc>
+    <lastmod>2015-01-13T19:46:35+00:00</lastmod>
   </url>
   
   <url>
@@ -254,6 +320,10 @@
   <url>
     <loc>https://blog.takady.net/blog/2014/11/15/fist-of-octopress/</loc>
     <lastmod>2014-11-15T15:52:35+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.takady.net/tags/</loc>
   </url>
   
 </urlset>

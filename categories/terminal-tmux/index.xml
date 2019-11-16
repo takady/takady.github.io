@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Terminal Tmux on Yuichi Takada</title>
+    <title>terminal tmux on Yuichi Takada</title>
     <link>https://blog.takady.net/categories/terminal-tmux/</link>
-    <description>Recent content in Terminal Tmux on Yuichi Takada</description>
+    <description>Recent content in terminal tmux on Yuichi Takada</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
     <lastBuildDate>Mon, 20 Apr 2015 16:54:18 +0000</lastBuildDate>
-    <atom:link href="https://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>tmuxにpowerlineを導入した</title>
@@ -16,79 +18,7 @@
       <pubDate>Mon, 20 Apr 2015 16:54:18 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/04/20/powerline-config/</guid>
-      <description>
-
-&lt;h1 id=&#34;powerlineの導入&#34;&gt;powerlineの導入&lt;/h1&gt;
-
-&lt;p&gt;下記の記事を参考にした．&lt;br /&gt;
-&lt;a href=&#34;http://qiita.com/tkhr/items/8cc17c02dea1803be9c6&#34;&gt;tmux - Powerline導入例 - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;フォントが綺麗に表示されない場合&#34;&gt;フォントが綺麗に表示されない場合&lt;/h2&gt;
-
-&lt;p&gt;自分の環境では，&lt;code&gt;brew reinstall --powerline --vim-powerline ricty&lt;/code&gt;でpowerline用のRictyを入れても綺麗に表示されなかったので，自分でfontを合成した．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/yascentur/Ricty.git
-$ cd Ricty
-
-$ git clone https://github.com/powerline/fonts.git
-
-$ wget http://sourceforge.jp/frs/redir.php\?m\=jaist\&amp;amp;f\=%2Fmix-mplus-ipa%2F59022%2Fmigu-1m-20130617.zip -O migu-1m-20130617.zip
-$ unzip migu-1m-20130617.zip
-$ ./ricty_generator.sh fonts/Inconsolata/Inconsolata\ for\ Powerline.otf migu-1m-20130617/migu-1m-regular.ttf migu-1m-20130617/migu-1m-bold.ttf
-
-$ cp -f ./Ricty*.ttf ~/Library/Fonts
-$ fc-cache -vf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;カスタマイズ&#34;&gt;カスタマイズ&lt;/h1&gt;
-
-&lt;p&gt;デフォルトは水色．&lt;br /&gt;
-&lt;img src=&#34;https://blog.takady.net/images/powerline_config_01.png&#34; alt=&#34;before&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst&#34;&gt;powerline/configuration.rst&lt;/a&gt;に設定方法は書いてある．&lt;br /&gt;
-カスタマイズしたいconfigファイルを&lt;code&gt;powerline/config_files&lt;/code&gt;から&lt;code&gt;~/.config/powerline&lt;/code&gt;以下にパスそのままにコピーしてきて，それを編集する．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ mkdir -p ~/.config/powerline/colorschemes/tmux
-$ cp -i powerline/config_files/colorschemes/tmux/default.json ~/.config/powerline/colorschemes/tmux/.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;config-powerline-colorschemes-tmux-default-json&#34;&gt;~/.config/powerline/colorschemes/tmux/default.json&lt;/h2&gt;
-
-&lt;p&gt;例えば色を変えてみる．&lt;br /&gt;
-色は&lt;code&gt;powerline/config_files/colors.json&lt;/code&gt;に定義されているものも使える．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;groups&amp;quot;: {
-    &amp;quot;active_window_status&amp;quot;: {&amp;quot;fg&amp;quot;: &amp;quot;gray70&amp;quot;, &amp;quot;bg&amp;quot;: &amp;quot;gray0&amp;quot;,       &amp;quot;attrs&amp;quot;: []},
-    &amp;quot;window:current&amp;quot;:       {&amp;quot;fg&amp;quot;: &amp;quot;black&amp;quot;,  &amp;quot;bg&amp;quot;: &amp;quot;brightgreen&amp;quot;, &amp;quot;attrs&amp;quot;: []},
-    &amp;quot;window_name&amp;quot;:          {&amp;quot;fg&amp;quot;: &amp;quot;black&amp;quot;,  &amp;quot;bg&amp;quot;: &amp;quot;brightgreen&amp;quot;, &amp;quot;attrs&amp;quot;: [&amp;quot;bold&amp;quot;]},
-    &amp;quot;session:prefix&amp;quot;:       {&amp;quot;fg&amp;quot;: &amp;quot;black&amp;quot;,  &amp;quot;bg&amp;quot;: &amp;quot;brightgreen&amp;quot;, &amp;quot;attrs&amp;quot;: [&amp;quot;bold&amp;quot;]}
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;修正後&#34;&gt;修正後&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.takady.net/images/powerline_config_02.png&#34; alt=&#34;after&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;その他&#34;&gt;その他&lt;/h1&gt;
-
-&lt;p&gt;ちなみに，tmuxの設定をreloadするために毎回tmuxを再起動するのは面倒なので，&lt;code&gt;.tmux.conf&lt;/code&gt;に下記のように設定を再読み込みするよう定義しておくと捗る．&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;bind C-r source-file &amp;quot;${HOME}/.tmux.conf&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;まとめ&#34;&gt;まとめ&lt;/h1&gt;
-
-&lt;p&gt;もっとこだわるなら表示する情報とかもカスタマイズできるので，やりたくなったらやるつもり．&lt;/p&gt;
-
-&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst&#34;&gt;powerline/configuration.rst at develop · powerline/powerline&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/takady/dotfiles&#34;&gt;takady/dotfiles&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>powerlineの導入 下記の記事を参考にした． tmux - Powerline導入例 - Qiita フォントが綺麗に表示されない場合 自分の環境では，brew reinstall --powerline</description>
     </item>
     
   </channel>
