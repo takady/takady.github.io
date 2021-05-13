@@ -69,91 +69,69 @@
     </div>
   </header>
   <section>
-    
-
-<p>個人的に作ってるサイトを HTTPS 対応させてみた。<br />
+    <p>個人的に作ってるサイトを HTTPS 対応させてみた。<br>
 iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。</p>
-
-<h2 id="let-s-encrypt">Let&rsquo;s Encrypt</h2>
-
+<h2 id="lets-encrypt">Let&rsquo;s Encrypt</h2>
 <p><a href="https://letsencrypt.jp/">https://letsencrypt.jp/</a></p>
-
 <p>無料で証明書を用意できるので今回利用した。</p>
-
-<p>curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。<br />
+<p>curl で実行ファイルを取ってきて、適切にオプションを付けて実行すると、対話形式にていくつかの確認に応え、証明書が作成される。<br>
 以下、実行例。</p>
-
 <pre><code>$ sudo certbot-auto certonly --webroot -w /path/to/app/current/public -d example.com --email your_email@example.com
-</code></pre>
-
-<p>webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。</p>
-
+</code></pre><p>webroot に指定したパスの下にファイルが置かれ、そこに対してリクエストを送って確認しているみたいなので、アクセスできるようにしておく必要がある。</p>
 <p>これで <code>/etc/letsencrypt/live/example.com/</code> 以下に、証明書や秘密鍵が配置されるので(実際にはこれはシンボリックリンクなのだが)、これらのファイルを Nginx の設定で指定する。</p>
-
 <h2 id="iptables">iptables</h2>
-
-<p><code>/etc/sysconfig/iptables</code> を見て、80 と同様に 443 も許可されている事を確認しておく。<br />
-されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。<br />
-<code>sudo /sbin/iptables -L</code> で設定を確認できる。最後に <code>iptables save</code> するのを忘れずに。<br />
+<p><code>/etc/sysconfig/iptables</code> を見て、80 と同様に 443 も許可されている事を確認しておく。<br>
+されてない場合は追加することになるのだけど、このファイル直接編集は推奨されていないらしいので iptables コマンドで追加する。<br>
+<code>sudo /sbin/iptables -L</code> で設定を確認できる。最後に <code>iptables save</code> するのを忘れずに。<br>
 あとは iptables を再起動すると反映されるはず。</p>
-
 <h2 id="nginx">Nginx</h2>
-
-<p>実際の Nginx の設定は下記のようにした。<br />
-http のリクエストは https にリダイレクトさせるようにした。<br />
+<p>実際の Nginx の設定は下記のようにした。<br>
+http のリクエストは https にリダイレクトさせるようにした。<br>
 （unicorn を使ってるのでその記述があるが今回の件には直接関係無い。</p>
-
-<pre><code class="language-nginx">upstream unicorn {
-    server unix:/path/to/app/current/tmp/sockets/unicorn.sock;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">upstream</span> <span style="color:#e6db74">unicorn</span> {
+    <span style="color:#f92672">server</span> <span style="color:#e6db74">unix:/path/to/app/current/tmp/sockets/unicorn.sock</span>;
 }
 
-server {
-    listen 80;
-    return 301 https://$host$request_uri;
+<span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://</span>$host$request_uri;
 }
 
-server {
-    listen 443 ssl;
-    server_name example.com;
+<span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+    <span style="color:#f92672">server_name</span> <span style="color:#e6db74">example.com</span>;
 
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers &quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&quot;;
-    access_log /var/log/nginx/example.com.access.log;
-    root /path/to/app/current/public;
-    try_files $uri @unicorn;
+    <span style="color:#f92672">ssl</span> <span style="color:#66d9ef">on</span>;
+    <span style="color:#f92672">ssl_certificate</span> <span style="color:#e6db74">/etc/letsencrypt/live/example.com/fullchain.pem</span>;
+    <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/letsencrypt/live/example.com/privkey.pem</span>;
+    <span style="color:#f92672">ssl_protocols</span> <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+    <span style="color:#f92672">ssl_prefer_server_ciphers</span> <span style="color:#66d9ef">on</span>;
+    <span style="color:#f92672">ssl_ciphers</span> <span style="color:#e6db74">&#34;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH&#34;</span>;
+    <span style="color:#f92672">access_log</span> <span style="color:#e6db74">/var/log/nginx/example.com.access.log</span>;
+    <span style="color:#f92672">root</span> <span style="color:#e6db74">/path/to/app/current/public</span>;
+    <span style="color:#f92672">try_files</span> $uri <span style="color:#e6db74">@unicorn</span>;
 
-    location ~ ^/assets/ {
-        root /path/to/app/shared/public;
+    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">^/assets/</span> {
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/path/to/app/shared/public</span>;
     }
 
-    location @unicorn {
-        proxy_set_header X-Forwarded-Host $host;
-        proxy_set_header X-Forwarded-Server $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://unicorn;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">@unicorn</span> {
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-Host</span> $host;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-Server</span> $host;
+        <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Forwarded-For</span> $proxy_add_x_forwarded_for;
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://unicorn</span>;
     }
 
-    location /robots.txt {
-        alias /path/to/app/current/public/robots.txt;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/robots.txt</span> {
+        <span style="color:#f92672">alias</span> <span style="color:#e6db74">/path/to/app/current/public/robots.txt</span>;
     }
 }
-</code></pre>
-
-<h2 id="ssl-labs">SSL LABS</h2>
-
+</code></pre></div><h2 id="ssl-labs">SSL LABS</h2>
 <p><a href="https://www.ssllabs.com/ssltest/">https://www.ssllabs.com/ssltest/</a></p>
-
-<p>SSL の設定確認できるサイト。<br />
+<p>SSL の設定確認できるサイト。<br>
 以下のようになればうまくいっている。</p>
-
-<p><img src="/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png" alt="" /></p>
-
+<p><img src="/images/2017-02-11-lets-encrypt-with-nginx/screenshot.png" alt=""></p>
 <h2 id="参考">参考</h2>
-
 <ul>
 <li><a href="https://programming.wikihub.io/@r7kamura/20160702202711">Let&rsquo;s EncryptとAmazon LinuxとNginxでamakan.netをHTTPSに対応させた - Programming</a></li>
 <li><a href="http://nobuneko.com/blog/archives/2013/05/linux_centos_6_iptables_http_https.html">Linux(CentOS 6) - iptablesの設定を変更し、http、httpsでのアクセスを許可する - r_nobuホームページ</a></li>

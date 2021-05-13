@@ -69,34 +69,21 @@
     </div>
   </header>
   <section>
-    
-
-<p>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。</p>
-
+    <p>Ubuntu に td-agent 入れて Slack に rails アプリのエラーを通知するようにしたときの備忘録。</p>
 <h2 id="td-agent">td-agent</h2>
-
 <h3 id="インストール">インストール</h3>
-
-<p>td-agent のインストールは下記に書いてある通り。<br />
+<p>td-agent のインストールは下記に書いてある通り。<br>
 <a href="http://docs.fluentd.org/v0.12/articles/install-by-deb">Installing Fluentd Using deb Package | Fluentd</a></p>
-
 <p>Ubuntu 16.04 なので下記で入れた。</p>
-
 <pre><code>$ curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-xenial-td-agent2.sh | sh
 </code></pre>
-
 <h3 id="プラグインのインストール">プラグインのインストール</h3>
-
 <p>td-agent-gem で slack のプラグインをインストール。</p>
-
 <pre><code>$ td-agent-gem install fluent-plugin-slack
 </code></pre>
-
 <h3 id="設定ファイルの修正">設定ファイルの修正</h3>
-
-<p><code>/etc/td-agent/td-agent.conf</code> を下記のように修正。<br />
+<p><code>/etc/td-agent/td-agent.conf</code> を下記のように修正。<br>
 webhook の URL あらかじめ Slack 取得しておく。</p>
-
 <pre><code>&lt;source&gt;
   @type forward
 &lt;/source&gt;
@@ -129,57 +116,35 @@ webhook の URL あらかじめ Slack 取得しておく。</p>
 &lt;match clear&gt;
   @type null
 &lt;/match&gt;
-</code></pre>
-
-<h3 id="再起動">再起動</h3>
-
+</code></pre><h3 id="再起動">再起動</h3>
 <p>td-agent を再起動する。</p>
-
 <pre><code>$ /etc/init.d/td-agent restart
 </code></pre>
-
 <h2 id="rails">rails</h2>
-
 <h3 id="gemfile">Gemfile</h3>
-
 <p><code>act-fluent-logger-rails</code> と <code>lograge</code> をインストール。</p>
-
 <pre><code>gem 'act-fluent-logger-rails'
 gem 'lograge'
-</code></pre>
-
-<h3 id="config-environments-production-rb">config/environments/production.rb</h3>
-
+</code></pre><h3 id="configenvironmentsproductionrb">config/environments/production.rb</h3>
 <p>loggerの設定。</p>
-
-<pre><code class="language-ruby">config.log_level = :info
-config.logger = ActFluentLoggerRails::Logger.new
-config.lograge.enabled = true
-config.lograge.formatter = Lograge::Formatters::Json.new
-</code></pre>
-
-<h3 id="config-fluent-logger-yml">config/fluent-logger.yml</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">config<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">:info</span>
+config<span style="color:#f92672">.</span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActFluentLoggerRails</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new
+config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>enabled <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>formatter <span style="color:#f92672">=</span> <span style="color:#66d9ef">Lograge</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Formatters</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Json</span><span style="color:#f92672">.</span>new
+</code></pre></div><h3 id="configfluent-loggeryml">config/fluent-logger.yml</h3>
 <p>fluent用の設定ファイル。</p>
-
-<pre><code class="language-yaml">production:
-  fluent_host:   '127.0.0.1'
-  fluent_port:   24224
-  tag:           'app.web'
-  messages_type: 'string'
-</code></pre>
-
-<h2 id="結果">結果</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">production</span>:
+  <span style="color:#f92672">fluent_host</span>:   <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>
+  <span style="color:#f92672">fluent_port</span>:   <span style="color:#ae81ff">24224</span>
+  <span style="color:#f92672">tag</span>:           <span style="color:#e6db74">&#39;app.web&#39;</span>
+  <span style="color:#f92672">messages_type</span>: <span style="color:#e6db74">&#39;string&#39;</span>
+</code></pre></div><h2 id="結果">結果</h2>
 <p>ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。</p>
-
 <pre><code>$ tail -f /var/log/app/web.20170219.b548df17385a3a314
 2017-02-19T09:51:42+00:00       app.web    {&quot;messages&quot;:&quot;{\&quot;method\&quot;:\&quot;GET\&quot;,\&quot;path\&quot;:\&quot;/\&quot;,\&quot;format\&quot;:\&quot;html\&quot;,\&quot;controller\&quot;:\&quot;FooController\&quot;,\&quot;action\&quot;:\&quot;index\&quot;,\&quot;status\&quot;:200,\&quot;duration\&quot;:1534.33,\&quot;view\&quot;:1299.3,\&quot;db\&quot;:0.0}&quot;,&quot;severity&quot;:&quot;INFO&quot;}
 2017-02-19T09:51:43+00:00       app.web    {&quot;messages&quot;:&quot;{\&quot;method\&quot;:\&quot;GET\&quot;,\&quot;path\&quot;:\&quot;/api/foo.json\&quot;,\&quot;format\&quot;:\&quot;json\&quot;,\&quot;controller\&quot;:\&quot;Api::FooController\&quot;,\&quot;action\&quot;:\&quot;index\&quot;,\&quot;status\&quot;:200,\&quot;duration\&quot;:374.19,\&quot;view\&quot;:49.21,\&quot;db\&quot;:0.0}&quot;,&quot;severity&quot;:&quot;INFO&quot;}
 </code></pre>
-
 <h2 id="参考">参考</h2>
-
 <ul>
 <li><a href="https://github.com/actindi/act-fluent-logger-rails">actindi/act-fluent-logger-rails: Fluent logger</a></li>
 <li><a href="http://www.fluentd.org/datasources/rails">Collecting and Analyzing Ruby on Rails Logs | Fluentd</a></li>

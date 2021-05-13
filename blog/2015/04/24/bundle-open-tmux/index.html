@@ -69,38 +69,24 @@
     </div>
   </header>
   <section>
-    
-
-<p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br />
+    <p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br>
 便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．</p>
-
-<pre><code class="language-sh">export BUNDLER_EDITOR=&quot;tmux split-window -c&quot;
-</code></pre>
-
-<p>上記を<code>~/.zshrc</code>あたりに定義して，コマンドラインで<code>bundle open</code>を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export BUNDLER_EDITOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tmux split-window -c&#34;</span>
+</code></pre></div><p>上記を<code>~/.zshrc</code>あたりに定義して，コマンドラインで<code>bundle open</code>を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．</p>
 <pre><code>$ bundle open activerecord
 </code></pre>
-
 <h1 id="bundle-openを上書きしたくない場合">bundle openを上書きしたくない場合</h1>
-
 <p><code>bundle open</code>の挙動はそのまま残したいという場合には，<code>BUNDLER_EDITOR</code>で設定するのではなく，下記のような関数を別途定義して使うと良い．</p>
-
-<pre><code class="language-sh">function bundle_open_tmux() {
-    if [ -n &quot;$1&quot; ]; then
-        local dir=$(bundle show &quot;$1&quot;)
-        tmux split-window -c &quot;$dir&quot;
-    fi
-}
-</code></pre>
-
-<p>下記のように実行すると，同じように動作する．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">function</span> bundle_open_tmux<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+        local dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>bundle show <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+        tmux split-window -c <span style="color:#e6db74">&#34;</span>$dir<span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>下記のように実行すると，同じように動作する．</p>
 <pre><code>$ bundle_open_tmux activerecord
 </code></pre>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="http://rebuild.fm/41/">Rebuild: 41: Kids These Days Don&rsquo;t Know Shell (Naoya Ito)</a></li>
 </ul>

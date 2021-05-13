@@ -69,23 +69,15 @@
     </div>
   </header>
   <section>
-    
-
-<p>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で <code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.</code> なエラーが出てしまった。</p>
-
+    <p>rails プロジェクトの CI に Travis CI を利用しているが、ある日 mini_racer を Gemfile に追加してビルドを試みたところ、bundle install で <code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.</code> なエラーが出てしまった。</p>
 <p>Travis CI のデフォルトの環境では mini_racer が入らないってことのようで、<a href="https://github.com/discourse/mini_racer#travis-ci">mini_racer の README.md</a> には下記の対応方法が記載されている。</p>
-
 <pre><code>sudo: required
 dist: trusty
 </code></pre>
-
 <p>これで実際に、mini_racer は install 出来るようになる。</p>
-
-<p>ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。<br />
+<p>ただ、rails のプロジェクトの DB として mysql を使っていたため、新たに別の問題が発生する。<br>
 2017年2月の時点で、<a href="https://docs.travis-ci.com/user/trusty-ci-environment/#Data-Stores">Trusty の環境には mysql が入ってない</a>ので <code>rake db:migrate</code> あたりで DB に接続できませんということでビルドが失敗する。</p>
-
 <p><a href="https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433">この辺の issue</a> など参考にしながら、ひとまず mysql を自分で入れるってことと、mysql の接続ユーザを <code>root</code> にする事で回避した。</p>
-
 <pre><code>dist: trusty
 sudo: required
 addons:
@@ -95,11 +87,8 @@ addons:
     - mysql-client-core-5.6
     - mysql-client-5.6
 </code></pre>
-
 <p>きびしい。</p>
-
 <h2 id="参考">参考</h2>
-
 <ul>
 <li><a href="https://github.com/discourse/mini_racer#travis-ci">https://github.com/discourse/mini_racer#travis-ci</a></li>
 <li><a href="https://github.com/travis-ci/travis-ci/issues/6842#issuecomment-278601433">&ldquo;Can&rsquo;t connect to local MySQL server through socket &lsquo;/var/run/mysqld/mysqld.sock&rsquo;&rdquo; · Issue #6842 · travis-ci/travis-ci</a></li>

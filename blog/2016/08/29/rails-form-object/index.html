@@ -69,117 +69,95 @@
     </div>
   </header>
   <section>
-    
-
-<p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
-
+    <p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
 <p><br /></p>
-
-<p><img src="/images/2016-08-29-rails-form-object/screenshot1.png" alt="" /></p>
-
+<p><img src="/images/2016-08-29-rails-form-object/screenshot1.png" alt=""></p>
 <p>こういうフォーム。</p>
-
 <h1 id="model">Model</h1>
-
 <p>uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。</p>
+<h2 id="appmodelsfoo_dayrb">app/models/foo_day.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+  belongs_to <span style="color:#e6db74">:user</span>
 
-<h2 id="app-models-foo-day-rb">app/models/foo_day.rb</h2>
-
-<pre><code class="language-ruby">class FooDay &lt; ActiveRecord::Base
-  belongs_to :user
-
-  validates :user_id, presence: true
-  validates :date, presence: true, uniqueness: {scope: :user_id}
-end
-</code></pre>
-
-<h1 id="formobject">FormObject</h1>
-
-<p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br />
+  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+  validates <span style="color:#e6db74">:date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">uniqueness</span>: {<span style="color:#e6db74">scope</span>: <span style="color:#e6db74">:user_id</span>}
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h1 id="formobject">FormObject</h1>
+<p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br>
 例えば今回のケースだと、view から文字列で渡ってくる <code>YYY-MM-DD</code> を Date に変換したかったので、一度 Virtus を使ってみたけど、
-例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br />
+例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br>
 結局、日付の validation のために <a href="https://github.com/adzap/validates_timeliness">validates_timeliness</a> という gem を使ったけど便利だった。</p>
+<h2 id="appmodelsfoo_dayregistration_formrb">app/models/foo_day/registration_form.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span>
+  <span style="color:#66d9ef">include</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Model</span>
 
-<h2 id="app-models-foo-day-registration-form-rb">app/models/foo_day/registration_form.rb</h2>
+  <span style="color:#66d9ef">attr_accessor</span> <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">:to_date</span>
 
-<pre><code class="language-ruby">class FooDay::RegistrationForm
-  include ActiveModel::Model
+  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+  validates <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:today</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
+  validates <span style="color:#e6db74">:to_date</span>, <span style="color:#e6db74">allow_blank</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
 
-  attr_accessor :user_id, :from_date, :to_date
-
-  validates :user_id, presence: true
-  validates :from_date, presence: true, timeliness: {on_or_after: :today, type: :date}
-  validates :to_date, allow_blank: true, timeliness: {on_or_after: :from_date, type: :date}
-
-  def save
-    return false unless valid?
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> valid?
 
     persist!
-    true
-  end
+    <span style="color:#66d9ef">true</span>
+  <span style="color:#66d9ef">end</span>
 
-  private
+  <span style="color:#66d9ef">private</span>
 
-  def foo_days
-    @foo_days ||= build_foo_days
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo_days</span>
+    @foo_days <span style="color:#f92672">||=</span> build_foo_days
+  <span style="color:#66d9ef">end</span>
 
-  def build_foo_days
-    if to_date.blank?
-      [FooDay.new(date: from_date, user_id: user_id)]
-    else
-      (Date.parse(from_date)..Date.parse(to_date)).map {|date| FooDay.new(user_id: user_id, date: date) }
-    end
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_foo_days</span>
+    <span style="color:#66d9ef">if</span> to_date<span style="color:#f92672">.</span>blank?
+      <span style="color:#f92672">[</span><span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">date</span>: from_date, <span style="color:#e6db74">user_id</span>: user_id)<span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">else</span>
+      (<span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(from_date)<span style="color:#f92672">..</span><span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(to_date))<span style="color:#f92672">.</span>map {<span style="color:#f92672">|</span>date<span style="color:#f92672">|</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">user_id</span>: user_id, <span style="color:#e6db74">date</span>: date) }
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
 
-  def valid?
-    return false unless super
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">valid?</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">super</span>
 
-    foo_days.each do |foo_day|
-      next if foo_day.valid?
+    foo_days<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>foo_day<span style="color:#f92672">|</span>
+      <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">if</span> foo_day<span style="color:#f92672">.</span>valid?
 
-      foo_day.errors.full_messages.each do |message|
-        errors.add(:base, I18n.t('activemodel.errors.invalid_foo_day', date: foo_day.date, message: message))
-      end
-    end
+      foo_day<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>full_messages<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>message<span style="color:#f92672">|</span>
+        errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:base</span>, <span style="color:#66d9ef">I18n</span><span style="color:#f92672">.</span>t(<span style="color:#e6db74">&#39;activemodel.errors.invalid_foo_day&#39;</span>, <span style="color:#e6db74">date</span>: foo_day<span style="color:#f92672">.</span>date, <span style="color:#e6db74">message</span>: message))
+      <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">end</span>
 
-    return super
-  end
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>
+  <span style="color:#66d9ef">end</span>
 
-  def persist!
-    foo_days.each(&amp;:save!)
-  end
-end
-</code></pre>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">persist!</span>
+    foo_days<span style="color:#f92672">.</span>each(<span style="color:#f92672">&amp;</span><span style="color:#e6db74">:save!</span>)
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h1 id="controller">Controller</h1>
+<h2 id="appcontrollersfoo_days_controllerrb">app/controllers/foo_days_controller.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDaysController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new</span>
+    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new
+  <span style="color:#66d9ef">end</span>
 
-<h1 id="controller">Controller</h1>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create</span>
+    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new(params<span style="color:#f92672">[</span><span style="color:#e6db74">:foo_day_registration_form</span><span style="color:#f92672">].</span>merge(<span style="color:#e6db74">user_id</span>: current_user<span style="color:#f92672">.</span>id))
 
-<h2 id="app-controllers-foo-days-controller-rb">app/controllers/foo_days_controller.rb</h2>
+    <span style="color:#66d9ef">if</span> @registration_form<span style="color:#f92672">.</span>save
+      redirect_to new_foo_day_path, <span style="color:#e6db74">notice</span>: <span style="color:#e6db74">&#39;登録に成功しました&#39;</span>
+    <span style="color:#66d9ef">else</span>
+      flash<span style="color:#f92672">.</span>now<span style="color:#f92672">[</span><span style="color:#e6db74">:alert</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;登録に失敗しました&#39;</span>
 
-<pre><code class="language-ruby">class FooDaysController &lt; ApplicationController
-  def new
-    @registration_form = FooDay::RegistrationForm.new
-  end
-
-  def create
-    @registration_form = FooDay::RegistrationForm.new(params[:foo_day_registration_form].merge(user_id: current_user.id))
-
-    if @registration_form.save
-      redirect_to new_foo_day_path, notice: '登録に成功しました'
-    else
-      flash.now[:alert] = '登録に失敗しました'
-
-      render action: :new
-    end
-  end
-end
-</code></pre>
-
-<h1 id="view">View</h1>
-
-<h2 id="app-views-foo-days-new-html-haml">app/views/foo_days/new.html.haml</h2>
-
-<pre><code class="language-haml">.row
+      render <span style="color:#e6db74">action</span>: <span style="color:#e6db74">:new</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h1 id="view">View</h1>
+<h2 id="appviewsfoo_daysnewhtmlhaml">app/views/foo_days/new.html.haml</h2>
+<pre><code class="language-haml" data-lang="haml">.row
   %h1 日々の登録
   = form_for @registration_form, url: foo_days_path, method: :post do |f|
     - if @registration_form.errors.any?
@@ -193,35 +171,26 @@ end
     = f.date_field :to_date
 
     = f.submit '確定'
-</code></pre>
-
-<h1 id="translation">Translation</h1>
-
-<h2 id="config-locales-ja-yml">config/locales/ja.yml</h2>
-
-<pre><code class="language-yaml">ja:
-  activemodel:
-    attributes:
-      foo_day/registration_form:
-        from_date: 開始日
-        to_date: 終了日
-    errors:
-      invalid_foo_day: '%{date} %{message}'
-      models:
-        foo_day/registration_form:
-          attributes:
-            from_date:
-              on_or_after: は %{restriction} 以降の日付を指定してください
-            to_date:
-              on_or_after: は 開始日 以降の日付を指定してください
-</code></pre>
-
-<h1 id="まとめ">まとめ</h1>
-
+</code></pre><h1 id="translation">Translation</h1>
+<h2 id="configlocalesjayml">config/locales/ja.yml</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ja</span>:
+  <span style="color:#f92672">activemodel</span>:
+    <span style="color:#f92672">attributes</span>:
+      <span style="color:#f92672">foo_day/registration_form</span>:
+        <span style="color:#f92672">from_date</span>: <span style="color:#ae81ff">開始日</span>
+        <span style="color:#f92672">to_date</span>: <span style="color:#ae81ff">終了日</span>
+    <span style="color:#f92672">errors</span>:
+      <span style="color:#f92672">invalid_foo_day</span>: <span style="color:#e6db74">&#39;%{date} %{message}&#39;</span>
+      <span style="color:#f92672">models</span>:
+        <span style="color:#f92672">foo_day/registration_form</span>:
+          <span style="color:#f92672">attributes</span>:
+            <span style="color:#f92672">from_date</span>:
+              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は %{restriction} 以降の日付を指定してください</span>
+            <span style="color:#f92672">to_date</span>:
+              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は 開始日 以降の日付を指定してください</span>
+</code></pre></div><h1 id="まとめ">まとめ</h1>
 <p>フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。</p>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="http://webuild.envato.com/blog/creating-form-objects-with-activemodel-and-virtus/">Creating Form Objects with ActiveModel and Virtus - We build Envato</a></li>
 <li><a href="http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/">7 Patterns to Refactor Fat ActiveRecord Models - Code Climate Blog</a></li>

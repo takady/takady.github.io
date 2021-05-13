@@ -69,54 +69,38 @@
     </div>
   </header>
   <section>
-    
-
-<p><strong>この投稿は<a href="http://qiita.com/advent-calendar/2014/ruby">Ruby Advent Calendar 2014</a>の7日目の記事です。</strong></p>
-
-<p>rubyには標準添付ライブラリにloggerクラスがある。<br />
-そのloggerクラス、newした後に出力先のログファイルが削除された時の挙動について調べた。<br />
+    <p><strong>この投稿は<a href="http://qiita.com/advent-calendar/2014/ruby">Ruby Advent Calendar 2014</a>の7日目の記事です。</strong></p>
+<p>rubyには標準添付ライブラリにloggerクラスがある。<br>
+そのloggerクラス、newした後に出力先のログファイルが削除された時の挙動について調べた。<br>
 そして、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。</p>
-
 <h1 id="検証">検証</h1>
-
 <p>下記のようにして、<code>Logger.new</code>と<code>logger.info</code>の間でファイルを削除してみる</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;logger&#39;</span>
+require <span style="color:#e6db74">&#39;fileutils&#39;</span>
 
-<pre><code class="language-ruby">require 'logger'
-require 'fileutils'
-
-logfile = 'test.log'
-logger = Logger.new(logfile)
-FileUtils.rm(logfile)
-logger.info('this is test')
-</code></pre>
-
-<p>これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん<code>this is test</code>というlogも残っていない。</p>
-
+logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
+logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(logfile)
+<span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
+logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
+</code></pre></div><p>これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん<code>this is test</code>というlogも残っていない。</p>
 <h1 id="filesafelogger">FileSafeLogger</h1>
-
-<p>ファイルが削除されるとlogging出来ないというのが困る時がある。<br />
-なので、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。<br />
-やってることはいたって単純で、<a href="https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L593-L612">Logger::LogDevice.#write</a>メソッドをoverrideして、ファイルが存在しない場合は作成しているだけである。<br />
+<p>ファイルが削除されるとlogging出来ないというのが困る時がある。<br>
+なので、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。<br>
+やってることはいたって単純で、<a href="https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L593-L612">Logger::LogDevice.#write</a>メソッドをoverrideして、ファイルが存在しない場合は作成しているだけである。<br>
 <a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>を使って、先ほどのlogging処理と同じ処理をやってみる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;file_safe_logger&#39;</span>
+require <span style="color:#e6db74">&#39;fileutils&#39;</span>
 
-<pre><code class="language-ruby">require 'file_safe_logger'
-require 'fileutils'
-
-logfile = 'test.log'
-logger = FileSafeLogger.new(logfile)
-FileUtils.rm(logfile)
-logger.info('this is test')
-</code></pre>
-
-<p>これの実行後、カレントディレクトリには<code>test.log</code>が存在し、下記のようにlogが書き出されている。</p>
-
+logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
+logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">FileSafeLogger</span><span style="color:#f92672">.</span>new(logfile)
+<span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
+logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
+</code></pre></div><p>これの実行後、カレントディレクトリには<code>test.log</code>が存在し、下記のようにlogが書き出されている。</p>
 <pre><code>$ cat test.log
 # Logfile created on 2014-12-06 17:07:53 +0900 by logger.rb/44203
 I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
 </code></pre>
-
 <h1 id="参考">参考</h1>
-
 <p><a href="https://github.com/sonots/process_safe_logger">sonots/process_safe_logger</a></p>
 
   </section>

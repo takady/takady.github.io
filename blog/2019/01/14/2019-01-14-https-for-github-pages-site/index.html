@@ -69,28 +69,20 @@
     </div>
   </header>
   <section>
-    
-
-<p>このブログは <a href="https://gohugo.io/">Hugo</a> を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。</p>
-
+    <p>このブログは <a href="https://gohugo.io/">Hugo</a> を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。</p>
 <h1 id="hugo-側の設定">hugo 側の設定</h1>
-
-<h2 id="config-toml">config.toml</h2>
-
-<pre><code class="language-toml">diff --git a/config.toml b/config.toml
-index 9aa98a1..4949f9d 100644
---- a/config.toml
-+++ b/config.toml
-@@ -1,4 +1,4 @@
--baseurl = &quot;http://blog.takady.net/&quot;
-+baseurl = &quot;https://blog.takady.net/&quot;
- languageCode = &quot;ja&quot;
- hasCJKLanguage = &quot;true&quot;
- title = &quot;Yuichi Takada&quot;
-</code></pre>
-
-<h2 id="robots-txt">robots.txt</h2>
-
+<h2 id="configtoml">config.toml</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#a6e22e">diff</span> <span style="color:#960050;background-color:#1e0010">--</span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+<span style="color:#a6e22e">index</span> <span style="color:#ae81ff">9</span><span style="color:#a6e22e">aa98a1</span>..<span style="color:#ae81ff">4949</span><span style="color:#a6e22e">f9d</span> <span style="color:#ae81ff">100644</span>
+<span style="color:#960050;background-color:#1e0010">---</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+<span style="color:#960050;background-color:#1e0010">+++</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+<span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">+1</span>,<span style="color:#ae81ff">4</span> <span style="color:#960050;background-color:#1e0010">@@</span>
+<span style="color:#960050;background-color:#1e0010">-</span><span style="color:#a6e22e">baseurl</span> = <span style="color:#e6db74">&#34;http://blog.takady.net/&#34;</span>
+<span style="color:#960050;background-color:#1e0010">+</span><span style="color:#a6e22e">baseurl</span> = <span style="color:#e6db74">&#34;https://blog.takady.net/&#34;</span>
+ <span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;ja&#34;</span>
+ <span style="color:#a6e22e">hasCJKLanguage</span> = <span style="color:#e6db74">&#34;true&#34;</span>
+ <span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Yuichi Takada&#34;</span>
+</code></pre></div><h2 id="robotstxt">robots.txt</h2>
 <pre><code>diff --git a/static/robots.txt b/static/robots.txt
 index 0752adc..b3f03e0 100644
 --- a/static/robots.txt
@@ -101,12 +93,8 @@ index 0752adc..b3f03e0 100644
 
 -Sitemap: http://blog.takady.net/sitemap.xml
 +Sitemap: https://blog.takady.net/sitemap.xml
-</code></pre>
-
-<h1 id="github-側の利用設定">Github 側の利用設定</h1>
-
+</code></pre><h1 id="github-側の利用設定">Github 側の利用設定</h1>
 <p><a href="https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site">https://help.github.com/articles/securing-your-github-pages-site-with-https/#enforcing-https-for-your-github-pages-site</a> に書いてあるとおり、 <code>Enforce HTTPS</code> にチェックを入れる。</p>
-
 <p>以上。</p>
 
   </section>

@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Fri, 27 Mar 2015 00:41:40 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.takady.net/categories/tips/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 27 Mar 2015 00:41:40 +0000</lastBuildDate><atom:link href="https://blog.takady.net/categories/tips/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>標準出力のjson文字列を手軽にpretty printする</title>
       <link>https://blog.takady.net/blog/2015/03/27/json-pp/</link>

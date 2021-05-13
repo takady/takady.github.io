@@ -69,26 +69,23 @@
     </div>
   </header>
   <section>
-    
-
-<p>必要になったので調べてみた．<br />
-結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．<br />
+    <p>必要になったので調べてみた．<br>
+結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる．<br>
 調べた結果，自分は下記の方法をとった．</p>
-
 <ol>
 <li>新しい名前のgemのコードを用意する．既存repositoryをrenameする場合は，.gemspecなど漏れなく修正する．</li>
 <li>新しい名前のgemを<code>rake release</code>する．</li>
 <li><code>gem yank</code>で古い名前のgemをindexから外す．</li>
 </ol>
-
 <p><code>gem yank</code>してもrubygems.org上のページは残るのでその点注意．</p>
-
 <h1 id="参考">参考</h1>
-
 <ul>
-<li><p><a href="http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem">Removing a published RubyGem / Gemcutter / Knowledge Base - RubyGems.org Support</a></p></li>
-
-<li><p><a href="http://blog.s21g.com/articles/1755">公開した gem を削除する方法 - ヽ( ・∀・)ノくまくまー - s21g</a></p></li>
+<li>
+<p><a href="http://help.rubygems.org/kb/gemcutter/removing-a-published-rubygem">Removing a published RubyGem / Gemcutter / Knowledge Base - RubyGems.org Support</a></p>
+</li>
+<li>
+<p><a href="http://blog.s21g.com/articles/1755">公開した gem を削除する方法 - ヽ( ・∀・)ノくまくまー - s21g</a></p>
+</li>
 </ul>
 
   </section>

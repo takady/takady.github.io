@@ -69,15 +69,10 @@
     </div>
   </header>
   <section>
-    
-
-<p>rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである.<br />
+    <p>rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである.<br>
 <a href="https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md">rocket/getting-started-guide.md at master · coreos/rocket</a>を通して, rocketをCoreOS上で動かしてみた.</p>
-
 <h1 id="vagrantでcoreosのvmを用意">vagrantでCoreOSのVMを用意</h1>
-
 <p>まず, CoreOSの環境を用意する.</p>
-
 <pre><code>$ git clone https://github.com/coreos/coreos-vagrant/
 $ cd coreos-vagrant
 $ vagrant up
@@ -86,35 +81,24 @@ Last login: Tue Jan 13 08:50:19 2015 from 10.0.2.2
 CoreOS alpha (557.0.0)
 core@core-01 ~ $
 </code></pre>
-
 <h1 id="rkt-actool-goのinstall">rkt, actool, goのinstall</h1>
-
 <h2 id="rkt">rkt</h2>
-
 <pre><code>core@core-01 ~ $ wget https://github.com/coreos/rocket/releases/download/v0.1.1/rocket-v0.1.1.tar.gz
 core@core-01 ~ $ tar zxf rocket-v0.1.1.tar.gz
 </code></pre>
-
 <h2 id="actool">actool</h2>
-
 <pre><code>core@core-01 ~ $ wget https://github.com/appc/spec/releases/download/v0.1.1/appc-spec-v0.1.1.tar.gz
 core@core-01 ~ $ tar zxf appc-spec-v0.1.1.tar.gz
 </code></pre>
-
 <h2 id="go">go</h2>
-
-<p><a href="http://qiita.com/hnakamur/items/8cda520807f571409f6c#4-1">OSX + Vagrant + CoreOSでKubernetesを試してみた - Qiita</a>を参考にした.<br />
+<p><a href="http://qiita.com/hnakamur/items/8cda520807f571409f6c#4-1">OSX + Vagrant + CoreOSでKubernetesを試してみた - Qiita</a>を参考にした.<br>
 ちなみに, go1.4だと次のhello.goがうまくビルド出来くて, 断念して1.3系を入れた.(<a href="https://github.com/coreos/rocket/issues/270">参考</a>)</p>
-
 <pre><code>core@core-01 ~ $ wget https://storage.googleapis.com/golang/go1.3.3.linux-amd64.tar.gz
 core@core-01 ~ $ sudo mkdir /opt
 core@core-01 ~ $ sudo tar zxf go1.3.3.linux-amd64.tar.gz -C /opt/
 </code></pre>
-
 <h2 id="gopath等の設定">GOPATH等の設定</h2>
-
 <p>bash_profileはシムリンクを削除して実ファイルを用意した.</p>
-
 <pre><code>core@core-01 ~ $ ls -l ~/.bash_profile
 lrwxrwxrwx 1 core core 34 Jan  9 04:47 /home/core/.bash_profile -&gt; ../../usr/share/skel/.bash_profile
 core@core-01 ~ $ rm ~/.bash_profile
@@ -130,77 +114,64 @@ core@core-01 ~ $ exec $SHELL -l
 core@core-01 ~ $ go version
 go version go1.3.3 linux/amd64
 </code></pre>
-
 <h1 id="サンプルアプリケーション作成">サンプルアプリケーション作成</h1>
+<h2 id="hellogoの作成とビルド">hello.goの作成とビルド</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<h2 id="hello-goの作成とビルド">hello.goの作成とビルド</h2>
-
-<pre><code class="language-go">package main
-
-import (
-    &quot;log&quot;
-    &quot;net/http&quot;
+<span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;log&#34;</span>
+    <span style="color:#e6db74">&#34;net/http&#34;</span>
 )
 
-func main() {
-    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
-        log.Printf(&quot;request from %v\n&quot;, r.RemoteAddr)
-        w.Write([]byte(&quot;hello\n&quot;))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;request from %v\n&#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">RemoteAddr</span>)
+        <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello\n&#34;</span>))
     })
-    log.Fatal(http.ListenAndServe(&quot;:5000&quot;, nil))
+    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:5000&#34;</span>, <span style="color:#66d9ef">nil</span>))
 }
-</code></pre>
-
-<p>ビルドする.</p>
-
+</code></pre></div><p>ビルドする.</p>
 <pre><code>core@core-01 ~ $ CGO_ENABLED=0 GOOS=linux go build -a -tags netgo -ldflags '-w' hello.go
 </code></pre>
-
-<h2 id="manifest-jsonの作成">manifest.jsonの作成</h2>
-
-<pre><code class="language-json">{
-    &quot;acKind&quot;: &quot;ImageManifest&quot;,
-    &quot;acVersion&quot;: &quot;0.1.1&quot;,
-    &quot;name&quot;: &quot;coreos.com/hello&quot;,
-    &quot;labels&quot;: [
+<h2 id="manifestjsonの作成">manifest.jsonの作成</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;acKind&#34;</span>: <span style="color:#e6db74">&#34;ImageManifest&#34;</span>,
+    <span style="color:#f92672">&#34;acVersion&#34;</span>: <span style="color:#e6db74">&#34;0.1.1&#34;</span>,
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;coreos.com/hello&#34;</span>,
+    <span style="color:#f92672">&#34;labels&#34;</span>: [
         {
-            &quot;name&quot;: &quot;version&quot;,
-            &quot;val&quot;: &quot;1.0.0&quot;
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;version&#34;</span>,
+            <span style="color:#f92672">&#34;val&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>
         },
         {
-            &quot;name&quot;: &quot;arch&quot;,
-            &quot;val&quot;: &quot;amd64&quot;
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;arch&#34;</span>,
+            <span style="color:#f92672">&#34;val&#34;</span>: <span style="color:#e6db74">&#34;amd64&#34;</span>
         },
         {
-            &quot;name&quot;: &quot;os&quot;,
-            &quot;val&quot;: &quot;linux&quot;
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;os&#34;</span>,
+            <span style="color:#f92672">&#34;val&#34;</span>: <span style="color:#e6db74">&#34;linux&#34;</span>
         }
     ],
-    &quot;app&quot;: {
-        &quot;user&quot;: &quot;root&quot;,
-        &quot;group&quot;: &quot;root&quot;,
-        &quot;exec&quot;: [
-            &quot;/bin/hello&quot;
+    <span style="color:#f92672">&#34;app&#34;</span>: {
+        <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;root&#34;</span>,
+        <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;root&#34;</span>,
+        <span style="color:#f92672">&#34;exec&#34;</span>: [
+            <span style="color:#e6db74">&#34;/bin/hello&#34;</span>
         ],
-        &quot;ports&quot;: [
+        <span style="color:#f92672">&#34;ports&#34;</span>: [
         {
-            &quot;name&quot;: &quot;www&quot;,
-            &quot;protocol&quot;: &quot;tcp&quot;,
-            &quot;port&quot;: 5000
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;www&#34;</span>,
+            <span style="color:#f92672">&#34;protocol&#34;</span>: <span style="color:#e6db74">&#34;tcp&#34;</span>,
+            <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">5000</span>
         }
         ]
     }
 }
-</code></pre>
-
-<p>validationする.</p>
-
+</code></pre></div><p>validationする.</p>
 <pre><code>core@core-01 ~ $ ./appc-spec-v0.1.1/actool -debug validate manifest.json
 manifest.json: valid ImageManifest
 </code></pre>
-
-<h1 id="app-container-image-aci-のビルド">App Container Image(ACI)のビルド</h1>
-
+<h1 id="app-container-imageaciのビルド">App Container Image(ACI)のビルド</h1>
 <pre><code>core@core-01 ~ $ mkdir -p hello-layout/rootfs/bin
 core@core-01 ~ $ cp -i manifest.json hello-layout/manifest
 core@core-01 ~ $ cp -i hello hello-layout/rootfs/bin/
@@ -208,21 +179,16 @@ core@core-01 ~ $ ./appc-spec-v0.1.1/actool build hello-layout/ hello.aci
 core@core-01 ~ $ ./appc-spec-v0.1.1/actool -debug validate hello.aci
 hello.aci: valid app container image
 </code></pre>
-
 <p>ちなみに, ACIはtarなので,下記で中身を確認できる.</p>
-
 <pre><code>core@core-01 ~ $ tar tvf hello.aci
 drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs
 drwxr-xr-x 500/500           0 2015-01-13 10:26 rootfs/bin
 -rwxr-xr-x 500/500     4383427 2015-01-13 10:26 rootfs/bin/hello
 -rw-r--r-- root/root       510 2015-01-13 10:27 manifest
 </code></pre>
-
 <h1 id="aciの起動">ACIの起動</h1>
-
-<p>ここでcontainerを起動し, helloアプリがhttpリクエストを受けられる状態になる.<br />
+<p>ここでcontainerを起動し, helloアプリがhttpリクエストを受けられる状態になる.<br>
 ちなみに, containerを落としたい時は<code>ctrl-]</code>を3回押す.</p>
-
 <pre><code>core@core-01 ~ $ sudo ./rocket-v0.1.1/rkt --debug run hello.aci
 2015/01/13 10:27:43 Unpacking stage1 rootfs
 2015/01/13 10:27:43 Writing stage1 init
@@ -249,36 +215,25 @@ Initializing machine ID from container UUID.
 [  OK  ] Started coreos.com/hello.
 [  OK  ] Reached target Rocket apps target.
 </code></pre>
-
 <h2 id="アクセスしてみる">アクセスしてみる</h2>
-
 <pre><code>core@core-01 ~ $ curl 127.0.0.1:5000
 hello
 </code></pre>
-
 <h2 id="アクセスログが表示される">アクセスログが表示される</h2>
-
 <pre><code>2015/01/13 10:31:30 request from 127.0.0.1:36742
 </code></pre>
-
 <h1 id="環境">環境</h1>
-
 <h2 id="osx">OSX</h2>
-
 <ul>
 <li>OSX 10.9.5</li>
 <li>Vagrant 1.6.5</li>
 </ul>
-
 <h2 id="coreos">CoreOS</h2>
-
 <ul>
 <li>CoreOS alpha (557.0.0)</li>
 <li>go 1.3.3</li>
 </ul>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="https://github.com/coreos/rocket/blob/master/Documentation/getting-started-guide.md">rocket/getting-started-guide.md at master · coreos/rocket</a></li>
 <li><a href="https://github.com/kelseyhightower/rocket-tutorial">kelseyhightower/rocket-tutorial</a></li>

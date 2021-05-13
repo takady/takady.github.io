@@ -69,45 +69,31 @@
     </div>
   </header>
   <section>
-    
-
-<p>rails で普通に scaffold すると id が URL に入って <code>example.com/users/:id</code> となる。<br />
-これを <code>twitter.com/takady7</code> とか <code>github.com/takady</code> みたいにしたい時がある。<br />
+    <p>rails で普通に scaffold すると id が URL に入って <code>example.com/users/:id</code> となる。<br>
+これを <code>twitter.com/takady7</code> とか <code>github.com/takady</code> みたいにしたい時がある。<br>
 実現には 2 通りの方法があると思われる。</p>
-
-<h1 id="to-param-を使う方法">to_param を使う方法</h1>
-
+<h1 id="to_param-を使う方法">to_param を使う方法</h1>
 <p>activerecord に <a href="http://railsdoc.com/references/to_param">to_param</a> というメソッドがあって、これを使うと URL の :id の部分に id 以外を指定できるようになる。</p>
+<h2 id="userrb">user.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+  validates_presence_of <span style="color:#e6db74">:username</span>
+  validates_uniqueness_of <span style="color:#e6db74">:username</span>, <span style="color:#e6db74">case_sensitive</span>: <span style="color:#66d9ef">false</span>
 
-<h2 id="user-rb">user.rb</h2>
-
-<pre><code class="language-ruby">class User &lt; ActiveRecord::Base
-  validates_presence_of :username
-  validates_uniqueness_of :username, case_sensitive: false
-
-  def to_param
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">to_param</span>
     username
-  end
-end
-</code></pre>
-
-<h2 id="users-controller-rb">users_controller.rb</h2>
-
-<pre><code class="language-ruby">class UsersController &lt; ApplicationController
-  def show
-    @user = User.find_by(username: params[:id])
-  end
-end
-</code></pre>
-
-<h2 id="routes-rb">routes.rb</h2>
-
-<pre><code class="language-ruby">Rails.application.routes.draw do
-  resources :users, path: '/', only: [:show, :edit, :update, :destroy]
-end
-</code></pre>
-
-<pre><code>$ rake routes
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="users_controllerrb">users_controller.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UsersController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show</span>
+    @user <span style="color:#f92672">=</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">.</span>find_by(<span style="color:#e6db74">username</span>: params<span style="color:#f92672">[</span><span style="color:#e6db74">:id</span><span style="color:#f92672">]</span>)
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="routesrb">routes.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>application<span style="color:#f92672">.</span>routes<span style="color:#f92672">.</span>draw <span style="color:#66d9ef">do</span>
+  resources <span style="color:#e6db74">:users</span>, <span style="color:#e6db74">path</span>: <span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#e6db74">only</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">:show</span>, <span style="color:#e6db74">:edit</span>, <span style="color:#e6db74">:update</span>, <span style="color:#e6db74">:destroy</span><span style="color:#f92672">]</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><pre><code>$ rake routes
     Prefix Verb   URI Pattern                        Controller#Action
  edit_user GET    /:id/edit(.:format)                users#edit
       user GET    /:id(.:format)                     users#show
@@ -115,29 +101,20 @@ end
            PUT    /:id(.:format)                     users#update
            DELETE /:id(.:format)                     users#destroy
 </code></pre>
-
 <h1 id="routing-で-param-を設定する方法">routing で param を設定する方法</h1>
-
-<p>User クラスに to_param を定義せずに、 routes.rb で設定する方法。<br />
+<p>User クラスに to_param を定義せずに、 routes.rb で設定する方法。<br>
 <code>params[:username]</code> というふうに渡ってくるので、こちらの方が素直な気がして個人的にはこちらを使いたい。</p>
-
-<h2 id="users-controller-rb-1">users_controller.rb</h2>
-
-<pre><code class="language-ruby">class UsersController &lt; ApplicationController
-  def show
-    @user = User.find_by(username: params[:username])
-  end
-end
-</code></pre>
-
-<h2 id="routes-rb-1">routes.rb</h2>
-
-<pre><code class="language-ruby">Rails.application.routes.draw do
-  resources :users, param: :username, path: '/', only: [:show, :edit, :update, :destroy]
-end
-</code></pre>
-
-<pre><code>$ rake routes
+<h2 id="users_controllerrb-1">users_controller.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UsersController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show</span>
+    @user <span style="color:#f92672">=</span> <span style="color:#66d9ef">User</span><span style="color:#f92672">.</span>find_by(<span style="color:#e6db74">username</span>: params<span style="color:#f92672">[</span><span style="color:#e6db74">:username</span><span style="color:#f92672">]</span>)
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="routesrb-1">routes.rb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>application<span style="color:#f92672">.</span>routes<span style="color:#f92672">.</span>draw <span style="color:#66d9ef">do</span>
+  resources <span style="color:#e6db74">:users</span>, <span style="color:#e6db74">param</span>: <span style="color:#e6db74">:username</span>, <span style="color:#e6db74">path</span>: <span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#e6db74">only</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">:show</span>, <span style="color:#e6db74">:edit</span>, <span style="color:#e6db74">:update</span>, <span style="color:#e6db74">:destroy</span><span style="color:#f92672">]</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><pre><code>$ rake routes
     Prefix Verb   URI Pattern                        Controller#Action
  edit_user GET    /:username/edit(.:format)          users#edit
       user GET    /:username(.:format)               users#show
@@ -145,9 +122,7 @@ end
            PUT    /:username(.:format)               users#update
            DELETE /:username(.:format)               users#destroy
 </code></pre>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="http://stackoverflow.com/questions/7735315/rails-route-to-username-instead-of-id">ruby - Rails route to username instead of id - Stack Overflow</a></li>
 <li><a href="http://railsdoc.com/references/to_param">to_param - リファレンス - - Railsドキュメント</a></li>

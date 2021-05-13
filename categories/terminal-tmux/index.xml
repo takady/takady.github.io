@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Mon, 20 Apr 2015 16:54:18 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 20 Apr 2015 16:54:18 +0000</lastBuildDate><atom:link href="https://blog.takady.net/categories/terminal-tmux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>tmuxにpowerlineを導入した</title>
       <link>https://blog.takady.net/blog/2015/04/20/powerline-config/</link>

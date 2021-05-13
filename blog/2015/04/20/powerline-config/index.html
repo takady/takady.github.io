@@ -69,17 +69,11 @@
     </div>
   </header>
   <section>
-    
-
-<h1 id="powerlineの導入">powerlineの導入</h1>
-
-<p>下記の記事を参考にした．<br />
+    <h1 id="powerlineの導入">powerlineの導入</h1>
+<p>下記の記事を参考にした．<br>
 <a href="http://qiita.com/tkhr/items/8cc17c02dea1803be9c6">tmux - Powerline導入例 - Qiita</a></p>
-
 <h2 id="フォントが綺麗に表示されない場合">フォントが綺麗に表示されない場合</h2>
-
 <p>自分の環境では，<code>brew reinstall --powerline --vim-powerline ricty</code>でpowerline用のRictyを入れても綺麗に表示されなかったので，自分でfontを合成した．</p>
-
 <pre><code>$ git clone https://github.com/yascentur/Ricty.git
 $ cd Ricty
 
@@ -92,51 +86,33 @@ $ ./ricty_generator.sh fonts/Inconsolata/Inconsolata\ for\ Powerline.otf migu-1m
 $ cp -f ./Ricty*.ttf ~/Library/Fonts
 $ fc-cache -vf
 </code></pre>
-
 <h1 id="カスタマイズ">カスタマイズ</h1>
-
-<p>デフォルトは水色．<br />
-<img src="/images/powerline_config_01.png" alt="before" /></p>
-
-<p><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst</a>に設定方法は書いてある．<br />
+<p>デフォルトは水色．<br>
+<img src="/images/powerline_config_01.png" alt="before"></p>
+<p><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst</a>に設定方法は書いてある．<br>
 カスタマイズしたいconfigファイルを<code>powerline/config_files</code>から<code>~/.config/powerline</code>以下にパスそのままにコピーしてきて，それを編集する．</p>
-
 <pre><code>$ mkdir -p ~/.config/powerline/colorschemes/tmux
 $ cp -i powerline/config_files/colorschemes/tmux/default.json ~/.config/powerline/colorschemes/tmux/.
 </code></pre>
-
-<h2 id="config-powerline-colorschemes-tmux-default-json">~/.config/powerline/colorschemes/tmux/default.json</h2>
-
-<p>例えば色を変えてみる．<br />
+<h2 id="configpowerlinecolorschemestmuxdefaultjson">~/.config/powerline/colorschemes/tmux/default.json</h2>
+<p>例えば色を変えてみる．<br>
 色は<code>powerline/config_files/colors.json</code>に定義されているものも使える．</p>
-
-<pre><code class="language-json">{
-  &quot;groups&quot;: {
-    &quot;active_window_status&quot;: {&quot;fg&quot;: &quot;gray70&quot;, &quot;bg&quot;: &quot;gray0&quot;,       &quot;attrs&quot;: []},
-    &quot;window:current&quot;:       {&quot;fg&quot;: &quot;black&quot;,  &quot;bg&quot;: &quot;brightgreen&quot;, &quot;attrs&quot;: []},
-    &quot;window_name&quot;:          {&quot;fg&quot;: &quot;black&quot;,  &quot;bg&quot;: &quot;brightgreen&quot;, &quot;attrs&quot;: [&quot;bold&quot;]},
-    &quot;session:prefix&quot;:       {&quot;fg&quot;: &quot;black&quot;,  &quot;bg&quot;: &quot;brightgreen&quot;, &quot;attrs&quot;: [&quot;bold&quot;]}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;groups&#34;</span>: {
+    <span style="color:#f92672">&#34;active_window_status&#34;</span>: {<span style="color:#f92672">&#34;fg&#34;</span>: <span style="color:#e6db74">&#34;gray70&#34;</span>, <span style="color:#f92672">&#34;bg&#34;</span>: <span style="color:#e6db74">&#34;gray0&#34;</span>,       <span style="color:#f92672">&#34;attrs&#34;</span>: []},
+    <span style="color:#f92672">&#34;window:current&#34;</span>:       {<span style="color:#f92672">&#34;fg&#34;</span>: <span style="color:#e6db74">&#34;black&#34;</span>,  <span style="color:#f92672">&#34;bg&#34;</span>: <span style="color:#e6db74">&#34;brightgreen&#34;</span>, <span style="color:#f92672">&#34;attrs&#34;</span>: []},
+    <span style="color:#f92672">&#34;window_name&#34;</span>:          {<span style="color:#f92672">&#34;fg&#34;</span>: <span style="color:#e6db74">&#34;black&#34;</span>,  <span style="color:#f92672">&#34;bg&#34;</span>: <span style="color:#e6db74">&#34;brightgreen&#34;</span>, <span style="color:#f92672">&#34;attrs&#34;</span>: [<span style="color:#e6db74">&#34;bold&#34;</span>]},
+    <span style="color:#f92672">&#34;session:prefix&#34;</span>:       {<span style="color:#f92672">&#34;fg&#34;</span>: <span style="color:#e6db74">&#34;black&#34;</span>,  <span style="color:#f92672">&#34;bg&#34;</span>: <span style="color:#e6db74">&#34;brightgreen&#34;</span>, <span style="color:#f92672">&#34;attrs&#34;</span>: [<span style="color:#e6db74">&#34;bold&#34;</span>]}
   }
 }
-</code></pre>
-
-<h3 id="修正後">修正後</h3>
-
-<p><img src="/images/powerline_config_02.png" alt="after" /></p>
-
+</code></pre></div><h3 id="修正後">修正後</h3>
+<p><img src="/images/powerline_config_02.png" alt="after"></p>
 <h1 id="その他">その他</h1>
-
 <p>ちなみに，tmuxの設定をreloadするために毎回tmuxを再起動するのは面倒なので，<code>.tmux.conf</code>に下記のように設定を再読み込みするよう定義しておくと捗る．</p>
-
-<pre><code class="language-text">bind C-r source-file &quot;${HOME}/.tmux.conf&quot;
-</code></pre>
-
-<h1 id="まとめ">まとめ</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">bind C-r source-file &#34;${HOME}/.tmux.conf&#34;
+</code></pre></div><h1 id="まとめ">まとめ</h1>
 <p>もっとこだわるなら表示する情報とかもカスタマイズできるので，やりたくなったらやるつもり．</p>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="https://github.com/powerline/powerline/blob/develop/docs/source/configuration.rst">powerline/configuration.rst at develop · powerline/powerline</a></li>
 <li><a href="https://github.com/takady/dotfiles">takady/dotfiles</a></li>

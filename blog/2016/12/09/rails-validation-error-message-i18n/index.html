@@ -69,74 +69,58 @@
     </div>
   </header>
   <section>
-    
-
-<p>rails で Custom validatior や Custom validation method を定義して、その中で <code>errors.add</code> する際に、
-message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。<br />
+    <p>rails で Custom validatior や Custom validation method を定義して、その中で <code>errors.add</code> する際に、
+message として使われる I18n のパスをどう書くのが良いのかっていうのが気になった。<br>
 結論としては、下記のように書くのがスッキリして良さそう。</p>
-
 <h2 id="custom-validators">Custom Validators</h2>
-
 <p>特定のモデルによらないエラーメッセージの場合は、下記のように <code>locales/en.yml</code> を書くことで、<code>record.errors.add(attribute, :something_invalid)</code>と書ける。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">en</span>:
+  <span style="color:#f92672">errors</span>:
+    <span style="color:#f92672">messages</span>:
+      <span style="color:#f92672">something_invalid</span>: <span style="color:#ae81ff">Invalid something.</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyCheckValidator</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">EachValidator</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_each</span>(record, attribute, value)
+    <span style="color:#66d9ef">unless</span> check_something(value)
+      record<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>add(attribute, <span style="color:#e6db74">:something_invalid</span>)
+      <span style="color:#75715e">#=&gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
 
-<pre><code class="language-yml">en:
-  errors:
-    messages:
-      something_invalid: Invalid something.
-</code></pre>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_something</span>(value)
+   <span style="color:#75715e"># Something</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
 
-<pre><code class="language-ruby">class MyCheckValidator &lt; ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless check_something(value)
-      record.errors.add(attribute, :something_invalid)
-      #=&gt; record.errors.add(attribute, I18n.t('errors.messages.something_invalid')) と同じ
-    end
-  end
-
-  def check_something(value)
-   # Something
-  end
-end
-
-class MyModel &lt; ActiveRecord::Base
-  validates :name, my_check: true
-end
-</code></pre>
-
-<h2 id="custom-methods">Custom Methods</h2>
-
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+  validates <span style="color:#e6db74">:name</span>, <span style="color:#e6db74">my_check</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="custom-methods">Custom Methods</h2>
 <p>特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">en</span>:
+  <span style="color:#f92672">activerecord</span>:
+    <span style="color:#f92672">errors</span>:
+      <span style="color:#f92672">models</span>:
+        <span style="color:#f92672">my_model</span>:
+          <span style="color:#f92672">attributes</span>:
+            <span style="color:#f92672">start_date</span>:
+              <span style="color:#f92672">cannot_be_after_end_date</span>: <span style="color:#ae81ff">It cannot be after the end date.</span>
+            <span style="color:#f92672">end_date</span>:
+              <span style="color:#f92672">cannot_be_before_start_date</span>: <span style="color:#ae81ff">It cannot be before the start date.</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+  validate <span style="color:#e6db74">:start_date_cannot_be_after_end_date</span>, <span style="color:#66d9ef">if</span>: <span style="color:#f92672">-&gt;</span> { start_date<span style="color:#f92672">.</span>present? <span style="color:#f92672">&amp;&amp;</span> end_date<span style="color:#f92672">.</span>present? }
 
-<pre><code class="language-yml">en:
-  activerecord:
-    errors:
-      models:
-        my_model:
-          attributes:
-            start_date:
-              cannot_be_after_end_date: It cannot be after the end date.
-            end_date:
-              cannot_be_before_start_date: It cannot be before the start date.
-</code></pre>
+  <span style="color:#66d9ef">private</span>
 
-<pre><code class="language-ruby">class MyModel &lt; ActiveRecord::Base
-  validate :start_date_cannot_be_after_end_date, if: -&gt; { start_date.present? &amp;&amp; end_date.present? }
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_date_cannot_be_after_end_date</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> start_date <span style="color:#f92672">&lt;=</span> end_date
 
-  private
-
-  def start_date_cannot_be_after_end_date
-    return if start_date &lt;= end_date
-
-    errors.add(:start_date, :cannot_be_after_end_date)
-    #=&gt; errors.add(:start_date, I18n.t('activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date')) と同じ
-    errors.add(:end_date, :cannot_be_before_start_date)
-    #=&gt; errors.add(:end_date, I18n.t('activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date')) と同じ
-  end
-end
-</code></pre>
-
-<h3 id="参考">参考</h3>
-
+    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:start_date</span>, <span style="color:#e6db74">:cannot_be_after_end_date</span>)
+    <span style="color:#75715e">#=&gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ</span>
+    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:end_date</span>, <span style="color:#e6db74">:cannot_be_before_start_date</span>)
+    <span style="color:#75715e">#=&gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h3 id="参考">参考</h3>
 <ul>
 <li><a href="http://guides.rubyonrails.org/active_record_validations.html">Active Record Validations — Ruby on Rails Guides</a></li>
 </ul>

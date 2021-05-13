@@ -3,27 +3,27 @@
 <head prefix="og: http://ogp.me/ns#">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-  <meta property="og:title" content=" Octopress から Hugo に移行した &middot;  Yuichi Takada" />
+  <meta property="og:title" content=" git commit に署名を付ける &middot;  Yuichi Takada" />
   
   <meta name="theme-color" content="#333" />
  
   <meta property="og:site_name" content="Yuichi Takada" />
-  <meta property="og:url" content="https://blog.takady.net/blog/2017/03/26/hello-hugo/" />
+  <meta property="og:url" content="https://blog.takady.net/blog/2021/05/13/signing-commits/" />
   
   
   <meta property="og:type" content="article" />
   
-  <meta property="og:article:published_time" content="2017-03-26T12:14:44&#43;09:00" />
+  <meta property="og:article:published_time" content="2021-05-13T00:00:00&#43;09:00" />
   
   
-  <meta name="og:description" content="このブログのエンジンを Octopress から Hugo に移行した。 2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイ" />
+  <meta name="og:description" content="背景 先日とある repository に contribute した時に、署名付き commit が必要になったので、設定した記録。 署名付き commit とは これのこと。 GPG キーの作成から設定まで こちらに記載の手" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:url" content="https://blog.takady.net/blog/2017/03/26/hello-hugo/" />
+  <meta name="twitter:url" content="https://blog.takady.net/blog/2021/05/13/signing-commits/" />
   <meta name="twitter:site" content="@takady7" />
   <meta name="twitter:creator" content="@takady7" />
 
   <title>
-     Octopress から Hugo に移行した &middot;  Yuichi Takada
+     git commit に署名を付ける &middot;  Yuichi Takada
   </title>
 
   <link rel="stylesheet" href="https://blog.takady.net/css/bootstrap.min.css" />
@@ -55,12 +55,12 @@
 
 <article>
   <header>
-    <h1 class="text-primary">Octopress から Hugo に移行した</h1>
+    <h1 class="text-primary">git commit に署名を付ける</h1>
     <div class="post-meta clearfix">
       <div class="post-date pull-left">
         Posted on
-        <time datetime="2017-03-26T12:14:44&#43;09:00">
-          Mar 26, 2017
+        <time datetime="2021-05-13T00:00:00&#43;09:00">
+          May 13, 2021
         </time>
       </div>
       <div class="pull-right">
@@ -69,29 +69,28 @@
     </div>
   </header>
   <section>
-    <p>このブログのエンジンを Octopress から <a href="https://gohugo.io/">Hugo</a> に移行した。<br>
-2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイムラグが結構気になってきていた。<br>
-jekyll からのインポートコマンドも hugo に用意されているので、わりと楽に移行出来た。</p>
-<h2 id="感想">感想</h2>
-<ul>
-<li>再生成が一瞬で完了するのでとても快適。</li>
-<li>theme が少ないとか言われているけどシンプルなやつは結構良いやつある。
-<ul>
-<li>vienna のテーマをちょっとイジって使ってる。</li>
-</ul>
-</li>
-<li>disqus を初めて使ってみたけど設定でハマった。
-<ul>
-<li>アカウント作るだけじゃなくて Create a new site して short name を用意しないといけなかった。</li>
-</ul>
-</li>
-</ul>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://gohugo.io/tutorials/github-pages-blog/">Hugo - Hosting on GitHub Pages</a></li>
-<li><a href="http://ja.mhatta.org/blog/2016/08/21/migrated-from-octopress-to-hugo/">OctopressからHugoへ移行 · Masayuki Hatta a.k.a. mhatta</a></li>
-</ul>
-
+    <h1 id="背景">背景</h1>
+<p>先日とある <a href="https://github.com/Djarvur/go-err113/pull/17#issuecomment-755453967">repository に contribute した時</a>に、署名付き commit が必要になったので、設定した記録。</p>
+<h1 id="署名付き-commit-とは">署名付き commit とは</h1>
+<p>これのこと。</p>
+<p><img src="/images/2021-05-13-signing-commits/signing-commits.png" alt=""></p>
+<h1 id="gpg-キーの作成から設定まで">GPG キーの作成から設定まで</h1>
+<p>こちらに記載の手順の通り。<br>
+<a href="https://docs.github.com/ja/github/authenticating-to-github/generating-a-new-gpg-key#generating-a-gpg-key">https://docs.github.com/ja/github/authenticating-to-github/generating-a-new-gpg-key#generating-a-gpg-key</a></p>
+<p>gpg を install。</p>
+<pre><code>$ brew install gpg
+</code></pre><p>GPG キーペアを生成。</p>
+<pre><code>$ gpg --full-generate-key
+</code></pre><p>途中、ユーザ ID 情報で本名、メールアドレス、コメントの入力を順に求められるが、コメントについては空で問題ない。</p>
+<pre><code>$ gpg --list-secret-keys --keyid-format LONG
+</code></pre><p>上記コマンドで表示されるGPGキーIDをコピーして、下記コメントで GPG キーをクリップボードにコピー。</p>
+<pre><code>$ gpg --armor --export &lt;GPGキーID&gt; | pbcopy
+</code></pre><p>あとは下記ページを参照して、 GPG キーを GitHub アカウントに追加する。
+<a href="https://docs.github.com/ja/github/authenticating-to-github/adding-a-new-gpg-key-to-your-github-account">https://docs.github.com/ja/github/authenticating-to-github/adding-a-new-gpg-key-to-your-github-account</a></p>
+<h1 id="署名付きコミットをする">署名付きコミットをする</h1>
+<p><code>-S</code> オプション付きで commit する。</p>
+<pre><code>$ git commit -S &quot;Commit message&quot;
+</code></pre>
   </section>
   <footer>
     
@@ -125,10 +124,10 @@ jekyll からのインポートコマンドも hugo に用意されているの�
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2017/05/28/mistel_keyboard/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2017/03/24/huawei-nova/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2019/11/16/baby/">Newer <span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>

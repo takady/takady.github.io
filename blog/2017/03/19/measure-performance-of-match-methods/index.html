@@ -70,15 +70,12 @@
   </header>
   <section>
     <p>下記のようなよくある文字列のマッチ判定を Ruby でやる場合に、String クラスのメソッドを使った場合と正規表現を使った場合それぞれのベンチマーク結果を見てみた。</p>
-
 <ul>
 <li>部分文字列が含まれているか</li>
 <li>指定の文字列で始まっているか</li>
 <li>指定の文字列で終わっているか</li>
 </ul>
-
 <p>String のメソッドの方がパフォーマンスが良い。</p>
-
 <pre><code>$ ruby benchmarker.rb
                            user     system      total        real
 [string]include        0.110000   0.000000   0.110000 (  0.116923)
@@ -87,38 +84,31 @@
 [regexp]start_with     0.230000   0.000000   0.230000 (  0.234467)
 [string]end_with       0.090000   0.000000   0.090000 (  0.091226)
 [regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)
-</code></pre>
-
-<p>コード。<br />
+</code></pre><p>コード。<br>
 生成コストが入らないように定数で宣言したものでベンチマーク取った。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;benchmark&#39;</span>
 
-<pre><code class="language-ruby">require 'benchmark'
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span>
 
-n = 1_000_000
+<span style="color:#66d9ef">TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>freeze
+<span style="color:#66d9ef">TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;te&#39;</span><span style="color:#f92672">.</span>freeze
+<span style="color:#66d9ef">ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;st&#39;</span><span style="color:#f92672">.</span>freeze
+<span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/test/</span><span style="color:#f92672">.</span>freeze
+<span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/\Ate/</span><span style="color:#f92672">.</span>freeze
+<span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/st\z/</span><span style="color:#f92672">.</span>freeze
 
-TEST = 'test'.freeze
-TE = 'te'.freeze
-ST = 'st'.freeze
-REGEXP_TEST = /test/.freeze
-REGEXP_TE = /\Ate/.freeze
-REGEXP_ST = /st\z/.freeze
-
-Benchmark.bm(20) do |b|
-  b.report('[string]include') { (1..n).each { TEST.include?(TE) } }
-  b.report('[regexp]include') { (1..n).each { REGEXP_TEST === TEST } }
-  b.report('[string]start_with') { (1..n).each { TEST.start_with?(TE) } }
-  b.report('[regexp]start_with') { (1..n).each { REGEXP_TE === TEST } }
-  b.report('[string]end_with') { (1..n).each { TEST.end_with?(ST) } }
-  b.report('[regexp]end_with') { (1..n).each { REGEXP_ST === TEST } }
-end
-</code></pre>
-
-<p>ちなみに、<code>start_with?</code>、 <code>end_with?</code> は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。</p>
-
-<pre><code class="language-ruby">[1] pry(main)&gt; 'test'.start_with?('ab', 'te')
-=&gt; true
-</code></pre>
-
+<span style="color:#66d9ef">Benchmark</span><span style="color:#f92672">.</span>bm(<span style="color:#ae81ff">20</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>b<span style="color:#f92672">|</span>
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>include?(<span style="color:#66d9ef">TE</span>) } }
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>start_with?(<span style="color:#66d9ef">TE</span>) } }
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>end_with?(<span style="color:#66d9ef">ST</span>) } }
+  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>ちなみに、<code>start_with?</code>、 <code>end_with?</code> は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span> pry(main)<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>start_with?(<span style="color:#e6db74">&#39;ab&#39;</span>, <span style="color:#e6db74">&#39;te&#39;</span>)
+<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
+</code></pre></div>
   </section>
   <footer>
     

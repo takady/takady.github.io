@@ -69,23 +69,16 @@
     </div>
   </header>
   <section>
-    
-
-<p>rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。<br />
+    <p>rubyのLoggerを使っていると、Logger.newした際に生成されるlogファイルには、デフォルトで下記のようなヘッダが出力される。<br>
 <code># Logfile created on 2014-11-22 13:15:26 +0900 by logger.rb/44203</code></p>
-
 <p>これを出したくない場合は、下記のようにヘッダをつける<a href="https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L649-L653">Logger::LogDevice#add_log_header</a>メソッドを空にoverrideすると良い。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Logger</span><span style="color:#f92672">::</span><span style="color:#66d9ef">LogDevice</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_log_header</span>(file)
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
 
-<pre><code class="language-ruby">class Logger::LogDevice
-  def add_log_header(file)
-  end
-end
-
-log = Logger.new('info.log')
-</code></pre>
-
-<h1 id="参考">参考</h1>
-
+log <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#39;info.log&#39;</span>)
+</code></pre></div><h1 id="参考">参考</h1>
 <p><a href="http://stackoverflow.com/questions/4096336/can-i-disable-the-log-header-for-ruby-logger">Can I disable the log header for ruby logger? - Stack Overflow</a></p>
 
   </section>

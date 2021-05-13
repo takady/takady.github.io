@@ -69,23 +69,17 @@
     </div>
   </header>
   <section>
-    
-
-<p>最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、<br />
-たまにブラウザからGETリクエスト送ってサクッとjsonの中を見たいって時に、認証があって見れない。。。ってパターンがかなりある。<br />
-開発環境では、認証しなくていいやと思った。<br />
+    <p>最近railsでapi開発をしていて、もちろんテストコード書いてるんだけど、<br>
+たまにブラウザからGETリクエスト送ってサクッとjsonの中を見たいって時に、認証があって見れない。。。ってパターンがかなりある。<br>
+開発環境では、認証しなくていいやと思った。<br>
 下記のようにすることで、before_actionをdevelopment環境ではスキップさせられる。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActionController</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+  before_action <span style="color:#e6db74">:authenticate</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>development?
 
-<pre><code class="language-ruby">class ApplicationController &lt; ActionController::Base
-  before_action :authenticate unless Rails.env.development?
-
-  def authenticate
-    ...
-  end
-</code></pre>
-
-<h1 id="参考">参考</h1>
-
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>
+    <span style="color:#f92672">...</span>
+  <span style="color:#66d9ef">end</span>
+</code></pre></div><h1 id="参考">参考</h1>
 <p><a href="http://memo.yomukaku.net/entries/127">Rails.env.development?でdevelopment環境かどうかを判定できる - memo.yomukaku.net</a></p>
 
   </section>
