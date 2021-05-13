@@ -26,3 +26,10 @@ blockquote {
   font-size: 17px;
   color: gray;
 }
+
+.pagination
+{
+  width : auto;
+	text-align: center;
+	display: block;
+}
