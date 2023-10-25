@@ -14,7 +14,7 @@
       <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
-      <description>この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 動機は 2年くらい前に買ったまま放置してた Raspberry</description>
+      <description>Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 用意したもの Raspberry Pi Model B ADT7410使用 高精度・高分解能 I2C・16Bit 温度センサ</description>
     </item>
     
   </channel>

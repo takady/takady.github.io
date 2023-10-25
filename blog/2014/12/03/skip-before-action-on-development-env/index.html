@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2014/12/03/skip-before-action-on-development-env/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">development環境だけbefore_actionをスキップする</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2014-12-03T21:02:25Z">
           Dec 3, 2014
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -73,17 +80,18 @@
 たまにブラウザからGETリクエスト送ってサクッとjsonの中を見たいって時に、認証があって見れない。。。ってパターンがかなりある。<br>
 開発環境では、認証しなくていいやと思った。<br>
 下記のようにすることで、before_actionをdevelopment環境ではスキップさせられる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActionController</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
-  before_action <span style="color:#e6db74">:authenticate</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>development?
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>
-    <span style="color:#f92672">...</span>
-  <span style="color:#66d9ef">end</span>
-</code></pre></div><h1 id="参考">参考</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActionController</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+</span></span><span style="display:flex;"><span>  before_action <span style="color:#e6db74">:authenticate</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>env<span style="color:#f92672">.</span>development?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">authenticate</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h1 id="参考">参考</h1>
 <p><a href="http://memo.yomukaku.net/entries/127">Rails.env.development?でdevelopment環境かどうかを判定できる - memo.yomukaku.net</a></p>
 
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -96,6 +104,7 @@
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -115,10 +124,10 @@
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2014/12/03/documentation/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2014/12/02/rails-mysql-boolean/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2014/12/07/file-safe-logger/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -143,6 +152,9 @@
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

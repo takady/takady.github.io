@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2015/02/08/embulk-plugin-sqlite3/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">embulk-plugin-sqlite3を作った</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2015-02-08T22:17:00Z">
           Feb 8, 2015
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -95,11 +102,11 @@ Successfully installed embulk-plugin-sqlite3-0.0.1
 $ embulk guess /tmp/example.yml -o /tmp/config.yml
 </code></pre>
 <p><code>/tmp/config.yml</code>のoutputの設定を下記のように修正する．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">out</span>:
-  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">sqlite3</span>
-  <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#39;/tmp/test.db&#39;</span>
-  <span style="color:#f92672">table</span>: <span style="color:#e6db74">&#39;load01&#39;</span>
-</code></pre></div><p><code>embulk run</code>する．</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">out</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">sqlite3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#39;/tmp/test.db&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">table</span>: <span style="color:#e6db74">&#39;load01&#39;</span>
+</span></span></code></pre></div><p><code>embulk run</code>する．</p>
 <pre><code>$ embulk run /tmp/config.yml
 2015-02-08 22:29:38,623 [INFO]: main:org.embulk.standards.LocalFileInputPlugin: Listing local files with prefix '/tmp/csv'
 2015-02-08 22:29:38,885 [INFO]: main:org.embulk.exec.LocalExecutor: Running 1 tasks using 8 local threads
@@ -140,6 +147,7 @@ sqlite&gt;
   </section>
   <footer>
     
+    
     <hr/>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -151,6 +159,7 @@ sqlite&gt;
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -170,10 +179,10 @@ sqlite&gt;
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2014/12/07/file-safe-logger/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2015/01/13/coreos-rocket/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2015/03/27/json-pp/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -198,6 +207,9 @@ sqlite&gt;
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

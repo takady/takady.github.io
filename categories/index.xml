@@ -27,24 +27,6 @@
     </item>
     
     <item>
-      <title>book</title>
-      <link>https://blog.takady.net/categories/book/</link>
-      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/categories/book/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>android</title>
-      <link>https://blog.takady.net/categories/android/</link>
-      <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/categories/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>RaspberryPi</title>
       <link>https://blog.takady.net/categories/raspberrypi/</link>
       <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
@@ -54,20 +36,20 @@
     </item>
     
     <item>
+      <title>book</title>
+      <link>https://blog.takady.net/categories/book/</link>
+      <pubDate>Thu, 24 Sep 2015 18:43:39 +0000</pubDate>
+      
+      <guid>https://blog.takady.net/categories/book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ruby tmux</title>
       <link>https://blog.takady.net/categories/ruby-tmux/</link>
       <pubDate>Fri, 24 Apr 2015 13:11:11 +0000</pubDate>
       
       <guid>https://blog.takady.net/categories/ruby-tmux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>terminal tmux</title>
-      <link>https://blog.takady.net/categories/terminal-tmux/</link>
-      <pubDate>Mon, 20 Apr 2015 16:54:18 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/categories/terminal-tmux/</guid>
       <description></description>
     </item>
     
@@ -86,15 +68,6 @@
       <pubDate>Sun, 08 Feb 2015 22:17:00 +0000</pubDate>
       
       <guid>https://blog.takady.net/categories/ruby-embulk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>coreos</title>
-      <link>https://blog.takady.net/categories/coreos/</link>
-      <pubDate>Tue, 13 Jan 2015 19:46:35 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/categories/coreos/</guid>
       <description></description>
     </item>
     

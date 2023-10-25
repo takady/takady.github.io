@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2015/04/24/bundle-open-tmux/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">bundle openでtmuxのpaneを開く</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2015-04-24T13:11:11Z">
           Apr 24, 2015
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -71,19 +78,19 @@
   <section>
     <p><code>bundle open</code>でgemのソースをエディタで開いたり，<code>bundle show</code>でgemのパスを見たりすることができるので，gemの挙動を知りたくてコードを見たい時にこれらのコマンドをよく使ってる．<br>
 便利なんだけど，gemのディレクトリがtmuxのペインで開いてくれるともっと使いやすいと思って，やってみた．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export BUNDLER_EDITOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tmux split-window -c&#34;</span>
-</code></pre></div><p>上記を<code>~/.zshrc</code>あたりに定義して，コマンドラインで<code>bundle open</code>を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>export BUNDLER_EDITOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tmux split-window -c&#34;</span>
+</span></span></code></pre></div><p>上記を<code>~/.zshrc</code>あたりに定義して，コマンドラインで<code>bundle open</code>を実行すれば，tmuxのpaneが開いてそのgemのディレクトリを見ることができる．</p>
 <pre><code>$ bundle open activerecord
 </code></pre>
 <h1 id="bundle-openを上書きしたくない場合">bundle openを上書きしたくない場合</h1>
 <p><code>bundle open</code>の挙動はそのまま残したいという場合には，<code>BUNDLER_EDITOR</code>で設定するのではなく，下記のような関数を別途定義して使うと良い．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">function</span> bundle_open_tmux<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-        local dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>bundle show <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-        tmux split-window -c <span style="color:#e6db74">&#34;</span>$dir<span style="color:#e6db74">&#34;</span>
-    <span style="color:#66d9ef">fi</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>下記のように実行すると，同じように動作する．</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> bundle_open_tmux<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -n <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        local dir<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>bundle show <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        tmux split-window -c <span style="color:#e6db74">&#34;</span>$dir<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>下記のように実行すると，同じように動作する．</p>
 <pre><code>$ bundle_open_tmux activerecord
 </code></pre>
 <h1 id="参考">参考</h1>
@@ -93,6 +100,7 @@
 
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -105,6 +113,7 @@
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -124,10 +133,10 @@
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2015/03/27/json-pp/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2015/04/20/powerline-config/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2015/09/14/kojin-joho-hogo-shi/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -152,6 +161,9 @@
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

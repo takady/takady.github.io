@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2016/12/09/rails-validation-error-message-i18n/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">rails の validation error message の i18n 対応</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2016-12-09T21:20:43Z">
           Dec 9, 2016
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -74,59 +81,60 @@ message として使われる I18n のパスをどう書くのが良いのかっ
 結論としては、下記のように書くのがスッキリして良さそう。</p>
 <h2 id="custom-validators">Custom Validators</h2>
 <p>特定のモデルによらないエラーメッセージの場合は、下記のように <code>locales/en.yml</code> を書くことで、<code>record.errors.add(attribute, :something_invalid)</code>と書ける。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">en</span>:
-  <span style="color:#f92672">errors</span>:
-    <span style="color:#f92672">messages</span>:
-      <span style="color:#f92672">something_invalid</span>: <span style="color:#ae81ff">Invalid something.</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyCheckValidator</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">EachValidator</span>
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_each</span>(record, attribute, value)
-    <span style="color:#66d9ef">unless</span> check_something(value)
-      record<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>add(attribute, <span style="color:#e6db74">:something_invalid</span>)
-      <span style="color:#75715e">#=&gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ</span>
-    <span style="color:#66d9ef">end</span>
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_something</span>(value)
-   <span style="color:#75715e"># Something</span>
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
-  validates <span style="color:#e6db74">:name</span>, <span style="color:#e6db74">my_check</span>: <span style="color:#66d9ef">true</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><h2 id="custom-methods">Custom Methods</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">en</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">errors</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">messages</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">something_invalid</span>: <span style="color:#ae81ff">Invalid something.</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyCheckValidator</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">EachValidator</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_each</span>(record, attribute, value)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">unless</span> check_something(value)
+</span></span><span style="display:flex;"><span>      record<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>add(attribute, <span style="color:#e6db74">:something_invalid</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#=&gt; record.errors.add(attribute, I18n.t(&#39;errors.messages.something_invalid&#39;)) と同じ</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_something</span>(value)
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Something</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:name</span>, <span style="color:#e6db74">my_check</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h2 id="custom-methods">Custom Methods</h2>
 <p>特定のモデルの特定の項目のエラーメッセージの場合は、下記のようにymlを書くことで、適切にメッセージを参照してくれる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">en</span>:
-  <span style="color:#f92672">activerecord</span>:
-    <span style="color:#f92672">errors</span>:
-      <span style="color:#f92672">models</span>:
-        <span style="color:#f92672">my_model</span>:
-          <span style="color:#f92672">attributes</span>:
-            <span style="color:#f92672">start_date</span>:
-              <span style="color:#f92672">cannot_be_after_end_date</span>: <span style="color:#ae81ff">It cannot be after the end date.</span>
-            <span style="color:#f92672">end_date</span>:
-              <span style="color:#f92672">cannot_be_before_start_date</span>: <span style="color:#ae81ff">It cannot be before the start date.</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
-  validate <span style="color:#e6db74">:start_date_cannot_be_after_end_date</span>, <span style="color:#66d9ef">if</span>: <span style="color:#f92672">-&gt;</span> { start_date<span style="color:#f92672">.</span>present? <span style="color:#f92672">&amp;&amp;</span> end_date<span style="color:#f92672">.</span>present? }
-
-  <span style="color:#66d9ef">private</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_date_cannot_be_after_end_date</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> start_date <span style="color:#f92672">&lt;=</span> end_date
-
-    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:start_date</span>, <span style="color:#e6db74">:cannot_be_after_end_date</span>)
-    <span style="color:#75715e">#=&gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ</span>
-    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:end_date</span>, <span style="color:#e6db74">:cannot_be_before_start_date</span>)
-    <span style="color:#75715e">#=&gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ</span>
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><h3 id="参考">参考</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">en</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">activerecord</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">errors</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">models</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">my_model</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">attributes</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">start_date</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">cannot_be_after_end_date</span>: <span style="color:#ae81ff">It cannot be after the end date.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">end_date</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">cannot_be_before_start_date</span>: <span style="color:#ae81ff">It cannot be before the start date.</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModel</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+</span></span><span style="display:flex;"><span>  validate <span style="color:#e6db74">:start_date_cannot_be_after_end_date</span>, <span style="color:#66d9ef">if</span>: <span style="color:#f92672">-&gt;</span> { start_date<span style="color:#f92672">.</span>present? <span style="color:#f92672">&amp;&amp;</span> end_date<span style="color:#f92672">.</span>present? }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_date_cannot_be_after_end_date</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> start_date <span style="color:#f92672">&lt;=</span> end_date
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:start_date</span>, <span style="color:#e6db74">:cannot_be_after_end_date</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#=&gt; errors.add(:start_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.start_date.cannot_be_after_end_date&#39;)) と同じ</span>
+</span></span><span style="display:flex;"><span>    errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:end_date</span>, <span style="color:#e6db74">:cannot_be_before_start_date</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#=&gt; errors.add(:end_date, I18n.t(&#39;activerecord.errors.models.my_model.attributes.end_date.cannot_be_before_start_date&#39;)) と同じ</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h3 id="参考">参考</h3>
 <ul>
 <li><a href="http://guides.rubyonrails.org/active_record_validations.html">Active Record Validations — Ruby on Rails Guides</a></li>
 </ul>
 
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -139,6 +147,7 @@ message として使われる I18n のパスをどう書くのが良いのかっ
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -158,10 +167,10 @@ message として使われる I18n のパスをどう書くのが良いのかっ
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2016/12/31/2016-summary/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2016/08/29/rails-form-object/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2016/09/21/isucon6-qualifier/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -186,6 +195,9 @@ message として使われる I18n のパスをどう書くのが良いのかっ
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

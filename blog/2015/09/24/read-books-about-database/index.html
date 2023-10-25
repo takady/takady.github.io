@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2015/09/24/read-books-about-database/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">WEB&#43;DB PRESS plus の DB 本 3冊を読んで index を学んだ</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2015-09-24T18:43:39Z">
           Sep 24, 2015
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -122,29 +129,29 @@ B+Tree は B-Tree と違って、必ずリーフノードに値を持つ。ブ�
 </ul>
 <h1 id="index-は前方一致に対してのみ有効">index は前方一致に対してのみ有効</h1>
 <p>これは index 有効。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;高田%&#39;</span>;
-</code></pre></div><p>これは index 効かない。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%祐一&#39;</span>;
-</code></pre></div><h1 id="演算や関数にかけてしまうと-index-は効かない">演算や関数にかけてしまうと index は効かない</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;高田%&#39;</span>;
+</span></span></code></pre></div><p>これは index 効かない。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%祐一&#39;</span>;
+</span></span></code></pre></div><h1 id="演算や関数にかけてしまうと-index-は効かない">演算や関数にかけてしまうと index は効かない</h1>
 <p>col1 に index を貼っていても、下記のクエリは index が効かない。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">123</span>;
-</code></pre></div><p>index を効かせたい場合は、こうする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">123</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-</code></pre></div><h1 id="マルチカラムインデックスではカラムの順番も意味がある">マルチカラムインデックスでは、カラムの順番も意味がある</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">123</span>;
+</span></span></code></pre></div><p>index を効かせたい場合は、こうする。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">123</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><h1 id="マルチカラムインデックスではカラムの順番も意味がある">マルチカラムインデックスでは、カラムの順番も意味がある</h1>
 <p>下記のクエリに対して効果的な index は、(col1, col2) ではなく (col2, col1) な index である。<br>
 index が前方一致な事を思い出す。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
-</code></pre></div><h1 id="index-オンリースキャン">index オンリースキャン</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><h1 id="index-オンリースキャン">index オンリースキャン</h1>
 <p>index を貼ると、index を見てから、データ領域を参照する事になる。<br>
 しかし、index の参照だけで取得できるようなクエリだと、データ領域への参照が必要無いのでさらに高速になる。<br>
 (col1, col2) というindex を貼ってあるテーブル tbl に対して、下記のクエリを発行すると、index の参照だけで済む。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> col1, col2 <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>;
-</code></pre></div><p>集計関数の場合も、うまく使えば index だけで済ませられる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>;
-</code></pre></div><h1 id="btree-はキーの順にソートされて格納されている">B+Tree はキーの順にソートされて格納されている</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> col1, col2 <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>;
+</span></span></code></pre></div><p>集計関数の場合も、うまく使えば index だけで済ませられる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> col1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">AND</span> col2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>;
+</span></span></code></pre></div><h1 id="btree-はキーの順にソートされて格納されている">B+Tree はキーの順にソートされて格納されている</h1>
 <p>index のキーはソートされているので、name に index があるテーブルに、下記のようなクエリを発行すると範囲検索とソートの両方にインデックスが使われるので高速。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;高田%&#39;</span> <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> name;
-</code></pre></div><h1 id="まとめ">まとめ</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tbl <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;高田%&#39;</span> <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> name;
+</span></span></code></pre></div><h1 id="まとめ">まとめ</h1>
 <p>index という概念が導入される前の hiveQL を長年使っていたので、 SQL は書けるけど index に対しては理解弱かったので、勉強になった。<br>
 頭の中で B+Tree をイメージすると、効果的な index をイメージしやすい気がする。<br>
 あと、前方一致の特徴などからも やはり index は、本の索引をイメージするとわかりやすい。</p>
@@ -158,6 +165,7 @@ index が前方一致な事を思い出す。</p>
   </section>
   <footer>
     
+    
     <hr/>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -169,6 +177,7 @@ index が前方一致な事を思い出す。</p>
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -188,10 +197,10 @@ index が前方一致な事を思い出す。</p>
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2015/09/14/kojin-joho-hogo-shi/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2015/09/14/kojin-joho-hogo-shi/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -216,6 +225,9 @@ index が前方一致な事を思い出す。</p>
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

@@ -18,33 +18,6 @@
     </item>
     
     <item>
-      <title>rubygems.orgに公開しているgemの名前を変更する</title>
-      <link>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</link>
-      <pubDate>Fri, 27 Mar 2015 00:56:07 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
-      <description>必要になったので調べてみた． 結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる． 調べた結</description>
-    </item>
-    
-    <item>
-      <title>apache_log-parserを修正してBenchmarkをとってみた</title>
-      <link>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</link>
-      <pubDate>Wed, 11 Feb 2015 16:53:46 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
-      <description>takady/apache_log-parser 先週，とある機会に，とあるエンジニアの方が，僕が作ったapache_log-parserというrubyのgemに対してアドバイスをしてくれ</description>
-    </item>
-    
-    <item>
-      <title>facebook graph apiのAccess Tokenを取得するまで</title>
-      <link>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</link>
-      <pubDate>Mon, 29 Dec 2014 17:45:20 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
-      <description>OAuth2について、わかってたつもりでわかってないので、 nov/fb_graphを通して、facebook graph apiでAccess Token</description>
-    </item>
-    
-    <item>
       <title>rubyのloggerをnewした後にログファイルを削除するとどうなるのか</title>
       <link>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</link>
       <pubDate>Sun, 07 Dec 2014 18:01:52 +0000</pubDate>

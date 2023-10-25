@@ -7,52 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>&amp;copy; Copyright Yuichi Takada</copyright>
-    <lastBuildDate>Sat, 23 Jul 2016 10:33:25 +0000</lastBuildDate><atom:link href="https://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/07/23/soft-skills/</link>
-      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
-      <description>先月、日本語版が発売された直後に買って読んだ。 ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内</description>
-    </item>
-    
-    <item>
-      <title>10年後の仕事のカタチ10のヒント を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
-      <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
-      <description>こちらのブログ記事 でオススメされていたので読んでみた。 対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃</description>
-    </item>
-    
-    <item>
-      <title>10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
-      <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
-      <description>読んだ。 最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリュ</description>
-    </item>
-    
-    <item>
-      <title>オブジェクト指向における再利用のためのデザインパターン を読んだ</title>
-      <link>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</link>
-      <pubDate>Wed, 04 Nov 2015 20:45:35 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
-      <description>いわゆる GoF 本を読んだ。 動機 こういう設計に関する本は今まで読んだことがなくて、なんとなくそういうことは本で勉強するより実践から身につけるものな</description>
-    </item>
-    
-    <item>
-      <title>情熱プログラマー を読んだ</title>
-      <link>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</link>
-      <pubDate>Sun, 11 Oct 2015 21:01:24 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
-      <description>良い本だった。 さすが半谷さんオススメ本。 4: 一番の下手くそでいよう 13: 師匠を探す 手本となる人物の特長10個を重要度で並べて、その10項目それぞれ</description>
-    </item>
-    
+    <lastBuildDate>Thu, 24 Sep 2015 18:43:39 +0000</lastBuildDate><atom:link href="https://blog.takady.net/categories/book/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WEB&#43;DB PRESS plus の DB 本 3冊を読んで index を学んだ</title>
       <link>https://blog.takady.net/blog/2015/09/24/read-books-about-database/</link>

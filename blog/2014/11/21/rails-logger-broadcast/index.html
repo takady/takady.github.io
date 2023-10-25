@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2014/11/21/rails-logger-broadcast/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">railsで、複数の出力先にlogを出力する</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2014-11-21T18:57:07Z">
           Nov 21, 2014
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -76,22 +83,22 @@ rails 4.1.4</p>
 <h1 id="方法">方法</h1>
 <p>まず、複数の出力先にロギングするには、<a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/logger.rb#L10-L42">ActiveSupport::Logger.#broadcast</a>というメソッドが使える。<br>
 config/application.rbのMyapp::Applicationクラス内に下記のように書いてみた。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(config<span style="color:#f92672">.</span>paths<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;log&#34;</span><span style="color:#f92672">].</span>first)
-error_logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#34;log/error.log&#34;</span>)
-error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">::</span><span style="color:#66d9ef">ERROR</span>
-logger<span style="color:#f92672">.</span>extend <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>broadcast(error_logger)
-config<span style="color:#f92672">.</span>logger <span style="color:#f92672">=</span> logger
-</code></pre></div><p>これで、複数箇所にログが出力されるようにはなった。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(config<span style="color:#f92672">.</span>paths<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;log&#34;</span><span style="color:#f92672">].</span>first)
+</span></span><span style="display:flex;"><span>error_logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#34;log/error.log&#34;</span>)
+</span></span><span style="display:flex;"><span>error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">::</span><span style="color:#66d9ef">ERROR</span>
+</span></span><span style="display:flex;"><span>logger<span style="color:#f92672">.</span>extend <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>broadcast(error_logger)
+</span></span><span style="display:flex;"><span>config<span style="color:#f92672">.</span>logger <span style="color:#f92672">=</span> logger
+</span></span></code></pre></div><p>これで、複数箇所にログが出力されるようにはなった。<br>
 しかし、今回やりたかったのは、__ERROR以上の時だけ__２箇所にロギングしたいというもので、上記のようにconfig/application.rbでextendした場合、error_loggerのlevelをERRORにセットしていても、Rails.loggerのlevelと同じlevelでのloggingになってしまう。<br>
 全く同じエラーログを複数箇所に吐かせたいというだけであれば、上記の方法で良いと思う。(その際、上記の<code>error_logger.level = Logger::ERROR</code>は意味が無いので消した方が良い)</p>
 <p>error_logger.levelの指定が効くようにするには、<code>run Rails.application</code>よりも後で、error_loggerをRails.loggerにextendすると良い。<br>
 config.ruに下記を追記する。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">run <span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>application
-
-error_logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#34;log/error.log&#34;</span>)
-error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">::</span><span style="color:#66d9ef">ERROR</span>
-<span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>logger<span style="color:#f92672">.</span>extend <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>broadcast(error_logger)
-</code></pre></div><p>これで、log/error.logへは、ERRORレベル以上のログだけが出力されるようになった。<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>run <span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>application
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>error_logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">&#34;log/error.log&#34;</span>)
+</span></span><span style="display:flex;"><span>error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">::</span><span style="color:#66d9ef">ERROR</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Rails</span><span style="color:#f92672">.</span>logger<span style="color:#f92672">.</span>extend <span style="color:#66d9ef">ActiveSupport</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>broadcast(error_logger)
+</span></span></code></pre></div><p>これで、log/error.logへは、ERRORレベル以上のログだけが出力されるようになった。<br>
 もちろん、log/development.logには、これまでどおりDEBUGレベルまで含めた全てのlogが出ている。</p>
 <h1 id="参考">参考</h1>
 <p><a href="http://blog.livedoor.jp/sonots/archives/38927788.html">[Ruby] 例えば、Rails の標準ログを止める - sonots:blog</a><br>
@@ -100,6 +107,7 @@ error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672
 
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -112,6 +120,7 @@ error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -131,10 +140,10 @@ error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2014/11/15/fist-of-octopress/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2014/11/22/disable-ruby-log-header/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -159,6 +168,9 @@ error_logger<span style="color:#f92672">.</span>level <span style="color:#f92672
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

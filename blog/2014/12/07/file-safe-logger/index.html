@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2014/12/07/file-safe-logger/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">rubyのloggerをnewした後にログファイルを削除するとどうなるのか</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2014-12-07T18:01:52Z">
           Dec 7, 2014
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -75,27 +82,27 @@
 そして、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。</p>
 <h1 id="検証">検証</h1>
 <p>下記のようにして、<code>Logger.new</code>と<code>logger.info</code>の間でファイルを削除してみる</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;logger&#39;</span>
-require <span style="color:#e6db74">&#39;fileutils&#39;</span>
-
-logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
-logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(logfile)
-<span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
-logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
-</code></pre></div><p>これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん<code>this is test</code>というlogも残っていない。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;logger&#39;</span>
+</span></span><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;fileutils&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
+</span></span><span style="display:flex;"><span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new(logfile)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
+</span></span><span style="display:flex;"><span>logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
+</span></span></code></pre></div><p>これは、結果としてはエラーにはならず正常終了するが、test.logというファイルはカレントディレクトリに存在せず、もちろん<code>this is test</code>というlogも残っていない。</p>
 <h1 id="filesafelogger">FileSafeLogger</h1>
 <p>ファイルが削除されるとlogging出来ないというのが困る時がある。<br>
 なので、<a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>というgemを作った。<br>
 やってることはいたって単純で、<a href="https://github.com/ruby/ruby/blob/trunk/lib/logger.rb#L593-L612">Logger::LogDevice.#write</a>メソッドをoverrideして、ファイルが存在しない場合は作成しているだけである。<br>
 <a href="https://github.com/takady/file_safe_logger">file_safe_logger</a>を使って、先ほどのlogging処理と同じ処理をやってみる。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;file_safe_logger&#39;</span>
-require <span style="color:#e6db74">&#39;fileutils&#39;</span>
-
-logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
-logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">FileSafeLogger</span><span style="color:#f92672">.</span>new(logfile)
-<span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
-logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
-</code></pre></div><p>これの実行後、カレントディレクトリには<code>test.log</code>が存在し、下記のようにlogが書き出されている。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;file_safe_logger&#39;</span>
+</span></span><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;fileutils&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>logfile <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.log&#39;</span>
+</span></span><span style="display:flex;"><span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">FileSafeLogger</span><span style="color:#f92672">.</span>new(logfile)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FileUtils</span><span style="color:#f92672">.</span>rm(logfile)
+</span></span><span style="display:flex;"><span>logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;this is test&#39;</span>)
+</span></span></code></pre></div><p>これの実行後、カレントディレクトリには<code>test.log</code>が存在し、下記のようにlogが書き出されている。</p>
 <pre><code>$ cat test.log
 # Logfile created on 2014-12-06 17:07:53 +0900 by logger.rb/44203
 I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
@@ -105,6 +112,7 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
 
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -117,6 +125,7 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -136,10 +145,10 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2014/12/03/skip-before-action-on-development-env/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2014/12/03/documentation/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -164,6 +173,9 @@ I, [2014-12-06T17:07:53.884806 #1547]  INFO -- : this is test
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

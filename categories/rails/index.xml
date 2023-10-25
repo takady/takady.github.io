@@ -50,7 +50,7 @@
       <pubDate>Sun, 29 Nov 2015 23:06:56 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/</guid>
-      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/takady7 とか github.com/takady みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
+      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/myname とか github.com/yourname みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
     </item>
     
     <item>

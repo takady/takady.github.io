@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2019/01/14/2019-01-14-https-for-github-pages-site/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">https 対応した</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2019-01-14T10:39:16&#43;09:00">
           Jan 14, 2019
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -72,18 +79,18 @@
     <p>このブログは <a href="https://gohugo.io/">Hugo</a> を使っていて、Github pages にホストしているんだけど、https 対応を今更やった。</p>
 <h1 id="hugo-側の設定">hugo 側の設定</h1>
 <h2 id="configtoml">config.toml</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#a6e22e">diff</span> <span style="color:#960050;background-color:#1e0010">--</span><span style="color:#a6e22e">git</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
-<span style="color:#a6e22e">index</span> <span style="color:#ae81ff">9</span><span style="color:#a6e22e">aa98a1</span>..<span style="color:#ae81ff">4949</span><span style="color:#a6e22e">f9d</span> <span style="color:#ae81ff">100644</span>
-<span style="color:#960050;background-color:#1e0010">---</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
-<span style="color:#960050;background-color:#1e0010">+++</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
-<span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">+1</span>,<span style="color:#ae81ff">4</span> <span style="color:#960050;background-color:#1e0010">@@</span>
-<span style="color:#960050;background-color:#1e0010">-</span><span style="color:#a6e22e">baseurl</span> = <span style="color:#e6db74">&#34;http://blog.takady.net/&#34;</span>
-<span style="color:#960050;background-color:#1e0010">+</span><span style="color:#a6e22e">baseurl</span> = <span style="color:#e6db74">&#34;https://blog.takady.net/&#34;</span>
- <span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;ja&#34;</span>
- <span style="color:#a6e22e">hasCJKLanguage</span> = <span style="color:#e6db74">&#34;true&#34;</span>
- <span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Yuichi Takada&#34;</span>
-</code></pre></div><h2 id="robotstxt">robots.txt</h2>
-<pre><code>diff --git a/static/robots.txt b/static/robots.txt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">diff</span> <span style="color:#a6e22e">--git</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">index</span> <span style="color:#ae81ff">9</span><span style="color:#a6e22e">aa98a1</span>..<span style="color:#ae81ff">4949</span><span style="color:#a6e22e">f9d</span> <span style="color:#ae81ff">100644</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">---</span> <span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">+++</span> <span style="color:#a6e22e">b</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">+1</span>,<span style="color:#ae81ff">4</span> <span style="color:#960050;background-color:#1e0010">@@</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">-baseurl</span> = <span style="color:#e6db74">&#34;http://blog.takady.net/&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">+</span><span style="color:#a6e22e">baseurl</span> = <span style="color:#e6db74">&#34;https://blog.takady.net/&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;ja&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">hasCJKLanguage</span> = <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Yuichi Takada&#34;</span>
+</span></span></code></pre></div><h2 id="robotstxt">robots.txt</h2>
+<pre tabindex="0"><code>diff --git a/static/robots.txt b/static/robots.txt
 index 0752adc..b3f03e0 100644
 --- a/static/robots.txt
 +++ b/static/robots.txt
@@ -100,6 +107,7 @@ index 0752adc..b3f03e0 100644
   </section>
   <footer>
     
+    
     <hr/>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -111,6 +119,7 @@ index 0752adc..b3f03e0 100644
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -130,10 +139,10 @@ index 0752adc..b3f03e0 100644
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2019/11/16/baby/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2017/07/01/react_up_and_running/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2018/12/31/2018-summary/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2021/05/13/signing-commits/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -158,6 +167,9 @@ index 0752adc..b3f03e0 100644
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

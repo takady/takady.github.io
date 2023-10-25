@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2021/05/13/signing-commits/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">git commit に署名を付ける</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2021-05-13T00:00:00&#43;09:00">
           May 13, 2021
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -78,21 +85,22 @@
 <p>こちらに記載の手順の通り。<br>
 <a href="https://docs.github.com/ja/github/authenticating-to-github/generating-a-new-gpg-key#generating-a-gpg-key">https://docs.github.com/ja/github/authenticating-to-github/generating-a-new-gpg-key#generating-a-gpg-key</a></p>
 <p>gpg を install。</p>
-<pre><code>$ brew install gpg
+<pre tabindex="0"><code>$ brew install gpg
 </code></pre><p>GPG キーペアを生成。</p>
-<pre><code>$ gpg --full-generate-key
+<pre tabindex="0"><code>$ gpg --full-generate-key
 </code></pre><p>途中、ユーザ ID 情報で本名、メールアドレス、コメントの入力を順に求められるが、コメントについては空で問題ない。</p>
-<pre><code>$ gpg --list-secret-keys --keyid-format LONG
+<pre tabindex="0"><code>$ gpg --list-secret-keys --keyid-format LONG
 </code></pre><p>上記コマンドで表示されるGPGキーIDをコピーして、下記コメントで GPG キーをクリップボードにコピー。</p>
-<pre><code>$ gpg --armor --export &lt;GPGキーID&gt; | pbcopy
+<pre tabindex="0"><code>$ gpg --armor --export &lt;GPGキーID&gt; | pbcopy
 </code></pre><p>あとは下記ページを参照して、 GPG キーを GitHub アカウントに追加する。
 <a href="https://docs.github.com/ja/github/authenticating-to-github/adding-a-new-gpg-key-to-your-github-account">https://docs.github.com/ja/github/authenticating-to-github/adding-a-new-gpg-key-to-your-github-account</a></p>
 <h1 id="署名付きコミットをする">署名付きコミットをする</h1>
 <p><code>-S</code> オプション付きで commit する。</p>
-<pre><code>$ git commit -S &quot;Commit message&quot;
+<pre tabindex="0"><code>$ git commit -S &#34;Commit message&#34;
 </code></pre>
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -105,6 +113,7 @@
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -124,10 +133,10 @@
     </section>
     <ul class="pager">
       
-      <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2019/11/16/baby/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next disabled"><a href="#">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -152,6 +161,9 @@
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

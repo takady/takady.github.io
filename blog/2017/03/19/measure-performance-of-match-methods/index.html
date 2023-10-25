@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2017/03/19/measure-performance-of-match-methods/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">Ruby の文字列マッチ判定のパフォーマンス</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2017-03-19T17:36:07Z">
           Mar 19, 2017
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -76,7 +83,7 @@
 <li>指定の文字列で終わっているか</li>
 </ul>
 <p>String のメソッドの方がパフォーマンスが良い。</p>
-<pre><code>$ ruby benchmarker.rb
+<pre tabindex="0"><code>$ ruby benchmarker.rb
                            user     system      total        real
 [string]include        0.110000   0.000000   0.110000 (  0.116923)
 [regexp]include        0.230000   0.000000   0.230000 (  0.229775)
@@ -86,31 +93,32 @@
 [regexp]end_with       0.250000   0.000000   0.250000 (  0.249781)
 </code></pre><p>コード。<br>
 生成コストが入らないように定数で宣言したものでベンチマーク取った。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;benchmark&#39;</span>
-
-n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span>
-
-<span style="color:#66d9ef">TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>freeze
-<span style="color:#66d9ef">TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;te&#39;</span><span style="color:#f92672">.</span>freeze
-<span style="color:#66d9ef">ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;st&#39;</span><span style="color:#f92672">.</span>freeze
-<span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/test/</span><span style="color:#f92672">.</span>freeze
-<span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/\Ate/</span><span style="color:#f92672">.</span>freeze
-<span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/st\z/</span><span style="color:#f92672">.</span>freeze
-
-<span style="color:#66d9ef">Benchmark</span><span style="color:#f92672">.</span>bm(<span style="color:#ae81ff">20</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>b<span style="color:#f92672">|</span>
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>include?(<span style="color:#66d9ef">TE</span>) } }
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>start_with?(<span style="color:#66d9ef">TE</span>) } }
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>end_with?(<span style="color:#66d9ef">ST</span>) } }
-  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
-<span style="color:#66d9ef">end</span>
-</code></pre></div><p>ちなみに、<code>start_with?</code>、 <code>end_with?</code> は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span> pry(main)<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>start_with?(<span style="color:#e6db74">&#39;ab&#39;</span>, <span style="color:#e6db74">&#39;te&#39;</span>)
-<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>require <span style="color:#e6db74">&#39;benchmark&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;te&#39;</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;st&#39;</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/test/</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/\Ate/</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/st\z/</span><span style="color:#f92672">.</span>freeze
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Benchmark</span><span style="color:#f92672">.</span>bm(<span style="color:#ae81ff">20</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>b<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>include?(<span style="color:#66d9ef">TE</span>) } }
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]include&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TEST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>start_with?(<span style="color:#66d9ef">TE</span>) } }
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]start_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_TE</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[string]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">TEST</span><span style="color:#f92672">.</span>end_with?(<span style="color:#66d9ef">ST</span>) } }
+</span></span><span style="display:flex;"><span>  b<span style="color:#f92672">.</span>report(<span style="color:#e6db74">&#39;[regexp]end_with&#39;</span>) { (<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span>n)<span style="color:#f92672">.</span>each { <span style="color:#66d9ef">REGEXP_ST</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">TEST</span> } }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>ちなみに、<code>start_with?</code>、 <code>end_with?</code> は、引数に2つ以上文字列を指定できて、いずれかにマッチすれば true が返る。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span> pry(main)<span style="color:#f92672">&gt;</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>start_with?(<span style="color:#e6db74">&#39;ab&#39;</span>, <span style="color:#e6db74">&#39;te&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div>
   </section>
   <footer>
+    
     
     <hr/>
     <div id="disqus_thread"></div>
@@ -123,6 +131,7 @@ n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</sp
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -142,10 +151,10 @@ n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</sp
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2017/03/24/huawei-nova/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2017/07/01/react_up_and_running/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -170,6 +179,9 @@ n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1_000_000</sp
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

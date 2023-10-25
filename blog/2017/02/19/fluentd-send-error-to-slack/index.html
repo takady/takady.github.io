@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2017/02/19/fluentd-send-error-to-slack/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">rails のログを fluentd で slack に通知する</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2017-02-19T18:58:24Z">
           Feb 19, 2017
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -84,7 +91,7 @@
 <h3 id="設定ファイルの修正">設定ファイルの修正</h3>
 <p><code>/etc/td-agent/td-agent.conf</code> を下記のように修正。<br>
 webhook の URL あらかじめ Slack 取得しておく。</p>
-<pre><code>&lt;source&gt;
+<pre tabindex="0"><code>&lt;source&gt;
   @type forward
 &lt;/source&gt;
 
@@ -123,22 +130,22 @@ webhook の URL あらかじめ Slack 取得しておく。</p>
 <h2 id="rails">rails</h2>
 <h3 id="gemfile">Gemfile</h3>
 <p><code>act-fluent-logger-rails</code> と <code>lograge</code> をインストール。</p>
-<pre><code>gem 'act-fluent-logger-rails'
-gem 'lograge'
+<pre tabindex="0"><code>gem &#39;act-fluent-logger-rails&#39;
+gem &#39;lograge&#39;
 </code></pre><h3 id="configenvironmentsproductionrb">config/environments/production.rb</h3>
 <p>loggerの設定。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">config<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">:info</span>
-config<span style="color:#f92672">.</span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActFluentLoggerRails</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new
-config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>enabled <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
-config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>formatter <span style="color:#f92672">=</span> <span style="color:#66d9ef">Lograge</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Formatters</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Json</span><span style="color:#f92672">.</span>new
-</code></pre></div><h3 id="configfluent-loggeryml">config/fluent-logger.yml</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>config<span style="color:#f92672">.</span>log_level <span style="color:#f92672">=</span> <span style="color:#e6db74">:info</span>
+</span></span><span style="display:flex;"><span>config<span style="color:#f92672">.</span>logger <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActFluentLoggerRails</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Logger</span><span style="color:#f92672">.</span>new
+</span></span><span style="display:flex;"><span>config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>enabled <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</span>formatter <span style="color:#f92672">=</span> <span style="color:#66d9ef">Lograge</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Formatters</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Json</span><span style="color:#f92672">.</span>new
+</span></span></code></pre></div><h3 id="configfluent-loggeryml">config/fluent-logger.yml</h3>
 <p>fluent用の設定ファイル。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">production</span>:
-  <span style="color:#f92672">fluent_host</span>:   <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>
-  <span style="color:#f92672">fluent_port</span>:   <span style="color:#ae81ff">24224</span>
-  <span style="color:#f92672">tag</span>:           <span style="color:#e6db74">&#39;app.web&#39;</span>
-  <span style="color:#f92672">messages_type</span>: <span style="color:#e6db74">&#39;string&#39;</span>
-</code></pre></div><h2 id="結果">結果</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">production</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fluent_host</span>:   <span style="color:#e6db74">&#39;127.0.0.1&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fluent_port</span>:   <span style="color:#ae81ff">24224</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tag</span>:           <span style="color:#e6db74">&#39;app.web&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">messages_type</span>: <span style="color:#e6db74">&#39;string&#39;</span>
+</span></span></code></pre></div><h2 id="結果">結果</h2>
 <p>ログが下記に出るようになる。アプリケーションエラーが起きれば Slack にポストされる。</p>
 <pre><code>$ tail -f /var/log/app/web.20170219.b548df17385a3a314
 2017-02-19T09:51:42+00:00       app.web    {&quot;messages&quot;:&quot;{\&quot;method\&quot;:\&quot;GET\&quot;,\&quot;path\&quot;:\&quot;/\&quot;,\&quot;format\&quot;:\&quot;html\&quot;,\&quot;controller\&quot;:\&quot;FooController\&quot;,\&quot;action\&quot;:\&quot;index\&quot;,\&quot;status\&quot;:200,\&quot;duration\&quot;:1534.33,\&quot;view\&quot;:1299.3,\&quot;db\&quot;:0.0}&quot;,&quot;severity&quot;:&quot;INFO&quot;}
@@ -153,6 +160,7 @@ config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</
   </section>
   <footer>
     
+    
     <hr/>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -164,6 +172,7 @@ config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -183,10 +192,10 @@ config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2017/02/21/install-mini-racer-on-travis-ci/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -211,6 +220,9 @@ config<span style="color:#f92672">.</span>lograge<span style="color:#f92672">.</
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

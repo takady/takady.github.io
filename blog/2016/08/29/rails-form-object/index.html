@@ -48,6 +48,11 @@
       </a>
       
       
+      <a href="/blog/2016/08/29/rails-form-object/" class="btn-header btn-subscribe hidden-xs">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+        &nbsp;Subscribe
+      </a>
+      
     </section>
   </header>
   <main class="container">
@@ -57,12 +62,14 @@
   <header>
     <h1 class="text-primary">rails で FormObject を使う</h1>
     <div class="post-meta clearfix">
+    
       <div class="post-date pull-left">
         Posted on
         <time datetime="2016-08-29T19:38:49Z">
           Aug 29, 2016
         </time>
       </div>
+    
       <div class="pull-right">
         
       </div>
@@ -70,94 +77,94 @@
   </header>
   <section>
     <p>フォームでは日付の期間を入力し、それを日単位のレコードに保存するようなケースでは、FormObject を使えるかも。やってみた。</p>
-<p><br /></p>
+<br />
 <p><img src="/images/2016-08-29-rails-form-object/screenshot1.png" alt=""></p>
 <p>こういうフォーム。</p>
 <h1 id="model">Model</h1>
 <p>uniqueness など Model 単位でバリデーションしなければいけないものや、コンテキストに関係なくバリデーションするものは Model に書く。</p>
 <h2 id="appmodelsfoo_dayrb">app/models/foo_day.rb</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
-  belongs_to <span style="color:#e6db74">:user</span>
-
-  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
-  validates <span style="color:#e6db74">:date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">uniqueness</span>: {<span style="color:#e6db74">scope</span>: <span style="color:#e6db74">:user_id</span>}
-<span style="color:#66d9ef">end</span>
-</code></pre></div><h1 id="formobject">FormObject</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span>
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#e6db74">:user</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">uniqueness</span>: {<span style="color:#e6db74">scope</span>: <span style="color:#e6db74">:user_id</span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h1 id="formobject">FormObject</h1>
 <p>FormObject の参考では、よく <a href="https://github.com/solnic/virtus">virtus</a> を include しているサンプルがあるけど、Virtus の Type cast が効果的に使えそうなケース以外だと特に使わなくて良いかなと個人的に思った。<br>
 例えば今回のケースだと、view から文字列で渡ってくる <code>YYY-MM-DD</code> を Date に変換したかったので、一度 Virtus を使ってみたけど、
 例えば <code>2016-08-32</code> のように Date として解釈できないものが渡ってきた場合に、エラーにならずに文字列のまま変数に格納される挙動だったので、あまり積極的に使う理由が無かった。<br>
 結局、日付の validation のために <a href="https://github.com/adzap/validates_timeliness">validates_timeliness</a> という gem を使ったけど便利だった。</p>
 <h2 id="appmodelsfoo_dayregistration_formrb">app/models/foo_day/registration_form.rb</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span>
-  <span style="color:#66d9ef">include</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Model</span>
-
-  <span style="color:#66d9ef">attr_accessor</span> <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">:to_date</span>
-
-  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
-  validates <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:today</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
-  validates <span style="color:#e6db74">:to_date</span>, <span style="color:#e6db74">allow_blank</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> valid?
-
-    persist!
-    <span style="color:#66d9ef">true</span>
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">private</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo_days</span>
-    @foo_days <span style="color:#f92672">||=</span> build_foo_days
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_foo_days</span>
-    <span style="color:#66d9ef">if</span> to_date<span style="color:#f92672">.</span>blank?
-      <span style="color:#f92672">[</span><span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">date</span>: from_date, <span style="color:#e6db74">user_id</span>: user_id)<span style="color:#f92672">]</span>
-    <span style="color:#66d9ef">else</span>
-      (<span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(from_date)<span style="color:#f92672">..</span><span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(to_date))<span style="color:#f92672">.</span>map {<span style="color:#f92672">|</span>date<span style="color:#f92672">|</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">user_id</span>: user_id, <span style="color:#e6db74">date</span>: date) }
-    <span style="color:#66d9ef">end</span>
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">valid?</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">super</span>
-
-    foo_days<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>foo_day<span style="color:#f92672">|</span>
-      <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">if</span> foo_day<span style="color:#f92672">.</span>valid?
-
-      foo_day<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>full_messages<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>message<span style="color:#f92672">|</span>
-        errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:base</span>, <span style="color:#66d9ef">I18n</span><span style="color:#f92672">.</span>t(<span style="color:#e6db74">&#39;activemodel.errors.invalid_foo_day&#39;</span>, <span style="color:#e6db74">date</span>: foo_day<span style="color:#f92672">.</span>date, <span style="color:#e6db74">message</span>: message))
-      <span style="color:#66d9ef">end</span>
-    <span style="color:#66d9ef">end</span>
-
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">persist!</span>
-    foo_days<span style="color:#f92672">.</span>each(<span style="color:#f92672">&amp;</span><span style="color:#e6db74">:save!</span>)
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><h1 id="controller">Controller</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">include</span> <span style="color:#66d9ef">ActiveModel</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Model</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">attr_accessor</span> <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">:to_date</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:user_id</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">presence</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:today</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
+</span></span><span style="display:flex;"><span>  validates <span style="color:#e6db74">:to_date</span>, <span style="color:#e6db74">allow_blank</span>: <span style="color:#66d9ef">true</span>, <span style="color:#e6db74">timeliness</span>: {<span style="color:#e6db74">on_or_after</span>: <span style="color:#e6db74">:from_date</span>, <span style="color:#e6db74">type</span>: <span style="color:#e6db74">:date</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> valid?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    persist!
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo_days</span>
+</span></span><span style="display:flex;"><span>    @foo_days <span style="color:#f92672">||=</span> build_foo_days
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_foo_days</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> to_date<span style="color:#f92672">.</span>blank?
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">[</span><span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">date</span>: from_date, <span style="color:#e6db74">user_id</span>: user_id)<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>      (<span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(from_date)<span style="color:#f92672">..</span><span style="color:#66d9ef">Date</span><span style="color:#f92672">.</span>parse(to_date))<span style="color:#f92672">.</span>map {<span style="color:#f92672">|</span>date<span style="color:#f92672">|</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">user_id</span>: user_id, <span style="color:#e6db74">date</span>: date) }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">valid?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">unless</span> <span style="color:#66d9ef">super</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    foo_days<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>foo_day<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">if</span> foo_day<span style="color:#f92672">.</span>valid?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      foo_day<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>full_messages<span style="color:#f92672">.</span>each <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>message<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>        errors<span style="color:#f92672">.</span>add(<span style="color:#e6db74">:base</span>, <span style="color:#66d9ef">I18n</span><span style="color:#f92672">.</span>t(<span style="color:#e6db74">&#39;activemodel.errors.invalid_foo_day&#39;</span>, <span style="color:#e6db74">date</span>: foo_day<span style="color:#f92672">.</span>date, <span style="color:#e6db74">message</span>: message))
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">persist!</span>
+</span></span><span style="display:flex;"><span>    foo_days<span style="color:#f92672">.</span>each(<span style="color:#f92672">&amp;</span><span style="color:#e6db74">:save!</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h1 id="controller">Controller</h1>
 <h2 id="appcontrollersfoo_days_controllerrb">app/controllers/foo_days_controller.rb</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDaysController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new</span>
-    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create</span>
-    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new(params<span style="color:#f92672">[</span><span style="color:#e6db74">:foo_day_registration_form</span><span style="color:#f92672">].</span>merge(<span style="color:#e6db74">user_id</span>: current_user<span style="color:#f92672">.</span>id))
-
-    <span style="color:#66d9ef">if</span> @registration_form<span style="color:#f92672">.</span>save
-      redirect_to new_foo_day_path, <span style="color:#e6db74">notice</span>: <span style="color:#e6db74">&#39;登録に成功しました&#39;</span>
-    <span style="color:#66d9ef">else</span>
-      flash<span style="color:#f92672">.</span>now<span style="color:#f92672">[</span><span style="color:#e6db74">:alert</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;登録に失敗しました&#39;</span>
-
-      render <span style="color:#e6db74">action</span>: <span style="color:#e6db74">:new</span>
-    <span style="color:#66d9ef">end</span>
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><h1 id="view">View</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooDaysController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new</span>
+</span></span><span style="display:flex;"><span>    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create</span>
+</span></span><span style="display:flex;"><span>    @registration_form <span style="color:#f92672">=</span> <span style="color:#66d9ef">FooDay</span><span style="color:#f92672">::</span><span style="color:#66d9ef">RegistrationForm</span><span style="color:#f92672">.</span>new(params<span style="color:#f92672">[</span><span style="color:#e6db74">:foo_day_registration_form</span><span style="color:#f92672">].</span>merge(<span style="color:#e6db74">user_id</span>: current_user<span style="color:#f92672">.</span>id))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> @registration_form<span style="color:#f92672">.</span>save
+</span></span><span style="display:flex;"><span>      redirect_to new_foo_day_path, <span style="color:#e6db74">notice</span>: <span style="color:#e6db74">&#39;登録に成功しました&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>      flash<span style="color:#f92672">.</span>now<span style="color:#f92672">[</span><span style="color:#e6db74">:alert</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;登録に失敗しました&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      render <span style="color:#e6db74">action</span>: <span style="color:#e6db74">:new</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><h1 id="view">View</h1>
 <h2 id="appviewsfoo_daysnewhtmlhaml">app/views/foo_days/new.html.haml</h2>
-<pre><code class="language-haml" data-lang="haml">.row
+<pre tabindex="0"><code class="language-haml" data-lang="haml">.row
   %h1 日々の登録
   = form_for @registration_form, url: foo_days_path, method: :post do |f|
     - if @registration_form.errors.any?
@@ -165,30 +172,30 @@
         - @registration_form.errors.full_messages.each do |msg|
           %li= msg
 
-    = f.label '日付'
+    = f.label &#39;日付&#39;
     = f.date_field :from_date
     %span 〜
     = f.date_field :to_date
 
-    = f.submit '確定'
+    = f.submit &#39;確定&#39;
 </code></pre><h1 id="translation">Translation</h1>
 <h2 id="configlocalesjayml">config/locales/ja.yml</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">ja</span>:
-  <span style="color:#f92672">activemodel</span>:
-    <span style="color:#f92672">attributes</span>:
-      <span style="color:#f92672">foo_day/registration_form</span>:
-        <span style="color:#f92672">from_date</span>: <span style="color:#ae81ff">開始日</span>
-        <span style="color:#f92672">to_date</span>: <span style="color:#ae81ff">終了日</span>
-    <span style="color:#f92672">errors</span>:
-      <span style="color:#f92672">invalid_foo_day</span>: <span style="color:#e6db74">&#39;%{date} %{message}&#39;</span>
-      <span style="color:#f92672">models</span>:
-        <span style="color:#f92672">foo_day/registration_form</span>:
-          <span style="color:#f92672">attributes</span>:
-            <span style="color:#f92672">from_date</span>:
-              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は %{restriction} 以降の日付を指定してください</span>
-            <span style="color:#f92672">to_date</span>:
-              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は 開始日 以降の日付を指定してください</span>
-</code></pre></div><h1 id="まとめ">まとめ</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ja</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">activemodel</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">attributes</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">foo_day/registration_form</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">from_date</span>: <span style="color:#ae81ff">開始日</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">to_date</span>: <span style="color:#ae81ff">終了日</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">errors</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">invalid_foo_day</span>: <span style="color:#e6db74">&#39;%{date} %{message}&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">models</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">foo_day/registration_form</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">attributes</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">from_date</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は %{restriction} 以降の日付を指定してください</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">to_date</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">on_or_after</span>: <span style="color:#ae81ff">は 開始日 以降の日付を指定してください</span>
+</span></span></code></pre></div><h1 id="まとめ">まとめ</h1>
 <p>フォームとモデルが1対1で対応しないケースもたまにあるので、その時は FormObject も選択肢の一つになるかも。</p>
 <h1 id="参考">参考</h1>
 <ul>
@@ -201,6 +208,7 @@
   </section>
   <footer>
     
+    
     <hr/>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -212,6 +220,7 @@
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
     
     <section class="author-info row">
       <div class="author-avatar col-md-2">
@@ -231,10 +240,10 @@
     </section>
     <ul class="pager">
       
-      <li class="previous"><a href="https://blog.takady.net/blog/2016/09/21/isucon6-qualifier/"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="previous"><a href="https://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/"><span aria-hidden="true">&larr;</span>Older</a></li>
       
       
-      <li class="next"><a href="https://blog.takady.net/blog/2016/07/23/soft-skills/">Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <li class="next"><a href="https://blog.takady.net/blog/2016/12/09/rails-validation-error-message-i18n/">Newer<span aria-hidden="true">&rarr;</span></a></li>
       
     </ul>
   </footer>
@@ -259,6 +268,9 @@
   <a href="https://github.com/takady" target="_blank">
     <i class="fa fa-github"></i>
   </a>
+  
+  
+  
   
   
   <a href="https://stackoverflow.com/users/4319579" target="_blank">

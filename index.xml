@@ -18,15 +18,6 @@
     </item>
     
     <item>
-      <title>赤ちゃん関連で買ったものレビュー</title>
-      <link>https://blog.takady.net/blog/2019/11/16/baby/</link>
-      <pubDate>Sat, 16 Nov 2019 15:24:32 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2019/11/16/baby/</guid>
-      <description>息子が来月で2歳になるので。 はじめてママ&amp;amp;パパの育児―0~3才赤ちゃんとの暮らし 気がかりがスッキリ! (実用No.1シリーズ) 離乳食、</description>
-    </item>
-    
-    <item>
       <title>https 対応した</title>
       <link>https://blog.takady.net/blog/2019/01/14/2019-01-14-https-for-github-pages-site/</link>
       <pubDate>Mon, 14 Jan 2019 10:39:16 +0900</pubDate>
@@ -36,66 +27,12 @@
     </item>
     
     <item>
-      <title>2018年まとめ</title>
-      <link>https://blog.takady.net/blog/2018/12/31/2018-summary/</link>
-      <pubDate>Mon, 31 Dec 2018 21:12:32 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2018/12/31/2018-summary/</guid>
-      <description>かなり久しぶりのブログ更新。 去年のおわり頃〜今年のことを簡単に書いておく。 子ども 2017年の12月に息子が生まれた。 今年は育休取らせてもらっ</description>
-    </item>
-    
-    <item>
       <title>Reactビギナーズガイド を読んだ</title>
       <link>https://blog.takady.net/blog/2017/07/01/react_up_and_running/</link>
       <pubDate>Sat, 01 Jul 2017 17:28:33 +0900</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/07/01/react_up_and_running/</guid>
       <description>Reactビギナーズガイド ―コンポーネントベースのフロントエンド開発入門 React はプライベートで書いているけども、一度ちゃんと基礎を抑えておきたい</description>
-    </item>
-    
-    <item>
-      <title>初めての Javascript 第3版 を読んだ</title>
-      <link>https://blog.takady.net/blog/2017/06/24/learning_javascript_3rd_edition/</link>
-      <pubDate>Sat, 24 Jun 2017 12:18:34 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2017/06/24/learning_javascript_3rd_edition/</guid>
-      <description>初めてのJavaScript 第3版 ―ES2015以降の最新ウェブ開発 読んだ。 読んだ理由として以下のようなところがあった。 たまに React とか書くもの</description>
-    </item>
-    
-    <item>
-      <title>エラスティックリーダーシップを読んだ</title>
-      <link>https://blog.takady.net/blog/2017/06/06/elastic_leadership/</link>
-      <pubDate>Tue, 06 Jun 2017 22:51:59 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2017/06/06/elastic_leadership/</guid>
-      <description>エラスティックリーダーシップ ―自己組織化チームの育て方 読んだ。 普段、自分がメンバーとしての立場から、リーダーに対してどこまで求めて良いのかよ</description>
-    </item>
-    
-    <item>
-      <title>MiSTEL のセパレートキーボードを買った</title>
-      <link>https://blog.takady.net/blog/2017/05/28/mistel_keyboard/</link>
-      <pubDate>Sun, 28 May 2017 17:35:42 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2017/05/28/mistel_keyboard/</guid>
-      <description>これまで3年ほど、キーボードは Apple の Wireless Keyboard からの Magic Keyboard と、Apple のペタペタしたキーボードをずっと使っていた。 理由は、比較的打鍵音が静かだった事</description>
-    </item>
-    
-    <item>
-      <title>Octopress から Hugo に移行した</title>
-      <link>https://blog.takady.net/blog/2017/03/26/hello-hugo/</link>
-      <pubDate>Sun, 26 Mar 2017 12:14:44 +0900</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2017/03/26/hello-hugo/</guid>
-      <description>このブログのエンジンを Octopress から Hugo に移行した。 2年くらい Octopress を使っていたけど、ブログの記事が増えてきて、編集してから再生成して反映されるまでのタイ</description>
-    </item>
-    
-    <item>
-      <title>Huawei nova がきた</title>
-      <link>https://blog.takady.net/blog/2017/03/24/huawei-nova/</link>
-      <pubDate>Fri, 24 Mar 2017 22:38:13 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2017/03/24/huawei-nova/</guid>
-      <description>Nexus5 を使っていたけどそろそろバッテリーがヘタってきたし、画面の交換などで何度か解体したりして背面カバーのツメがいくつか折れてパカパカしていたの</description>
     </item>
     
     <item>
@@ -131,16 +68,7 @@
       <pubDate>Sat, 11 Feb 2017 15:53:29 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2017/02/11/lets-encrypt-with-nginx/</guid>
-      <description>個人的に作ってるサイトを HTTPS 対応させてみた。 iptable ではまって2時間くらいかかってしまったけども、想像より手軽にできた。 Let&amp;rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意でき</description>
-    </item>
-    
-    <item>
-      <title>2016年まとめ</title>
-      <link>https://blog.takady.net/blog/2016/12/31/2016-summary/</link>
-      <pubDate>Sat, 31 Dec 2016 13:10:16 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/12/31/2016-summary/</guid>
-      <description>自分用今年のまとめ。 英語 自分の中で英語をやる機運が高まってきたので勉強始めた。 夏あたりからオンライン英会話を週1,2回ペースでやって、オンサ</description>
+      <description>個人的に作ってるサイトを HTTPS 対応させてみた。 Let&amp;rsquo;s Encrypt https://letsencrypt.jp/ 無料で証明書を用意できるので今回利用した。 curl で実行ファイルを取ってきて、適切にオプションを付</description>
     </item>
     
     <item>
@@ -153,15 +81,6 @@
     </item>
     
     <item>
-      <title>isucon6 予選に参加した</title>
-      <link>https://blog.takady.net/blog/2016/09/21/isucon6-qualifier/</link>
-      <pubDate>Wed, 21 Sep 2016 20:11:54 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/09/21/isucon6-qualifier/</guid>
-      <description>去年に引き続き、今年も同じメンバーで チームYashio として isucon6 予選に参加してきた。 今回は去年の経験を活かして予選通過できそうな気がしていたけ</description>
-    </item>
-    
-    <item>
       <title>rails で FormObject を使う</title>
       <link>https://blog.takady.net/blog/2016/08/29/rails-form-object/</link>
       <pubDate>Mon, 29 Aug 2016 19:38:49 +0000</pubDate>
@@ -171,66 +90,12 @@
     </item>
     
     <item>
-      <title>SOFT SKILLS ソフトウェア開発者の人生マニュアル を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/07/23/soft-skills/</link>
-      <pubDate>Sat, 23 Jul 2016 10:33:25 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/07/23/soft-skills/</guid>
-      <description>先月、日本語版が発売された直後に買って読んだ。 ソフトウェアエンジニアとして、キャリアの事から健康や心の事まで、まさに人生マニュアルといった内</description>
-    </item>
-    
-    <item>
-      <title>10年後の仕事のカタチ10のヒント を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</link>
-      <pubDate>Sat, 23 Jul 2016 09:14:15 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/07/23/hints-of-work-style-after-a-decade/</guid>
-      <description>こちらのブログ記事 でオススメされていたので読んでみた。 対話形式になっている。ボリュームが多くないのでさくっと2時間くらいで読めて価格もお手頃</description>
-    </item>
-    
-    <item>
-      <title>10年戦えるデータ分析入門 SQLを武器にデータ活用時代を生き抜く を読んだ</title>
-      <link>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</link>
-      <pubDate>Sun, 22 May 2016 10:38:56 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/05/22/introduction-to-data-analysis-book/</guid>
-      <description>読んだ。 最近またデータ活用的なところをやる機会が来るかもなので、今ってその辺どんな感じなんだろうというのを知りたくて本書を手にとった。ボリュ</description>
-    </item>
-    
-    <item>
       <title>nexus5 の画面が割れたので自分で交換した</title>
       <link>https://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</link>
       <pubDate>Sun, 15 May 2016 21:56:33 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2016/05/15/nexus5-screen-replacement/</guid>
-      <description>3日前に nexus5 を落としてしまって画面が思いっきり割れてしまった。 端末の画面を割ってしまったのは初めてだったし、まだ買って半年だったのでとても残念</description>
-    </item>
-    
-    <item>
-      <title>自分の開発スピードを上げるには</title>
-      <link>https://blog.takady.net/blog/2016/05/02/more-productive/</link>
-      <pubDate>Mon, 02 May 2016 01:10:20 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/05/02/more-productive/</guid>
-      <description>新しい機能なりサービスを作った後に振り返ってみると、もっと上手くやれた気がするなーって思う。 もっと早く、質の良いものを作るにはどうすれば良い</description>
-    </item>
-    
-    <item>
-      <title>Android Studio で emacs キーバインドでコードを書く</title>
-      <link>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</link>
-      <pubDate>Wed, 27 Jan 2016 23:15:54 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2016/01/27/android-studio-with-emacs-keybinds/</guid>
-      <description>Android Studio でコードを書こうと思ったのだが、キーバインドが全然しっくり来なくて嫌になりそうだったのでキーバインドの設定をはじめにした。 Android Studio には、Em</description>
-    </item>
-    
-    <item>
-      <title>2015年まとめ</title>
-      <link>https://blog.takady.net/blog/2015/12/31/2015-summary/</link>
-      <pubDate>Thu, 31 Dec 2015 19:50:01 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/12/31/2015-summary/</guid>
-      <description>簡単に振り返っとこう。 転職 5 月に転職した。 転職して１ヶ月経った | Yuichi Takada 新しい環境というのが一番自分を成長させてくれると思うし、今回もそう思った</description>
+      <description>3日前に nexus5 を落としてしまって画面が思いっきり割れてしまった。 そんな中、自力で直してたという記事を発見。 Nexus 5 ガラス割れを自力で交換修理する件 用</description>
     </item>
     
     <item>
@@ -239,7 +104,7 @@
       <pubDate>Fri, 18 Dec 2015 00:46:37 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/12/18/raspberry-pi-with-adt7410/</guid>
-      <description>この記事は Sansan Advent Calendar 2015 の 18日目の記事です。 Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 動機は 2年くらい前に買ったまま放置してた Raspberry</description>
+      <description>Raspberry Pi と ADT7410 温度センサーで自宅の温度を測り、 focusligt でグラフにした。 用意したもの Raspberry Pi Model B ADT7410使用 高精度・高分解能 I2C・16Bit 温度センサ</description>
     </item>
     
     <item>
@@ -248,34 +113,7 @@
       <pubDate>Sun, 29 Nov 2015 23:06:56 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/11/29/rails-routing-with-username-instead-of-id/</guid>
-      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/takady7 とか github.com/takady みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
-    </item>
-    
-    <item>
-      <title>オブジェクト指向における再利用のためのデザインパターン を読んだ</title>
-      <link>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</link>
-      <pubDate>Wed, 04 Nov 2015 20:45:35 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/11/04/gof-design-pattern/</guid>
-      <description>いわゆる GoF 本を読んだ。 動機 こういう設計に関する本は今まで読んだことがなくて、なんとなくそういうことは本で勉強するより実践から身につけるものな</description>
-    </item>
-    
-    <item>
-      <title>情熱プログラマー を読んだ</title>
-      <link>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</link>
-      <pubDate>Sun, 11 Oct 2015 21:01:24 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/10/11/the-passionate-programmer/</guid>
-      <description>良い本だった。 さすが半谷さんオススメ本。 4: 一番の下手くそでいよう 13: 師匠を探す 手本となる人物の特長10個を重要度で並べて、その10項目それぞれ</description>
-    </item>
-    
-    <item>
-      <title>#isucon 5 予選で惨敗してきました</title>
-      <link>https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/</link>
-      <pubDate>Tue, 29 Sep 2015 00:05:00 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/09/29/isucon5-qualifier/</guid>
-      <description>isucon5 予選で惨敗しました。 出場の動機 isucon というものの存在を知ってから、とにかく出てみたいと思っていた。 年初くらいには @tatsuyaoiw に声を掛け快諾してくれていた</description>
+      <description>rails で普通に scaffold すると id が URL に入って example.com/users/:id となる。 これを twitter.com/myname とか github.com/yourname みたいにしたい時がある。 実現には 2 通りの方法があると思われる。 to_param を使う方法 activerecord に to_param とい</description>
     </item>
     
     <item>
@@ -297,57 +135,12 @@
     </item>
     
     <item>
-      <title>YAPC::Asia 2015 に行ってきた</title>
-      <link>https://blog.takady.net/blog/2015/08/22/yapc-asia-2015/</link>
-      <pubDate>Sat, 22 Aug 2015 21:00:19 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/08/22/yapc-asia-2015/</guid>
-      <description>YAPC::Asia 2015 の前夜祭と2日目に行ってきた。 前夜祭 技術ブログを書くことについて語るときに僕の語ること ブログでブクマ数を稼ぐには、という話だった。 なるほ</description>
-    </item>
-    
-    <item>
-      <title>Rebuild Meetup に行ってきた</title>
-      <link>https://blog.takady.net/blog/2015/08/19/rebuild-meetup/</link>
-      <pubDate>Wed, 19 Aug 2015 23:35:36 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/08/19/rebuild-meetup/</guid>
-      <description>Rebuild Meetup 2015 - connpass 昨年のはじめに仙台に出張してる時から rebuild.fm 聴くようになって、プログラミング好きになって、仕事でも web アプリ書けるところに異動して、その後</description>
-    </item>
-    
-    <item>
-      <title>転職して１ヶ月経った</title>
-      <link>https://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/</link>
-      <pubDate>Sun, 05 Jul 2015 20:37:26 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/07/05/join-a-new-company-and-past-a-month/</guid>
-      <description>5月12日に転職して、1ヶ月くらい経った。 一万人規模の会社から、百人規模の会社に来たので、色々なものごとの距離感の近さが新鮮に感じられる。 さ</description>
-    </item>
-    
-    <item>
       <title>bundle openでtmuxのpaneを開く</title>
       <link>https://blog.takady.net/blog/2015/04/24/bundle-open-tmux/</link>
       <pubDate>Fri, 24 Apr 2015 13:11:11 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2015/04/24/bundle-open-tmux/</guid>
       <description>bundle openでgemのソースをエディタで開いたり，bundle showでgemのパスを見たりすることができるので，gemの挙動を知りたくてコー</description>
-    </item>
-    
-    <item>
-      <title>tmuxにpowerlineを導入した</title>
-      <link>https://blog.takady.net/blog/2015/04/20/powerline-config/</link>
-      <pubDate>Mon, 20 Apr 2015 16:54:18 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/04/20/powerline-config/</guid>
-      <description>powerlineの導入 下記の記事を参考にした． tmux - Powerline導入例 - Qiita フォントが綺麗に表示されない場合 自分の環境では，brew reinstall --powerline</description>
-    </item>
-    
-    <item>
-      <title>rubygems.orgに公開しているgemの名前を変更する</title>
-      <link>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</link>
-      <pubDate>Fri, 27 Mar 2015 00:56:07 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/03/27/how-to-rename-gem/</guid>
-      <description>必要になったので調べてみた． 結論からいうと，renameはできない．ちなみにgithubのrepositoryはrenameできる． 調べた結</description>
     </item>
     
     <item>
@@ -360,15 +153,6 @@
     </item>
     
     <item>
-      <title>apache_log-parserを修正してBenchmarkをとってみた</title>
-      <link>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</link>
-      <pubDate>Wed, 11 Feb 2015 16:53:46 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/02/11/apache-log-parser-benchmark/</guid>
-      <description>takady/apache_log-parser 先週，とある機会に，とあるエンジニアの方が，僕が作ったapache_log-parserというrubyのgemに対してアドバイスをしてくれ</description>
-    </item>
-    
-    <item>
       <title>embulk-plugin-sqlite3を作った</title>
       <link>https://blog.takady.net/blog/2015/02/08/embulk-plugin-sqlite3/</link>
       <pubDate>Sun, 08 Feb 2015 22:17:00 +0000</pubDate>
@@ -378,48 +162,12 @@
     </item>
     
     <item>
-      <title>はじめてのcoreos/rocket</title>
-      <link>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</link>
-      <pubDate>Tue, 13 Jan 2015 19:46:35 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2015/01/13/coreos-rocket/</guid>
-      <description>rocketとは, CoreOS社が開発しているDockerのalternative実装で, まだprototypeという位置づけである. rocket/getting-started-guide.md at master</description>
-    </item>
-    
-    <item>
-      <title>2014年まとめ</title>
-      <link>https://blog.takady.net/blog/2014/12/31/2014-summary/</link>
-      <pubDate>Wed, 31 Dec 2014 19:26:56 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2014/12/31/2014-summary/</guid>
-      <description>今年はコードを書く楽しさを知った１年だった 去年までのコードをほとんど書いてなかった時間が悔やまれるけど、来年も前向きにいきたい よかったこと r</description>
-    </item>
-    
-    <item>
-      <title>facebook graph apiのAccess Tokenを取得するまで</title>
-      <link>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</link>
-      <pubDate>Mon, 29 Dec 2014 17:45:20 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2014/12/29/facebook-graph-api-oauth-flow/</guid>
-      <description>OAuth2について、わかってたつもりでわかってないので、 nov/fb_graphを通して、facebook graph apiでAccess Token</description>
-    </item>
-    
-    <item>
       <title>rubyのloggerをnewした後にログファイルを削除するとどうなるのか</title>
       <link>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</link>
       <pubDate>Sun, 07 Dec 2014 18:01:52 +0000</pubDate>
       
       <guid>https://blog.takady.net/blog/2014/12/07/file-safe-logger/</guid>
       <description>この投稿はRuby Advent Calendar 2014の7日目の記事です。 rubyには標準添付ライブラリにloggerクラスがある。 そのloggerクラス、newし</description>
-    </item>
-    
-    <item>
-      <title>チームで情報をスタックするためのwikiの運用で気をつけていること</title>
-      <link>https://blog.takady.net/blog/2014/12/03/documentation/</link>
-      <pubDate>Wed, 03 Dec 2014 21:14:11 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2014/12/03/documentation/</guid>
-      <description>僕のいるチームではConfluenceを使っているが、一般的なwikiのようなものであれば適用できる話だと思う。 ちなみにこれは個人的に気をつ</description>
     </item>
     
     <item>
@@ -465,15 +213,6 @@
       
       <guid>https://blog.takady.net/blog/2014/11/21/rails-logger-broadcast/</guid>
       <description>railsアプリケーションで、error以上のレベルのログだけ、２箇所にログを出力したいと思った。 前提 ruby 2.1.2 rails 4.1.4 方法 まず、複数の出力先にロギン</description>
-    </item>
-    
-    <item>
-      <title>Octopress</title>
-      <link>https://blog.takady.net/blog/2014/11/15/fist-of-octopress/</link>
-      <pubDate>Sat, 15 Nov 2014 15:52:35 +0000</pubDate>
-      
-      <guid>https://blog.takady.net/blog/2014/11/15/fist-of-octopress/</guid>
-      <description>今更ながら、octopress使ってみる。 markdownで書いて、投稿がterminalからできるってのが良いです。</description>
     </item>
     
   </channel>
